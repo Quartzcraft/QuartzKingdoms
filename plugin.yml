@@ -1,0 +1,12 @@
+name: QuartzKingdoms
+version: 1.6.2
+author: The QuartzCraft Team! SoulPunisher, mba2012 and nfell2009!
+website: http://www.quartzcraft.co.uk/
+main: uk.co.quartzcraft.kingdoms.QuartzKingdoms
+
+commands:
+   quartzking:
+      description: Runs quick checks.
+      usage: /quartzking
+      permission: QCC.quartzKing
+      permission-message: Unknown Command. Type "help" for help.
