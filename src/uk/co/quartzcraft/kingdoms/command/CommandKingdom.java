@@ -38,6 +38,8 @@ public class CommandKingdom implements CommandExecutor {
 				}
 			} else {
 				String SubCommand = SubCommandsKingdom.getSubCommand(arg0[0]);
+				
+				
 			}
 			
 		}
