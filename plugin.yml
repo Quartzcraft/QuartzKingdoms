@@ -8,5 +8,11 @@ commands:
    quartzking:
       description: Runs quick checks.
       usage: /quartzking
-      permission: QCC.quartzKing
+      permission: QCK.quartzKing
       permission-message: Unknown Command. Type "help" for help.
+   kingdom:
+      description: Main kingdoms command.
+      usage: /kingdom
+      permission: QCK.Kingdom
+      permission-message: Unknown Command. Type "help" for help.
+      alias: king, k
