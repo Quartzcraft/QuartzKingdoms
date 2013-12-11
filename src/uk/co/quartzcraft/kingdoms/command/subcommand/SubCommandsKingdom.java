@@ -2,20 +2,22 @@ package uk.co.quartzcraft.kingdoms.command.subcommand;
 
 import java.lang.reflect.Array;
 
+import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+
 public class SubCommandsKingdom {
 	
 	public static String[] list() {
 		
-		String[] SubCommandList;
+		String[] SubCommands;
 		
-		SubCommandList = new String[12];
+		SubCommands = new String[12];
 		
-		 SubCommandList[0] = "create";
-		 SubCommandList[1] = "info";
-		 SubCommandList[2] = "invite";
-		 SubCommandList[3] = "set";
+		SubCommands[0] = "create";
+		SubCommands[1] = "info";
+		SubCommands[2] = "invite";
+		SubCommands[3] = "set";
 		 
-		return SubCommandList;
+		return SubCommands;
 	}
 	
 	public static String getSubCommand(String arg) {
