@@ -1,6 +1,7 @@
 package uk.co.quartzcraft.kingdoms;
 
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -8,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.kingdoms.command.*;
 
 public class QuartzKingdoms extends JavaPlugin {
 	
@@ -30,6 +32,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		//DBKing = MySQL.closeConnection();
 				
     	//Shutdown notice
+		log.info("[QK]The QuartzKingdoms Plugin has been disabled!");
 	}
 	
 	@Override
@@ -44,9 +47,13 @@ public class QuartzKingdoms extends JavaPlugin {
 		log.info("[QK][STARTUP]Registering Listeners");
 		
 		//Commands
+		log.info("[QK][STARTUP]Registering Commands");
+		getCommand("kingdom").setExecutor(new CommandKingdom());
+			CommandKingdom.addCommand(Arrays.asList("info", "i"), new InfoSubCommand());
 	   	
         //Startup notice
-		//Database
+		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
+		log.info("[QK]Compiled using QuartzCore version " + releaseVersion);
 	}
 
 }
