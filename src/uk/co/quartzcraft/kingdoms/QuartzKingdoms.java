@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sun.tools.javac.util.List;
+
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.kingdoms.command.*;
 
@@ -49,7 +51,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		//Commands
 		log.info("[QK][STARTUP]Registering Commands");
 		getCommand("kingdom").setExecutor(new CommandKingdom());
-			CommandKingdom.addCommand(Arrays.asList("info", "i"), new InfoSubCommand());
+		CommandKingdom.addCommand((List<String>) Arrays.asList("info"), new InfoSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");

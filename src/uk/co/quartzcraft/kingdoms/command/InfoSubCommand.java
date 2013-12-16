@@ -9,7 +9,7 @@ import uk.co.quartzcraft.core.command.QSubCommand;
 public class InfoSubCommand extends QSubCommand {
 
 	 public String getPermission() {
-             return "launchme.info";
+             return "QCK.Kingdom";
      }
      
      public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {        

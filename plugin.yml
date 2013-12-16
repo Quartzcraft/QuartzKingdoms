@@ -10,10 +10,12 @@ commands:
       description: Runs quick checks.
       usage: /quartzking
       permission: QCK.quartzKing
+      default: op
       permission-message: Unknown Command. Type "help" for help.
    kingdom:
       description: Main kingdoms command.
       usage: /kingdom
       permission: QCK.Kingdom
+      default: op
       permission-message: Unknown Command. Type "help" for help.
       alias: king, k

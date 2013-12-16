@@ -46,7 +46,7 @@ public class CommandKingdom implements CommandExecutor {
                     }
             }
             else {
-                    Bukkit.dispatchCommand(sender, "lm info");
+                    sender.sendMessage("Please specify a SubCommand. Visit the QuartzCraft Wiki for help.");
             }
             
             return true;
