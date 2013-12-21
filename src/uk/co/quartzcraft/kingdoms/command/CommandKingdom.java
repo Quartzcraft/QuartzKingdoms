@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -17,7 +18,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.sun.tools.javac.util.List;
 
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.command.QSubCommand;
@@ -42,11 +42,11 @@ public class CommandKingdom implements CommandExecutor {
                     
                     if(!match)
                     {
-                            sender.sendMessage("Unknown Command. Visit the QuartzCraft Wiki for help.");
+                            sender.sendMessage(ChatColor.RED + "Could not find the specified SubCommand! " + ChatColor.GREEN +"Visit the QuartzCraft Wiki for help. C");
                     }
             }
             else {
-                    sender.sendMessage("Please specify a SubCommand. Visit the QuartzCraft Wiki for help.");
+                    sender.sendMessage(ChatColor.GREEN + "Please specify a SubCommand. Visit the QuartzCraft Wiki for help.");
             }
             
             return true;

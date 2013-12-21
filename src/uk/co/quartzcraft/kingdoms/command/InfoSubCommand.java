@@ -13,6 +13,6 @@ public class InfoSubCommand extends QSubCommand {
      }
      
      public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {        
-             
+             sender.sendMessage("Info on Kingdom: ");
      }
 }
