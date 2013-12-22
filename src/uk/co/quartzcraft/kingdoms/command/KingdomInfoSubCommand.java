@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 
 import uk.co.quartzcraft.core.command.QSubCommand;
 
-public class InfoSubCommand extends QSubCommand {
+public class KingdomInfoSubCommand extends QSubCommand {
 
 	 public String getPermission() {
              return "QCK.Kingdom";

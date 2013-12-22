@@ -40,6 +40,9 @@ public class QuartzKingdoms extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
+		//Phrases
+		log.info("[QK][STARTUP]Creating Phrases");
+		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");
 		//DBKing = MySQLking.openConnection();
@@ -51,7 +54,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		//Commands
 		log.info("[QK][STARTUP]Registering Commands");
 		getCommand("kingdom").setExecutor(new CommandKingdom());
-		CommandKingdom.addCommand(Arrays.asList("info"), new InfoSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("info"), new KingdomInfoSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("create"), new KingdomCreateSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
