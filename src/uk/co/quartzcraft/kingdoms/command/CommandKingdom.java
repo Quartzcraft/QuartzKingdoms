@@ -18,8 +18,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.command.QSubCommand;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
@@ -42,7 +42,7 @@ public class CommandKingdom implements CommandExecutor {
                     
                     if(!match)
                     {
-                            sender.sendMessage(ChatColor.RED + "Could not find the specified SubCommand! " + ChatColor.GREEN +"Visit the QuartzCraft Wiki for help. C");
+                            sender.sendMessage(ChatPhrase.getPhrase("Unknown_SubCommand"));
                     }
             }
             else {
