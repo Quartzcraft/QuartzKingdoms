@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.database.MySQL;
 import uk.co.quartzcraft.kingdoms.command.*;
+import uk.co.quartzcraft.kingdoms.listeners.*; 
 
 public class QuartzKingdoms extends JavaPlugin {
 	
@@ -58,6 +59,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		
 		//Listeners
 		log.info("[QK][STARTUP]Registering Listeners");
+		//getServer().getPluginManager().registerEvents(new BlockListener(), this);
+		new BlockListener(this);
 		
 		//Commands
 		log.info("[QK][STARTUP]Registering Commands");
