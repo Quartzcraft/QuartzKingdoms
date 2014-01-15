@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.core.database.MySQL;
 import uk.co.quartzcraft.kingdoms.command.*;
 
 public class QuartzKingdoms extends JavaPlugin {
@@ -20,11 +21,10 @@ public class QuartzKingdoms extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
 	public static String releaseVersion = QuartzCore.displayReleaseVersion();
-	//public static Connection DBCore = null;
-	//public static Connection DBKing = null;
 
-	//MySQL MySQLcore = new MySQL(plugin, "localhost", "3306", "Quartz", "root", "database1");
-	//MySQL MySQLking = new MySQL(plugin, "localhost", "3306", "Kingdoms", "root", "database1");
+	public static Connection DBKing = null;
+
+	public static MySQL MySQLking = null;
 	
 	@Override
 	public void onDisable() {
@@ -40,13 +40,21 @@ public class QuartzKingdoms extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
+		log.info("[QC]Running plugin configuration");
+		this.saveDefaultConfig();
+		
+		String SQLKingHost = this.getConfig().getString("database.kingdoms.host");
+		String SQLKingDatabase = this.getConfig().getString("database.kingdoms.database");
+		String SQLKingUser = this.getConfig().getString("database.kingdoms.username");
+		String SQLKingPassword = this.getConfig().getString("database.kingdoms.password");
+		MySQLking = new MySQL(plugin, SQLKingHost, "3306", SQLKingDatabase, SQLKingUser, SQLKingPassword);
+		
 		//Phrases
 		log.info("[QK][STARTUP]Creating Phrases");
 		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");
-		//DBKing = MySQLking.openConnection();
-		//DBCore = MySQLcore.openConnection();
+		DBKing = MySQLking.openConnection();
 		
 		//Listeners
 		log.info("[QK][STARTUP]Registering Listeners");
