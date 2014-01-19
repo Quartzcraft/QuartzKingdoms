@@ -12,7 +12,7 @@ public class ChunkManager {
 
 	public void claimChunk(Player chunkClaimer) {
 		Chunk chunk = chunkClaimer.getLocation().getChunk();
-		
-		
 	}
+	
+	
 }
