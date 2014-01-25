@@ -1,4 +1,4 @@
-package uk.co.quartzcraft.kingdoms.landprotection;
+package uk.co.quartzcraft.kingdoms.managers;
 
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
