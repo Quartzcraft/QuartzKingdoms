@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.database.MySQL;
 import uk.co.quartzcraft.kingdoms.command.*;
 import uk.co.quartzcraft.kingdoms.listeners.*; 
@@ -52,6 +53,12 @@ public class QuartzKingdoms extends JavaPlugin {
 		
 		//Phrases
 		log.info("[QK][STARTUP]Creating Phrases");
+		ChatPhrase.addPhrase("created_kingdom_yes", "&aSuccessfully created kingdom: ");
+		ChatPhrase.addPhrase("created_kingdom_no", "&cFailed to create kingdom: ");
+		ChatPhrase.addPhrase("deleted_kingdom_yes", "&aSuccessfully deleted kingdom: ");
+		ChatPhrase.addPhrase("deleted_kingdom_no", "&cFailed to delete kingdom: ");
+		ChatPhrase.addPhrase("kingdomname_already_used", "&cThis name is already in use! &aConsider using another name and overtaking that kingdom!");
+		ChatPhrase.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
 		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");
