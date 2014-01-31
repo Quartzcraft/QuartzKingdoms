@@ -31,7 +31,7 @@ public class KingdomDeleteSubCommand extends QSubCommand {
 				sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
 			}
 		} else {
-			sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + args[1]);
+			sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args[1]);
 		}
 		
 	}
