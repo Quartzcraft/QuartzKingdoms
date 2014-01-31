@@ -18,7 +18,7 @@ public class QKPlayer extends QPlayer {
 		return null;
 	}
 	
-	public String getKingdom(Player player) {
+	public static String getKingdom(Player player) {
 		String kingdom = null;
 		
 		String playername = player.toString();
