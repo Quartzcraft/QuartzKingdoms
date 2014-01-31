@@ -4,7 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import uk.co.quartzcraft.core.QuartzCore;
@@ -18,16 +20,17 @@ public class QKPlayer extends QPlayer {
 		return null;
 	}
 	
-	public static String getKingdom(Player player) {
+	public static String getKingdom(String playername) {
 		String kingdom = null;
-		
-		String playername = player.toString();
+		Player player = Bukkit.getServer().getPlayer(playername);
+		UUID UUID = player.getUniqueId();
+		String SUUID = UUID.toString();
 		
 		try {
 			Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
 			Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
 			
-	        ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE DisplayName ='" + playername + "';");
+	        ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE UUID ='" + SUUID + "';");
 	        res1.next();
 	        
 	        ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE playerID =" + res1.getInt(1) + ";");

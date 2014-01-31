@@ -28,7 +28,7 @@ public class KingdomPromoteSubCommand extends QSubCommand {
 		
 		if(args[1] != null) {
 			Player player = Bukkit.getServer().getPlayer(args[1]);
-			String kingdomName = QKPlayer.getKingdom(player);
+			String kingdomName = QKPlayer.getKingdom(player.toString());
 			if(Kingdom.promotePlayer(kingdomName, sender, args[1])) {
 				sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
 			} else {
