@@ -44,3 +44,21 @@ Permissions:
    QCK.Kingdom.claim:
       description: Allows a king the ability to claim land for their kingdom.
       default: false
+   QCK.Kingdom.join:
+      description: Allows a player the ability to join a kingdom.
+      default: false
+   QCK.Kingdom.leave:
+      description: Allows a player the ability to leave a kingdom.
+      default: false
+   QCK.Kingdom.kick:
+      description: Allows a king the ability to kick a player from their kingdom.
+      default: false
+   QCK.Kingdom.ally:
+      description: Allows a king the ability to declare another kingdom an ally.
+      default: false
+   QCK.Kingdom.enemy:
+      description: Allows a king the ability to declare another kingdom an enemy.
+      default: false
+   QCK.Kingdom.neutral:
+      description: Allows a king the ability to declare their relationships with another kingdom neutral.
+      default: false
