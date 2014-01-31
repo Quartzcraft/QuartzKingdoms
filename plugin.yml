@@ -34,5 +34,8 @@ Permissions:
       description: Allows a player the ability to create a kingdom.
       default: false
    QCK.Kingdom.delete:
-      description: Allows a player the ability to delete a kingdom.
+      description: Allows a king the ability to delete their kingdom.
+      default: false
+   QCK.Kingdom.promote:
+      description: Allows a king the ability to promote someone in their kingdom.
       default: false
