@@ -75,6 +75,9 @@ public class QuartzKingdoms extends JavaPlugin {
 		getCommand("kingdom").setExecutor(new CommandKingdom());
 		CommandKingdom.addCommand(Arrays.asList("info"), new KingdomInfoSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("create"), new KingdomCreateSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("delete"), new KingdomDeleteSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("promote"), new KingdomPromoteSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("claim"), new KingdomClaimSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");

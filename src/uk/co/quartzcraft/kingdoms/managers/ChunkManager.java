@@ -1,5 +1,6 @@
 package uk.co.quartzcraft.kingdoms.managers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
@@ -8,11 +9,12 @@ import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
 public class ChunkManager {
 
-	public boolean checkClaim(Chunk chunk) {
+	public static boolean checkClaim(Chunk chunk) {
 		return false;
 	}
 	
-	public void claimChunk(Player chunkClaimer) {
+	public static boolean claimChunk(String player) {
+		Player chunkClaimer = Bukkit.getServer().getPlayer(player);
 		Chunk chunk = chunkClaimer.getLocation().getChunk();
 		
 		if(checkClaim(chunk) == false) {
@@ -20,6 +22,7 @@ public class ChunkManager {
 		} else {
 			//error
 		}
+		return false;
 	}
 	
 	
