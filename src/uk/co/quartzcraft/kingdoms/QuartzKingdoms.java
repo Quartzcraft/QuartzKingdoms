@@ -57,7 +57,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("created_kingdom_no", "&cFailed to create kingdom: ");
 		ChatPhrase.addPhrase("deleted_kingdom_yes", "&aSuccessfully deleted kingdom: ");
 		ChatPhrase.addPhrase("deleted_kingdom_no", "&cFailed to delete kingdom: ");
-		ChatPhrase.addPhrase("kingdomname_already_used", "&cThis name is already in use! &aConsider using another name and overtaking that kingdom!");
+		ChatPhrase.addPhrase("kingdomname_already_used", "&cAnother kingdom is using that name! &aConsider using a different name and overtaking that kingdom!");
 		ChatPhrase.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
 		
 		//Database
