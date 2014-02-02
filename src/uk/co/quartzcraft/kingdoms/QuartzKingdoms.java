@@ -63,6 +63,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for Kingdom: ");
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_not", "&aChunk not successfully claimed for Kingdom: ");
+		ChatPhrase.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
 		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");

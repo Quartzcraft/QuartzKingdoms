@@ -27,10 +27,11 @@ public class KingdomPromoteSubCommand extends QSubCommand {
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if(args[1] != null) {
-			Player player = Bukkit.getServer().getPlayer(args[1]);
-			String kingdomName = QKPlayer.getKingdom(player.toString());
+			Player target = Bukkit.getServer().getPlayer(args[1]);
+			String kingdomName = QKPlayer.getKingdom(target.toString());
 			if(Kingdom.promotePlayer(kingdomName, sender, args[1])) {
 				sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
+				target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
 			} else {
 				sender.sendMessage(ChatPhrase.getPhrase("promoted_player_no") + ChatColor.WHITE + kingdomName);
 			}
