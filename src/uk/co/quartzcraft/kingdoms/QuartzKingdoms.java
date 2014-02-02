@@ -65,6 +65,10 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_not", "&aChunk not successfully claimed for Kingdom: ");
 		ChatPhrase.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
 		
+		ChatPhrase.addPhrase("kingdom_is_now_at_war_with_kingdom", " &cis now at war with ");
+		ChatPhrase.addPhrase("kingdom_is_now_allied_with_kingdom", " &ais now allied with ");
+		ChatPhrase.addPhrase("kingdom_is_now_neutral_relationship_with_kingdom", " &6is now in a neutral relationship with ");
+		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");
 		DBKing = MySQLking.openConnection();
