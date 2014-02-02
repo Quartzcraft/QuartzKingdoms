@@ -29,6 +29,12 @@ Permissions:
          QCK.Kingdom.delete: true
          QCK.Kingdom.promote: true
          QCK.Kingdom.claim: true
+         QCK.Kingdom.join: true
+         QCK.Kingdom.leave: true
+         QCK.Kingdom.kick: true
+         QCK.Kingdom.allay: true
+         QCK.Kingdom.enemy: true
+         QCK.Kingdom.neutral: true
    QCK.Kingdom.info:
       description: Allows a player the ability to get information on a kingdom.
       default: false
