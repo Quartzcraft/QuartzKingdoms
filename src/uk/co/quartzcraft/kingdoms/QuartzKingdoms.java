@@ -70,6 +70,9 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("kingdom_is_now_at_war_with_kingdom", " &cis now at war with ");
 		ChatPhrase.addPhrase("kingdom_is_now_allied_with_kingdom", " &ais now allied with ");
 		ChatPhrase.addPhrase("kingdom_is_now_neutral_relationship_with_kingdom", " &6is now in a neutral relationship with ");
+		ChatPhrase.addPhrase("failed_to_ally_with_kingdom", "&cFailed to become an ally with ");
+		ChatPhrase.addPhrase("failed_to_neutral_with_kingdom", "&cFailed to become neutral with ");
+		ChatPhrase.addPhrase("failed_to_war_with_kingdom", "&cFailed to go to war with ");
 		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");
@@ -89,6 +92,9 @@ public class QuartzKingdoms extends JavaPlugin {
 		CommandKingdom.addCommand(Arrays.asList("promote"), new KingdomPromoteSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("claim"), new KingdomClaimSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("unclaim"), new KingdomUnClaimSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("war"), new KingdomWarSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("ally"), new KingdomAllySubCommand());
+		CommandKingdom.addCommand(Arrays.asList("neutral"), new KingdomNeutralSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
