@@ -32,7 +32,7 @@ public class KingdomClaimSubCommand extends QSubCommand {
 		if(ChunkManager.claimChunk(playername)) {
 			sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
 		} else {
-			sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+			sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
 		}
 		
 	}
