@@ -24,15 +24,19 @@ public class KingdomCreateSubCommand extends QSubCommand {
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if(args[1] != null) {
-			String kingdomName = Kingdom.createKingdom(args[1], sender);
-			if(kingdomName != null) {
-				if(kingdomName == args[1]) {
-					sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
-				} else if(kingdomName == "quartz error") {
-					sender.sendMessage(ChatPhrase.getPhrase("kingdomname_already_used") + ChatColor.WHITE + kingdomName);
-				}
+			if(args[2] != null) {
+				sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
 			} else {
-				sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+				String kingdomName = Kingdom.createKingdom(args[1], sender);
+				if(kingdomName != null) {
+					if(kingdomName == args[1]) {
+						sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+					} else if(kingdomName == "quartz error") {
+						sender.sendMessage(ChatPhrase.getPhrase("kingdomname_already_used") + ChatColor.WHITE + kingdomName);
+					}
+				} else {
+					sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+				}
 			}
 		} else {
 			sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args[1]);
