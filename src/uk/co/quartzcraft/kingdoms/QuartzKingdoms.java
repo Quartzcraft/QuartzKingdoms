@@ -62,7 +62,9 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("kingdomname_already_used", "&cAnother kingdom is using that name! &aConsider using a different name and overtaking that kingdom!");
 		ChatPhrase.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for Kingdom: ");
-		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_not", "&aChunk not successfully claimed for Kingdom: ");
+		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_no", "&aChunk was not successfully claimed for Kingdom: ");
+		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for Kingdom: ");
+		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_no", "&aChunk was not successfully unclaimed for Kingdom: ");
 		ChatPhrase.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
 		
 		ChatPhrase.addPhrase("kingdom_is_now_at_war_with_kingdom", " &cis now at war with ");
@@ -86,6 +88,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		CommandKingdom.addCommand(Arrays.asList("delete"), new KingdomDeleteSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("promote"), new KingdomPromoteSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("claim"), new KingdomClaimSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("unclaim"), new KingdomUnClaimSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");

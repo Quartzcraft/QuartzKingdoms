@@ -24,6 +24,11 @@ public class ChunkManager {
 		}
 		return false;
 	}
+
+	public static boolean unClaimChunk(String playername) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }

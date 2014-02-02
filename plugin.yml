@@ -48,7 +48,7 @@ Permissions:
       description: Allows a king the ability to promote someone in their kingdom.
       default: false
    QCK.Kingdom.claim:
-      description: Allows a king the ability to claim land for their kingdom.
+      description: Allows a king the ability to claim and unclaim land for their kingdom.
       default: false
    QCK.Kingdom.join:
       description: Allows a player the ability to join a kingdom.
