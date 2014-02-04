@@ -29,7 +29,7 @@ public class KingdomNeutralSubCommand extends QSubCommand {
 		String splayer = sender.toString();
 		String kingdom = QKPlayer.getKingdom(splayer);
 		
-		if(Kingdom.setRelationshipStatus(kingdom, args[1], "neutral")) {
+		if(Kingdom.setRelationshipStatus(kingdom, args[1], 0)) {
 			Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
 		} else {
 			sender.sendMessage(ChatPhrase.getPhrase("failed_to_neutral_with_kingdom"));

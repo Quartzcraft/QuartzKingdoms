@@ -28,4 +28,9 @@ public class Kingdom {
 		return null;
 		
 	}
+	
+	public static boolean setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
+		return false;
+		
+	}
 }
