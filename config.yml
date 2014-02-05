@@ -10,5 +10,5 @@ database:
       username:
       password:
 settings:
-   promote-command:
+   promote-command: pex group <group> user add <user>
    
