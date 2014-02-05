@@ -25,7 +25,6 @@ public class QuartzKingdoms extends JavaPlugin {
 	public static String releaseVersion = QuartzCore.displayReleaseVersion();
 
 	public static Connection DBKing = null;
-
 	public static MySQL MySQLking = null;
 	
 	@Override

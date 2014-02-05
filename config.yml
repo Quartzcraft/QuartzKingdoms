@@ -9,4 +9,6 @@ database:
       database:
       username:
       password:
+settings:
+   promote-command:
    
