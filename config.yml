@@ -1,0 +1,14 @@
+database:
+   kingdoms:
+      host:
+      database:
+      username:
+      password:
+   website:
+      host:
+      database:
+      username:
+      password:
+settings:
+   promote-command: pex group <group> user add <user>
+   

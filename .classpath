@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/nicholasbassett/Documents/Development/craftbukkit-1.6.4-R2.1.jar"/>
-	<classpathentry kind="lib" path="/Users/nicholasbassett/Documents/Development/Quartz.jar"/>
+	<classpathentry kind="lib" path="/Users/nicholasbassett/Documents/Development/Compiled Projects/craftbukkit-1.7.2-R0.2.jar"/>
+	<classpathentry kind="lib" path="/Users/nicholasbassett/Documents/Development/Compiled Projects/Quartz.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

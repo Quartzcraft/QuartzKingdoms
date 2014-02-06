@@ -1,5 +1,5 @@
 name: QuartzKingdoms
-version: 1.6.4
+version: 1.0.0
 author: The QuartzCraft Team! SoulPunisher, mba2012 and nfell2009!
 website: http://www.quartzcraft.co.uk/
 main: uk.co.quartzcraft.kingdoms.QuartzKingdoms
@@ -10,10 +10,61 @@ commands:
       description: Runs quick checks.
       usage: /quartzking
       permission: QCK.quartzKing
-      permission-message: Unknown Command. Type "help" for help.
+      default: op
+      permission-message: Unknown Command. Visit the QuartzCraft Wiki for help.
    kingdom:
       description: Main kingdoms command.
       usage: /kingdom
       permission: QCK.Kingdom
-      permission-message: Unknown Command. Type "help" for help.
+      default: false
+      permission-message: Unknown Command. Visit the QuartzCraft Wiki for help.
       alias: king, k
+Permissions:
+   QCK.kingdom.*:
+      description: Allows access to all QCK permissions.
+      default: op
+      children:
+         QCK.Kingdom.info: true
+         QCK.Kingdom.create: true
+         QCK.Kingdom.delete: true
+         QCK.Kingdom.promote: true
+         QCK.Kingdom.claim: true
+         QCK.Kingdom.join: true
+         QCK.Kingdom.leave: true
+         QCK.Kingdom.kick: true
+         QCK.Kingdom.allay: true
+         QCK.Kingdom.enemy: true
+         QCK.Kingdom.neutral: true
+   QCK.Kingdom.info:
+      description: Allows a player the ability to get information on a kingdom.
+      default: false
+   QCK.Kingdom.create:
+      description: Allows a player the ability to create a kingdom.
+      default: false
+   QCK.Kingdom.delete:
+      description: Allows a king the ability to delete their kingdom.
+      default: false
+   QCK.Kingdom.promote:
+      description: Allows a king the ability to promote someone in their kingdom.
+      default: false
+   QCK.Kingdom.claim:
+      description: Allows a king the ability to claim and unclaim land for their kingdom.
+      default: false
+   QCK.Kingdom.join:
+      description: Allows a player the ability to join a kingdom.
+      default: false
+   QCK.Kingdom.leave:
+      description: Allows a player the ability to leave a kingdom.
+      default: false
+   QCK.Kingdom.kick:
+      description: Allows a king the ability to kick a player from their kingdom.
+      default: false
+   QCK.Kingdom.ally:
+      description: Allows a king the ability to declare another kingdom an ally.
+      default: false
+   QCK.Kingdom.enemy:
+      description: Allows a king the ability to declare another kingdom an enemy.
+      default: false
+   QCK.Kingdom.neutral:
+      description: Allows a king the ability to declare their relationships with another kingdom neutral.
+      default: false
