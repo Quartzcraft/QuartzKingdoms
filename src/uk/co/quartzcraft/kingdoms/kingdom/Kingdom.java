@@ -51,14 +51,14 @@ public class Kingdom {
 	public static boolean setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
 		switch(status) {
 			case 1:
-				//Update
 				//Neutral
+				//Update
 			case 2:
-				//Update
 				//Ally
-			case 3:
 				//Update
+			case 3:
 				//War
+				//Update
 			default:
 				//Do nothing
 				return false;
