@@ -49,7 +49,20 @@ public class Kingdom {
 	}
 	
 	public static boolean setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
-		return false;
+		switch(status) {
+			case 1:
+				//Update
+				//Neutral
+			case 2:
+				//Update
+				//Ally
+			case 3:
+				//Update
+				//War
+			default:
+				//Do nothing
+				return false;
+		}
 		
 	}
 }
