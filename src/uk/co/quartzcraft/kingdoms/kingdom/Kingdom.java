@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
 
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
 public class Kingdom {
@@ -26,16 +27,11 @@ public class Kingdom {
 	}
 	
 	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group) {
-		String promoteCommand = plugin.getConfig().getString("settings.promote-command");
-		promoteCommand.replaceAll("<group>", group);
-		promoteCommand.replaceAll("<user>", playerToPromote);
-		
-		if(Bukkit.getServer().dispatchCommand(sender, promoteCommand)) {
+		if(QPlayer.addSecondaryGroup(sender, playerToPromote, group)) {
 			return true;
 		} else {
 			return false;
 		}
-		
 	}
 	
 	public static String[] getInfo(String kingdomName) {
