@@ -31,7 +31,7 @@ public class KingdomCreateSubCommand extends QSubCommand {
 				if(kingdomName != null) {
 					if(kingdomName == args[1]) {
 						sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
-					} else if(kingdomName == "quartz error") {
+					} else if(kingdomName == "name_error") {
 						sender.sendMessage(ChatPhrase.getPhrase("kingdomname_already_used") + ChatColor.WHITE + kingdomName);
 					}
 				} else {
