@@ -49,4 +49,9 @@ public class QKPlayer extends QPlayer {
 		return false;
 	}
 
+	public static boolean isKing(String kingdomName, int userID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
