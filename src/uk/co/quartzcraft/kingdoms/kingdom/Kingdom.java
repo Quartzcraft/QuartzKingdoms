@@ -21,6 +21,11 @@ public class Kingdom {
 		
 	}
 	
+	private static boolean exists(String kingdomName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public static String deleteKingdom(String kingdomName, CommandSender sender) {
 		return null;
 		
