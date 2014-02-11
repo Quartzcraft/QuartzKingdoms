@@ -24,7 +24,7 @@ public class KingdomDeleteSubCommand extends QSubCommand {
 			if(kingdomName != null) {
 				if(kingdomName == args[1]) {
 					sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + kingdomName);
-				} else if(kingdomName == "quartz error") {
+				} else if(kingdomName == "error") {
 					sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
 				}
 			} else {
