@@ -1,10 +1,13 @@
 package uk.co.quartzcraft.kingdoms.kingdom;
 
+import java.sql.SQLException;
+import java.util.UUID;
+
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
 
-import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
@@ -17,8 +20,30 @@ public class Kingdom {
 	}
 	
 	public static String createKingdom(String kingdomName, CommandSender sender) {
-		return null;
+		String name_error = "name_error";
+		String error = "error";
+		Player player = (Player) sender;
+		int userID = QPlayer.getUserID(player);
+		if(exists(kingdomName)) {
+			return name_error;
+		}
 		
+		if(userID == 0) {
+			return error;
+		} 
+		
+		try {
+			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID, MemberIDs) VALUES ('" + kingdomName + "', '" + userID + "', '" + userID + "');");
+			if(s.executeUpdate() == 1) {
+				return kingdomName;
+			} else {
+				return error;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return error;
+		}
 	}
 	
 	private static boolean exists(String kingdomName) {
