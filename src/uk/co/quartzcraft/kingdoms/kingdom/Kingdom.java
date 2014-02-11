@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 
 public class Kingdom {
 	
@@ -52,7 +53,36 @@ public class Kingdom {
 	}
 
 	public static String deleteKingdom(String kingdomName, CommandSender sender) {
-		return null;
+		String name_error = "name_error";
+		String king_error = "error";
+		String error = "error";
+		Player player = (Player) sender;
+		int userID = QPlayer.getUserID(player);
+		
+		if(exists(kingdomName)) {
+			
+		} else {
+			return error;
+		}
+		
+		if(QKPlayer.isKing(kingdomName, userID)) {
+			
+		} else {
+			return king_error;
+		}
+		
+		try {
+			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+			java.sql.PreparedStatement s = connection.prepareStatement("DELETE FROM Kingdoms WHERE KingdomName = '" + kingdomName + "' AND KingID = '" + userID + "';");
+			if(s.executeUpdate() == 1) {
+				return kingdomName;
+			} else {
+				return error;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return error;
+		}
 		
 	}
 	
