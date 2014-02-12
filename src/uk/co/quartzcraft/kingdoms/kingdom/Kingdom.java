@@ -87,7 +87,23 @@ public class Kingdom {
 	}
 	
 	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group) {
-		if(QPlayer.addSecondaryGroup(sender, playerToPromote, group)) {
+		String[] ranks = null;
+		ranks[0] = "Citizen";
+		ranks[1] = "Knight";
+		ranks[2] = "Nobel";
+		
+		int i = 1;
+		int a = 1;
+		if(i == 1) {
+			for(String rank : ranks) {
+				if(group.equalsIgnoreCase(rank)) {
+					if(QPlayer.addSecondaryGroup(sender, playerToPromote, group)) {
+						return true;
+					} else {
+						return false;
+					}
+				} 
+			}
 			return true;
 		} else {
 			return false;
