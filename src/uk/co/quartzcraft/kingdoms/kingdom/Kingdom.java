@@ -1,6 +1,7 @@
 package uk.co.quartzcraft.kingdoms.kingdom;
 
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.command.CommandSender;
@@ -105,12 +106,12 @@ public class Kingdom {
 		}
 	}
 	
-	public static String[] getInfo(String kingdomName) {
 	private static boolean exists(String kingdomName) {
 		
 		return false;
 	}
 	
+	public static Map getInfo(String kingdomName) {
 		return null;
 		
 	}
