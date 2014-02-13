@@ -46,11 +46,6 @@ public class Kingdom {
 			return error;
 		}
 	}
-	
-	private static boolean exists(String kingdomName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	public static String deleteKingdom(String kingdomName, CommandSender sender) {
 		String name_error = "name_error";
@@ -111,6 +106,11 @@ public class Kingdom {
 	}
 	
 	public static String[] getInfo(String kingdomName) {
+	private static boolean exists(String kingdomName) {
+		
+		return false;
+	}
+	
 		return null;
 		
 	}
