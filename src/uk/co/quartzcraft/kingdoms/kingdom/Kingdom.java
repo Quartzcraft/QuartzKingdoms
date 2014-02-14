@@ -138,4 +138,9 @@ public class Kingdom {
 		}
 		
 	}
+	
+	public boolean setOpen(String kingdomName, boolean status) {
+		
+		return false;
+	}
 }

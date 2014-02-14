@@ -1,5 +1,7 @@
 package uk.co.quartzcraft.kingdoms.command;
 
+import java.util.Map;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +18,7 @@ public class KingdomInfoSubCommand extends QSubCommand {
      
      public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {  
     	 String arg = args[1];
-         String[] info = Kingdom.getInfo(arg);
+         Map info = Kingdom.getInfo(arg);
          
          if(info != null) {
         	 sender.sendMessage(ChatPhrase.getPhrase("info_kingdom"));
