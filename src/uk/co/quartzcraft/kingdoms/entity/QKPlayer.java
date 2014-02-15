@@ -85,6 +85,7 @@ public class QKPlayer extends QPlayer {
 		} catch(SQLException e) {
 			
 		}
+		return 0;
 	}
 
 	@Override
