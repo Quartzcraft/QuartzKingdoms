@@ -68,4 +68,21 @@ public class QKPlayer extends QPlayer {
 		return false;
 	}
 
+	public static int getCoreID(int id) {
+		Statement s;
+		
+		try {
+			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id ='" + id + "';");
+	        if(res.next()) {
+	        	return res.getInt(2);
+	        } else {
+	        	return 0;
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }
