@@ -3,6 +3,7 @@ package uk.co.quartzcraft.kingdoms.kingdom;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -157,8 +158,25 @@ public class Kingdom {
 	}
 	
 	public static Map getInfo(String kingdomName) {
-		return null;
+		HashMap<String, String> info = new HashMap<String, String>();
 		
+		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+		java.sql.PreparedStatement s = null;
+		try {
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			if(res2.next()) {
+				info.put("id", res2.getString(1));
+				info.put("Name", res2.getString(2));
+				info.put("King", QPlayer.getDisplayName(QKPlayer.getCoreID(res2.getInt(3))));
+				info.put("members", res2.getString(1));
+		    	 return info;
+		     } else {
+		    	 return null;
+		     }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public static String getName(int id) {
