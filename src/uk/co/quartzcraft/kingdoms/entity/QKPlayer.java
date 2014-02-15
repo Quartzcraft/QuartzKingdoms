@@ -43,7 +43,6 @@ public class QKPlayer extends QPlayer {
 		        		kingdom = res3.getString("KingdomName");
 		        		return kingdom;
 		        	}
-		        	return kingdom;
 		        } else {
 		        	return error;
 		        }
