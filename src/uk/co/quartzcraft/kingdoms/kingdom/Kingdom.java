@@ -140,9 +140,20 @@ public class Kingdom {
 		}
 	}
 	
-	private static boolean exists(String kingdomName) {
-		
-		return false;
+	public static boolean exists(String kingdomName) {
+		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+		java.sql.PreparedStatement s = null;
+		try {
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			if(res2.next()) {
+		    	 return true;
+		     } else {
+		    	 return false;
+		     }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static Map getInfo(String kingdomName) {
