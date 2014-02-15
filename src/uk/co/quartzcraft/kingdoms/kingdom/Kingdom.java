@@ -167,8 +167,9 @@ public class Kingdom {
 			if(res2.next()) {
 				info.put("id", res2.getString(1));
 				info.put("Name", res2.getString(2));
-				info.put("King", QPlayer.getDisplayName(QKPlayer.getCoreID(res2.getInt(3))));
-				info.put("members", res2.getString(1));
+				info.put("Invite Only", res2.getString(3));
+				info.put("King", QPlayer.getDisplayName(QKPlayer.getCoreID(res2.getInt(4))));
+				info.put("Members", res2.getString(5));
 		    	 return info;
 		     } else {
 		    	 return null;
