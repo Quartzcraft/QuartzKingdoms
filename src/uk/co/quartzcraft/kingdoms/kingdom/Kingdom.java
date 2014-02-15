@@ -218,6 +218,10 @@ public class Kingdom {
 	
 	public boolean setOpen(String kingdomName, boolean status) {
 		
-		return false;
+		if(status = true) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

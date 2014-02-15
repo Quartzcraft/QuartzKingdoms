@@ -84,5 +84,10 @@ public class QKPlayer extends QPlayer {
 			return 0;
 		}
 	}
+	
+	public static boolean joinKingdom(Player player, String kingdomName) {
+		
+		return false;
+	}
 
 }
