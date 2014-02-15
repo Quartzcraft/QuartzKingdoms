@@ -150,9 +150,22 @@ public class Kingdom {
 		
 	}
 	
-	public static String getName() {
-		return null;
-		
+	public static String getName(int id) {
+		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+		java.sql.PreparedStatement s = null;
+		try {
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
+			if(res2.next()) {
+		    	 String kingdomName = res2.getString("KingdomName");
+		    	 return kingdomName;
+		     } else {
+		    	 return null;
+		     }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	        	
 	}
 	
 	public static boolean setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
