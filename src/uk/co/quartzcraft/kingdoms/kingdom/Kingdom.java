@@ -1,6 +1,8 @@
 package uk.co.quartzcraft.kingdoms.kingdom;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 import java.util.UUID;
 
@@ -9,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
 
+import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
@@ -19,6 +22,37 @@ public class Kingdom {
 	
 	public void QuartzKingdomsConfig(QuartzKingdoms plugin) {
 		this.plugin = plugin;
+	}
+	
+	public static int getKingdomID(String playername) {
+		String kingdom = null;
+		Player player = Bukkit.getServer().getPlayer(playername);
+		UUID UUID = player.getUniqueId();
+		String SUUID = UUID.toString();
+		
+		try {
+			Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
+			Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			
+	        ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE UUID ='" + SUUID + "';");
+	        
+	        if(res1.next()) {
+		        ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE playerID =" + res1.getInt(1) + ";");
+		        if(res2.next()) {
+		        	int kingdomID = res2.getInt(4);
+		        	return kingdomID;
+		        } else {
+		        	return 0;
+		        }
+	        } else {
+	        	return 0;
+	        }
+	        
+		} catch(SQLException e) {
+			
+		}
+		return 0;
 	}
 	
 	public static String createKingdom(String kingdomName, CommandSender sender) {
