@@ -85,6 +85,24 @@ public class QKPlayer extends QPlayer {
 		}
 	}
 	
+	public static int getID(Player player) {
+		Statement s;
+		int userID = QKPlayer.getUserID(player);
+		
+		try {
+			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID ='" + userID + "';");
+	        if(res.next()) {
+	        	return res.getInt(1);
+	        } else {
+	        	return 0;
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	public static boolean joinKingdom(Player player, String kingdomName) {
 		
 		return false;
