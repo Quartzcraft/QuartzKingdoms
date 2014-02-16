@@ -89,5 +89,10 @@ public class QKPlayer extends QPlayer {
 		
 		return false;
 	}
+	
+public static boolean leaveKingdom(Player player, String kingdomName) {
+		
+		return false;
+	}
 
 }
