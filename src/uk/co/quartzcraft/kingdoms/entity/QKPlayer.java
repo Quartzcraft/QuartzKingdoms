@@ -85,7 +85,7 @@ public class QKPlayer extends QPlayer {
 		}
 	}
 	
-	public static int getID(Player player) {
+	public static int getCoreID(Player player) {
 		Statement s;
 		int userID = QKPlayer.getUserID(player);
 		
