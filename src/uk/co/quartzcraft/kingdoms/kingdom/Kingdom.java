@@ -229,4 +229,9 @@ public class Kingdom {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public static boolean addUser(Player player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
