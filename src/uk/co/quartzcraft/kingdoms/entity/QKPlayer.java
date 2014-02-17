@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 
 public class QKPlayer extends QPlayer {
 
@@ -104,7 +105,24 @@ public class QKPlayer extends QPlayer {
 	}
 	
 	public static boolean joinKingdom(Player player, String kingdomName) {
+		int userID = getID(player);
+		int kingdomID = Kingdom.getID(kingdomName);
 		
+		try {
+			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+			java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=" + kingdomID + " WHERE id=" + userID + ");");
+			if(s.executeUpdate() == 1) {
+				if(Kingdom.addUser(player)) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			
+		}
 		return false;
 	}
 	
