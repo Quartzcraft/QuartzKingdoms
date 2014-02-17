@@ -224,4 +224,9 @@ public class Kingdom {
 			return false;
 		}
 	}
+
+	public static int getID(String kingdomName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
