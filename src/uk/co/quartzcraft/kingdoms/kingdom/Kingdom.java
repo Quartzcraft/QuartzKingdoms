@@ -143,9 +143,9 @@ public class Kingdom {
 	
 	public static boolean exists(String kingdomName) {
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		java.sql.PreparedStatement s = null;
 		try {
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			ResultSet res2 = s.executeQuery();
 			if(res2.next()) {
 		    	 return true;
 		     } else {
@@ -161,9 +161,9 @@ public class Kingdom {
 		HashMap<String, String> info = new HashMap<String, String>();
 		
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		java.sql.PreparedStatement s = null;
 		try {
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			ResultSet res2 = s.executeQuery();
 			if(res2.next()) {
 				info.put("id", res2.getString(1));
 				info.put("Name", res2.getString(2));
@@ -182,8 +182,8 @@ public class Kingdom {
 	
 	public static String getName(int id) {
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		java.sql.PreparedStatement s = null;
 		try {
+			Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
 			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
 			if(res2.next()) {
 		    	 String kingdomName = res2.getString("KingdomName");
