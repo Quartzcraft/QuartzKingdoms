@@ -51,10 +51,7 @@ Permissions:
       description: Allows a king the ability to claim and unclaim land for their kingdom.
       default: false
    QCK.Kingdom.join:
-      description: Allows a player the ability to join a kingdom.
-      default: false
-   QCK.Kingdom.leave:
-      description: Allows a player the ability to leave a kingdom.
+      description: Allows a player the ability to join and leave a kingdom.
       default: false
    QCK.Kingdom.kick:
       description: Allows a king the ability to kick a player from their kingdom.
