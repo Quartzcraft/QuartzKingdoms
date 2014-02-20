@@ -99,6 +99,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		CommandKingdom.addCommand(Arrays.asList("war"), new KingdomWarSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("ally"), new KingdomAllySubCommand());
 		CommandKingdom.addCommand(Arrays.asList("neutral"), new KingdomNeutralSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("join"), new KingdomJoinSubCommand());
+		CommandKingdom.addCommand(Arrays.asList("leave"), new KingdomJoinSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
