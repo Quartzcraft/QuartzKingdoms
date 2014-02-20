@@ -66,6 +66,11 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_no", "&aChunk was not successfully unclaimed for Kingdom: ");
 		ChatPhrase.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
 		
+		ChatPhrase.addPhrase("successfully_joined_kingdom_X", "&aSuccessfully joined the kingdom ");
+		ChatPhrase.addPhrase("failed_join_kingdom", "&cFailed to join the specified kingdom. Please check that it is not invite only.");
+		ChatPhrase.addPhrase("successfully_left_kingdom_X", "&aSuccessfully left the kingdom ");
+		ChatPhrase.addPhrase("failed_leave_kingdom", "&cFailed to leave the specified kingdom.");
+		
 		ChatPhrase.addPhrase("kingdom_is_now_at_war_with_kingdom", " &cis now at war with ");
 		ChatPhrase.addPhrase("kingdom_is_now_allied_with_kingdom", " &ais now allied with ");
 		ChatPhrase.addPhrase("kingdom_is_now_neutral_relationship_with_kingdom", " &6is now in a neutral relationship with ");
