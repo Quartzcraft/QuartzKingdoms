@@ -26,6 +26,21 @@ public class KingdomJoinSubCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		//TODO 
+		Player player = (Player) sender;
+		if(args[0].equalsIgnoreCase("join")) {
+			if(QKPlayer.joinKingdom(player, args[1])) {
+				sender.sendMessage(ChatPhrase.getPhrase("successfully_joined_kingdom_X") + args[1]);
+			} else {
+				sender.sendMessage(ChatPhrase.getPhrase("failed_join_kingdom"));
+			}
+		}
+		
+		if(args[0].equalsIgnoreCase("leave")) {
+			if(QKPlayer.leaveKingdom(player, args[1])) {
+				sender.sendMessage(ChatPhrase.getPhrase("successfully_left_kingdom_X") + args[1]);
+			} else {
+				sender.sendMessage(ChatPhrase.getPhrase("failed_leave_kingdom"));
+			}
+		}
 	}
 }
