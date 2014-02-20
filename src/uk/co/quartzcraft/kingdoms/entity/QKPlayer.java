@@ -126,9 +126,40 @@ public class QKPlayer extends QPlayer {
 		return false;
 	}
 	
-public static boolean leaveKingdom(Player player, String kingdomName) {
+	public static boolean leaveKingdom(Player player, String kingdomName) {
 		
 		return false;
+	}
+	
+	public static int getKingdomID(String playername) {
+		String kingdom = null;
+		Player player = Bukkit.getServer().getPlayer(playername);
+		UUID UUID = player.getUniqueId();
+		String SUUID = UUID.toString();
+		
+		try {
+			Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
+			Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			
+	        ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE UUID ='" + SUUID + "';");
+	        
+	        if(res1.next()) {
+		        ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE playerID =" + res1.getInt(1) + ";");
+		        if(res2.next()) {
+		        	int kingdomID = res2.getInt(4);
+		        	return kingdomID;
+		        } else {
+		        	return 0;
+		        }
+	        } else {
+	        	return 0;
+	        }
+	        
+		} catch(SQLException e) {
+			
+		}
+		return 0;
 	}
 
 }
