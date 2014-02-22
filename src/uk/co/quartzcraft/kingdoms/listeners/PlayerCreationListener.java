@@ -8,14 +8,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
 public class PlayerCreationListener implements Listener {
 
+	private static QuartzKingdoms plugin;
+	
 	public PlayerCreationListener(QuartzKingdoms plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        this.plugin = plugin;
     }
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
