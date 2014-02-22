@@ -94,15 +94,17 @@ public class Kingdom {
 		
 		int i = 1;
 		int a = 1;
+		int current = 0;
 		if(i == 1) {
 			for(String rank : ranks) {
 				if(group.equalsIgnoreCase(rank)) {
-					if(QPlayer.addSecondaryGroup(sender, playerToPromote, group)) {
+					if(QPlayer.addSecondaryGroup(sender, playerToPromote, rank)) {
 						return true;
 					} else {
 						return false;
 					}
-				} 
+				}
+				current++;
 			}
 			return true;
 		} else {
