@@ -26,10 +26,10 @@ public class KingdomClaimSubCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		String playername = sender.toString();
-		String kingdomName = QKPlayer.getKingdom(playername);
+		Player player = (Player) sender;
+		String kingdomName = QKPlayer.getKingdom(player);
 		
-		if(ChunkManager.claimChunk(playername)) {
+		if(ChunkManager.claimChunk(player)) {
 			sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
 		} else {
 			sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);

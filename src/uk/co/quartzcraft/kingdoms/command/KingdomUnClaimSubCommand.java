@@ -26,10 +26,10 @@ public class KingdomUnClaimSubCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		String playername = sender.toString();
-		String kingdomName = QKPlayer.getKingdom(playername);
+		Player player = (Player) sender;
+		String kingdomName = QKPlayer.getKingdom(player);
 		
-		if(ChunkManager.unClaimChunk(playername)) {
+		if(ChunkManager.unClaimChunk(player)) {
 			sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
 		} else {
 			sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);

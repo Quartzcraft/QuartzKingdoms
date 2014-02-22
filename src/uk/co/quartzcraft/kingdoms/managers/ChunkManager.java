@@ -13,8 +13,8 @@ public class ChunkManager {
 		return false;
 	}
 	
-	public static boolean claimChunk(String player) {
-		Player chunkClaimer = Bukkit.getServer().getPlayer(player);
+	public static boolean claimChunk(Player player) {
+		Player chunkClaimer = player;
 		Chunk chunk = chunkClaimer.getLocation().getChunk();
 		
 		if(checkClaim(chunk) == false) {
@@ -25,7 +25,7 @@ public class ChunkManager {
 		return false;
 	}
 
-	public static boolean unClaimChunk(String playername) {
+	public static boolean unClaimChunk(Player player) {
 		// TODO Auto-generated method stub
 		return false;
 	}

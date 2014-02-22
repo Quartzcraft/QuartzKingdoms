@@ -21,10 +21,10 @@ public class QKPlayer extends QPlayer {
 		return null;
 	}
 	
-	public static String getKingdom(String playername) {
+	public static String getKingdom(Player player) {
 		String error = "error";
 		String kingdom = null;
-		Player player = Bukkit.getServer().getPlayer(playername);
+		//Player player = Bukkit.getServer().getPlayer(playername);
 		UUID UUID = player.getUniqueId();
 		String SUUID = UUID.toString();
 		
