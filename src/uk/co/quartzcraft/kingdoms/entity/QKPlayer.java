@@ -16,7 +16,7 @@ import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 
 public class QKPlayer extends QPlayer {
 
-	public HashMap getDataThisPlugin() {
+	public HashMap getDataThisPlugin(Player player) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -24,7 +24,6 @@ public class QKPlayer extends QPlayer {
 	public static String getKingdom(Player player) {
 		String error = "error";
 		String kingdom = null;
-		//Player player = Bukkit.getServer().getPlayer(playername);
 		UUID UUID = player.getUniqueId();
 		String SUUID = UUID.toString();
 		
@@ -58,10 +57,20 @@ public class QKPlayer extends QPlayer {
 		return kingdom;
 	}
 
-	@Override
-	public boolean createPlayerThisPlugin() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createPlayerThisPlugin(Player player) {
+		
+	    try {
+   			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+   			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO KingdomsPlayerData (PlayerID) VALUES (" + QPlayer.getUserID(player) +");");
+   			if(s.executeUpdate() == 1) {
+   				return true;
+   			} else {
+   				return false;
+   			}
+   		} catch (SQLException e) {
+   			e.printStackTrace();
+   			return false;
+   		}
 	}
 
 	public static boolean isKing(String kingdomName, int userID) {
