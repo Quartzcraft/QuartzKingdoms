@@ -8,8 +8,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
+import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 
 public class PlayerCreationListener implements Listener {
 
@@ -23,6 +25,10 @@ public class PlayerCreationListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCreation(QPlayerCreationEvent event) {
            Player player = event.getPlayer();
-           
+           if(QKPlayer.createKingdomsPlayer(player)) {
+        	   plugin.log.info("[QC] Player, " + player.getDisplayName() + " was created with UUID of " + player.getUniqueId().toString());
+           } else {
+        	   player.kickPlayer(ChatPhrase.getPhrase("database_error_contact") + "\n" + ChatPhrase.getPhrase("could_not_create_kingdoms_player"));
+           }
     }
 }
