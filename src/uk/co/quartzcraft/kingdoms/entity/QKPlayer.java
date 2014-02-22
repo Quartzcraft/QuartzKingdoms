@@ -57,7 +57,7 @@ public class QKPlayer extends QPlayer {
 		return kingdom;
 	}
 
-	public boolean createPlayerThisPlugin(Player player) {
+	public static boolean createKingdomsPlayer(Player player) {
 		
 	    try {
    			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
