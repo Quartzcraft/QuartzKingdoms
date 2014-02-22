@@ -205,4 +205,23 @@ public class Kingdom {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public static String getKing(String kingdomName) {
+		int id = Kingdom.getID(kingdomName);
+		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+		try {
+			Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
+			if(res2.next()) {
+		    	 int kingID = res2.getInt("KingID");
+		    	 int coreKingID = QKPlayer.getCoreID(kingID);
+		    	 return QPlayer.getDisplayName(coreKingID);
+		     } else {
+		    	 return null;
+		     }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

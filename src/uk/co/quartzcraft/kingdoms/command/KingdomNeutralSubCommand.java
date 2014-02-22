@@ -26,13 +26,17 @@ public class KingdomNeutralSubCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		String splayer = sender.toString();
-		String kingdom = QKPlayer.getKingdom(splayer);
+		Player player = (Player) sender;
+		String kingdom = QKPlayer.getKingdom(player);
 		
-		if(Kingdom.setRelationshipStatus(kingdom, args[1], 1)) {
-			Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
+		if(player.getDisplayName() == Kingdom.getKing(kingdom)) {
+			if(Kingdom.setRelationshipStatus(kingdom, args[1], 1)) {
+				Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
+			} else {
+				sender.sendMessage(ChatPhrase.getPhrase("failed_to_neutral_with_kingdom"));
+			}
 		} else {
-			sender.sendMessage(ChatPhrase.getPhrase("failed_to_neutral_with_kingdom"));
+			sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
 		}
 		
 		
