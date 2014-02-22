@@ -68,6 +68,47 @@ public class QKPlayer extends QPlayer {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public static boolean isKing(String kingdomName, Player player) {
+		if(kingdomName != null) {
+			int id = Kingdom.getID(kingdomName);
+			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+			try {
+				Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+				ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
+				if(res2.next()) {
+			    	 int kingID = res2.getInt("KingID");
+			    	 if(QKPlayer.getID(player) == kingID) {
+			    		 return true;
+			    	 }
+			     } else {
+			    	 return false;
+			     }
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		} else {
+			int id = QKPlayer.getID(player);
+			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+			try {
+				Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+				ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingID =" + id + ";");
+				if(res2.next()) {
+			    	 int kingID = res2.getInt("KingID");
+			    	 if(id == kingID) {
+			    		 return true;
+			    	 }
+			     } else {
+			    	 return false;
+			     }
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false;
+	}
 
 	public static int getCoreID(int id) {
 		Statement s;
