@@ -11,8 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
@@ -222,6 +224,14 @@ public class Kingdom {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public static boolean compareKingdom(Player p1, Player p2) {
+		if(QKPlayer.getKingdom(p1) == QKPlayer.getKingdom(p2)) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

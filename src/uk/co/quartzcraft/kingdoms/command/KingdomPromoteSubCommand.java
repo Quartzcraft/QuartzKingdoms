@@ -29,7 +29,7 @@ public class KingdomPromoteSubCommand extends QSubCommand {
 		Player psender = (Player) sender;
 		String kingdomName = QKPlayer.getKingdom(target);
 		
-		if(QKPlayer.getKingdom(target) == QKPlayer.getKingdom(psender)) {
+		if(Kingdom.compareKingdom(target, psender)) {
 			if(args[1] != null) {
 				if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[2])) {
 					sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
