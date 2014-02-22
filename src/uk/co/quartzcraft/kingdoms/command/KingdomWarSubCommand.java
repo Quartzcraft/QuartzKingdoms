@@ -29,7 +29,7 @@ public class KingdomWarSubCommand extends QSubCommand {
 		Player player = (Player) sender;
 		String kingdom = QKPlayer.getKingdom(player);
 		
-		if(player.getDisplayName() == Kingdom.getKing(kingdom)) {
+		if(QKPlayer.isKing(kingdom, player)) {
 			if(Kingdom.setRelationshipStatus(kingdom, args[1], 3)) {
 				Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + null);
 			} else {

@@ -29,7 +29,7 @@ public class KingdomAllySubCommand extends QSubCommand {
 		Player player = (Player) sender;
 		String kingdom = QKPlayer.getKingdom(player);
 		
-		if(player.getDisplayName() == Kingdom.getKing(kingdom)) {
+		if(QKPlayer.isKing(kingdom, player)) {
 			if(Kingdom.setRelationshipStatus(kingdom, args[1], 2)) {
 				Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + null);
 			} else {
