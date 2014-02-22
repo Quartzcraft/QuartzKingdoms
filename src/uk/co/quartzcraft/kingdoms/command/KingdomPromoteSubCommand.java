@@ -25,18 +25,23 @@ public class KingdomPromoteSubCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		Player target = Bukkit.getServer().getPlayer(args[1]);
+		Player psender = (Player) sender;
+		String kingdomName = QKPlayer.getKingdom(target);
 		
-		if(args[1] != null) {
-			Player target = Bukkit.getServer().getPlayer(args[1]);
-			String kingdomName = QKPlayer.getKingdom(target.toString());
-			if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[2])) {
-				sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
-				target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
+		if(QKPlayer.getKingdom(target) == QKPlayer.getKingdom(psender)) {
+			if(args[1] != null) {
+				if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[2])) {
+					sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
+					target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
+				} else {
+					sender.sendMessage(ChatPhrase.getPhrase("promoted_player_no") + ChatColor.WHITE + kingdomName);
+				}
 			} else {
-				sender.sendMessage(ChatPhrase.getPhrase("promoted_player_no") + ChatColor.WHITE + kingdomName);
+				sender.sendMessage(ChatPhrase.getPhrase("specify_username") + ChatColor.WHITE + args[1]);
 			}
 		} else {
-			sender.sendMessage(ChatPhrase.getPhrase("specify_username") + ChatColor.WHITE + args[1]);
+			sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
 		}
 		
 	}
