@@ -16,7 +16,7 @@ import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 
 public class QKPlayer extends QPlayer {
 
-	public HashMap getDataThisPlugin(Player player) {
+	public HashMap getData(Player player) {
 		// TODO Auto-generated method stub
 		return null;
 	}
