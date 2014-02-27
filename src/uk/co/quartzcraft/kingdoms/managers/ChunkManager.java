@@ -29,6 +29,16 @@ public class ChunkManager {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public static boolean isClaimed(Chunk chunk) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static String getKingdom(Chunk chunk) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
