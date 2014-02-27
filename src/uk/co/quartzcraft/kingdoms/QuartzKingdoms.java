@@ -66,6 +66,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for Kingdom: ");
 		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_no", "&aChunk was not successfully unclaimed for Kingdom: ");
 		ChatPhrase.addPhrase("now_entering_the_land_of", "&aNow entering the land of ");
+		ChatPhrase.addPhrase("now_leaving_the_land_of", "&aNow entering the land of ");
 		
 		ChatPhrase.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
 		
