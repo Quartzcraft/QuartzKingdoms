@@ -199,8 +199,20 @@ public class Kingdom {
 	}
 
 	public static int getID(String kingdomName) {
-		// TODO Auto-generated method stub
-		return 0;
+		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+		try {
+			Statement s = connection.createStatement();
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			if(res2.next()) {
+		    	 int id = res2.getInt("id");
+		    	 return id;
+		     } else {
+		    	 return 0;
+		     }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	public static boolean addUser(Player player) {
