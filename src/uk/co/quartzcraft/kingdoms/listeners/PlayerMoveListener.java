@@ -20,13 +20,22 @@ public class PlayerMoveListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		if (event.getFrom().getChunk().equals(event.getTo().getChunk())) {
-			if(ChunkManager.isClaimed(event.getTo().getChunk()) && ChunkManager.getKingdom(event.getFrom().getChunk()) != ChunkManager.getKingdom(event.getTo().getChunk())) {
+			//Nothing
+		} else {
+			if(ChunkManager.isClaimed(event.getTo().getChunk()) && ChunkManager.isClaimed(event.getFrom().getChunk())) {
+				if(ChunkManager.getKingdom(event.getFrom().getChunk()) != ChunkManager.getKingdom(event.getTo().getChunk())) {
+					player.sendMessage(ChatPhrase.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdom(event.getFrom().getChunk()));
+					player.sendMessage(ChatPhrase.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdom(event.getTo().getChunk()));
+				} else {
+					//player.sendMessage(ChatPhrase.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdom(event.getTo().getChunk()));
+				}
+			} else if(ChunkManager.isClaimed(event.getFrom().getChunk())) {
+				player.sendMessage(ChatPhrase.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdom(event.getFrom().getChunk()));
+			} else if(ChunkManager.isClaimed(event.getTo().getChunk())) {
 				player.sendMessage(ChatPhrase.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdom(event.getTo().getChunk()));
 			} else {
-				
+				//Nothing
 			}
-		} else {
-			// chunk are not equal
 		}
     }
 }
