@@ -14,6 +14,7 @@ public class ChunkManager {
 	}
 	
 	public static boolean claimChunk(Player player) {
+		//TODO
 		Player chunkClaimer = player;
 		Chunk chunk = chunkClaimer.getLocation().getChunk();
 		

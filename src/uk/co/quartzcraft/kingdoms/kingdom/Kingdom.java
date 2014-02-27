@@ -172,6 +172,7 @@ public class Kingdom {
 	}
 	
 	public static boolean setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
+		//TODO
 		switch(status) {
 			case 1:
 				//Neutral
@@ -190,7 +191,7 @@ public class Kingdom {
 	}
 	
 	public boolean setOpen(String kingdomName, boolean status) {
-		
+		//TODO
 		if(status = true) {
 			return true;
 		} else {

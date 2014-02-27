@@ -211,7 +211,7 @@ public class QKPlayer extends QPlayer {
 	}
 	
 	public static boolean leaveKingdom(Player player, String kingdomName) {
-		
+		//TODO
 		return false;
 	}
 	
