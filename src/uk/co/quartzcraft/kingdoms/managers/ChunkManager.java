@@ -8,17 +8,13 @@ import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
 public class ChunkManager {
-
-	public static boolean checkClaim(Chunk chunk) {
-		return false;
-	}
 	
 	public static boolean claimChunk(Player player) {
 		//TODO
 		Player chunkClaimer = player;
 		Chunk chunk = chunkClaimer.getLocation().getChunk();
 		
-		if(checkClaim(chunk) == false) {
+		if(isClaimed(chunk) == false) {
 			//claim chunk
 		} else {
 			//error
