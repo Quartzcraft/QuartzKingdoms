@@ -35,7 +35,7 @@ public class ChunkManager {
 		return false;
 	}
 
-	public static String getKingdom(Chunk chunk) {
+	public static String getOwner(Chunk chunk) {
 		// TODO Auto-generated method stub
 		return null;
 	}
