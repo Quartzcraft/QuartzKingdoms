@@ -216,7 +216,11 @@ public class QKPlayer extends QPlayer {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
             java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + QPlayer.getUserID(player) + ");");
             if(s.executeUpdate() == 1) {
-                return true;
+                if(Kingdom.removeUser(player)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }

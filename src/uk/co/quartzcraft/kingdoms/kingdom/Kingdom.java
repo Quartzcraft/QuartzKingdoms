@@ -221,6 +221,11 @@ public class Kingdom {
 		return true;
 	}
 
+    public static boolean removeUser(Player player) {
+        // TODO Probably not going to use this
+        return true;
+    }
+
 	public static String getKing(String kingdomName) {
 		int id = Kingdom.getID(kingdomName);
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
