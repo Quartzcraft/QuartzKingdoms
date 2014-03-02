@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,13 +28,16 @@ public class KingdomUnClaimSubCommand extends QSubCommand {
 	@Override
 	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
+        Chunk chunk = player.getLocation().getChunk();
 		String kingdomName = QKPlayer.getKingdom(player);
-		
-		if(ChunkManager.unClaimChunk(player)) {
-			sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-		} else {
-			sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
-		}
+
+        if(ChunkManager.getKingdomOwner(chunk) == kingdomName) {
+            if(ChunkManager.unClaimChunkKingdom(player)) {
+                sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
+            }
+        }
 		
 	}
 }
