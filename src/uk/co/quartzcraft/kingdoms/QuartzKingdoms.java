@@ -29,10 +29,6 @@ public class QuartzKingdoms extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		
-		//Database
-		//log.info("[SHUTDOWN]Terminating Connection to Database");
-		//DBKing = MySQL.closeConnection();
 				
     	//Shutdown notice
 		log.info("[QK]The QuartzKingdoms Plugin has been disabled!");
