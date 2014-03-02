@@ -217,7 +217,7 @@ public class Kingdom {
 	}
 
 	public static boolean addUser(Player player) {
-		// TODO Auto-generated method stub
+		// TODO Probably not going to use this
 		return true;
 	}
 

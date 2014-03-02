@@ -199,6 +199,8 @@ public class QKPlayer extends QPlayer {
 				if(Kingdom.addUser(player)) {
 					return true;
 				} else {
+                    java.sql.Connection connection1 = QuartzKingdoms.MySQLking.openConnection();
+                    java.sql.PreparedStatement s1 = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + userID + ");");
 					return false;
 				}
 			} else {
