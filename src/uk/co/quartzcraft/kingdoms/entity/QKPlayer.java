@@ -199,22 +199,30 @@ public class QKPlayer extends QPlayer {
 				if(Kingdom.addUser(player)) {
 					return true;
 				} else {
-                    java.sql.Connection connection1 = QuartzKingdoms.MySQLking.openConnection();
                     java.sql.PreparedStatement s1 = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + userID + ");");
+                    s1.executeUpdate();
 					return false;
 				}
 			} else {
 				return false;
 			}
 		} catch (SQLException e) {
-			
+			return false;
 		}
-		return false;
 	}
 	
 	public static boolean leaveKingdom(Player player, String kingdomName) {
-		//TODO
-		return false;
+        try {
+            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + QPlayer.getUserID(player) + ");");
+            if(s.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
 	}
 	
 	public static int getKingdomID(String playername) {
