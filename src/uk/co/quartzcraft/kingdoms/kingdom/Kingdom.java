@@ -176,7 +176,16 @@ public class Kingdom {
 		switch(status) {
 			case 1:
 				//Neutral
-				//Update
+                try {
+                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms () VALUES ();");
+                    if(s.executeUpdate() == 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (SQLException e) {
+                    return false;
+                }
 			case 2:
 				//Ally
 				//Update
