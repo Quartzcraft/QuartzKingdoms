@@ -26,7 +26,7 @@ public class ChunkManager {
 			//claim chunk
             try {
                 Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                if(s.executeUpdate("INSERT INTO Chunks (kingdom, owner_id, X, Z) VALUES (1, " + Kingdom.getID(kingdomName) + ", " + chunkX + ", " + chunkZ + ");") == 1) {
+                if(s.executeUpdate("INSERT INTO Chunks (kingdom, kingdom_id, X, Z) VALUES (1, " + Kingdom.getID(kingdomName) + ", " + chunkX + ", " + chunkZ + ");") == 1) {
                     return true;
                 } else {
                     return false;
