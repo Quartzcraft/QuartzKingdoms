@@ -177,7 +177,7 @@ public class Kingdom {
 			case 1:
 				//Neutral
                 try {
-                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms () VALUES ();");
+                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms SET x WHERE x;");
                     if(s.executeUpdate() == 1) {
                         return true;
                     } else {
@@ -199,14 +199,53 @@ public class Kingdom {
 		
 	}
 	
-	public boolean setOpen(String kingdomName, boolean status) {
+	public static boolean setOpen(String kingdomName, boolean status) {
 		//TODO
-		if(status = true) {
-			return true;
+		if(status) {
+            try {
+                java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms SET invite_only=0 WHERE id=" + getID(kingdomName) + ";");
+                if(s.executeUpdate() == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (SQLException e) {
+                return false;
+            }
 		} else {
-			return false;
+            try {
+                java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms SET invite_only=1 WHERE id=" + getID(kingdomName) + ";");
+                if(s.executeUpdate() == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (SQLException e) {
+                return false;
+            }
 		}
 	}
+
+    public static boolean isOpen(String kingdomName) {
+        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+        try {
+            Statement s = connection.createStatement();
+            ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+            if(res2.next()) {
+                boolean open = res2.getBoolean("invite_only");
+                if(open) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 	public static int getID(String kingdomName) {
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();

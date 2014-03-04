@@ -70,7 +70,14 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("failed_join_kingdom", "&cFailed to join the specified kingdom. Please check that it is not invite only.");
 		ChatPhrase.addPhrase("successfully_left_kingdom_X", "&aSuccessfully left the kingdom ");
 		ChatPhrase.addPhrase("failed_leave_kingdom", "&cFailed to leave the specified kingdom.");
-		
+
+        ChatPhrase.addPhrase("kingdom_already_open", " &cThe kingdom is already open!");
+        ChatPhrase.addPhrase("kingdom_now_open", " &aYour kingdom is now open!");
+        ChatPhrase.addPhrase("failed_open_kingdom", " &cFailed to open the kingdom!");
+        ChatPhrase.addPhrase("kingdom_already_closed", " &cThe kingdom is already closed!");
+        ChatPhrase.addPhrase("kingdom_now_closed", " &aYour kingdom is now closed!");
+        ChatPhrase.addPhrase("failed_close_kingdom", " &cFailed to close the kingdom!");
+
 		ChatPhrase.addPhrase("kingdom_is_now_at_war_with_kingdom", " &cis now at war with ");
 		ChatPhrase.addPhrase("kingdom_is_now_allied_with_kingdom", " &ais now allied with ");
 		ChatPhrase.addPhrase("kingdom_is_now_neutral_relationship_with_kingdom", " &6is now in a neutral relationship with ");
@@ -105,6 +112,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		CommandKingdom.addCommand(Arrays.asList("neutral"), new KingdomNeutralSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("join"), new KingdomJoinSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("leave"), new KingdomJoinSubCommand());
+        CommandKingdom.addCommand(Arrays.asList("open"), new KingdomOpenSubCommand());
+        CommandKingdom.addCommand(Arrays.asList("close"), new KingdomOpenSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
