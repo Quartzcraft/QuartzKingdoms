@@ -65,7 +65,10 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("now_leaving_the_land_of", "&aNow entering the land of ");
 		
 		ChatPhrase.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
-		
+
+        ChatPhrase.addPhrase("you_must_be_member_kingdom", "&cYou must be a member of a kingdom!");
+        ChatPhrase.addPhrase("you_must_be_member_kingdom_leave", "&cYou must be a member of a kingdom to leave one!");
+        ChatPhrase.addPhrase("you_are_already_in_a_Kingdom", "&cYou are already a member of a kingdom!");
 		ChatPhrase.addPhrase("successfully_joined_kingdom_X", "&aSuccessfully joined the kingdom ");
 		ChatPhrase.addPhrase("failed_join_kingdom", "&cFailed to join the specified kingdom. Please check that it is not invite only.");
 		ChatPhrase.addPhrase("successfully_left_kingdom_X", "&aSuccessfully left the kingdom ");
