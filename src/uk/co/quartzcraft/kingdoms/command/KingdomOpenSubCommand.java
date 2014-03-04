@@ -30,7 +30,7 @@ public class KingdomOpenSubCommand extends QSubCommand {
 			}
 		}
 
-        if(args[0].equalsIgnoreCase("open")) {
+        if(args[0].equalsIgnoreCase("close")) {
             if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
                 if(Kingdom.setOpen(QKPlayer.getKingdom(player), false)) {
                     sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_closed"));
