@@ -42,7 +42,8 @@ public class ChunkManager {
 
 	public static boolean unClaimChunkKingdom(Player player) {
         Player chunkClaimer = player;
-        //String kingdomName = QKPlayer.getKingdom(player);
+        String kingdomName = QKPlayer.getKingdom(player);
+        int kingdomID = Kingdom.getID(kingdomName);
         Chunk chunk = chunkClaimer.getLocation().getChunk();
         int chunkX = chunk.getX();
         int chunkZ = chunk.getZ();
@@ -51,7 +52,7 @@ public class ChunkManager {
             //unclaim chunk
             try {
                 Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                if(s.executeUpdate("DELETE FROM Chunks WHERE X=" + chunkX + " AND Z=" + chunkZ + ";") == 1) {
+                if(s.executeUpdate("DELETE FROM Chunks WHERE X=" + chunkX + " AND Z=" + chunkZ + " AND kingdom_id=" + kingdomID + ";") == 1) {
                     return true;
                 } else {
                     return false;
@@ -91,7 +92,7 @@ public class ChunkManager {
                 Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
                 ResultSet res = s.executeQuery("SELECT FROM Chunks WHERE X=" + chunkX + " AND Z=" + chunkZ + ";");
                 if(res.next()) {
-                    int kingdomID = res.getInt("owner_id");
+                    int kingdomID = res.getInt("kingdom_id");
                     return Kingdom.getName(kingdomID);
                 } else {
                     return null;
