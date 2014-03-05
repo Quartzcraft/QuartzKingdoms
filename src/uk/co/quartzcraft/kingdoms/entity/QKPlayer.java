@@ -20,7 +20,13 @@ public class QKPlayer extends QPlayer {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+    /**
+     * Retrieves the name of the kingdom that the specified player is in.
+     *
+     * @param player The player that is being queried.
+     * @return Name of the kingdom
+     */
 	public static String getKingdom(Player player) {
 		String error = "error";
 		String kingdom = null;
@@ -51,7 +57,7 @@ public class QKPlayer extends QPlayer {
 	        }
 	        
 		} catch(SQLException e) {
-			
+			return null;
 		}
 		
 		return kingdom;
@@ -111,7 +117,14 @@ public class QKPlayer extends QPlayer {
 		}
 		return false;
 	}
-	
+
+    /**
+     * Finds out whether a player is a king, can check one kingdom.
+     *
+     * @param kingdomName This value can be null
+     * @param player This is the player you are querying, this is a required value
+     * @return boolean
+     */
 	public static boolean isKing(String kingdomName, Player player) {
 		if(kingdomName != null) {
 			int id = Kingdom.getID(kingdomName);
