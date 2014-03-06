@@ -175,29 +175,128 @@ public class Kingdom {
 		//TODO
 		switch(status) {
 			case 1:
-				//Neutral
+                //Neutral
                 try {
-                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms SET x WHERE x;");
-                    if(s.executeUpdate() == 1) {
-                        return true;
-                    } else {
+                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
+                    ResultSet res = s.executeQuery();
+                    if(isNeutral(kingdom, relatingKingdom)) {
                         return false;
+                    } else if(res.next()) {
+                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=1 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
+                        if(s1.executeUpdate() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (" + getID(kingdom) + ", " + getID(relatingKingdom) + ", 1);");
+                        if(s1.executeUpdate() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
                     }
-                } catch (SQLException e) {
+                }  catch (SQLException e) {
                     return false;
                 }
 			case 2:
 				//Ally
-				//Update
+                try {
+                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
+                    ResultSet res = s.executeQuery();
+                    if(isAlly(kingdom, relatingKingdom)) {
+                        return false;
+                    } else if(res.next()) {
+                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
+                        if(s1.executeUpdate() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (" + getID(kingdom) + ", " + getID(relatingKingdom) + ", 2);");
+                        if(s1.executeUpdate() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }  catch (SQLException e) {
+                    return false;
+                }
 			case 3:
 				//War
-				//Update
+                try {
+                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
+                    ResultSet res = s.executeQuery();
+                    if(isEnemy(kingdom, relatingKingdom)) {
+                        return false;
+                    } else if(res.next()) {
+                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=3 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
+                        if(s1.executeUpdate() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (" + getID(kingdom) + ", " + getID(relatingKingdom) + ", 3);");
+                        if(s1.executeUpdate() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }  catch (SQLException e) {
+                    return false;
+                }
 			default:
 				//Do nothing
 				return false;
 		}
 		
 	}
+
+    public static boolean isNeutral(String kingdom, String relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + " AND status=1;");
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public static boolean isEnemy(String kingdom, String relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + " AND status=3;");
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public static boolean isAlly(String kingdom, String relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + " AND status=2;");
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 	
 	public static boolean setOpen(String kingdomName, boolean status) {
 		//TODO
