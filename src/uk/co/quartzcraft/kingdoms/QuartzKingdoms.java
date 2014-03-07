@@ -88,7 +88,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("failed_to_neutral_with_kingdom", "&cFailed to become neutral with ");
 		ChatPhrase.addPhrase("failed_to_war_with_kingdom", "&cFailed to go to war with ");
 		
-		ChatPhrase.addPhrase("could_not_create_kingdoms_player", "&cYou're playerdata could not be added to the QuartzKingdoms database!");
+		ChatPhrase.addPhrase("could_not_create_kingdoms_player", "&cYour player data could not be added to the QuartzKingdoms database!");
 		
 		//Database
 		//logger.info("[STARTUP]Connecting to Database");
