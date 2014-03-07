@@ -21,14 +21,16 @@ public class KingdomCreateSubCommand extends QSubCommand {
 	}
 
 	@Override
-	public void onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
+	public void onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+		CommandSender sender = commandSender;
+        String[] args = strings;
 		if(args[1] != null) {
 			if(args[2] != null) {
 				sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
 			} else {
-				String kingdomName = Kingdom.createKingdom(args[1], sender);
-				if(kingdomName != null) {
+				String kingdomName = args[1];
+                boolean created = Kingdom.createKingdom(args[1], sender);
+				if(created) {
 					if(kingdomName == args[1]) {
 						sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
 					} else if(kingdomName == "name_error") {

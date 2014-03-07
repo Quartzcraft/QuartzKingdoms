@@ -26,7 +26,7 @@ public class ChunkManager {
 			//claim chunk
             try {
                 Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                if(s.executeUpdate("INSERT INTO Chunks (kingdom, kingdom_id, X, Z) VALUES (1, " + Kingdom.getID(kingdomName) + ", " + chunkX + ", " + chunkZ + ");") == 1) {
+                if(s.executeUpdate("INSERT INTO Chunks (kingdom, kingdom_id, X, Z) VALUES (1, " + Kingdom.getID(kingdomName) + ", '" + chunkX + "', '" + chunkZ + "');") == 1) {
                     return true;
                 } else {
                     return false;
@@ -52,7 +52,7 @@ public class ChunkManager {
             //unclaim chunk
             try {
                 Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                if(s.executeUpdate("DELETE FROM Chunks WHERE X=" + chunkX + " AND Z=" + chunkZ + " AND kingdom_id=" + kingdomID + ";") == 1) {
+                if(s.executeUpdate("DELETE FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "' AND kingdom_id=" + kingdomID + ";") == 1) {
                     return true;
                 } else {
                     return false;
@@ -72,7 +72,7 @@ public class ChunkManager {
 
         try {
             Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT FROM Chunks WHERE X=" + chunkX + " AND Z=" + chunkZ + ";");
+            ResultSet res = s.executeQuery("SELECT FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "';");
             if(res.next()) {
                 return true;
             } else {
@@ -90,7 +90,7 @@ public class ChunkManager {
 
         try {
                 Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                ResultSet res = s.executeQuery("SELECT FROM Chunks WHERE X=" + chunkX + " AND Z=" + chunkZ + ";");
+                ResultSet res = s.executeQuery("SELECT FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "';");
                 if(res.next()) {
                     int kingdomID = res.getInt("kingdom_id");
                     return Kingdom.getName(kingdomID);

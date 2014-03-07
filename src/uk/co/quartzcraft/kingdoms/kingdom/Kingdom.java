@@ -27,30 +27,28 @@ public class Kingdom {
 		this.plugin = plugin;
 	}
 	
-	public static String createKingdom(String kingdomName, CommandSender sender) {
-		String name_error = "name_error";
-		String error = "error";
+	public static boolean createKingdom(String kingdomName, CommandSender sender) {
 		Player player = (Player) sender;
 		int userID = QPlayer.getUserID(player);
 		if(exists(kingdomName)) {
-			return name_error;
+			return false;
 		}
 		
 		if(userID == 0) {
-			return error;
+			return false;
 		} 
 		
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID, MemberIDs) VALUES ('" + kingdomName + "', '" + userID + "', '" + userID + "');");
 			if(s.executeUpdate() == 1) {
-				return kingdomName;
+				return true;
 			} else {
-				return error;
+				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return error;
+			return false;
 		}
 	}
 
