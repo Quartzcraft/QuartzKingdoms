@@ -61,6 +61,8 @@ public class CommandKingdom implements CommandExecutor {
             sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args0[1]);
         }
     }
+
+    /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
             if(args.length >= 1) {
                     boolean match = false; 
@@ -85,6 +87,7 @@ public class CommandKingdom implements CommandExecutor {
             
             return true;
     }
+    */
     
     public static void addCommand(List<String> cmds, QSubCommand s) {
             commands.put(cmds, s);
