@@ -7,12 +7,14 @@ import java.util.logging.Logger;
 import com.sun.tools.javac.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.database.MySQL;
+import uk.co.quartzcraft.core.command.QCommand;
 import uk.co.quartzcraft.kingdoms.command.*;
 import uk.co.quartzcraft.kingdoms.listeners.*; 
 
@@ -26,6 +28,8 @@ public class QuartzKingdoms extends JavaPlugin {
 
 	public static Connection DBKing = null;
 	public static MySQL MySQLking = null;
+
+    public QCommand commandFramework;
 	
 	@Override
 	public void onDisable() {
@@ -103,7 +107,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		
 		//Commands
 		log.info("[QK][STARTUP]Registering Commands");
-		getCommand("kingdom").setExecutor(new CommandKingdom());
+        commandFramework = new QCommand(this);
+		getCommand("kingdom").setExecutor(new CommandKingdom(this));
 		CommandKingdom.addCommand(Arrays.asList("info"), new KingdomInfoSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("create"), new KingdomCreateSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("delete"), new KingdomDeleteSubCommand());
@@ -122,5 +127,10 @@ public class QuartzKingdoms extends JavaPlugin {
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
 		log.info("[QK]Compiled using QuartzCore version " + releaseVersion);
 	}
+
+    @Override
+    public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
+        return commandFramework.handleCommand(sender, label, command, args);
+    }
 
 }
