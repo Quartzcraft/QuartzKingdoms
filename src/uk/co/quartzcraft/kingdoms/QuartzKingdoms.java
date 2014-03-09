@@ -108,6 +108,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		//Commands
 		log.info("[QK][STARTUP]Registering Commands");
         commandFramework = new QCommand(this);
+        commandFramework.registerCommands(new CommandKingdom(this));
 		//getCommand("kingdom").setExecutor(new CommandKingdom(this));
 		CommandKingdom.addCommand(Arrays.asList("info"), new KingdomInfoSubCommand());
 		CommandKingdom.addCommand(Arrays.asList("create"), new KingdomCreateSubCommand());
