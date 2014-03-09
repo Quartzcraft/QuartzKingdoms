@@ -13,6 +13,7 @@ import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.command.QCommand;
 import uk.co.quartzcraft.core.command.QSubCommand;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 
 public class CommandKingdom implements CommandExecutor {
 	
@@ -29,6 +30,11 @@ public class CommandKingdom implements CommandExecutor {
     @QCommand.Command(name = "kingdom", aliases = { "k" }, permission = "QCK.kingdom", description = "The main kingdoms command", usage = "Use /kingdom [subcommand]")
     public void kingdom(QCommand.CommandArgs args) {
         args.getSender().sendMessage(ChatPhrase.getPhrase("Specify_Subcommand"));
+    }
+
+    @QCommand.Command(name = "kingdom.info", aliases = { "k.info" }, permission = "QCK.kingdom.info", description = "Get information about a specified kingdom", usage = "Use /kingdom info [kingdom name]")
+    public void kingdomInfo(QCommand.CommandArgs args) {
+        args.getSender().sendMessage("Info command testing");
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
