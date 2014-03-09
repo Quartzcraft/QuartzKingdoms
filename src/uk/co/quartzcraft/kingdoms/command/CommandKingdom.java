@@ -37,6 +37,30 @@ public class CommandKingdom implements CommandExecutor {
         args.getSender().sendMessage("Info command testing");
     }
 
+    @QCommand.Command(name = "kingdom.create", aliases = { "k.create" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
+    public void kingdomCreate(QCommand.CommandArgs args) {
+        CommandSender sender = args.getSender();
+        String[] args0 = args.getArgs();;
+        if(args0[1] != null) {
+            if(args0[2] != null) {
+                sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
+            } else {
+                String kingdomName = args0[1];
+                boolean created = Kingdom.createKingdom(args0[1], sender);
+                if(created) {
+                    if(kingdomName == args0[1]) {
+                        sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                    } else if(kingdomName == "name_error") {
+                        sender.sendMessage(ChatPhrase.getPhrase("kingdomname_already_used") + ChatColor.WHITE + kingdomName);
+                    }
+                } else {
+                    sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+                }
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args0[1]);
+        }
+    }
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
             if(args.length >= 1) {
                     boolean match = false; 
