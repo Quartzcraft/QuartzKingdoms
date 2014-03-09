@@ -8,12 +8,28 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
+import uk.co.quartzcraft.core.command.QCommand;
 import uk.co.quartzcraft.core.command.QSubCommand;
+import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 
 public class CommandKingdom implements CommandExecutor {
 	
 	private static HashMap<List<String>, QSubCommand> commands = new HashMap<List<String>, QSubCommand>();
+    private static QuartzKingdoms plugin;
+    private static QCommand framework;
+
+    public CommandKingdom(QuartzKingdoms plugin) {
+        this.plugin = plugin;
+        framework = new QCommand(this.plugin);
+        framework.registerCommands(this);
+    }
+
+    @QCommand.Command(name = "kingdom", aliases = { "k" }, permission = "QCK.kingdom", description = "The main kingdoms command", usage = "Use /kingdom [subcommand]")
+    public void kingdom(QCommand.CommandArgs args) {
+        args.getSender().sendMessage(ChatPhrase.getPhrase("Specify_Subcommand"));
+    }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
             if(args.length >= 1) {
