@@ -62,6 +62,27 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.delete", aliases = { "k.delete" }, permission = "QCK.kingdom.delete", description = "Deletes the kingdom you specify. You must be the king.", usage = "Use /kingdom create [kingdom name]")
+    public void kingdomDelete(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();;
+        if(args[1] != null) {
+            String kingdomName = Kingdom.deleteKingdom(args[1], sender);
+            if(kingdomName != null) {
+                if(kingdomName == args[1]) {
+                    sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                } else if(kingdomName == "error") {
+                    sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
+                }
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args[1]);
+        }
+    }
+
+
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
             if(args.length >= 1) {
