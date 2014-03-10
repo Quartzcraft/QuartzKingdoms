@@ -15,7 +15,7 @@ import uk.co.quartzcraft.core.command.QSubCommand;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 
-public class CommandKingdom implements CommandExecutor {
+public class CommandKingdom {
 	
 	private static HashMap<List<String>, QSubCommand> commands = new HashMap<List<String>, QSubCommand>();
     private static QuartzKingdoms plugin;
@@ -88,7 +88,7 @@ public class CommandKingdom implements CommandExecutor {
             return true;
     }
     */
-    
+
     public static void addCommand(List<String> cmds, QSubCommand s) {
             commands.put(cmds, s);
     }
