@@ -237,6 +237,22 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join.", usage = "Use /kingdom open")
+    public void kingdomOpen(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        String[] args = args0.getArgs();
+        if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
+            sender.sendMessage(ChatPhrase.getPhrase("kingdom_already_open"));
+        } else {
+            if(Kingdom.setOpen(QKPlayer.getKingdom(player), true)) {
+                sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_open"));
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_open_kingdom"));
+            }
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
