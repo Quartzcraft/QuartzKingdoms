@@ -12,13 +12,6 @@ commands:
       permission: QCK.quartzKing
       default: op
       permission-message: Unknown Command. Visit the QuartzCraft Wiki for help.
-   kingdom:
-      description: Main kingdoms command.
-      usage: /kingdom
-      permission: QCK.Kingdom
-      default: false
-      permission-message: Unknown Command. Visit the QuartzCraft Wiki for help.
-      alias: king, k
 Permissions:
    QCK.kingdom.*:
       description: Allows access to all QCK permissions.
