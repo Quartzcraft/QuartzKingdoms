@@ -147,6 +147,24 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 5 power.", usage = "Use /kingdom war [enemy kingdom name]")
+    public void kingdomWar(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();
+        Player player = (Player) sender;
+        String kingdom = QKPlayer.getKingdom(player);
+
+        if(QKPlayer.isKing(kingdom, player)) {
+            if(Kingdom.setRelationshipStatus(kingdom, args[1], 3)) {
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + null);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_to_war_with_kingdom"));
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
