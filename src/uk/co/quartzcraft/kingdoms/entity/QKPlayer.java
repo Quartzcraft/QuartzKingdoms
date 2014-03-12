@@ -14,7 +14,7 @@ import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 
-public class QKPlayer extends QPlayer {
+public class QKPlayer {
 
 	public HashMap getData(Player player) {
 		// TODO Auto-generated method stub
@@ -185,7 +185,7 @@ public class QKPlayer extends QPlayer {
 	
 	public static int getID(Player player) {
 		Statement s;
-		int userID = QKPlayer.getUserID(player);
+		int userID = QPlayer.getUserID(player);
 		
 		try {
 			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
