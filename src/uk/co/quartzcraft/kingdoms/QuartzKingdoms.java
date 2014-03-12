@@ -107,6 +107,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		//getServer().getPluginManager().registerEvents(new BlockListener(), this);
 		new BlockListener(this);
 		new PlayerCreationListener(this);
+        new PlayerDeathListener(this);
 		//new PlayerMoveListener(this);
 		
 		//Commands
