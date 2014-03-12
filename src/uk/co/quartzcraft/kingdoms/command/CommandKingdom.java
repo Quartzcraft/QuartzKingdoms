@@ -3,17 +3,22 @@ package uk.co.quartzcraft.kingdoms.command;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import org.bukkit.entity.Player;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.command.QCommand;
 import uk.co.quartzcraft.core.command.QSubCommand;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
+import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
 
 public class CommandKingdom {
 	
@@ -40,7 +45,7 @@ public class CommandKingdom {
     @QCommand.Command(name = "kingdom.create", aliases = { "k.create" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(QCommand.CommandArgs args) {
         CommandSender sender = args.getSender();
-        String[] args0 = args.getArgs();;
+        String[] args0 = args.getArgs();
         if(args0[1] != null) {
             if(args0[2] != null) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
