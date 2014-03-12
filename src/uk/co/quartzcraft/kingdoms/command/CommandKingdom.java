@@ -129,6 +129,24 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on. Returns 3 power..", usage = "Use /kingdom unclaim")
+    public void kingdomUnClaim(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        Chunk chunk = player.getLocation().getChunk();
+        String kingdomName = QKPlayer.getKingdom(player);
+
+        if(ChunkManager.getKingdomOwner(chunk) == kingdomName) {
+            if(ChunkManager.unClaimChunkKingdom(player)) {
+                sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("this_chunk_is_not_claimed"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
