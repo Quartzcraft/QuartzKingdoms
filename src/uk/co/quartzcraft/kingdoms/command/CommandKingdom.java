@@ -183,6 +183,24 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.ally", aliases = { "k.ally" }, permission = "QCK.kingdom.ally", description = "Allies with a kingdom, members of allied kingdoms can not hurt each other.", usage = "Use /kingdom ally [ally kingdom name]")
+    public void kingdomAlly(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();
+        Player player = (Player) sender;
+        String kingdom = QKPlayer.getKingdom(player);
+
+        if(QKPlayer.isKing(kingdom, player)) {
+            if(Kingdom.setRelationshipStatus(kingdom, args[1], 2)) {
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + null);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_to_ally_with_kingdom"));
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
