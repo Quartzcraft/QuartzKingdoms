@@ -165,6 +165,24 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.neutral", aliases = { "k.neutral" }, permission = "QCK.kingdom.neutral", description = "Removes all relationships between kingdoms, not at war or allied with the specified kingdom.", usage = "Use /kingdom neutral [other kingdom name]")
+    public void kingdomNeutral(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();
+        Player player = (Player) sender;
+        String kingdom = QKPlayer.getKingdom(player);
+
+        if(QKPlayer.isKing(kingdom, player)) {
+            if(Kingdom.setRelationshipStatus(kingdom, args[1], 1)) {
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_to_neutral_with_kingdom"));
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
