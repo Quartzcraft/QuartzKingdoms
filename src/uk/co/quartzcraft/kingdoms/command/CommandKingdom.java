@@ -253,6 +253,23 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited.", usage = "Use /kingdom close")
+    public void kingdomClose(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        String[] args = args0.getArgs();
+        if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
+            if(Kingdom.setOpen(QKPlayer.getKingdom(player), false)) {
+                sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_closed"));
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_close_kingdom"));
+            }
+
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("kingdom_already_closed"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
