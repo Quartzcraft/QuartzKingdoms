@@ -87,6 +87,30 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.promote", aliases = { "k.promote" }, permission = "QCK.kingdom.promote", description = "Promotes the specified player to the specified rank in the kingdom", usage = "Use /kingdom promote [playername]")
+    public void kingdomPromote(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();;
+        Player psender = (Player) sender;
+
+        if(args[1] != null) {
+            Player target = Bukkit.getServer().getPlayer(args[1]);
+            String kingdomName = QKPlayer.getKingdom(target);
+            if(Kingdom.compareKingdom(target, psender)) {
+                if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[2])) {
+                    sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
+                    target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
+                } else {
+                    sender.sendMessage(ChatPhrase.getPhrase("promoted_player_no") + ChatColor.WHITE + kingdomName);
+                }
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("specify_username") + ChatColor.WHITE + args[1]);
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
