@@ -397,4 +397,44 @@ public class Kingdom {
 			return false;
 		}
 	}
+
+    public static int getPower(String kingdomName) {
+        try {
+            Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+
+            ResultSet res1 = s2.executeQuery("SELECT * FROM Kingdoms WHERE kingdomName ='" + kingdomName + "';");
+
+            if(res1.next()) {
+                int power = res1.getInt("Power");
+                return power;
+            } else {
+                return 0;
+            }
+
+        } catch(SQLException e) {
+            return 0;
+        }
+    }
+
+    public static boolean setPower(String kingdomName, boolean addRemove, int amount) {
+        int currentPower = Kingdom.getPower(kingdomName);
+        int powerAmount;
+        if(addRemove) {
+            powerAmount = currentPower + amount;
+        } else {
+            powerAmount = currentPower - amount;
+        }
+        try {
+            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE Kingdoms SET Power=" + powerAmount + " WHERE id=" + Kingdom.getID(kingdomName) + ");");
+            if(s.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 }
