@@ -67,7 +67,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.delete", aliases = { "k.delete" }, permission = "QCK.kingdom.delete", description = "Deletes the kingdom you specify. You must be the king.", usage = "Use /kingdom create [kingdom name]")
+    @QCommand.Command(name = "kingdom.delete", aliases = { "k.delete" }, permission = "QCK.kingdom.delete", description = "Deletes the kingdom you specify. You must be the king.", usage = "Use /kingdom delete [kingdom name]")
     public void kingdomDelete(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();;
@@ -123,13 +123,14 @@ public class CommandKingdom {
         } else {
             if(ChunkManager.claimChunkKingdom(player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                Kingdom.setPower(QKPlayer.getKingdom(player), false, 5);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
             }
         }
     }
 
-    @QCommand.Command(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on. Returns 3 power..", usage = "Use /kingdom unclaim")
+    @QCommand.Command(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on. Returns 3 power.", usage = "Use /kingdom unclaim")
     public void kingdomUnClaim(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -139,6 +140,7 @@ public class CommandKingdom {
         if(ChunkManager.getKingdomOwner(chunk) == kingdomName) {
             if(ChunkManager.unClaimChunkKingdom(player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                Kingdom.setPower(QKPlayer.getKingdom(player), true, 3);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
             }
@@ -147,7 +149,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 5 power.", usage = "Use /kingdom war [enemy kingdom name]")
+    @QCommand.Command(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 4 power.", usage = "Use /kingdom war [enemy kingdom name]")
     public void kingdomWar(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -157,6 +159,7 @@ public class CommandKingdom {
         if(QKPlayer.isKing(kingdom, player)) {
             if(Kingdom.setRelationshipStatus(kingdom, args[1], 3)) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + null);
+                Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_to_war_with_kingdom"));
             }
@@ -211,6 +214,7 @@ public class CommandKingdom {
         } else if(Kingdom.isOpen(args[1])) {
             if(QKPlayer.joinKingdom(player, args[1])) {
                 sender.sendMessage(ChatPhrase.getPhrase("successfully_joined_kingdom_X") + args[1]);
+                Kingdom.setPower(QKPlayer.getKingdom(player), true, 6);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_join_kingdom"));
             }
@@ -229,6 +233,7 @@ public class CommandKingdom {
         if(QKPlayer.getKingdom(player) != null) {
             if(QKPlayer.leaveKingdom(player, QKPlayer.getKingdom(player))) {
                 sender.sendMessage(ChatPhrase.getPhrase("successfully_left_kingdom_X") +QKPlayer.getKingdom(player));
+                Kingdom.setPower(QKPlayer.getKingdom(player), false, 3);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_leave_kingdom"));
             }
@@ -237,7 +242,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join.", usage = "Use /kingdom open")
+    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom five power.", usage = "Use /kingdom open")
     public void kingdomOpen(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -247,6 +252,7 @@ public class CommandKingdom {
         } else {
             if(Kingdom.setOpen(QKPlayer.getKingdom(player), true)) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_open"));
+                Kingdom.setPower(QKPlayer.getKingdom(player), true, 5);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_open_kingdom"));
             }
