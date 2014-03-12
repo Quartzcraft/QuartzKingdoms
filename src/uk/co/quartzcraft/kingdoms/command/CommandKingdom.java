@@ -111,6 +111,24 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.claim", aliases = { "k.claim" }, permission = "QCK.kingdom.claim", description = "Claims the chunk of land you are standing on for your kingdom. Uses 5 power.", usage = "Use /kingdom claim")
+    public void kingdomClaim(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        Chunk chunk = player.getLocation().getChunk();
+        String kingdomName = QKPlayer.getKingdom(player);
+
+        if(ChunkManager.isClaimed(chunk)) {
+            sender.sendMessage(ChatPhrase.getPhrase("this_chunk_is_already_claimed"));
+        } else {
+            if(ChunkManager.claimChunkKingdom(player)) {
+                sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
+            }
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
