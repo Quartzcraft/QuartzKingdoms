@@ -273,4 +273,50 @@ public class QKPlayer {
 		return 0;
 	}
 
+    public static int getPower(Player player) {
+        try {
+            Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
+            Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
+
+            ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE UUID ='" + player.getUniqueId().toString() + "';");
+
+            if(res1.next()) {
+                ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE playerID =" + res1.getInt("id") + ";");
+                if(res2.next()) {
+                    int power = res2.getInt("Power");
+                    return power;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+
+        } catch(SQLException e) {
+            return 0;
+        }
+    }
+
+    public static boolean setPower(Player player, boolean addRemove, int amount) {
+        int currentPower = QKPlayer.getPower(player);
+        int powerAmount;
+        if(addRemove) {
+            powerAmount = currentPower + amount;
+        } else {
+            powerAmount = currentPower - amount;
+        }
+        try {
+            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET Power=" + powerAmount + " WHERE id=" + QKPlayer.getID(player) + ");");
+            if(s.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }
