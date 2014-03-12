@@ -221,6 +221,22 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.leave", aliases = { "k.leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 3 power from the kingdom.", usage = "Use /kingdom leave")
+    public void kingdomLeave(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        String[] args = args0.getArgs();
+        if(QKPlayer.getKingdom(player) != null) {
+            if(QKPlayer.leaveKingdom(player, QKPlayer.getKingdom(player))) {
+                sender.sendMessage(ChatPhrase.getPhrase("successfully_left_kingdom_X") +QKPlayer.getKingdom(player));
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_leave_kingdom"));
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("you_must_be_member_kingdom"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
