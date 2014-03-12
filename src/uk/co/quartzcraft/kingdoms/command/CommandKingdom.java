@@ -201,6 +201,26 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.join", aliases = { "k.join" }, permission = "QCK.kingdom.join", description = "Joins the specified kingdom, as long as you are allowed to. Gives the kingdom 6 power.", usage = "Use /kingdom join [kingdom name]")
+    public void kingdomJoin(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        String[] args = args0.getArgs();
+        if(QKPlayer.getKingdom(player) != null) {
+            sender.sendMessage(ChatPhrase.getPhrase("you_are_already_in_a_Kingdom"));
+        } else if(Kingdom.isOpen(args[1])) {
+            if(QKPlayer.joinKingdom(player, args[1])) {
+                sender.sendMessage(ChatPhrase.getPhrase("successfully_joined_kingdom_X") + args[1]);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("failed_join_kingdom"));
+            }
+        } else if(Kingdom.isOpen(args[1]) == false) {
+            sender.sendMessage(ChatPhrase.getPhrase("kingdom_not_open"));
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("kingdom_not_found"));
+        }
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
