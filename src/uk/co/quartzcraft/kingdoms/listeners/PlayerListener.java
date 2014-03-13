@@ -33,7 +33,7 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerJoin(QPlayerCreationEvent event) {
+    public void onQPlayerLogin(QPlayerLoginEvent event) {
         Player player = event.getPlayer();
         if(QKPlayer.createKingdomsPlayer(player)) {
             plugin.log.info("[QC] Player, " + player.getDisplayName() + " was created with UUID of " + player.getUniqueId().toString());
