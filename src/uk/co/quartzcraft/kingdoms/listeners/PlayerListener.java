@@ -26,11 +26,13 @@ public class PlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCreation(QPlayerCreationEvent event) {
            Player player = event.getPlayer();
+        /*
            if(QKPlayer.createKingdomsPlayer(player)) {
         	   plugin.log.info("[QC] Player, " + player.getDisplayName() + " was created with UUID of " + player.getUniqueId().toString());
            } else {
         	   player.kickPlayer(ChatPhrase.getPhrase("database_error_contact") + "\n" + ChatPhrase.getPhrase("could_not_create_kingdoms_player"));
            }
+        */
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
