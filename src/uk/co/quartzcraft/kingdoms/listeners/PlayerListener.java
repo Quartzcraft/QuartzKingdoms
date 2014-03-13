@@ -13,11 +13,11 @@ import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 
-public class PlayerCreationListener implements Listener {
+public class PlayerListener implements Listener {
 
 	private static QuartzKingdoms plugin;
 	
-	public PlayerCreationListener(QuartzKingdoms plugin) {
+	public PlayerListener(QuartzKingdoms plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
     }
@@ -30,5 +30,15 @@ public class PlayerCreationListener implements Listener {
            } else {
         	   player.kickPlayer(ChatPhrase.getPhrase("database_error_contact") + "\n" + ChatPhrase.getPhrase("could_not_create_kingdoms_player"));
            }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJoin(QPlayerCreationEvent event) {
+        Player player = event.getPlayer();
+        if(QKPlayer.createKingdomsPlayer(player)) {
+            plugin.log.info("[QC] Player, " + player.getDisplayName() + " was created with UUID of " + player.getUniqueId().toString());
+        } else {
+            player.kickPlayer(ChatPhrase.getPhrase("database_error_contact") + "\n" + ChatPhrase.getPhrase("could_not_create_kingdoms_player"));
+        }
     }
 }
