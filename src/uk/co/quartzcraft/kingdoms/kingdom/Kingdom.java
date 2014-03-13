@@ -425,6 +425,11 @@ public class Kingdom {
         } else {
             powerAmount = currentPower - amount;
         }
+        if(powerAmount > 50) {
+            powerAmount = 50;
+        } else if(powerAmount < -50) {
+            powerAmount = -50;
+        }
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
             java.sql.PreparedStatement s = connection.prepareStatement("UPDATE Kingdoms SET Power=" + powerAmount + " WHERE id=" + Kingdom.getID(kingdomName) + ");");

@@ -306,6 +306,11 @@ public class QKPlayer {
         } else {
             powerAmount = currentPower - amount;
         }
+        if(powerAmount > 50) {
+            powerAmount = 50;
+        } else if(powerAmount < -50) {
+            powerAmount = -50;
+        }
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
             java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET Power=" + powerAmount + " WHERE id=" + QKPlayer.getID(player) + ");");
