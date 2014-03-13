@@ -92,6 +92,9 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("kingdom_is_now_at_war_with_kingdom", " &cis now at war with ");
 		ChatPhrase.addPhrase("kingdom_is_now_allied_with_kingdom", " &ais now allied with ");
 		ChatPhrase.addPhrase("kingdom_is_now_neutral_relationship_with_kingdom", " &6is now in a neutral relationship with ");
+        ChatPhrase.addPhrase("kingdom_is_now_pending_war_with_kingdom", " &cis now pending war with ");
+        ChatPhrase.addPhrase("kingdom_is_pending_allied_with_kingdom", " &ais now pending an allied relationship with ");
+        ChatPhrase.addPhrase("kingdom_is_pending_neutral_relationship_with_kingdom", " &6is now pending a neutral relationship with ");
 		ChatPhrase.addPhrase("failed_to_ally_with_kingdom", "&cFailed to become an ally with ");
 		ChatPhrase.addPhrase("failed_to_neutral_with_kingdom", "&cFailed to become neutral with ");
 		ChatPhrase.addPhrase("failed_to_war_with_kingdom", "&cFailed to go to war with ");
