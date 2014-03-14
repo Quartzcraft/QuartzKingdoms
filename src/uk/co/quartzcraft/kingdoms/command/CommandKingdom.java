@@ -117,7 +117,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.claim", aliases = { "k.claim" }, permission = "QCK.kingdom.claim", description = "Claims the chunk of land you are standing on for your kingdom. Uses 5 power.", usage = "Use /kingdom claim")
+    @QCommand.Command(name = "kingdom.claim", aliases = { "k.claim" }, permission = "QCK.kingdom.claim", description = "Claims the chunk of land you are standing on for your kingdom. Uses 4 power.", usage = "Use /kingdom claim")
     public void kingdomClaim(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -129,7 +129,7 @@ public class CommandKingdom {
         } else {
             if(ChunkManager.claimChunkKingdom(player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                Kingdom.setPower(QKPlayer.getKingdom(player), false, 5);
+                Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
             }
