@@ -52,14 +52,14 @@ public class CommandKingdom {
     public void kingdomCreate(QCommand.CommandArgs args) {
         CommandSender sender = args.getSender();
         String[] args0 = args.getArgs();
-        if(args0[1] != null) {
-            if(args0[2] != null) {
+        if(args0[0] != null) {
+            if(args0[1] != null) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
             } else {
-                String kingdomName = args0[1];
-                boolean created = Kingdom.createKingdom(args0[1], sender);
+                String kingdomName = args0[0];
+                boolean created = Kingdom.createKingdom(args0[0], sender);
                 if(created) {
-                    if(kingdomName == args0[1]) {
+                    if(kingdomName == args0[0]) {
                         sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
                     } else if(kingdomName == "name_error") {
                         sender.sendMessage(ChatPhrase.getPhrase("kingdomname_already_used") + ChatColor.WHITE + kingdomName);
@@ -69,7 +69,7 @@ public class CommandKingdom {
                 }
             }
         } else {
-            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args0[1]);
+            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name"));
         }
     }
 
@@ -77,10 +77,10 @@ public class CommandKingdom {
     public void kingdomDelete(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();;
-        if(args[1] != null) {
-            String kingdomName = Kingdom.deleteKingdom(args[1], sender);
+        if(args[0] != null) {
+            String kingdomName = Kingdom.deleteKingdom(args[0], sender);
             if(kingdomName != null) {
-                if(kingdomName == args[1]) {
+                if(kingdomName == args[0]) {
                     sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + kingdomName);
                 } else if(kingdomName == "error") {
                     sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
@@ -89,7 +89,7 @@ public class CommandKingdom {
                 sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
             }
         } else {
-            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args[1]);
+            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args[0]);
         }
     }
 
@@ -99,11 +99,11 @@ public class CommandKingdom {
         String[] args = args0.getArgs();;
         Player psender = (Player) sender;
 
-        if(args[1] != null) {
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+        if(args[0] != null) {
+            Player target = Bukkit.getServer().getPlayer(args[0]);
             String kingdomName = QKPlayer.getKingdom(target);
             if(Kingdom.compareKingdom(target, psender)) {
-                if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[2])) {
+                if(Kingdom.promotePlayer(kingdomName, sender, args[0], args[1])) {
                     sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
                     target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
                 } else {
@@ -113,7 +113,7 @@ public class CommandKingdom {
                 sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
             }
         } else {
-            sender.sendMessage(ChatPhrase.getPhrase("specify_username") + ChatColor.WHITE + args[1]);
+            sender.sendMessage(ChatPhrase.getPhrase("specify_username") + ChatColor.WHITE + args[0]);
         }
     }
 
@@ -160,15 +160,15 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         Player player = (Player) sender;
-        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[1]));
+        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[0]));
         String kingdom = QKPlayer.getKingdom(player);
 
         if(QKPlayer.isKing(kingdom, player)) {
-            if(Kingdom.setRelationshipStatus(kingdom, args[1], 3) == 1) {
+            if(Kingdom.setRelationshipStatus(kingdom, args[0], 3) == 1) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + null);
                 Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
                 player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " has declared war against your kingdom. Type " + ChatColor.WHITE + "/kingdom war " + kingdom + ChatColor.GREEN + " to also declare war.");
-            } else if(Kingdom.setRelationshipStatus(kingdom, args[1], 3) == 2) {
+            } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 3) == 2) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + null);
                 Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
             } else {
@@ -184,14 +184,14 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         Player player = (Player) sender;
-        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[1]));
+        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[0]));
         String kingdom = QKPlayer.getKingdom(player);
 
         if(QKPlayer.isKing(kingdom, player)) {
-            if(Kingdom.setRelationshipStatus(kingdom, args[1], 1) == 1) {
+            if(Kingdom.setRelationshipStatus(kingdom, args[0], 1) == 1) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_pending_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
                 player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " is offering neutral relations with your kingdom. Type " + ChatColor.WHITE + "/kingdom neutral " + kingdom + ChatColor.GREEN + " to also make neutral relations.");
-            } else if(Kingdom.setRelationshipStatus(kingdom, args[1], 1) == 2) {
+            } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 1) == 2) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_to_neutral_with_kingdom"));
@@ -206,14 +206,14 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         Player player = (Player) sender;
-        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[1]));
+        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[0]));
         String kingdom = QKPlayer.getKingdom(player);
 
         if(QKPlayer.isKing(kingdom, player)) {
-            if(Kingdom.setRelationshipStatus(kingdom, args[1], 2) == 1) {
+            if(Kingdom.setRelationshipStatus(kingdom, args[0], 2) == 1) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + null);
                 player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " is offering to become an ally with your kingdom. Type " + ChatColor.WHITE + "/kingdom ally " + kingdom + ChatColor.GREEN + " to accept the offer.");
-            } else if(Kingdom.setRelationshipStatus(kingdom, args[1], 2) == 2) {
+            } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 2) == 2) {
                 Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + null);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_to_ally_with_kingdom"));
@@ -230,14 +230,14 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         if(QKPlayer.getKingdom(player) != null) {
             sender.sendMessage(ChatPhrase.getPhrase("you_are_already_in_a_Kingdom"));
-        } else if(Kingdom.isOpen(args[1])) {
-            if(QKPlayer.joinKingdom(player, args[1])) {
-                sender.sendMessage(ChatPhrase.getPhrase("successfully_joined_kingdom_X") + args[1]);
+        } else if(Kingdom.isOpen(args[0])) {
+            if(QKPlayer.joinKingdom(player, args[0])) {
+                sender.sendMessage(ChatPhrase.getPhrase("successfully_joined_kingdom_X") + args[0]);
                 Kingdom.setPower(QKPlayer.getKingdom(player), true, 6);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_join_kingdom"));
             }
-        } else if(Kingdom.isOpen(args[1]) == false) {
+        } else if(Kingdom.isOpen(args[0]) == false) {
             sender.sendMessage(ChatPhrase.getPhrase("kingdom_not_open"));
         } else {
             sender.sendMessage(ChatPhrase.getPhrase("kingdom_not_found"));
