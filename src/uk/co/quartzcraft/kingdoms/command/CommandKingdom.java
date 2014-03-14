@@ -37,9 +37,10 @@ public class CommandKingdom {
         args.getSender().sendMessage(ChatPhrase.getPhrase("Specify_Subcommand"));
     }
 
-    @QCommand.Command(name = "kingdom.test", aliases = { "k.test" }, permission = "QCK.kingdom.info", description = "The test kingdoms command", usage = "Use /kingdom test")
+    @QCommand.Command(name = "kingdom.test", aliases = { "k.test" }, permission = "QCK.kingdom", description = "The test kingdoms command", usage = "Use /kingdom test")
     public void kingdomTest(QCommand.CommandArgs args) {
-        args.getSender().sendMessage("This is the test kingdoms command!");
+        String[] args0 = args.getArgs();
+        args.getSender().sendMessage("This is the test kingdoms command!" + "Args0[1] was equal to " + args0[1]);
     }
 
     @QCommand.Command(name = "kingdom.info", aliases = { "k.info" }, permission = "QCK.kingdom.info", description = "Get information about a specified kingdom", usage = "Use /kingdom info [kingdom name]")
