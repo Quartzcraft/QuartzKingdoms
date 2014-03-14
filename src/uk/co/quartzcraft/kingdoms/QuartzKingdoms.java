@@ -117,20 +117,6 @@ public class QuartzKingdoms extends JavaPlugin {
 		log.info("[QK][STARTUP]Registering Commands");
         commandFramework = new QCommand(this);
         commandFramework.registerCommands(new CommandKingdom(this));
-		//getCommand("kingdom").setExecutor(new CommandKingdom(this));
-		//CommandKingdom.addCommand(Arrays.asList("info"), new KingdomInfoSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("create"), new KingdomCreateSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("delete"), new KingdomDeleteSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("promote"), new KingdomPromoteSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("claim"), new KingdomClaimSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("unclaim"), new KingdomUnClaimSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("war"), new KingdomWarSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("ally"), new KingdomAllySubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("neutral"), new KingdomNeutralSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("join"), new KingdomJoinSubCommand());
-		//CommandKingdom.addCommand(Arrays.asList("leave"), new KingdomJoinSubCommand());
-        //CommandKingdom.addCommand(Arrays.asList("open"), new KingdomOpenSubCommand());
-        //CommandKingdom.addCommand(Arrays.asList("close"), new KingdomOpenSubCommand());
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
