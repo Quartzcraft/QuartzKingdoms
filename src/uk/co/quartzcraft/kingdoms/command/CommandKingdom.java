@@ -76,7 +76,7 @@ public class CommandKingdom {
     @QCommand.Command(name = "kingdom.delete", aliases = { "k.delete" }, permission = "QCK.kingdom.delete", description = "Deletes the kingdom you specify. You must be the king.", usage = "Use /kingdom delete [kingdom name]")
     public void kingdomDelete(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
-        String[] args = args0.getArgs();;
+        String[] args = args0.getArgs();
         if(args[0] != null) {
             String kingdomName = Kingdom.deleteKingdom(args[0], sender);
             if(kingdomName != null) {
@@ -96,7 +96,7 @@ public class CommandKingdom {
     @QCommand.Command(name = "kingdom.promote", aliases = { "k.promote" }, permission = "QCK.kingdom.promote", description = "Promotes the specified player to the specified rank in the kingdom", usage = "Use /kingdom promote [playername]")
     public void kingdomPromote(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
-        String[] args = args0.getArgs();;
+        String[] args = args0.getArgs();
         Player psender = (Player) sender;
 
         if(args[0] != null) {
