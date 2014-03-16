@@ -180,17 +180,14 @@ public class QKPlayer {
 	public static boolean leaveKingdom(Player player, String kingdomName) {
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + QPlayer.getUserID(player) + ";");
+            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + QKPlayer.getID(player) + ";");
             if(s.executeUpdate() == 1) {
-                if(Kingdom.removeUser(player)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return true;
             } else {
                 return false;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
 	}
