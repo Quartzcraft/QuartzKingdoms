@@ -51,9 +51,10 @@ public class CommandKingdom {
     @QCommand.Command(name = "kingdom.create", aliases = { "k.create" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(QCommand.CommandArgs args) {
         CommandSender sender = args.getSender();
+        Player player = (Player) sender;
         String[] args0 = args.getArgs();
         if(args0[0] != null) {
-            if(args0[1] != null) {
+            if(/*args0[1] != null*/ 1 == 2) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
             } else {
                 String kingdomName = args0[0];
