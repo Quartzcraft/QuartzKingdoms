@@ -212,13 +212,7 @@ public class QKPlayer {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 			java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=" + kingdomID + " WHERE id=" + userID + ");");
 			if(s.executeUpdate() == 1) {
-				if(Kingdom.addUser(player)) {
-					return true;
-				} else {
-                    java.sql.PreparedStatement s1 = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + userID + ");");
-                    s1.executeUpdate();
-					return false;
-				}
+				return true;
 			} else {
 				return false;
 			}
