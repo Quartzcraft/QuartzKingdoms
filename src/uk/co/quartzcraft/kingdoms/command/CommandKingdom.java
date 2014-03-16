@@ -140,7 +140,7 @@ public class CommandKingdom {
         Chunk chunk = player.getLocation().getChunk();
         String kingdomName = QKPlayer.getKingdom(player);
 
-        if(ChunkManager.getKingdomOwner(chunk) == kingdomName) {
+        if(ChunkManager.isClaimed(chunk) && QKPlayer.getKingdom(player) == kingdomName) {
             if(ChunkManager.unClaimChunkKingdom(player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
                 Kingdom.setPower(QKPlayer.getKingdom(player), true, 3);
