@@ -195,35 +195,29 @@ public class QKPlayer {
         }
 	}
 	
-	public static int getKingdomID(String playername) {
+	public static int getKingdomID(Player player) {
 		String kingdom = null;
-		Player player = Bukkit.getServer().getPlayer(playername);
 		UUID UUID = player.getUniqueId();
 		String SUUID = UUID.toString();
+        int playerID = QPlayer.getUserID(player);
 		
 		try {
 			Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
 			Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
 			Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			
-	        ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE UUID ='" + SUUID + "';");
-	        
-	        if(res1.next()) {
-		        ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE playerID =" + res1.getInt(1) + ";");
-		        if(res2.next()) {
-		        	int kingdomID = res2.getInt(4);
-		        	return kingdomID;
-		        } else {
-		        	return 0;
-		        }
-	        } else {
-	        	return 0;
-	        }
+
+            ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID=" + playerID + ";");
+            if(res2.next()) {
+                int kingdomID = res2.getInt("KingdomID");
+                return kingdomID;
+            } else {
+                return 0;
+            }
 	        
 		} catch(SQLException e) {
-			
+			e.printStackTrace();
+            return 0;
 		}
-		return 0;
 	}
 
     public static int getPower(Player player) {
