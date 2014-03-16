@@ -130,7 +130,7 @@ public class QKPlayer {
 		
 		try {
 			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID ='" + id + "';");
+			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID='" + id + "';");
 	        if(res.next()) {
 	        	return res.getInt(2);
 	        } else {
@@ -148,7 +148,7 @@ public class QKPlayer {
 		
 		try {
 			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID ='" + userID + "';");
+			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID='" + userID + "';");
 	        if(res.next()) {
 	        	return res.getInt(1);
 	        } else {
@@ -166,12 +166,9 @@ public class QKPlayer {
 		
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=" + kingdomID + " WHERE id=" + userID + ");");
-			if(s.executeUpdate() == 1) {
-				return true;
-			} else {
-				return false;
-			}
+			java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=" + kingdomID + " WHERE id=" + userID + ";");
+            s.executeUpdate();
+            return true;
 		} catch (SQLException e) {
 			return false;
 		}
