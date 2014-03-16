@@ -72,7 +72,7 @@ public class Kingdom {
 		
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			java.sql.PreparedStatement s = connection.prepareStatement("DELETE FROM Kingdoms WHERE KingdomName = '" + kingdomName + "' AND KingID = '" + userID + "';");
+			java.sql.PreparedStatement s = connection.prepareStatement("DELETE FROM Kingdoms WHERE KingdomName='" + kingdomName + "' AND KingID='" + userID + "';");
 			if(s.executeUpdate() == 1) {
 				return kingdomName;
 			} else {
@@ -464,7 +464,7 @@ public class Kingdom {
         }
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE Kingdoms SET Power=" + powerAmount + " WHERE id=" + Kingdom.getID(kingdomName) + ");");
+            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE Kingdoms SET Power=" + powerAmount + " WHERE id=" + Kingdom.getID(kingdomName) + ";");
             if(s.executeUpdate() == 1) {
                 return true;
             } else {
