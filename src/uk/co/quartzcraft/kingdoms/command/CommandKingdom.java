@@ -83,10 +83,10 @@ public class CommandKingdom {
                     sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
                 }
             } else {
-                sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
+                sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + args[0]);
             }
         } else {
-            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name") + ChatColor.WHITE + args[0]);
+            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name"));
         }
     }
 
@@ -251,7 +251,7 @@ public class CommandKingdom {
                 sender.sendMessage(ChatPhrase.getPhrase("you_are_king_someone_else_must_be_to_leave"));
             } else {
                 if(QKPlayer.leaveKingdom(player, QKPlayer.getKingdom(player))) {
-                    sender.sendMessage(ChatPhrase.getPhrase("successfully_left_kingdom_X") +QKPlayer.getKingdom(player));
+                    sender.sendMessage(ChatPhrase.getPhrase("successfully_left_kingdom_X") + QKPlayer.getKingdom(player));
                     Kingdom.setPower(QKPlayer.getKingdom(player), false, 1);
                 } else {
                     sender.sendMessage(ChatPhrase.getPhrase("failed_leave_kingdom"));
