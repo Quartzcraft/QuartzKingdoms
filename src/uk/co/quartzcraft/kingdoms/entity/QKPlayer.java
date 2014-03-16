@@ -37,27 +37,21 @@ public class QKPlayer {
 			Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
 			Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
 			Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			
-	        ResultSet res1 = s1.executeQuery("SELECT FROM PlayerData WHERE UUID='" + SUUID + "';");
-	        
-	        if(res1.next()) {
-		        ResultSet res2 = s2.executeQuery("SELECT FROM KingdomsPlayerData WHERE playerID=" + res1.getInt("id") + ";");
-		        if(res2.next()) {
-		        	int kingdomID = res2.getInt("KingdomID");
-                    if(kingdomID == 0) {
-                        return null;
-                    }
-		        	ResultSet res3 = s3.executeQuery("SELECT FROM Kingdoms WHERE id=" + kingdomID + ";");
-		        	if(res3.next()) {
-		        		kingdom = res3.getString("KingdomName");
-		        		return kingdom;
-		        	}
-		        } else {
-		        	return null;
-		        }
-	        } else {
-	        	return null;
-	        }
+
+            ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID='" + QPlayer.getUserID(player) + "';");
+            if(res2.next()) {
+                int kingdomID = res2.getInt("KingdomID");
+                if(kingdomID == 0) {
+                    return null;
+                }
+                ResultSet res3 = s3.executeQuery("SELECT * FROM Kingdoms WHERE id=" + kingdomID + ";");
+                if(res3.next()) {
+                    kingdom = res3.getString("KingdomName");
+                    return kingdom;
+                }
+            } else {
+                return null;
+            }
 	        
 		} catch(SQLException e) {
             e.printStackTrace();
