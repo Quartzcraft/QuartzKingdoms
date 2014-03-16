@@ -77,45 +77,6 @@ public class QKPlayer {
    		}
 	}
 
-	public static boolean isKing(String kingdomName, int id) {
-		if(kingdomName != null) {
-			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			try {
-				Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-				ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
-				if(res2.next()) {
-			    	 int kingID = res2.getInt("KingID");
-			    	 if(id == kingID) {
-			    		 return true;
-			    	 }
-			     } else {
-			    	 return false;
-			     }
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
-			}
-		} else {
-			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			try {
-				Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-				ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingID =" + id + ";");
-				if(res2.next()) {
-			    	 int kingID = res2.getInt("KingID");
-			    	 if(id == kingID) {
-			    		 return true;
-			    	 }
-			     } else {
-			    	 return false;
-			     }
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		return false;
-	}
-
     /**
      * Finds out whether a player is a king, can check one kingdom.
      *
