@@ -81,7 +81,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("failed_leave_kingdom", "&cFailed to leave the specified kingdom.");
         ChatPhrase.addPhrase("kingdom_not_open", "&cThis kingdom is not open for new members!");
         ChatPhrase.addPhrase("kingdom_not_found", "&cNo kingdom could be found using the specified name!");
-        ChatPhrase.addPhrase("you_are_king_someone_else_must_be_to_leave", "&cYou are the king! You must make anothe rplayer kingdom before leaving your kingdom!");
+        ChatPhrase.addPhrase("you_are_king_someone_else_must_be_to_leave", "&cYou are the king! You must make another player king before leaving your kingdom!");
 
         ChatPhrase.addPhrase("kingdom_already_open", " &cThe kingdom is already open!");
         ChatPhrase.addPhrase("kingdom_now_open", " &aYour kingdom is now open!");
