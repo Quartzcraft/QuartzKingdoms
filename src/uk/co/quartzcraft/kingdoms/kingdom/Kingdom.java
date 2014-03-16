@@ -51,36 +51,32 @@ public class Kingdom {
 		}
 	}
 
-	public static String deleteKingdom(String kingdomName, CommandSender sender) {
+	public static boolean deleteKingdom(String kingdomName, CommandSender sender) {
 		String name_error = "name_error";
 		String king_error = "error";
 		String error = "error";
 		Player player = (Player) sender;
-		int userID = QPlayer.getUserID(player);
+		int userID = QKPlayer.getID(player);
 		
-		if(exists(kingdomName)) {
-			
-		} else {
-			return error;
+		if(!exists(kingdomName)) {
+			return false;
 		}
 		
-		if(QKPlayer.isKing(kingdomName, userID)) {
-			
-		} else {
-			return king_error;
+		if(!QKPlayer.isKing(kingdomName, player)) {
+			return false;
 		}
 		
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 			java.sql.PreparedStatement s = connection.prepareStatement("DELETE FROM Kingdoms WHERE KingdomName='" + kingdomName + "' AND KingID='" + userID + "';");
 			if(s.executeUpdate() == 1) {
-				return kingdomName;
+				return true;
 			} else {
-				return error;
+				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return error;
+			return false;
 		}
 		
 	}
