@@ -53,17 +53,17 @@ public class QKPlayer {
 		        		return kingdom;
 		        	}
 		        } else {
-		        	return error;
+		        	return null;
 		        }
 	        } else {
-	        	return error;
+	        	return null;
 	        }
 	        
 		} catch(SQLException e) {
 			return null;
 		}
 		
-		return kingdom;
+		return null;
 	}
 
 	public static boolean createKingdomsPlayer(Player player) {
