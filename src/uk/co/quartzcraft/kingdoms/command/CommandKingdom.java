@@ -57,12 +57,16 @@ public class CommandKingdom {
             if(/*args0[1] != null*/ 1 == 2) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
             } else {
-                String kingdomName = args0[0];
-                boolean created = Kingdom.createKingdom(args0[0], sender);
-                if(created) {
-                    sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                if(QKPlayer.getKingdom(player) != null) {
+                    sender.sendMessage(ChatPhrase.getPhrase("you_are_already_in_a_Kingdom"));
                 } else {
-                    sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+                    String kingdomName = args0[0];
+                    boolean created = Kingdom.createKingdom(args0[0], sender);
+                    if(created) {
+                        sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                    } else {
+                        sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+                    }
                 }
             }
         } else {
