@@ -42,12 +42,9 @@ public class Kingdom {
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('" + kingdomName + "', " + kuserID + ");");
-			if(s.executeUpdate() == 1) {
-                QKPlayer.joinKingdom(player, kingdomName);
-				return true;
-			} else {
-				return false;
-			}
+            s.executeUpdate();
+            QKPlayer.joinKingdom(player, kingdomName);
+            return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
