@@ -38,13 +38,16 @@ public class QKPlayer {
 			Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
 			Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
 			
-	        ResultSet res1 = s1.executeQuery("SELECT * FROM PlayerData WHERE UUID ='" + SUUID + "';");
+	        ResultSet res1 = s1.executeQuery("SELECT FROM PlayerData WHERE UUID='" + SUUID + "';");
 	        
 	        if(res1.next()) {
-		        ResultSet res2 = s2.executeQuery("SELECT * FROM KingdomsPlayerData WHERE playerID =" + res1.getInt(1) + ";");
+		        ResultSet res2 = s2.executeQuery("SELECT FROM KingdomsPlayerData WHERE playerID=" + res1.getInt("id") + ";");
 		        if(res2.next()) {
-		        	int kingdomID = res2.getInt(4);
-		        	ResultSet res3 = s3.executeQuery("SELECT * FROM Kingdoms WHERE id =" + kingdomID + ";");
+		        	int kingdomID = res2.getInt("KingdomID");
+                    if(kingdomID == 0) {
+                        return null;
+                    }
+		        	ResultSet res3 = s3.executeQuery("SELECT FROM Kingdoms WHERE id=" + kingdomID + ";");
 		        	if(res3.next()) {
 		        		kingdom = res3.getString("KingdomName");
 		        		return kingdom;
@@ -131,7 +134,7 @@ public class QKPlayer {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 			try {
 				Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-				ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
+				ResultSet res2 = s.executeQuery("SELECT FROM Kingdoms WHERE id =" + id + ";");
 				if(res2.next()) {
 			    	 int kingID = res2.getInt("KingID");
 			    	 if(QKPlayer.getID(player) == kingID) {
@@ -171,7 +174,7 @@ public class QKPlayer {
 		
 		try {
 			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id ='" + id + "';");
+			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID ='" + id + "';");
 	        if(res.next()) {
 	        	return res.getInt(2);
 	        } else {
@@ -227,7 +230,7 @@ public class QKPlayer {
 	public static boolean leaveKingdom(Player player, String kingdomName) {
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + QPlayer.getUserID(player) + ");");
+            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + QPlayer.getUserID(player) + ";");
             if(s.executeUpdate() == 1) {
                 if(Kingdom.removeUser(player)) {
                     return true;
