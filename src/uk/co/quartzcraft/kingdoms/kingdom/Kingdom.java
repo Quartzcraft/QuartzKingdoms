@@ -30,18 +30,20 @@ public class Kingdom {
 	public static boolean createKingdom(String kingdomName, CommandSender sender) {
 		Player player = (Player) sender;
 		int userID = QPlayer.getUserID(player);
+        int kuserID = QKPlayer.getID(player);
 		if(exists(kingdomName)) {
 			return false;
 		}
 		
-		if(userID == 0) {
+		if(userID == 0 | kuserID == 0) {
 			return false;
 		} 
 		
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('" + kingdomName + "', " + userID + ");");
+			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('" + kingdomName + "', " + kuserID + ");");
 			if(s.executeUpdate() == 1) {
+                QKPlayer.joinKingdom(player, kingdomName);
 				return true;
 			} else {
 				return false;
