@@ -60,6 +60,7 @@ public class QKPlayer {
 	        }
 	        
 		} catch(SQLException e) {
+            e.printStackTrace();
 			return null;
 		}
 		
