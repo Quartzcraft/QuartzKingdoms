@@ -59,11 +59,7 @@ public class CommandKingdom {
                 String kingdomName = args0[0];
                 boolean created = Kingdom.createKingdom(args0[0], sender);
                 if(created) {
-                    if(kingdomName == args0[0]) {
-                        sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                    } else if(kingdomName == "name_error") {
-                        sender.sendMessage(ChatPhrase.getPhrase("kingdomname_already_used") + ChatColor.WHITE + kingdomName);
-                    }
+                    sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
                 } else {
                     sender.sendMessage(ChatPhrase.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
                 }
