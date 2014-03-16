@@ -75,13 +75,8 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         if(args[0] != null) {
-            String kingdomName = Kingdom.deleteKingdom(args[0], sender);
-            if(kingdomName != null) {
-                if(kingdomName == args[0]) {
-                    sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                } else if(kingdomName == "error") {
-                    sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + kingdomName);
-                }
+            if(Kingdom.deleteKingdom(args[0], sender)) {
+                sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + args[0]);
             }
