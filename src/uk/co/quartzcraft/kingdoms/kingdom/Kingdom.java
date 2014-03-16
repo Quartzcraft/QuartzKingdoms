@@ -40,7 +40,7 @@ public class Kingdom {
 		
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID, MemberIDs) VALUES ('" + kingdomName + "', '" + userID + "', '" + userID + "');");
+			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('" + kingdomName + "', " + userID + ");");
 			if(s.executeUpdate() == 1) {
 				return true;
 			} else {
@@ -121,7 +121,7 @@ public class Kingdom {
 	public static boolean exists(String kingdomName) {
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 		try {
-			java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
 			ResultSet res2 = s.executeQuery();
 			if(res2.next()) {
 		    	 return true;
@@ -360,7 +360,7 @@ public class Kingdom {
         java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
         try {
             Statement s = connection.createStatement();
-            ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+            ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
             if(res2.next()) {
                 boolean open = res2.getBoolean("invite_only");
                 if(open) {
@@ -381,7 +381,7 @@ public class Kingdom {
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 		try {
 			Statement s = connection.createStatement();
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
 			if(res2.next()) {
 		    	 int id = res2.getInt("id");
 		    	 return id;
