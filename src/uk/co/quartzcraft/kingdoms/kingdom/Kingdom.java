@@ -112,22 +112,38 @@ public class Kingdom {
 			return false;
 		}
 	}
-	
-	public static boolean exists(String kingdomName) {
-		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		try {
-			java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
-			ResultSet res2 = s.executeQuery();
-			if(res2.next()) {
-		    	 return true;
-		     } else {
-		    	 return false;
-		     }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+
+    public static boolean exists(int kingdomID) {
+        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+        try {
+            java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE id ='" + kingdomID + "';");
+            ResultSet res2 = s.executeQuery();
+            if(res2.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean exists(String kingdomName) {
+        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+        try {
+            java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
+            ResultSet res2 = s.executeQuery();
+            if(res2.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 	
 	public static Map getInfo(String kingdomName) {
 		HashMap<String, String> info = new HashMap<String, String>();
