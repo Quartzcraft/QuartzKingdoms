@@ -57,7 +57,7 @@ public class CommandKingdom {
             if(/*args0[1] != null*/ 1 == 2) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
             } else {
-                if(QKPlayer.getKingdom(player) != null) {
+                if(QKPlayer.kingdom(player)) {
                     sender.sendMessage(ChatPhrase.getPhrase("you_are_already_in_a_Kingdom"));
                 } else {
                     String kingdomName = args0[0];
