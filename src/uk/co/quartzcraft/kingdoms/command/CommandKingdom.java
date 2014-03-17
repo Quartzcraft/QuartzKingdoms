@@ -132,7 +132,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on. Returns 3 power.", usage = "Use /kingdom unclaim")
+    @QCommand.Command(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on. Returns 2 power.", usage = "Use /kingdom unclaim")
     public void kingdomUnClaim(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -142,7 +142,7 @@ public class CommandKingdom {
         if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk) == kingdomName) {
             if(ChunkManager.unClaimChunkKingdom(player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                Kingdom.setPower(QKPlayer.getKingdom(player), true, 3);
+                Kingdom.setPower(QKPlayer.getKingdom(player), true, 2);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
             }
@@ -261,7 +261,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom five power.", usage = "Use /kingdom open")
+    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom 5 power.", usage = "Use /kingdom open")
     public void kingdomOpen(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -278,7 +278,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited.", usage = "Use /kingdom close")
+    @QCommand.Command(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this removes 5 power.", usage = "Use /kingdom close")
     public void kingdomClose(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -286,6 +286,7 @@ public class CommandKingdom {
         if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
             if(Kingdom.setOpen(QKPlayer.getKingdom(player), false)) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_closed"));
+                Kingdom.setPower(QKPlayer.getKingdom(player), false, 5);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_close_kingdom"));
             }
