@@ -139,7 +139,7 @@ public class CommandKingdom {
         Chunk chunk = player.getLocation().getChunk();
         String kingdomName = QKPlayer.getKingdom(player);
 
-        if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk) == kingdomName) {
+        if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).equals(kingdomName)) {
             if(ChunkManager.unClaimChunkKingdom(player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
                 Kingdom.setPower(QKPlayer.getKingdom(player), true, 2);
@@ -233,7 +233,7 @@ public class CommandKingdom {
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_join_kingdom"));
             }
-        } else if(Kingdom.isOpen(args[0]) == false) {
+        } else if(!Kingdom.isOpen(args[0])) {
             sender.sendMessage(ChatPhrase.getPhrase("kingdom_not_open"));
         } else {
             sender.sendMessage(ChatPhrase.getPhrase("kingdom_not_found"));
