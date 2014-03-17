@@ -245,7 +245,7 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
         String[] args = args0.getArgs();
-        if(QKPlayer.getKingdom(player) != null) {
+        if(QKPlayer.kingdom(player)) {
             if(QKPlayer.isKing(QKPlayer.getKingdom(player), player)) {
                 sender.sendMessage(ChatPhrase.getPhrase("you_are_king_someone_else_must_be_to_leave"));
             } else {
