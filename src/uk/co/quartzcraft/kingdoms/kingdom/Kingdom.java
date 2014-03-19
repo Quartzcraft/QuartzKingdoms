@@ -81,7 +81,7 @@ public class Kingdom {
 		
 	}
 	
-	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group) {
+	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group, QuartzCore plugin) {
 		String[] ranks = null;
 		ranks[0] = "Citizen";
 		ranks[1] = "Knight";
@@ -93,13 +93,13 @@ public class Kingdom {
 		int current = 0;
 		if(i == 1) {
             for(String rank : ranks) {
-                QPlayer.addSecondaryGroup(sender, playerToPromote, rank, false);
+                QPlayer.addSecondaryGroup(sender, playerToPromote, rank, false, plugin);
                 current++;
             }
 
 			for(String rank : ranks) {
 				if(group.equalsIgnoreCase(rank)) {
-					if(QPlayer.addSecondaryGroup(sender, playerToPromote, rank, true)) {
+					if(QPlayer.addSecondaryGroup(sender, playerToPromote, rank, true, plugin)) {
 						return true;
 					} else {
 						return false;
