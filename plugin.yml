@@ -58,3 +58,9 @@ Permissions:
    QCK.Kingdom.neutral:
       description: Allows a king the ability to declare their relationships with another kingdom neutral.
       default: false
+   QCK.Kingdom.open:
+      description: Allows a king to toggle between kingdom being open and closed.
+      default: false
+   QCK.Kingdom.invite:
+      description: Allows a player to invite someone to their kingdom.
+      default: false
