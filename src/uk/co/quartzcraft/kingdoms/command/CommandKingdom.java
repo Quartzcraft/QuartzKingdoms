@@ -53,8 +53,8 @@ public class CommandKingdom {
         CommandSender sender = args.getSender();
         Player player = (Player) sender;
         String[] args0 = args.getArgs();
-        if(args0[0] != null) {
-            if(/*args0[1] != null*/ 1 == 2) {
+        if(args0.length >= 1) {
+            if(args0.length >= 2) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_name_single_word"));
             } else {
                 if(QKPlayer.kingdom(player)) {
@@ -78,7 +78,7 @@ public class CommandKingdom {
     public void kingdomDelete(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
-        if(args[0] != null) {
+        if(args.length >= 1) {
             if(Kingdom.deleteKingdom(args[0], sender)) {
                 sender.sendMessage(ChatPhrase.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
             } else {
@@ -95,7 +95,7 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         Player psender = (Player) sender;
 
-        if(args[0] != null) {
+        if(args.length >= 2) {
             Player target = Bukkit.getServer().getPlayer(args[0]);
             String kingdomName = QKPlayer.getKingdom(target);
             if(Kingdom.compareKingdom(target, psender)) {
