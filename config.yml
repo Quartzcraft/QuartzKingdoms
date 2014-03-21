@@ -5,6 +5,5 @@ database:
       username:
       password:
 settings:
-   settings:
-     world: world
+   world: world
    
