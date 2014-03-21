@@ -120,15 +120,19 @@ public class CommandKingdom {
         Chunk chunk = player.getLocation().getChunk();
         String kingdomName = QKPlayer.getKingdom(player);
 
-        if(ChunkManager.isClaimed(chunk)) {
-            sender.sendMessage(ChatPhrase.getPhrase("this_chunk_is_already_claimed"));
-        } else {
-            if(ChunkManager.claimChunkKingdom(player)) {
-                sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
+        if(player.getWorld().getName() == this.plugin.getConfig().getString("settings.world")) {
+            if(ChunkManager.isClaimed(chunk)) {
+                sender.sendMessage(ChatPhrase.getPhrase("this_chunk_is_already_claimed"));
             } else {
-                sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
+                if(ChunkManager.claimChunkKingdom(player)) {
+                    sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                    Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
+                } else {
+                    sender.sendMessage(ChatPhrase.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
+                }
             }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("you_can_not_claim_land_in_this_world"));
         }
     }
 
