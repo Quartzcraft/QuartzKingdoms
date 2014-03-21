@@ -296,6 +296,14 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand.Command(name = "kingdom.invite", aliases = { "k.invite" }, permission = "QCK.kingdom.invite", description = "Invites a player to your kingdom.", usage = "Use /kingdom invite [playername]")
+    public void kingdomInvite(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        String[] args = args0.getArgs();
+        sender.sendMessage(ChatPhrase.getPhrase("feature_unavalible"));
+    }
+
 
     /*
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
