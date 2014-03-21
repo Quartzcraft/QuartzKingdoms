@@ -60,7 +60,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("specify_kingdom_name", "&cPlease specify a name!");
 		ChatPhrase.addPhrase("kingdomname_already_used", "&cAnother kingdom is using that name! &aConsider using a different name and overtaking that kingdom!");
 		ChatPhrase.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
-		
+
+        ChatPhrase.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for Kingdom: ");
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_no", "&aChunk was not successfully claimed for Kingdom: ");
 		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for Kingdom: ");
