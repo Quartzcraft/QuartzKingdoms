@@ -84,9 +84,10 @@ public class Kingdom {
 	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group, QuartzCore plugin) {
 		String[] ranks = null;
 		ranks[0] = "Citizen";
-		ranks[1] = "Knight";
-		ranks[2] = "Nobel";
-        ranks[3] = "King";
+        ranks[1] = "UpperClass";
+		ranks[2] = "Knight";
+		ranks[3] = "Nobel";
+        //ranks[4] = "King";
 		
 		int i = 1;
 		int a = 1;
