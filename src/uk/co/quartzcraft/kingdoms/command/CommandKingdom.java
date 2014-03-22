@@ -99,7 +99,7 @@ public class CommandKingdom {
             Player target = Bukkit.getServer().getPlayer(args[0]);
             String kingdomName = QKPlayer.getKingdom(target);
             if(Kingdom.compareKingdom(target, psender)) {
-                if(Kingdom.promotePlayer(kingdomName, sender, args[0], args[1], new QuartzCore())) {
+                if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[0], new QuartzCore())) {
                     sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
                     target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
                 } else {
