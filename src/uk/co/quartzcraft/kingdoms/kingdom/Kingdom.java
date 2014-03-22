@@ -69,6 +69,7 @@ public class Kingdom {
 		try {
 			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 			java.sql.PreparedStatement s = connection.prepareStatement("DELETE FROM Kingdoms WHERE KingdomName='" + kingdomName + "' AND KingID='" + userID + "';");
+            QKPlayer.leaveKingdom(player, kingdomName);
 			if(s.executeUpdate() == 1) {
 				return true;
 			} else {
