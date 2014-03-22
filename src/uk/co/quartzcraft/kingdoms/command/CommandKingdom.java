@@ -228,7 +228,7 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
         String[] args = args0.getArgs();
-        if(QKPlayer.getKingdom(player) != null) {
+        if(QKPlayer.kingdom(player)) {
             sender.sendMessage(ChatPhrase.getPhrase("you_are_already_in_a_Kingdom"));
         } else if(Kingdom.isOpen(args[0])) {
             if(QKPlayer.joinKingdom(player, args[0])) {
