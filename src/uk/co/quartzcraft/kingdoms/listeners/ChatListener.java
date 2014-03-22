@@ -6,11 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 
-/**
- * Created by nicholasbassett on 22/03/2014.
- */
 public class ChatListener implements Listener {
 
     private static QuartzKingdoms plugin;
