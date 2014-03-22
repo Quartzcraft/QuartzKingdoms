@@ -198,7 +198,7 @@ public class Kingdom {
                     ResultSet res = s.executeQuery();
                     if(isNeutral(kingdom, relatingKingdom)) {
                         return 0;
-                    } else if(res.next()) {
+                    } else if(res.next() && res.getInt("kingdom_id") == getID(kingdom)) {
                         if(res.getString("status") == "11") {
                             java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=1 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
                             if(s1.executeUpdate() == 1) {
