@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
+import org.bukkit.event.player.PlayerJoinEvent;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.core.event.QPlayerLoginEvent;
@@ -43,5 +44,13 @@ public class PlayerListener implements Listener {
         } else {
             QKPlayer.createKingdomsPlayer(player);
         }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        Player player = e.getPlayer();
+        String playerName = player.getDisplayName();
+        String kingdomPrefix = "[" + QKPlayer.getKingdom(player) + "]";
+        player.setDisplayName(kingdomPrefix + playerName);
     }
 }

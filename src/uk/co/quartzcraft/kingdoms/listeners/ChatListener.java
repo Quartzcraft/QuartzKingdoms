@@ -24,7 +24,5 @@ public class ChatListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String playerName = player.getDisplayName();
-        String kingdomPrefix = "[" + QKPlayer.getKingdom(player) + "]";
-        player.setDisplayName(kingdomPrefix + playerName);
     }
 }
