@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
+import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
 
 public class BlockListener implements Listener {
 	
@@ -17,17 +18,17 @@ public class BlockListener implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.LOWEST)
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
     }
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
 	}
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onIgnite(BlockIgniteEvent event) {
         Player player = event.getPlayer();
     }
