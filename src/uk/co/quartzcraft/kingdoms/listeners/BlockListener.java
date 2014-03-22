@@ -58,7 +58,7 @@ public class BlockListener implements Listener {
                 return false;
             }
         } else {
-            return false;
+            return true;
         }
     }
 
