@@ -375,8 +375,8 @@ public class Kingdom {
             Statement s = connection.createStatement();
             ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
             if(res2.next()) {
-                boolean open = res2.getBoolean("invite_only");
-                if(open) {
+                int open = res2.getInt("invite_only");
+                if(open == 1) {
                     return true;
                 } else {
                     return false;
