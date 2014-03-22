@@ -30,8 +30,8 @@ public class QKPlayer {
 	public static String getKingdom(Player player) {
 		String error = "error";
 		String kingdom = null;
-		UUID UUID = player.getUniqueId();
-		String SUUID = UUID.toString();
+		//UUID UUID = player.getUniqueId();
+		//String SUUID = UUID.toString();
 		
 		try {
 			Statement s1 = QuartzCore.MySQLcore.openConnection().createStatement();
