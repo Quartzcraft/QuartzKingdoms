@@ -127,7 +127,7 @@ public class CommandKingdom {
         String kingdomName = QKPlayer.getKingdom(player);
         World world = player.getWorld();
         String WorldName = world.getName();
-        String AWorldName = this.plugin.getConfig().getString("settings.world");
+        String AWorldName = plugin.getConfig().getString("settings.world");
 
         if(WorldName == AWorldName) {
             if(ChunkManager.isClaimed(chunk)) {
