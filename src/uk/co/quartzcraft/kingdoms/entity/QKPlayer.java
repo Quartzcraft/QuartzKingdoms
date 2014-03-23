@@ -44,7 +44,7 @@ public class QKPlayer {
                 if(kingdomID == 0) {
                     return null;
                 }
-                ResultSet res3 = s3.executeQuery("SELECT * FROM Kingdoms WHERE id=" + kingdomID + ";");
+                ResultSet res3 = s3.executeQuery("SELECT * FROM Kingdoms WHERE id='" + kingdomID + "';");
                 if(res3.next()) {
                     kingdom = res3.getString("KingdomName");
                     return kingdom;
