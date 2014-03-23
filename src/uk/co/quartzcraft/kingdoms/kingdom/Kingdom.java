@@ -224,7 +224,7 @@ public class Kingdom {
                         }
                     }
                 }  catch (SQLException e) {
-                    return 1;
+                    return 0;
                 }
 			case 2:
 				//Ally
