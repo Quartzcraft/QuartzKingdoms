@@ -94,9 +94,14 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         Player psender = (Player) sender;
+        Player target = null;
 
         if(args.length >= 2) {
-            Player target = Bukkit.getServer().getPlayer(args[0]);
+            if(Bukkit.getOfflinePlayer(args[0]).isOnline()) {
+                target = Bukkit.getServer().getPlayer(args[0]);
+            } else {
+                psender.sendMessage(ChatPhrase.getPhrase("specify_online_username"));
+            }
             String kingdomName = QKPlayer.getKingdom(target);
             if(Kingdom.compareKingdom(target, psender)) {
                 if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[0], new QuartzCore())) {
