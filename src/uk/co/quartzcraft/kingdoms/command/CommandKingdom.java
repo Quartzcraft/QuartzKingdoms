@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -124,8 +125,11 @@ public class CommandKingdom {
         Player player = (Player) sender;
         Chunk chunk = player.getLocation().getChunk();
         String kingdomName = QKPlayer.getKingdom(player);
+        World world = player.getWorld();
+        String WorldName = world.getName();
+        String AWorldName = this.plugin.getConfig().getString("settings.world");
 
-        if(player.getWorld().getName() == this.plugin.getConfig().getString("settings.world")) {
+        if(WorldName == AWorldName) {
             if(ChunkManager.isClaimed(chunk)) {
                 sender.sendMessage(ChatPhrase.getPhrase("this_chunk_is_already_claimed"));
             } else {
