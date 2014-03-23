@@ -437,7 +437,7 @@ public class Kingdom {
 	}
 	
 	public static boolean compareKingdom(Player p1, Player p2) {
-		if(QKPlayer.getKingdom(p1) == QKPlayer.getKingdom(p2)) {
+		if(QKPlayer.getKingdomID(p1) == QKPlayer.getKingdomID(p2)) {
 			return true;
 		} else {
 			return false;
