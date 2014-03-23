@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -419,17 +420,27 @@ public class Kingdom {
 
 	public static String getKing(String kingdomName) {
 		int id = Kingdom.getID(kingdomName);
+        Player player = null;
+        OfflinePlayer oplayer = null;
+        String playerName = null;
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 		try {
 			Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
+			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id ='" + id + "';");
 			if(res2.next()) {
-		    	 int kingID = res2.getInt("KingID");
-		    	 int coreKingID = QKPlayer.getCoreID(kingID);
-		    	 return QPlayer.getDisplayName(coreKingID);
-		     } else {
-		    	 return null;
-		     }
+		    	int kingID = res2.getInt("KingID");
+		    	int coreKingID = QKPlayer.getCoreID(kingID);
+                if(Bukkit.getOfflinePlayer(QPlayer.getDisplayName(coreKingID)).isOnline()) {
+                    player = Bukkit.getServer().getPlayer(QPlayer.getDisplayName(coreKingID));
+                    playerName = player.getName();
+                } else {
+                    oplayer = Bukkit.getOfflinePlayer(QPlayer.getDisplayName(coreKingID));
+                    playerName = oplayer.getName();
+                }
+		        return playerName;
+		    } else {
+		        return null;
+		    }
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
