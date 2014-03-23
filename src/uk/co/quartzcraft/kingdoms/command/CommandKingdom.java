@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.command.QCommand;
@@ -25,10 +26,12 @@ public class CommandKingdom {
 	
 	private static HashMap<List<String>, QSubCommand> commands = new HashMap<List<String>, QSubCommand>();
     private static QuartzKingdoms plugin;
+    private static Plugin core;
     private static QCommand framework;
 
-    public CommandKingdom(QuartzKingdoms plugin) {
+    public CommandKingdom(QuartzKingdoms plugin, Plugin core) {
         this.plugin = plugin;
+        this.core = core;
         framework = new QCommand(this.plugin);
         framework.registerCommands(this);
     }
@@ -105,7 +108,7 @@ public class CommandKingdom {
             }
             String kingdomName = QKPlayer.getKingdom(target);
             if(Kingdom.compareKingdom(target, psender)) {
-                if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[0], new QuartzCore())) {
+                if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[0], this.core)) {
                     sender.sendMessage(ChatPhrase.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
                     target.sendMessage(ChatPhrase.getPhrase("got_promoted_kingdom_yes"));
                 } else {
