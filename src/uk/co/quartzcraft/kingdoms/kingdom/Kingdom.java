@@ -376,7 +376,7 @@ public class Kingdom {
             ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
             if(res2.next()) {
                 int open = res2.getInt("invite_only");
-                if(open == 1) {
+                if(open == 0) {
                     return true;
                 } else {
                     return false;
