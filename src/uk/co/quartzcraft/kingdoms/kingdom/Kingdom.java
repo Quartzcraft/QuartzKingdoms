@@ -88,7 +88,7 @@ public class Kingdom {
 		ranks[0] = "Citizen";
         ranks[1] = "UpperClass";
 		ranks[2] = "Knight";
-		ranks[3] = "Nobel";
+		ranks[3] = "Noble";
         //ranks[4] = "King";
 		
 		int i = 1;
