@@ -114,7 +114,7 @@ public class CommandKingdom {
                 sender.sendMessage(ChatPhrase.getPhrase("no_permission"));
             }
         } else {
-            sender.sendMessage(ChatPhrase.getPhrase("specify_username") + ChatColor.WHITE + args[0]);
+            sender.sendMessage(ChatPhrase.getPhrase("specify_username"));
         }
     }
 
