@@ -21,6 +21,7 @@ import uk.co.quartzcraft.kingdoms.listeners.*;
 public class QuartzKingdoms extends JavaPlugin {
 	
 	public Plugin plugin = this.plugin;
+    public Plugin core = Bukkit.getPluginManager().getPlugin("QuartzCore");
 	
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
@@ -119,7 +120,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		//Commands
 		log.info("[QK][STARTUP]Registering Commands");
         commandFramework = new QCommand(this);
-        commandFramework.registerCommands(new CommandKingdom(this));
+        commandFramework.registerCommands(new CommandKingdom(this, core));
 	   	
         //Startup notice
 		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
