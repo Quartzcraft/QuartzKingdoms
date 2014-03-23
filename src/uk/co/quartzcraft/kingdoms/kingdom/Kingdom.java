@@ -224,6 +224,7 @@ public class Kingdom {
                         }
                     }
                 }  catch (SQLException e) {
+                    e.printStackTrace();
                     return 0;
                 }
 			case 2:
@@ -258,6 +259,7 @@ public class Kingdom {
                         }
                     }
                 }  catch (SQLException e) {
+                    e.printStackTrace();
                     return 0;
                 }
 			case 3:
@@ -292,6 +294,7 @@ public class Kingdom {
                         }
                     }
                 }  catch (SQLException e) {
+                    e.printStackTrace();
                     return 0;
                 }
 			default:
