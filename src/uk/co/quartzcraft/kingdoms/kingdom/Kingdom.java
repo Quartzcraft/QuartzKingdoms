@@ -463,7 +463,7 @@ public class Kingdom {
             Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
             Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
 
-            ResultSet res1 = s2.executeQuery("SELECT * FROM Kingdoms WHERE kingdomName ='" + kingdomName + "';");
+            ResultSet res1 = s2.executeQuery("SELECT * FROM Kingdoms WHERE kingdomName='" + kingdomName + "';");
 
             if(res1.next()) {
                 int power = res1.getInt("Power");
