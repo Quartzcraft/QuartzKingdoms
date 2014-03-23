@@ -135,9 +135,9 @@ public class QKPlayer {
 		
 		try {
 			s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID='" + id + "';");
+			ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id='" + id + "';");
 	        if(res.next()) {
-	        	return res.getInt(2);
+	        	return res.getInt("PlayerID");
 	        } else {
 	        	return 0;
 	        }
