@@ -165,11 +165,11 @@ public class CommandKingdom {
 
         if(QKPlayer.isKing(kingdom, player)) {
             if(Kingdom.setRelationshipStatus(kingdom, args[0], 3) == 1) {
-                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + null);
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(kingdom + "kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
                 Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
                 player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " has declared war against your kingdom. Type " + ChatColor.WHITE + "/kingdom war " + kingdom + ChatColor.GREEN + " to also declare war.");
             } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 3) == 2) {
-                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + null);
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(kingdom + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
                 Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_to_war_with_kingdom"));
@@ -189,10 +189,10 @@ public class CommandKingdom {
 
         if(QKPlayer.isKing(kingdom, player)) {
             if(Kingdom.setRelationshipStatus(kingdom, args[0], 1) == 1) {
-                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_pending_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(kingdom + "kingdom_is_pending_neutral_relationship_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
                 player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " is offering neutral relations with your kingdom. Type " + ChatColor.WHITE + "/kingdom neutral " + kingdom + ChatColor.GREEN + " to also make neutral relations.");
             } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 1) == 2) {
-                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + null);
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(kingdom + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_to_neutral_with_kingdom"));
             }
@@ -211,10 +211,10 @@ public class CommandKingdom {
 
         if(QKPlayer.isKing(kingdom, player)) {
             if(Kingdom.setRelationshipStatus(kingdom, args[0], 2) == 1) {
-                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + null);
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(kingdom + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
                 player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " is offering to become an ally with your kingdom. Type " + ChatColor.WHITE + "/kingdom ally " + kingdom + ChatColor.GREEN + " to accept the offer.");
             } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 2) == 2) {
-                Bukkit.broadcastMessage(ChatPhrase.getPhrase(null + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + null);
+                Bukkit.broadcastMessage(ChatPhrase.getPhrase(kingdom + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_to_ally_with_kingdom"));
             }
