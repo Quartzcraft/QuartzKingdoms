@@ -106,7 +106,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("could_not_create_kingdoms_player", "&cYour player data could not be added to the QuartzKingdoms database!");
 		
 		//Database
-		//logger.info("[STARTUP]Connecting to Database");
+		log.info("[QK][STARTUP]Connecting to Database");
 		DBKing = MySQLking.openConnection();
 		
 		//Listeners
