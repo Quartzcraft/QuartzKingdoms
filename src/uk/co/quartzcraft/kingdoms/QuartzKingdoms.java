@@ -65,9 +65,9 @@ public class QuartzKingdoms extends JavaPlugin {
 
         ChatPhrase.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
 		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for Kingdom: ");
-		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_no", "&aChunk was not successfully claimed for Kingdom: ");
+		ChatPhrase.addPhrase("chunk_claimed_for_kingdom_no", "&cChunk was not successfully claimed for Kingdom: ");
 		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for Kingdom: ");
-		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_no", "&aChunk was not successfully unclaimed for Kingdom: ");
+		ChatPhrase.addPhrase("chunk_unclaimed_for_kingdom_no", "&cChunk was not successfully unclaimed for Kingdom: ");
         ChatPhrase.addPhrase("this_chunk_is_already_claimed", "&cthis chunk has already been claimed!");
         ChatPhrase.addPhrase("this_chunk_is_not_claimed", "&cThis chunk chunk is not claimed by your kingdom!");
 		ChatPhrase.addPhrase("now_entering_the_land_of", "&aNow entering the land of ");
