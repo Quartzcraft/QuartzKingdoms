@@ -23,8 +23,7 @@ import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
 
 public class CommandKingdom {
-	
-	private static HashMap<List<String>, QSubCommand> commands = new HashMap<List<String>, QSubCommand>();
+
     private static QuartzKingdoms plugin;
     private static Plugin core;
     private static QCommand framework;
@@ -105,6 +104,7 @@ public class CommandKingdom {
                 target = Bukkit.getServer().getPlayer(args[0]);
             } else {
                 psender.sendMessage(ChatPhrase.getPhrase("specify_online_username"));
+                return;
             }
             String kingdomName = QKPlayer.getKingdom(target);
             if(Kingdom.compareKingdom(target, psender)) {
@@ -330,37 +330,5 @@ public class CommandKingdom {
         Player player = (Player) sender;
         String[] args = args0.getArgs();
         sender.sendMessage(ChatPhrase.getPhrase("feature_unavalible"));
-    }
-
-
-    /*
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-            if(args.length >= 1) {
-                    boolean match = false; 
-                    
-                    for(List<String> s : commands.keySet())
-                    {
-                            if(s.contains(args[0]))
-                            {
-                                    commands.get(s).runCommand(sender, cmd, label, args);
-                                    match = true;
-                            }
-                    }
-                    
-                    if(!match)
-                    {
-                            sender.sendMessage(ChatPhrase.getPhrase("Unknown_SubCommand"));
-                    }
-            }
-            else {
-                    sender.sendMessage(ChatPhrase.getPhrase("Specify_SubCommand"));
-            }
-            
-            return true;
-    }
-    */
-
-    public static void addCommand(List<String> cmds, QSubCommand s) {
-            commands.put(cmds, s);
     }
 }
