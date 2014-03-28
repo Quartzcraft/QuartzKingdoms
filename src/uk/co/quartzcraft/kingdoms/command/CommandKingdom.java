@@ -289,7 +289,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom 5 power.", usage = "Use /kingdom open")
+    @QCommand.Command(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom 4 power.", usage = "Use /kingdom open")
     public void kingdomOpen(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -299,14 +299,14 @@ public class CommandKingdom {
         } else {
             if(Kingdom.setOpen(QKPlayer.getKingdom(player), true)) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_open"));
-                Kingdom.setPower(QKPlayer.getKingdom(player), true, 5);
+                Kingdom.setPower(QKPlayer.getKingdom(player), true, 4);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_open_kingdom"));
             }
         }
     }
 
-    @QCommand.Command(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this removes 5 power.", usage = "Use /kingdom close")
+    @QCommand.Command(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this removes 3 power.", usage = "Use /kingdom close")
     public void kingdomClose(QCommand.CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -314,7 +314,7 @@ public class CommandKingdom {
         if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
             if(Kingdom.setOpen(QKPlayer.getKingdom(player), false)) {
                 sender.sendMessage(ChatPhrase.getPhrase("kingdom_now_closed"));
-                Kingdom.setPower(QKPlayer.getKingdom(player), false, 5);
+                Kingdom.setPower(QKPlayer.getKingdom(player), false, 3);
             } else {
                 sender.sendMessage(ChatPhrase.getPhrase("failed_close_kingdom"));
             }
