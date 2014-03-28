@@ -44,6 +44,7 @@ public class CommandKingdom {
     public void kingdomTest(QCommand.CommandArgs args) {
         String[] args0 = args.getArgs();
         args.getSender().sendMessage("This is the test kingdoms command!" + "Args0[1] was equal to " + args0[1]);
+        args.getSender().sendMessage("config preference settings.world equals:" + this.plugin.getConfig().getString("settings.world"));
     }
 
     @QCommand.Command(name = "kingdom.info", aliases = { "k.info" }, permission = "QCK.kingdom.info", description = "Get information about a specified kingdom", usage = "Use /kingdom info [kingdom name]")
@@ -130,9 +131,9 @@ public class CommandKingdom {
         String kingdomName = QKPlayer.getKingdom(player);
         World world = player.getWorld();
         String WorldName = world.getName();
-        String AWorldName = plugin.getConfig().getString("settings.world");
+        String AWorldName = this.plugin.getConfig().getString("settings.world");
 
-        if(WorldName == AWorldName) {
+        if(WorldName.equals(AWorldName)) {
             if(ChunkManager.isClaimed(chunk)) {
                 sender.sendMessage(ChatPhrase.getPhrase("this_chunk_is_already_claimed"));
             } else {
