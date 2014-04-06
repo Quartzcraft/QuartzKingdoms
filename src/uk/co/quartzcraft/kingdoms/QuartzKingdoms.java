@@ -58,6 +58,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		ChatPhrase.addPhrase("created_kingdom_no", "&cFailed to create kingdom: ");
 		ChatPhrase.addPhrase("deleted_kingdom_yes", "&aSuccessfully deleted kingdom: ");
 		ChatPhrase.addPhrase("deleted_kingdom_no", "&cFailed to delete kingdom: ");
+		ChatPhrase.addPhrase("disbanded_kingdom_yes", "&aSuccessfully disbanded kingdom: ");
+		ChatPhrase.addPhrase("disbanded_kingdom_no", "&cFailed to disband kingdom: ");
 		ChatPhrase.addPhrase("specify_kingdom_name", "&cPlease specify a name!");
 		ChatPhrase.addPhrase("kingdomname_already_used", "&cAnother kingdom is using that name! &aPlease pick another name");
         ChatPhrase.addPhrase("kingdom_does_not_exist", "&cThe specified kingdom does not exist!");
