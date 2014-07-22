@@ -5,21 +5,94 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.QuartzCore;
-import uk.co.quartzcraft.core.entity.QPlayer;
+import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
+import uk.co.quartzcraft.kingdoms.clan.Clan;
 
 public class QKPlayer {
 
-	public HashMap getData(Player player) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private static Plugin plugin;
+
+    private static QPlayer qplayer;
+
+    private static int id;
+    private static UUID uuid;
+    private static int power;
+    private static int clanid;
+    private static Clan clan;
+    private static int kingdomid;
+    private static Kingdom kingdom;
+    private static Player player;
+
+    public QKPlayer(Plugin plugin, UUID uuid) {
+        //TODO database
+        this.plugin = plugin;
+        this.uuid = uuid;
+
+        String SUUID = uuid.toString();
+        try {
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE UUID='" + SUUID + "';");
+            if(res.next()) {
+                this.id = res.getInt("id");
+                this.power = res.getInt("KingdomID");
+                this.kingdomid = res.getInt("KingdomID");
+                this.clanid = res.getInt("KingdomID");
+            } else {
+                return;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        this.kingdom = new Kingdom(this.kingdomid);
+        this.clan = new Clan(this.clanid);
+        this.qplayer = new QPlayer(QuartzCore.plugin, uuid);
+        this.player = Bukkit.getPlayer(this.qplayer.getName());
+    }
+
+    /**
+     *
+     * @param plugin
+     * @param id QuartzKingdoms id
+     */
+    public QKPlayer(Plugin plugin, int id) {
+        //TODO database
+        this.plugin = plugin;
+        this.id = id;
+
+        String SUUID = uuid.toString();
+        try {
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE UUID='" + SUUID + "';");
+            if(res.next()) {
+                this.power = res.getInt("KingdomID");
+                this.kingdomid = res.getInt("KingdomID");
+                this.clanid = res.getInt("KingdomID");
+            } else {
+                return;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        this.kingdom = new Kingdom(this.kingdomid);
+        this.clan = new Clan(this.clanid);
+        this.qplayer = new QPlayer(QuartzCore.plugin, uuid);
+        this.uuid = this.qplayer.getUniqueId();
+        this.player = Bukkit.getPlayer(this.qplayer.getName());
+    }
 
     /**
      * Retrieves the name of the kingdom that the specified player is in.

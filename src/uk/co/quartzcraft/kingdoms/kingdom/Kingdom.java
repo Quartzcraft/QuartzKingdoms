@@ -23,6 +23,10 @@ import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 public class Kingdom {
 	
 	private static QuartzKingdoms plugin;
+
+    public Kingdom(int id) {
+
+    }
 	
 	public void QuartzKingdomsConfig(QuartzKingdoms plugin) {
 		this.plugin = plugin;
