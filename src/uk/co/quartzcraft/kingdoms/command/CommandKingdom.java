@@ -92,6 +92,21 @@ public class CommandKingdom {
             sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name"));
         }
     }
+    
+    @QCommand.Command(name = "kingdom.disband", aliases = { "k.disband" }, permission = "QCK.kingdom.disband", description = "Disbands the kingdom you specify. You must be the king.", usage = "Use /kingdom disband [kingdom name]")
+    public void kingdomDelete(QCommand.CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();
+        if(args.length >= 1) {
+            if(Kingdom.deleteKingdom(args[0], sender)) {
+                sender.sendMessage(ChatPhrase.getPhrase("disbanded_kingdom_yes") + ChatColor.WHITE + args[0]);
+            } else {
+                sender.sendMessage(ChatPhrase.getPhrase("disbanded_kingdom_no") + ChatColor.WHITE + args[0]);
+            }
+        } else {
+            sender.sendMessage(ChatPhrase.getPhrase("specify_kingdom_name"));
+        }
+    }
 
     @QCommand.Command(name = "kingdom.promote", aliases = { "k.promote" }, permission = "QCK.kingdom.promote", description = "Promotes the specified player to the specified rank in the kingdom", usage = "Use /kingdom promote [playername]")
     public void kingdomPromote(QCommand.CommandArgs args0) {

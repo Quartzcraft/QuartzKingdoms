@@ -37,6 +37,9 @@ Permissions:
    QCK.Kingdom.delete:
       description: Allows a king the ability to delete their kingdom.
       default: false
+   QCK.Kingdom.disband:
+      description: Allows a king the ability to disband their kingdom.
+      default: false
    QCK.Kingdom.promote:
       description: Allows a king the ability to promote someone in their kingdom.
       default: false
