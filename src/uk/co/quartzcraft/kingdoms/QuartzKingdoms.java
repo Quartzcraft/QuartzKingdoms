@@ -21,8 +21,8 @@ import uk.co.quartzcraft.kingdoms.listeners.*;
 
 public class QuartzKingdoms extends JavaPlugin {
 	
-	public Plugin plugin = this.plugin;
-    public Plugin core = Bukkit.getPluginManager().getPlugin("QuartzCore");
+	public static Plugin plugin;
+    public static Plugin core;
 	
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
@@ -42,6 +42,9 @@ public class QuartzKingdoms extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+
+        this.plugin = this;
+        this.core = QuartzCore.plugin;
 		
 		log.info("[QC]Running plugin configuration");
 		this.saveDefaultConfig();

@@ -22,15 +22,11 @@ import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
 
 public class Kingdom {
 	
-	private static QuartzKingdoms plugin;
+	private static Plugin plugin = QuartzKingdoms.plugin;
 
     public Kingdom(int id) {
 
     }
-	
-	public void QuartzKingdomsConfig(QuartzKingdoms plugin) {
-		this.plugin = plugin;
-	}
 	
 	public static boolean createKingdom(String kingdomName, CommandSender sender) {
 		Player player = (Player) sender;
