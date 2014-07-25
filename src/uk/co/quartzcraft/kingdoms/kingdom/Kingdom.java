@@ -5,20 +5,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
-import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
+import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
 public class Kingdom {
 	
@@ -394,7 +391,7 @@ public class Kingdom {
         }
     }
 
-	public static int getID(String kingdomName) {
+	public int getID() {
 		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
 		try {
 			Statement s = connection.createStatement();
