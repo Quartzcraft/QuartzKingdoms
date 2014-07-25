@@ -9,9 +9,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
+import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
 
 public class BlockListener implements Listener {

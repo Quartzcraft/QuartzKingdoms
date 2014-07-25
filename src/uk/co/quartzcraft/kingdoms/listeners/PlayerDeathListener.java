@@ -8,9 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import uk.co.quartzcraft.core.chat.ChatPhrase;
-import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
+import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
 public class PlayerDeathListener implements Listener {
 

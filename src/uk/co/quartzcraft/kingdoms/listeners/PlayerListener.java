@@ -1,8 +1,5 @@
 package uk.co.quartzcraft.kingdoms.listeners;
 
-import java.sql.SQLException;
-
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,7 +10,7 @@ import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.core.event.QPlayerLoginEvent;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.entity.QKPlayer;
+import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
 public class PlayerListener implements Listener {
 
