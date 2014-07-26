@@ -24,6 +24,7 @@ public class Kingdom {
     private static String name;
     private static QKPlayer king;
     private static int power;
+    private static boolean open;
 
     public Kingdom(int id) {
 
@@ -142,6 +143,15 @@ public class Kingdom {
     }
 
     /**
+     * Find out whether the kingdom is open for new members or not.
+     *
+     * @return True if open for new players, false if closed to new players.
+     */
+    public boolean isOpen() {
+        return this.open;
+    }
+
+    /**
      * Returns the amount of power a kingdom has.
      *
      * @return
@@ -194,6 +204,45 @@ public class Kingdom {
                 return this;
             }
         } catch (SQLException e) {
+            return this;
+        }
+    }
+
+    /**
+     * Set the kingdom open or closed to new members.
+     *
+     * @param status
+     * @return
+     */
+    public Kingdom setOpen(boolean status) {
+        //TODO
+        if(status && !this.open) {
+            try {
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=0 WHERE id=?;");
+                s.setInt(1, this.id);
+                if(s.executeUpdate() == 1) {
+                    this.open = true;
+                    return this;
+                } else {
+                    return this;
+                }
+            } catch (SQLException e) {
+                return this;
+            }
+        } else if(!status && this.open) {
+            try {
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=1 WHERE id=?;");
+                s.setInt(1, this.id);
+                if(s.executeUpdate() == 1) {
+                    this.open = false;
+                    return this;
+                } else {
+                    return this;
+                }
+            } catch (SQLException e) {
+                return this;
+            }
+        } else {
             return this;
         }
     }
@@ -410,53 +459,7 @@ public class Kingdom {
         }
     }
 	
-	public static boolean setOpen(String kingdomName, boolean status) {
-		//TODO
-		if(status) {
-            try {
-                java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms SET invite_only=0 WHERE id=" + getID(kingdomName) + ";");
-                if(s.executeUpdate() == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } catch (SQLException e) {
-                return false;
-            }
-		} else {
-            try {
-                java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE Kingdoms SET invite_only=1 WHERE id=" + getID(kingdomName) + ";");
-                if(s.executeUpdate() == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } catch (SQLException e) {
-                return false;
-            }
-		}
-	}
 
-    public static boolean isOpen(String kingdomName) {
-        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-        try {
-            Statement s = connection.createStatement();
-            ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
-            if(res2.next()) {
-                int open = res2.getInt("invite_only");
-                if(open == 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 	
 	public static boolean compareKingdom(Player p1, Player p2) {
         int k1 = QKPlayer.getKingdomID(p1);
