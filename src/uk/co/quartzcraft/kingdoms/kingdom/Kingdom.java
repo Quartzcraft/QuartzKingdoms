@@ -46,12 +46,12 @@ public class Kingdom {
 		} 
 		
 		try {
-			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('?', ?);");
+			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName) VALUES ('?');");
             s.setString(1, kingdomName);
-            s.setInt(2, player.getID());
             if(s.executeUpdate() == 1) {
                 Kingdom kkingdom = new Kingdom(player.getKingdom().getID());
-                player.joinKingdom(kkingdom);
+                player.setKingdom(kkingdom);
+                kkingdom.setKing(player);
                 return kkingdom;
             } else {
                 return null;
@@ -101,7 +101,7 @@ public class Kingdom {
 			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Kingdoms WHERE id='?' AND KingID='?';");
             s.setInt(1, this.id);
             s.setInt(2, player.getID());
-            player.leaveKingdom(this);
+            player.setKingdom(null);
 			if(s.executeUpdate() == 1) {
 				return true;
 			} else {
@@ -189,6 +189,28 @@ public class Kingdom {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
+                return this;
+            } else {
+                return this;
+            }
+        } catch (SQLException e) {
+            return this;
+        }
+    }
+
+    /**
+     * Sets the king to the specified player.
+     *
+     * @param player
+     * @return
+     */
+    public Kingdom setKing(QKPlayer player) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET kingID=? WHERE id=?;");
+            s.setInt(1, player.getID());
+            s.setInt(2, this.id);
+            if(s.executeUpdate() == 1) {
+                this.king = player;
                 return this;
             } else {
                 return this;
@@ -445,12 +467,4 @@ public class Kingdom {
 			return false;
 		}
 	}
-
-    public static boolean addUser(QKPlayer player) {
-        return true;
-    }
-
-    public static boolean removeUser(QKPlayer player) {
-        return true;
-    }
 }

@@ -193,50 +193,6 @@ public class QKPlayer {
 	}
 
     /**
-     * Sets the users kingodm to the specified kingdom.
-     *
-     * @param kingdom
-     * @return
-     */
-    public boolean joinKingdom(Kingdom kingdom) {
-           //TODO replace with Kingdom.addUser()
-        try {
-            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=" + kingdom.getID() + " WHERE id=" + this.id + ";");
-            s.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Removes the player from the specified kingdom
-     *
-     * @param kingdom
-     * @return
-     */
-	public boolean leaveKingdom(Kingdom kingdom) {
-        //TODO replace with Kingdom.removeUser()
-        if(this.getKingdom().getID() == kingdom.getID()) {
-            try {
-                java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-                java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=" + this.id + ";");
-                if(s.executeUpdate() == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        } else {
-            return false;
-        }
-	}
-
-    /**
      * Returns the amount of power a player has.
      * @return
      */
@@ -289,6 +245,45 @@ public class QKPlayer {
             }
         } catch (SQLException e) {
             return this;
+        }
+    }
+
+    /**
+     * Sets a players kingdom to the specified kingdom.
+     *
+     * @param kingdom
+     * @return
+     */
+    public QKPlayer setKingdom(Kingdom kingdom) {
+        if(kingdom != null) {
+            try {
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=? WHERE id=?;");
+                s.setInt(1, kingdom.getID());
+                s.setInt(2, this.id);
+                if(s.executeUpdate() == 1) {
+                    this.kingdom = kingdom;
+                    return this;
+                } else {
+                    return this;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return this;
+            }
+        } else {
+            try {
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=0 WHERE id=?;");
+                s.setInt(1, this.id);
+                if(s.executeUpdate() == 1) {
+                    this.kingdom = null;
+                    return this;
+                } else {
+                    return this;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return this;
+            }
         }
     }
 
