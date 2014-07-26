@@ -136,6 +136,15 @@ public class QKPlayer {
     }
 
     /**
+     * Returns the QPlayer object associated with this player.
+     *
+     * @return
+     */
+    public QPlayer getQPlayer() {
+        return this.qplayer;
+    }
+
+    /**
      * Retrieves the name of the kingdom that the specified player is in.
      *
      * @return The kingdom object
@@ -190,7 +199,7 @@ public class QKPlayer {
      * @return
      */
     public boolean joinKingdom(Kingdom kingdom) {
-
+           //TODO replace with Kingdom.addUser()
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
             java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET KingdomID=" + kingdom.getID() + " WHERE id=" + this.id + ";");
@@ -208,6 +217,7 @@ public class QKPlayer {
      * @return
      */
 	public boolean leaveKingdom(Kingdom kingdom) {
+        //TODO replace with Kingdom.removeUser()
         if(this.getKingdom().getID() == kingdom.getID()) {
             try {
                 java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
@@ -227,7 +237,7 @@ public class QKPlayer {
 	}
 
     /**
-     *
+     * Returns the amount of power a player has.
      * @return
      */
     public int getPower() {
@@ -240,20 +250,21 @@ public class QKPlayer {
      * @param am
      * @return
      */
-    public int addPower(int am) {
+    public QKPlayer addPower(int am) {
         int newa = this.power + am;
 
         try {
-            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET Power=" + newa + " WHERE id=" + this.id + ");");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET Power=? WHERE id=?);");
+            s.setInt(1, newa);
+            s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
-                return newa;
+                return this;
             } else {
-                return this.power;
+                return this;
             }
         } catch (SQLException e) {
-            return this.power;
+            return this;
         }
     }
 
@@ -263,20 +274,21 @@ public class QKPlayer {
      * @param am
      * @return
      */
-    public int takePower(int am) {
+    public QKPlayer takePower(int am) {
         int newa = this.power - am;
 
         try {
-            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE KingdomsPlayerData SET Power=" + newa + " WHERE id=" + this.id + ");");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET Power=? WHERE id=?);");
+            s.setInt(1, newa);
+            s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
-                return newa;
+                return this;
             } else {
-                return this.power;
+                return this;
             }
         } catch (SQLException e) {
-            return this.power;
+            return this;
         }
     }
 

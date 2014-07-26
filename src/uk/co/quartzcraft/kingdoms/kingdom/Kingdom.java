@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
 
-import uk.co.quartzcraft.core.chat.ChatPhrase;
-import uk.co.quartzcraft.core.entity.QPlayer;
+import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
@@ -21,53 +20,88 @@ public class Kingdom {
 	
 	private static Plugin plugin = QuartzKingdoms.plugin;
 
+    private static int id;
+    private static String name;
+    private static QKPlayer king;
+    private static int power;
+
     public Kingdom(int id) {
 
     }
-	
-	public static boolean createKingdom(String kingdomName, CommandSender sender) {
-		Player player = (Player) sender;
-		int userID = QPlayer.getUserID(player);
-        int kuserID = QKPlayer.getID(player);
+
+    /**
+     * Creates a kingdom using the specified name and setting the speificed player as king.
+     *
+     * @param kingdomName
+     * @param player
+     * @return
+     */
+	public static Kingdom createKingdom(String kingdomName, QKPlayer player) {
 		if(exists(kingdomName)) {
-			return false;
+			return null;
 		}
 		
-		if(userID == 0 | kuserID == 0) {
-			return false;
+		if(player.getID() == 0 | player.getQPlayer().getID() == 0) {
+			return null;
 		} 
 		
 		try {
-			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('" + kingdomName + "', " + kuserID + ");");
-            s.executeUpdate();
-            QKPlayer.joinKingdom(player, kingdomName);
-            return true;
+			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES ('?', ?);");
+            s.setString(1, kingdomName);
+            s.setInt(2, player.getID());
+            if(s.executeUpdate() == 1) {
+                Kingdom kkingdom = new Kingdom(player.getKingdom().getID());
+                player.joinKingdom(kkingdom);
+                return kkingdom;
+            } else {
+                return null;
+            }
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 
-	public static boolean deleteKingdom(String kingdomName, CommandSender sender) {
-		String name_error = "name_error";
-		String king_error = "error";
-		String error = "error";
-		Player player = (Player) sender;
-		int userID = QKPlayer.getID(player);
-		
-		if(!exists(kingdomName)) {
-			return false;
-		}
-		
-		if(!QKPlayer.isKing(kingdomName, player)) {
+    /**
+     * Determines whether a kingdom with the specifed name exisits.
+     *
+     * @param kingdomName
+     * @return
+     */
+    public static boolean exists(String kingdomName) {
+        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName='?';");
+            s.setString(1, kingdomName);
+            ResultSet res2 = s.executeQuery();
+            if(res2.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Deletes the kingdom
+     *
+     * @param player
+     * @return
+     */
+	public boolean delete(QKPlayer player) {
+        //TODO All players must leave kingdom
+		if(!player.isKing(this)) {
 			return false;
 		}
 		
 		try {
-			java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-			java.sql.PreparedStatement s = connection.prepareStatement("DELETE FROM Kingdoms WHERE KingdomName='" + kingdomName + "' AND KingID='" + userID + "';");
-            QKPlayer.leaveKingdom(player, kingdomName);
+			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Kingdoms WHERE id='?' AND KingID='?';");
+            s.setInt(1, this.id);
+            s.setInt(2, player.getID());
+            player.leaveKingdom(this);
 			if(s.executeUpdate() == 1) {
 				return true;
 			} else {
@@ -79,6 +113,90 @@ public class Kingdom {
 		}
 		
 	}
+
+    /**
+     * Returns a kingdoms id.
+     *
+     * @return
+     */
+    public int getID() {
+        return this.id;
+    }
+
+    /**
+     * Returns a kingdom name.
+     *
+     * @return
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Returns a kingdoms king.
+     *
+     * @return
+     */
+    public QKPlayer getKing() {
+        return this.king;
+    }
+
+    /**
+     * Returns the amount of power a kingdom has.
+     *
+     * @return
+     */
+    public int getPower() {
+        return this.power;
+    }
+
+    /**
+     * Increases a kingdoms power by the specified amount.
+     *
+     * @param am
+     * @return
+     */
+    public Kingdom addPower(int am) {
+        int newa = this.power + am;
+
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET Power=? WHERE id=?);");
+            s.setInt(1, newa);
+            s.setInt(2, this.id);
+            if(s.executeUpdate() == 1) {
+                this.power = newa;
+                return this;
+            } else {
+                return this;
+            }
+        } catch (SQLException e) {
+            return this;
+        }
+    }
+
+    /**
+     * Decreases a kingdoms power by the specified amount.
+     *
+     * @param am
+     * @return
+     */
+    public Kingdom takePower(int am) {
+        int newa = this.power - am;
+
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET Power=? WHERE id=?);");
+            s.setInt(1, newa);
+            s.setInt(2, this.id);
+            if(s.executeUpdate() == 1) {
+                this.power = newa;
+                return this;
+            } else {
+                return this;
+            }
+        } catch (SQLException e) {
+            return this;
+        }
+    }
 	
 	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group, Plugin plugin) {
 		String[] ranks = null;
@@ -111,79 +229,6 @@ public class Kingdom {
 		} else {
 			return false;
 		}
-	}
-
-    public static boolean exists(int kingdomID) {
-        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-        try {
-            java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE id ='" + kingdomID + "';");
-            ResultSet res2 = s.executeQuery();
-            if(res2.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean exists(String kingdomName) {
-        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-        try {
-            java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
-            ResultSet res2 = s.executeQuery();
-            if(res2.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-	
-	public static Map getInfo(String kingdomName) {
-		HashMap<String, String> info = new HashMap<String, String>();
-		
-		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		try {
-			java.sql.PreparedStatement s = connection.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName =" + kingdomName + ";");
-			ResultSet res2 = s.executeQuery();
-			if(res2.next()) {
-				info.put("id", res2.getString(1));
-				info.put("Name", res2.getString(2));
-				info.put("Invite Only", res2.getString(3));
-				info.put("King", QPlayer.getDisplayName(QKPlayer.getCoreID(res2.getInt(4))));
-				info.put("Members", res2.getString(5));
-		    	 return info;
-		     } else {
-		    	 return null;
-		     }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public static String getName(int id) {
-		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		try {
-			Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id =" + id + ";");
-			if(res2.next()) {
-		    	 String kingdomName = res2.getString("KingdomName");
-		    	 return kingdomName;
-		     } else {
-		    	 return null;
-		     }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	        	
 	}
 	
 	public static int setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
@@ -390,62 +435,6 @@ public class Kingdom {
             return false;
         }
     }
-
-	public int getID() {
-		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		try {
-			Statement s = connection.createStatement();
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName ='" + kingdomName + "';");
-			if(res2.next()) {
-		    	 int id = res2.getInt("id");
-		    	 return id;
-		     } else {
-		    	 return 0;
-		     }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		}
-	}
-
-	public static boolean addUser(Player player) {
-		// TODO Probably not going to use this
-		return true;
-	}
-
-    public static boolean removeUser(Player player) {
-        // TODO Probably not going to use this
-        return true;
-    }
-
-	public static String getKing(String kingdomName) {
-		int id = Kingdom.getID(kingdomName);
-        Player player = null;
-        OfflinePlayer oplayer = null;
-        String playerName = null;
-		java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-		try {
-			Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-			ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id ='" + id + "';");
-			if(res2.next()) {
-		    	int kingID = res2.getInt("KingID");
-		    	int coreKingID = QKPlayer.getCoreID(kingID);
-                if(Bukkit.getOfflinePlayer(QPlayer.getDisplayName(coreKingID)).isOnline()) {
-                    player = Bukkit.getServer().getPlayer(QPlayer.getDisplayName(coreKingID));
-                    playerName = player.getName();
-                } else {
-                    oplayer = Bukkit.getOfflinePlayer(QPlayer.getDisplayName(coreKingID));
-                    playerName = oplayer.getName();
-                }
-		        return playerName;
-		    } else {
-		        return null;
-		    }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
 	public static boolean compareKingdom(Player p1, Player p2) {
         int k1 = QKPlayer.getKingdomID(p1);
@@ -457,48 +446,11 @@ public class Kingdom {
 		}
 	}
 
-    public static int getPower(String kingdomName) {
-        try {
-            Statement s2 = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            Statement s3 = QuartzKingdoms.MySQLking.openConnection().createStatement();
-
-            ResultSet res1 = s2.executeQuery("SELECT * FROM Kingdoms WHERE kingdomName='" + kingdomName + "';");
-
-            if(res1.next()) {
-                int power = res1.getInt("Power");
-                return power;
-            } else {
-                return 0;
-            }
-
-        } catch(SQLException e) {
-            return 0;
-        }
+    public static boolean addUser(QKPlayer player) {
+        return true;
     }
 
-    public static boolean setPower(String kingdomName, boolean addRemove, int amount) {
-        int currentPower = Kingdom.getPower(kingdomName);
-        int powerAmount;
-        if(addRemove) {
-            powerAmount = currentPower + amount;
-        } else {
-            powerAmount = currentPower - amount;
-        }
-        if(powerAmount > 50) {
-            powerAmount = 50;
-        } else if(powerAmount < -50) {
-            powerAmount = -50;
-        }
-        try {
-            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("UPDATE Kingdoms SET Power=" + powerAmount + " WHERE id=" + Kingdom.getID(kingdomName) + ";");
-            if(s.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            return false;
-        }
+    public static boolean removeUser(QKPlayer player) {
+        return true;
     }
 }
