@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.data.QPlayer;
+import uk.co.quartzcraft.core.systems.perms.Permissions;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.clan.Clan;
@@ -29,10 +30,12 @@ public class QKPlayer {
     private static int kingdomid;
     private static Kingdom kingdom;
     private static Player player;
+    private static int kingdomGroup;
 
-    public QKPlayer(Plugin plugin, UUID uuid) {
+    public QKPlayer(Plugin plugin, Player iplayer) {
         this.plugin = plugin;
-        this.uuid = uuid;
+        this.uuid = iplayer.getUniqueId();
+        this.player = iplayer;
 
         String SUUID = uuid.toString();
         try {
@@ -42,7 +45,8 @@ public class QKPlayer {
                 this.id = res.getInt("id");
                 this.power = res.getInt("KingdomID");
                 this.kingdomid = res.getInt("KingdomID");
-                this.clanid = res.getInt("KingdomID");
+                this.clanid = res.getInt("ClanID");
+                this.kingdomGroup = res.getInt("GroupID");
             } else {
                 return;
             }
@@ -58,21 +62,16 @@ public class QKPlayer {
             this.kingdom = null;
         }
         if(this.clanid >= 1) {
-            this.clan = new Clan(this.clanid);
+            //this.clan = new Clan(this.clanid);
+            this.clan = null;
         } else {
             this.clan = null;
         }
 
-        this.qplayer = new QPlayer(QuartzCore.plugin, uuid);
-        this.player = Bukkit.getPlayer(this.qplayer.getName());
+        this.qplayer = new QPlayer(iplayer);
     }
 
-    /**
-     *
-     * @param plugin
-     * @param id QuartzKingdoms id
-     */
-    public QKPlayer(Plugin plugin, int id) {
+    public QKPlayer(Plugin plugin, QPlayer qPlayer) {
         this.plugin = plugin;
         this.id = id;
 
@@ -82,7 +81,8 @@ public class QKPlayer {
             if(res.next()) {
                 this.power = res.getInt("KingdomID");
                 this.kingdomid = res.getInt("KingdomID");
-                this.clanid = res.getInt("KingdomID");
+                this.clanid = res.getInt("ClanID");
+                this.kingdomGroup = res.getInt("GroupID");
             } else {
                 return;
             }
@@ -98,19 +98,26 @@ public class QKPlayer {
             this.kingdom = null;
         }
         if(this.clanid >= 1) {
-            this.clan = new Clan(this.clanid);
+            //this.clan = new Clan(this.clanid);
+            this.clan = null;
         } else {
             this.clan = null;
         }
 
-        this.qplayer = new QPlayer(QuartzCore.plugin, uuid);
-        this.uuid = this.qplayer.getUniqueId();
-        this.player = Bukkit.getPlayer(this.qplayer.getName());
+        this.qplayer = qPlayer;
+        this.uuid = qPlayer.getUniqueId();
+        this.player = qPlayer.getPlayer();
     }
 
+    /**
+     * Creates a new QKPlayer (not object
+     * )
+     * @param player
+     * @return
+     */
     public static boolean createKingdomsPlayer(Player player) {
 
-        QPlayer lqplayer = new QPlayer(QuartzCore.plugin, player.getUniqueId());
+        QPlayer lqplayer = new QPlayer(player);
 
         try {
             java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
@@ -121,6 +128,52 @@ public class QKPlayer {
                 return false;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Creates a new QKPlayer (not object
+     *
+     * @param player
+     * @return
+     */
+    public static boolean createKingdomsPlayer(QPlayer player) {
+
+        try {
+            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
+            java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO KingdomsPlayerData (PlayerID) VALUES (" + player.getID() +");");
+            if(s.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Find out whether a QKPlayer object exists for the specified player
+     *
+     * @param player
+     * @return
+     */
+    public static boolean exists(Player player) {
+        QPlayer qplayer = new QPlayer(player);
+
+        try {
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID='" + qplayer.getID() + "';");
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch(SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -151,6 +204,23 @@ public class QKPlayer {
      */
     public Kingdom getKingdom() {
         return this.kingdom;
+    }
+
+    /**
+     * Returns the amount of power a player has.
+     * @return
+     */
+    public int getPower() {
+        return this.power;
+    }
+
+    /**
+     * Returns the players kingdoms group.
+     *
+     * @return
+     */
+    public int getKingdomGroup() {
+        return this.kingdomGroup;
     }
 
     /**
@@ -191,14 +261,6 @@ public class QKPlayer {
         }
         return false;
 	}
-
-    /**
-     * Returns the amount of power a player has.
-     * @return
-     */
-    public int getPower() {
-        return this.power;
-    }
 
     /**
      * Increases a players power by the specified amount.
@@ -284,6 +346,27 @@ public class QKPlayer {
                 e.printStackTrace();
                 return this;
             }
+        }
+    }
+
+    public QKPlayer setKingdomGroup(int rank) {
+        if(rank >= 6 | rank == 0) {
+            return this;
+        }
+
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET GroupID=? WHERE id=?;");
+            s.setInt(1, this.id);
+            s.setInt(2, rank);
+            if(s.executeUpdate() == 1) {
+                this.kingdomGroup = rank;
+                return this;
+            } else {
+                return this;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return this;
         }
     }
 

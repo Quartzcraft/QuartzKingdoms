@@ -268,6 +268,34 @@ public class Kingdom {
             return this;
         }
     }
+
+    /**
+     * Makes the specified player a noble for this kingdom.
+     *
+     * @param player
+     * @return
+     */
+    public boolean makeNoble(QKPlayer player) {
+        if(player.getKingdom() != this) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Makes the specified player a knight for this kingdom.
+     *
+     * @param player
+     * @return
+     */
+    public boolean makeKnight(QKPlayer player) {
+        if(player.getKingdom() != this) {
+            return false;
+        }
+
+        return true;
+    }
 	
 	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group, Plugin plugin) {
 		String[] ranks = null;
