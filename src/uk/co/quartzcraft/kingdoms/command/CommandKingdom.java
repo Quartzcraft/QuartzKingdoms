@@ -12,6 +12,7 @@ import uk.co.quartzcraft.core.command.framework.QCommandFramework;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.command.framework.QCommand;
 import uk.co.quartzcraft.core.command.framework.CommandArgs;
+import uk.co.quartzcraft.core.util.Util;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
@@ -50,56 +51,44 @@ public class CommandKingdom {
     @QCommand(name = "kingdom.create", aliases = { "k.create" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(CommandArgs args) {
         CommandSender sender = args.getSender();
-        Player player = (Player) sender;
+        QKPlayer player = new QKPlayer(this.plugin, args.getPlayer());
         String[] args0 = args.getArgs();
         if(args0.length >= 1) {
             if(args0.length >= 2) {
-                sender.sendMessage(QCChat.getPhrase("kingdom_name_single_word"));
+                player.getQPlayer().sendMessage(QCChat.getPhrase("kingdom_name_single_word"));
             } else {
-                if(QKPlayer.kingdom(player)) {
-                    sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
+                if(player.kingdomMember()) {
+                    player.getQPlayer().sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
                 } else {
                     String kingdomName = args0[0];
-                    boolean created = Kingdom.createKingdom(args0[0], sender);
-                    if(created) {
-                        sender.sendMessage(QCChat.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                    Kingdom kingdom = Kingdom.createKingdom(args0[0], player);
+                    if(kingdom != null) {
+                        player.getQPlayer().sendMessage(QCChat.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
                     } else {
-                        sender.sendMessage(QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+                        player.getQPlayer().sendMessage(QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
                     }
                 }
             }
         } else {
-            sender.sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            player.getQPlayer().sendMessage(QCChat.getPhrase("specify_kingdom_name"));
         }
     }
 
-    @QCommand(name = "kingdom.delete", aliases = { "k.delete" }, permission = "QCK.kingdom.delete", description = "Deletes the kingdom you specify. You must be the king.", usage = "Use /kingdom delete [kingdom name]")
-    public void kingdomDelete(CommandArgs args0) {
-        CommandSender sender = args0.getSender();
-        String[] args = args0.getArgs();
-        if(args.length >= 1) {
-            if(Kingdom.deleteKingdom(args[0], sender)) {
-                sender.sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
-            } else {
-                sender.sendMessage(QCChat.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + args[0]);
-            }
-        } else {
-            sender.sendMessage(QCChat.getPhrase("specify_kingdom_name"));
-        }
-    }
-    
     @QCommand(name = "kingdom.disband", aliases = { "k.disband" }, permission = "QCK.kingdom.disband", description = "Disbands the kingdom you specify. You must be the king.", usage = "Use /kingdom disband [kingdom name]")
     public void kingdomDisband(CommandArgs args0) {
+        //TODO confirmation chest UI
         CommandSender sender = args0.getSender();
+        QKPlayer player = new QKPlayer(this.plugin, args0.getPlayer());
+        Kingdom kingdom = new Kingdom(player);
         String[] args = args0.getArgs();
-        if(args.length >= 1) {
-            if(Kingdom.deleteKingdom(args[0], sender)) {
-                sender.sendMessage(QCChat.getPhrase("disbanded_kingdom_yes") + ChatColor.WHITE + args[0]);
+        if(kingdom.getKing().equals(player.getKingdom()) && player.isKing(kingdom)) {
+            if(kingdom.delete(player)) {
+                player.getQPlayer().sendMessage(QCChat.getPhrase("disbanded_kingdom_yes") + ChatColor.WHITE + player.getKingdom().getName());
             } else {
-                sender.sendMessage(QCChat.getPhrase("disbanded_kingdom_no") + ChatColor.WHITE + args[0]);
+                player.getQPlayer().sendMessage(QCChat.getPhrase("disbanded_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
             }
         } else {
-            sender.sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            player.getQPlayer().sendMessage(QCChat.getPhrase("you_must_be_king_to_delete_kingdom"));
         }
     }
 

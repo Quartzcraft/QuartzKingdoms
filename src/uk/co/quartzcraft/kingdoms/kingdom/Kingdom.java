@@ -30,6 +30,14 @@ public class Kingdom {
 
     }
 
+    public Kingdom(QKPlayer player) {
+        if(player.kingdomMember()) {
+
+        } else {
+            return;
+        }
+    }
+
     /**
      * Creates a kingdom using the specified name and setting the speificed player as king.
      *
