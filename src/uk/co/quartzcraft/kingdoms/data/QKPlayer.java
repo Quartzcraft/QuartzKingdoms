@@ -5,13 +5,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import org.bukkit.plugin.Plugin;
-import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.data.QPlayer;
-import uk.co.quartzcraft.core.systems.perms.Permissions;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.clan.Clan;
@@ -52,7 +50,7 @@ public class QKPlayer {
             }
 
         } catch(SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not retrieve players data", e);
             return;
         }
 
@@ -88,7 +86,7 @@ public class QKPlayer {
             }
 
         } catch(SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not retrieve players data", e);
             return;
         }
 
@@ -128,7 +126,7 @@ public class QKPlayer {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not create kingdoms player", e);
             return false;
         }
     }
@@ -150,7 +148,7 @@ public class QKPlayer {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not create kingdoms player", e);
             return false;
         }
     }
@@ -174,7 +172,7 @@ public class QKPlayer {
             }
 
         } catch(SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not retrieve player data", e);
             return false;
         }
     }
@@ -255,7 +253,7 @@ public class QKPlayer {
                     return false;
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                KUtil.printException("Could not retrieve player data", e);
                 return false;
             }
         }
@@ -282,6 +280,7 @@ public class QKPlayer {
                 return this;
             }
         } catch (SQLException e) {
+            KUtil.printException("Could not add players power", e);
             return this;
         }
     }
@@ -306,6 +305,7 @@ public class QKPlayer {
                 return this;
             }
         } catch (SQLException e) {
+            KUtil.printException("Could not take players power", e);
             return this;
         }
     }
@@ -329,7 +329,7 @@ public class QKPlayer {
                     return this;
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                KUtil.printException("Could not update players kingdom", e);
                 return this;
             }
         } else {
@@ -343,7 +343,7 @@ public class QKPlayer {
                     return this;
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                KUtil.printException("Could not update players kingdom", e);
                 return this;
             }
         }
@@ -365,7 +365,7 @@ public class QKPlayer {
                 return this;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not update players group", e);
             return this;
         }
     }
