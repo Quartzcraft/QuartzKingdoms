@@ -304,6 +304,15 @@ public class Kingdom {
 
         return true;
     }
+
+    /**
+     * Invites the specified player to the kingdom.
+     *
+     * @param player
+     */
+    public void invitePlayer(QKPlayer player) {
+        
+    }
 	
 	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group, Plugin plugin) {
 		String[] ranks = null;

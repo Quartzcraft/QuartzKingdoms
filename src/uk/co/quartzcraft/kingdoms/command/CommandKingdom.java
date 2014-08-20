@@ -366,5 +366,11 @@ public class CommandKingdom {
         qkPlayer.getKingdom().invite(new QKPlayer(Bukkit.getPlayer(args[0])));
     }
 
+    @QCommand(name = "kingdom.accept", aliases = { "k.accept, accept" }, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept")
+    public void kingdomAccept(CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        Player player = (Player) sender;
+        String[] args = args0.getArgs();
+
     }
 }
