@@ -107,7 +107,7 @@ public class Kingdom {
 		}
 		
 		try {
-			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Kingdoms WHERE id='?' AND KingID='?';");
+			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Kingdoms WHERE id=? AND KingID=?;");
             s.setInt(1, this.id);
             s.setInt(2, player.getID());
             player.setKingdom(null);
