@@ -78,7 +78,12 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("now_entering_the_land_of", "&aNow entering the land of ");
         QCChat.addPhrase("now_leaving_the_land_of", "&aNow entering the land of ");
 
-        QCChat.addPhrase("got_promoted_kingdom_yes", "&aYou were moved group by your king!");
+        QCChat.addPhrase("successfully_knighted_player", "&aThe player has successfully been knighted!");
+        QCChat.addPhrase("successfully_noble_player", "&aThe player has successfully been made a noble!");
+        QCChat.addPhrase("successfully_king_player", "&aThe player has successfully been made the king!");
+        QCChat.addPhrase("you_are_now_a_knight", "&aYou have been knighted by your kingdom!");
+        QCChat.addPhrase("you_are_now_a_noble", "&aYou have been made a noble by your king!");
+        QCChat.addPhrase("you_are_now_a_king", "&aYou have been made the king of your kingdom!");
 
         QCChat.addPhrase("you_must_be_member_kingdom", "&cYou must be a member of a kingdom!");
         QCChat.addPhrase("you_must_be_member_kingdom_leave", "&cYou must be a member of a kingdom to leave one!");
