@@ -27,11 +27,11 @@ public class Permissions {
         }
         PermissionAttachment attachmentPrimary = player.addAttachment(QuartzCore.plugin);
 
-        attachmentPrimary.setPermission("empire.everyone", true);
+        attachmentPrimary.setPermission("QCK.everyone", true);
 
         //
         if (kingdomGroup > 0) {
-            attachmentPrimary.setPermission("empire.normal", true);
+            attachmentPrimary.setPermission("QCK.normal", true);
         }
 
         //citizens
