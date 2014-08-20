@@ -363,6 +363,8 @@ public class CommandKingdom {
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
-        sender.sendMessage(QCChat.getPhrase("feature_unavalible"));
+        qkPlayer.getKingdom().invite(new QKPlayer(Bukkit.getPlayer(args[0])));
+    }
+
     }
 }
