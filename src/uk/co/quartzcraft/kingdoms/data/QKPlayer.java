@@ -30,8 +30,8 @@ public class QKPlayer {
     private static Player player;
     private static int kingdomGroup;
 
-    public QKPlayer(Plugin plugin, Player iplayer) {
-        this.plugin = plugin;
+    public QKPlayer(Player iplayer) {
+        this.plugin = QuartzKingdoms.plugin;
         this.uuid = iplayer.getUniqueId();
         this.player = iplayer;
 
@@ -69,8 +69,8 @@ public class QKPlayer {
         this.qplayer = new QPlayer(iplayer);
     }
 
-    public QKPlayer(Plugin plugin, QPlayer qPlayer) {
-        this.plugin = plugin;
+    public QKPlayer(QPlayer qPlayer) {
+        this.plugin = QuartzKingdoms.plugin;
         this.id = id;
 
         try {
@@ -350,6 +350,12 @@ public class QKPlayer {
     }
 
     public QKPlayer setKingdomGroup(int rank) {
+        //1 - no kingdom
+        //2 - citizen
+        //3 - upper class
+        //4 - knight
+        //5 - noble
+        //6 - king
         if(rank >= 6 | rank == 0) {
             return this;
         }

@@ -51,7 +51,7 @@ public class CommandKingdom {
     @QCommand(name = "kingdom.create", aliases = { "k.create" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(CommandArgs args) {
         CommandSender sender = args.getSender();
-        QKPlayer player = new QKPlayer(this.plugin, args.getPlayer());
+        QKPlayer player = new QKPlayer(args.getPlayer());
         String[] args0 = args.getArgs();
         if(args0.length >= 1) {
             if(args0.length >= 2) {
@@ -78,7 +78,7 @@ public class CommandKingdom {
     public void kingdomDisband(CommandArgs args0) {
         //TODO confirmation chest UI
         CommandSender sender = args0.getSender();
-        QKPlayer player = new QKPlayer(this.plugin, args0.getPlayer());
+        QKPlayer player = new QKPlayer(args0.getPlayer());
         Kingdom kingdom = new Kingdom(player);
         String[] args = args0.getArgs();
         if(kingdom.getKing().equals(player.getKingdom()) && player.isKing(kingdom)) {
@@ -328,6 +328,7 @@ public class CommandKingdom {
     public void kingdomInvite(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
+        QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
         sender.sendMessage(QCChat.getPhrase("feature_unavalible"));
     }
