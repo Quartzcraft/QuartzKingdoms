@@ -92,28 +92,61 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.promote", aliases = { "k.promote" }, permission = "QCK.kingdom.promote", description = "Promotes the specified player to the specified rank in the kingdom", usage = "Use /kingdom promote [playername]")
-    public void kingdomPromote(CommandArgs args0) {
+    @QCommand(name = "kingdom.knight", aliases = { "k.knight", "knight" }, permission = "QCK.kingdom.promote.knight", description = "Promotes the specified player to a knight of the kingdom", usage = "Use /kingdom knight [playername]")
+    public void kingdomKnight(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
-        Player psender = (Player) sender;
-        Player target = null;
+        QKPlayer psender = new QKPlayer((Player) sender);
+        QKPlayer target = new QKPlayer(Bukkit.getPlayer(args[0]));
 
         if(args.length >= 2) {
-            if(Bukkit.getOfflinePlayer(args[0]).isOnline()) {
-                target = Bukkit.getServer().getPlayer(args[0]);
+            Kingdom kingdom = psender.getKingdom();
+            if(kingdom.equals(target.getKingdom())) {
+                target.setKingdomGroup(4);
+                sender.sendMessage(QCChat.getPhrase("successfully_knighted_player"));
+                target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_knight"));
             } else {
-                psender.sendMessage(QCChat.getPhrase("specify_online_username"));
-                return;
+                sender.sendMessage(QCChat.getPhrase("no_permission"));
             }
-            String kingdomName = QKPlayer.getKingdom(target);
-            if(Kingdom.compareKingdom(target, psender)) {
-                if(Kingdom.promotePlayer(kingdomName, sender, args[1], args[0], this.core)) {
-                    sender.sendMessage(QCChat.getPhrase("promoted_player_yes") + ChatColor.WHITE + kingdomName);
-                    target.sendMessage(QCChat.getPhrase("got_promoted_kingdom_yes"));
-                } else {
-                    sender.sendMessage(QCChat.getPhrase("promoted_player_no") + ChatColor.WHITE + kingdomName);
-                }
+        } else {
+            sender.sendMessage(QCChat.getPhrase("specify_username"));
+        }
+    }
+
+    @QCommand(name = "kingdom.noble", aliases = { "k.noble", "noble" }, permission = "QCK.kingdom.promote.noble", description = "Promotes the specified player to a noble of the kingdom", usage = "Use /kingdom noble [playername")
+    public void kingdomNoble(CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();
+        QKPlayer psender = new QKPlayer((Player) sender);
+        QKPlayer target = new QKPlayer(Bukkit.getPlayer(args[0]));
+
+        if(args.length >= 2) {
+            Kingdom kingdom = psender.getKingdom();
+            if(kingdom.equals(target.getKingdom())) {
+                target.setKingdomGroup(5);
+                sender.sendMessage(QCChat.getPhrase("successfully_noble_player"));
+                target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_noble"));
+            } else {
+                sender.sendMessage(QCChat.getPhrase("no_permission"));
+            }
+        } else {
+            sender.sendMessage(QCChat.getPhrase("specify_username"));
+        }
+    }
+
+    @QCommand(name = "kingdom.king", aliases = { "k.king", "king" }, permission = "QCK.kingdom.promote.king", description = "Promotes the specified player to the king of the kingdom", usage = "Use /kingdom king [playername")
+    public void kingdomKing(CommandArgs args0) {
+        CommandSender sender = args0.getSender();
+        String[] args = args0.getArgs();
+        QKPlayer psender = new QKPlayer((Player) sender);
+        QKPlayer target = new QKPlayer(Bukkit.getPlayer(args[0]));
+
+        if(args.length >= 2) {
+            Kingdom kingdom = psender.getKingdom();
+            if(kingdom.equals(target.getKingdom())) {
+                target.setKingdomGroup(6);
+                sender.sendMessage(QCChat.getPhrase("successfully_king_player"));
+                target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_king"));
             } else {
                 sender.sendMessage(QCChat.getPhrase("no_permission"));
             }
