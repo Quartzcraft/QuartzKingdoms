@@ -74,7 +74,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.disband", aliases = { "k.disband" }, permission = "QCK.kingdom.disband", description = "Disbands the kingdom you specify. You must be the king.", usage = "Use /kingdom disband [kingdom name]")
+    @QCommand(name = "kingdom.disband", aliases = { "k.disband", "disband" }, permission = "QCK.kingdom.disband", description = "Disbands the kingdom you specify. You must be the king.", usage = "Use /kingdom disband [kingdom name]")
     public void kingdomDisband(CommandArgs args0) {
         //TODO confirmation chest UI
         CommandSender sender = args0.getSender();
