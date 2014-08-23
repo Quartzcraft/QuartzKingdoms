@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import uk.co.quartzcraft.core.entity.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
-import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
+import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

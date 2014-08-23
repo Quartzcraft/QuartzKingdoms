@@ -11,8 +11,8 @@ import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.kingdom.Kingdom;
-import uk.co.quartzcraft.kingdoms.clan.Clan;
+import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
+import uk.co.quartzcraft.kingdoms.features.clan.Clan;
 
 public class QKPlayer {
 

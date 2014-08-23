@@ -1,4 +1,4 @@
-package uk.co.quartzcraft.kingdoms.clan;
+package uk.co.quartzcraft.kingdoms.features.clan;
 
 public class Clan {
 

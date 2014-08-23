@@ -1,18 +1,10 @@
-package uk.co.quartzcraft.kingdoms.kingdom;
+package uk.co.quartzcraft.kingdoms.features.kingdom;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.Bukkit;
 
-import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
@@ -313,39 +305,6 @@ public class Kingdom {
     public void invitePlayer(QKPlayer player) {
         
     }
-	
-	public static boolean promotePlayer(String kingdomName, CommandSender sender, String playerToPromote, String group, Plugin plugin) {
-		String[] ranks = null;
-		ranks[0] = "Citizen";
-        ranks[1] = "UpperClass";
-		ranks[2] = "Knight";
-		ranks[3] = "Noble";
-        //ranks[4] = "King";
-		
-		int i = 1;
-		int a = 1;
-		int current = 0;
-		if(i == 1) {
-            for(String rank : ranks) {
-                QPlayer.addSecondaryGroup(sender, playerToPromote, rank, false, plugin);
-                current++;
-            }
-
-			for(String rank : ranks) {
-				if(group.equalsIgnoreCase(rank)) {
-					if(QPlayer.addSecondaryGroup(sender, playerToPromote, rank, true, plugin)) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-				current++;
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 	public static int setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
 		//TODO
