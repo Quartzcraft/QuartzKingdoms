@@ -18,6 +18,7 @@ public class Kingdom {
     private static String name;
     private static QKPlayer king;
     private static int power;
+    private static int level;
     private static boolean open;
 
     /**
@@ -37,6 +38,7 @@ public class Kingdom {
                 this.open = res.getBoolean("invite_only");
                 this.king = new QKPlayer(res.getInt("KingID"));
                 this.name = res.getString("KingdomName");
+                this.level = res.getInt("Level");
             } else {
                 return;
             }
@@ -63,6 +65,7 @@ public class Kingdom {
                 this.power = res.getInt("Power");
                 this.open = res.getBoolean("invite_only");
                 this.king = new QKPlayer(res.getInt("KingID"));
+                this.level = res.getInt("Level");
             } else {
                 return;
             }
@@ -192,6 +195,15 @@ public class Kingdom {
      */
     public boolean isOpen() {
         return this.open;
+    }
+
+    /**
+     * Returns the kingdoms level.
+     *
+     * @return
+     */
+    public int getLevel() {
+        return this.level;
     }
 
     /**
