@@ -2,11 +2,13 @@ package uk.co.quartzcraft.kingdoms.features.kingdom;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.bukkit.plugin.Plugin;
 
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 public class Kingdom {
 	
