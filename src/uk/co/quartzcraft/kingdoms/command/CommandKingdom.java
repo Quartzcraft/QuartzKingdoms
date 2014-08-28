@@ -235,26 +235,23 @@ public class CommandKingdom {
     public void kingdomNeutral(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
-        Player player = (Player) sender;
-        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[0]));
-        String kingdom = QKPlayer.getKingdom(player);
+        Player sendplayer = (Player) sender;
+        QKPlayer player = new QKPlayer(sendplayer);
+        Kingdom kingdom1 = player.getKingdom();
+        Kingdom kingdom2 = new Kingdom(args[0]);
+        QKPlayer player1 = kingdom2.getKing();
 
-        if(Kingdom.exists(QKPlayer.getKingdom(player1))) {
-            if(QKPlayer.isKing(kingdom, player)) {
-                if(Kingdom.setRelationshipStatus(kingdom, args[0], 1) == 1) {
-                    Bukkit.broadcastMessage(QCChat.getPhrase(kingdom + "kingdom_is_pending_neutral_relationship_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
-                    player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " is offering neutral relations with your kingdom. Type " + ChatColor.WHITE + "/kingdom neutral " + kingdom + ChatColor.GREEN + " to also make neutral relations.");
-                } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 1) == 2) {
-                    Bukkit.broadcastMessage(QCChat.getPhrase(kingdom + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
-                } else {
-                    sender.sendMessage(QCChat.getPhrase("failed_to_neutral_with_kingdom"));
-                }
-            } else {
-                sender.sendMessage(QCChat.getPhrase("no_permission"));
-            }
-        } else {
-            sender.sendMessage(QCChat.getPhrase("specifed_kingdom_does_not_exist"));
+        if(!player.isKing(kingdom1)) {
+            sender.sendMessage(QCChat.getPhrase("no_permission"));
+            return;
         }
+        if(!Kingdom.exists(args[0])) {
+            sender.sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            return;
+        }
+
+        kingdom1.setAtNeutral(kingdom2);
+        Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
     }
 
     @QCommand(name = "kingdom.ally", aliases = { "k.ally" }, permission = "QCK.kingdom.ally", description = "Allies with a kingdom, members of allied kingdoms can not hurt each other.", usage = "Use /kingdom ally [ally kingdom name]")
