@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import org.bukkit.plugin.Plugin;
@@ -30,6 +31,45 @@ public class QKPlayer {
     private static Player player;
     private static int kingdomGroup;
 
+    public QKPlayer(int id) {
+        this.plugin = QuartzKingdoms.plugin;
+        this.id = id;
+
+        try {
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id=" + id + ";");
+            if(res.next()) {
+                this.qplayer = new QPlayer(res.getInt("PlayerID"));
+                this.power = res.getInt("Power");
+                this.kingdomid = res.getInt("KingdomID");
+                this.clanid = res.getInt("ClanID");
+                this.kingdomGroup = res.getInt("GroupID");
+            } else {
+                return;
+            }
+
+        } catch(SQLException e) {
+            KUtil.printException("Could not retrieve players data", e);
+            return;
+        }
+
+        if(this.kingdomid >= 1) {
+            this.kingdom = new Kingdom(this.kingdomid);
+        } else {
+            this.kingdom = null;
+        }
+        if(this.clanid >= 1) {
+            //this.clan = new Clan(this.clanid);
+            this.clan = null;
+        } else {
+            this.clan = null;
+        }
+
+        this.player = this.qplayer.getPlayer();
+        this.uuid = this.qplayer.getUniqueId();
+
+    }
+
     public QKPlayer(Player iplayer) {
         this.plugin = QuartzKingdoms.plugin;
         this.uuid = iplayer.getUniqueId();
@@ -41,7 +81,7 @@ public class QKPlayer {
             ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE UUID='" + SUUID + "';");
             if(res.next()) {
                 this.id = res.getInt("id");
-                this.power = res.getInt("KingdomID");
+                this.power = res.getInt("Power");
                 this.kingdomid = res.getInt("KingdomID");
                 this.clanid = res.getInt("ClanID");
                 this.kingdomGroup = res.getInt("GroupID");
@@ -71,13 +111,13 @@ public class QKPlayer {
 
     public QKPlayer(QPlayer qPlayer) {
         this.plugin = QuartzKingdoms.plugin;
-        this.id = id;
 
         try {
             Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id='" + id + "';");
+            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id=" + qplayer.getID() + ";");
             if(res.next()) {
-                this.power = res.getInt("KingdomID");
+                this.id = res.getInt("id");
+                this.power = res.getInt("Power");
                 this.kingdomid = res.getInt("KingdomID");
                 this.clanid = res.getInt("ClanID");
                 this.kingdomGroup = res.getInt("GroupID");
