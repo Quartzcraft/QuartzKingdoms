@@ -346,20 +346,31 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.invite", aliases = { "k.invite" }, permission = "QCK.kingdom.invite", description = "Invites a player to your kingdom.", usage = "Use /kingdom invite [playername]")
+    @QCommand(name = "kingdom.invite", aliases = { "k.invite", "invite" }, permission = "QCK.kingdom.invite", description = "Invites a player to your kingdom.", usage = "Use /kingdom invite [playername]")
     public void kingdomInvite(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
-        qkPlayer.getKingdom().invite(new QKPlayer(Bukkit.getPlayer(args[0])));
+        if(qkPlayer.kingdomMember()) {
+            qkPlayer.getKingdom().invitePlayer(new QKPlayer(Bukkit.getPlayer(args[0])));
+            sender.sendMessage(QCChat.getPhrase("invited_player_to_kingdom"));
+        } else {
+            sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
+        }
     }
 
-    @QCommand(name = "kingdom.accept", aliases = { "k.accept, accept" }, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept")
+    @QCommand(name = "kingdom.accept", aliases = { "k.accept", "accept" }, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept")
     public void kingdomAccept(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
+        QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
-
+        if(qkPlayer.kingdomMember()) {
+            sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
+        } else {
+            qkPlayer.setKingdom(null); //TODO Fix this
+            sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
+        }
     }
 }
