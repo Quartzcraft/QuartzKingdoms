@@ -17,7 +17,7 @@ import uk.co.quartzcraft.kingdoms.features.clan.Clan;
 
 public class QKPlayer {
 
-    private static Plugin plugin;
+    private static Plugin plugin = QuartzKingdoms.plugin;
 
     private static QPlayer qplayer;
 
@@ -32,7 +32,6 @@ public class QKPlayer {
     private static int kingdomGroup;
 
     public QKPlayer(int id) {
-        this.plugin = QuartzKingdoms.plugin;
         this.id = id;
 
         try {
@@ -71,7 +70,6 @@ public class QKPlayer {
     }
 
     public QKPlayer(Player iplayer) {
-        this.plugin = QuartzKingdoms.plugin;
         this.uuid = iplayer.getUniqueId();
         this.player = iplayer;
 
@@ -110,7 +108,6 @@ public class QKPlayer {
     }
 
     public QKPlayer(QPlayer qPlayer) {
-        this.plugin = QuartzKingdoms.plugin;
 
         try {
             Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
