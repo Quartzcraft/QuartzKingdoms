@@ -421,6 +421,31 @@ public class Kingdom {
                 }  catch (SQLException e) {
                     e.printStackTrace();
                     return 0;
+
+    /**
+     * Sets the relationships between this kingdom and the specified kingdom to neutral.
+     *
+     * @param relatingKingdom
+     */
+    public void setAtNeutral(Kingdom relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            s.setInt(1, this.id);
+            s.setInt(2, relatingKingdom.getID());
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("DELETE FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                s.setInt(1, this.id);
+                s.setInt(2, relatingKingdom.getID());
+                s1.executeUpdate();
+            } else {
+                return;
+            }
+        }  catch (SQLException e) {
+            KUtil.printException("Could not retrieve relationships", e);
+        }
+    }
+
                 }
 			case 3:
 				//War
