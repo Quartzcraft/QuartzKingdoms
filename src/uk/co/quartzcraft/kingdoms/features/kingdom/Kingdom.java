@@ -478,9 +478,11 @@ public class Kingdom {
         }
     }
 
-    public static boolean isEnemy(String kingdom, String relatingKingdom) {
+    public boolean isEnemy(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + " AND status=3;");
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=3;");
+            s.setInt(1, this.id);
+            s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
                 return true;
@@ -492,9 +494,11 @@ public class Kingdom {
         }
     }
 
-    public static boolean isAlly(String kingdom, String relatingKingdom) {
+    public boolean isAlly(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + " AND status=2;");
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=2;");
+            s.setInt(1, this.id);
+            s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
                 return true;
