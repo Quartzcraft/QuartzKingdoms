@@ -505,6 +505,30 @@ public class Kingdom {
                 }  catch (SQLException e) {
                     e.printStackTrace();
                     return 0;
+    /**
+     * Sets the relationships between this kingdom and the specified kingdom to ally.
+     *
+     * @param relatingKingdom
+     */
+    public void setAtAlly(Kingdom relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            s.setInt(1, this.id);
+            s.setInt(2, relatingKingdom.getID());
+            ResultSet res = s.executeQuery();
+            if(isEnemy(relatingKingdom)) {
+                return;
+            } else if(res.next()) {
+                if(res.getString("status") == "33") {
+                    java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    s1.setInt(1, this.id);
+                    s1.setInt(2, relatingKingdom.getID());
+                    s1.executeUpdate();
+                } else {
+                    java.sql.PreparedStatement s2 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=22 WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    s2.setInt(1, this.id);
+                    s2.setInt(2, relatingKingdom.getID());
+                    s2.executeUpdate();
                 }
 			default:
 				//Do nothing
