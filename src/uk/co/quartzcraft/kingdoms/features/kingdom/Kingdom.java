@@ -74,7 +74,7 @@ public class Kingdom {
     }
 
     /**
-     * Creates a kingdom using the specified name and setting the speificed player as king.
+     * Creates a kingdom using the specified name and setting the specified player as king.
      *
      * @param kingdomName
      * @param player
