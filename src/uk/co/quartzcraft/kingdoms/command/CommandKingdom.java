@@ -319,33 +319,28 @@ public class CommandKingdom {
     @QCommand(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom 4 power.", usage = "Use /kingdom open")
     public void kingdomOpen(CommandArgs args0) {
         CommandSender sender = args0.getSender();
-        Player player = (Player) sender;
         String[] args = args0.getArgs();
-        if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
+        QKPlayer player = new QKPlayer(Bukkit.getPlayer(sender.getName()));
+        Kingdom kingdom = player.getKingdom();
+        if(kingdom.isOpen()) {
             sender.sendMessage(QCChat.getPhrase("kingdom_already_open"));
         } else {
-            if(Kingdom.setOpen(QKPlayer.getKingdom(player), true)) {
-                sender.sendMessage(QCChat.getPhrase("kingdom_now_open"));
-                Kingdom.setPower(QKPlayer.getKingdom(player), true, 4);
-            } else {
-                sender.sendMessage(QCChat.getPhrase("failed_open_kingdom"));
-            }
+            kingdom.setOpen(true);
+            sender.sendMessage(QCChat.getPhrase("kingdom_now_open"));
+            kingdom.addPower(4);
         }
     }
 
     @QCommand(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this removes 3 power.", usage = "Use /kingdom close")
     public void kingdomClose(CommandArgs args0) {
         CommandSender sender = args0.getSender();
-        Player player = (Player) sender;
         String[] args = args0.getArgs();
-        if(Kingdom.isOpen(QKPlayer.getKingdom(player))) {
-            if(Kingdom.setOpen(QKPlayer.getKingdom(player), false)) {
-                sender.sendMessage(QCChat.getPhrase("kingdom_now_closed"));
-                Kingdom.setPower(QKPlayer.getKingdom(player), false, 3);
-            } else {
-                sender.sendMessage(QCChat.getPhrase("failed_close_kingdom"));
-            }
-
+        QKPlayer player = new QKPlayer(Bukkit.getPlayer(sender.getName()));
+        Kingdom kingdom = player.getKingdom();
+        if(kingdom.isOpen()) {
+            kingdom.setOpen(true);
+            sender.sendMessage(QCChat.getPhrase("kingdom_now_closed"));
+            kingdom.takePower(3);
         } else {
             sender.sendMessage(QCChat.getPhrase("kingdom_already_closed"));
         }
