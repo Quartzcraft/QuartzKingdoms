@@ -73,6 +73,20 @@ public class CommandKingdom {
         }
     }
 
+    @QCommand(name = "kingdom.level", aliases = { "k.level" }, permission = "QCK.kingdom.info.level", description = "Find out the level the kingdom is on", usage = "Use /kingdom level")
+    public void kingdomLevel(CommandArgs args) {
+        Player player = (Player) args.getSender();
+        QKPlayer qkPlayer = new QKPlayer(player);
+        args.getSender().sendMessage(QCChat.getPhrase("your_kingdoms_level_is_X") + qkPlayer.getKingdom().getLevel());
+    }
+
+    @QCommand(name = "kingdom.power", aliases = { "k.power" }, permission = "QCK.kingdom.info.power", description = "Find out the power the kingdom has", usage = "Use /kingdom power")
+    public void kingdomPower(CommandArgs args) {
+        Player player = (Player) args.getSender();
+        QKPlayer qkPlayer = new QKPlayer(player);
+        args.getSender().sendMessage(QCChat.getPhrase("your_kingdoms_power_is_X") + qkPlayer.getKingdom().getPower());
+    }
+
     @QCommand(name = "kingdom.disband", aliases = { "k.disband", "disband" }, permission = "QCK.kingdom.disband", description = "Disbands the kingdom you specify. You must be the king.", usage = "Use /kingdom disband [kingdom name]")
     public void kingdomDisband(CommandArgs args0) {
         //TODO confirmation chest UI
