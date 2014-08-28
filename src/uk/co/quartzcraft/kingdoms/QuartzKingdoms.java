@@ -67,6 +67,8 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("kingdomname_already_used", "&cAnother kingdom is using that name! &aPlease pick another name");
         QCChat.addPhrase("kingdom_does_not_exist", "&cThe specified kingdom does not exist!");
         QCChat.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
+        QCChat.addPhrase("your_kingdoms_level_is_X", "&ayour kingdoms level is &b");
+        QCChat.addPhrase("your_kingdoms_power_is_X", "&aYour kingdoms power is &b");
 
         QCChat.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
         QCChat.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for Kingdom: ");
