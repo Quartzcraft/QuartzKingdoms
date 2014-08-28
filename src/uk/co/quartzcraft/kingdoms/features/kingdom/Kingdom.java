@@ -464,16 +464,10 @@ public class Kingdom {
 		
 	}
 
-    public static boolean isNeutral(String kingdom, String relatingKingdom) {
-        try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + " AND status=1;");
-            ResultSet res = s.executeQuery();
-            if(res.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
+    public boolean isNeutral(Kingdom relatingKingdom) {
+        if(!isEnemy(relatingKingdom) && !isAlly(relatingKingdom)) {
+            return true;
+        } else {
             return false;
         }
     }
