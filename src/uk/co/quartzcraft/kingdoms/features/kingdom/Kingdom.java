@@ -348,79 +348,6 @@ public class Kingdom {
     public void invitePlayer(QKPlayer player) {
         
     }
-	
-	public static int setRelationshipStatus(String kingdom, String relatingKingdom, int status) {
-		//TODO
-		switch(status) {
-			case 1:
-                //Neutral
-                try {
-                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                    ResultSet res = s.executeQuery();
-                    if(isNeutral(kingdom, relatingKingdom)) {
-                        return 0;
-                    } else if(res.next() && res.getInt("kingdom_id") == getID(kingdom)) {
-                        if(res.getString("status") == "11") {
-                            java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=1 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                            if(s1.executeUpdate() == 1) {
-                                return 2;
-                            } else {
-                                return 0;
-                            }
-                        } else {
-                            java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=11 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                            if(s1.executeUpdate() == 1) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        }
-                    } else {
-                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (" + getID(kingdom) + ", " + getID(relatingKingdom) + ", 11);");
-                        if(s1.executeUpdate() == 1) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-                }  catch (SQLException e) {
-                    e.printStackTrace();
-                    return 0;
-                }
-			case 2:
-				//Ally
-                try {
-                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                    ResultSet res = s.executeQuery();
-                    if(isAlly(kingdom, relatingKingdom)) {
-                        return 0;
-                    } else if(res.next()) {
-                        if(res.getString("status") == "11") {
-                            java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                            if(s1.executeUpdate() == 1) {
-                                return 2;
-                            } else {
-                                return 0;
-                            }
-                        } else {
-                            java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=22 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                            if(s1.executeUpdate() == 1) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        }
-                    } else {
-                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (" + getID(kingdom) + ", " + getID(relatingKingdom) + ", 22);");
-                        if(s1.executeUpdate() == 1) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-                }  catch (SQLException e) {
-                    e.printStackTrace();
-                    return 0;
 
     /**
      * Sets the relationships between this kingdom and the specified kingdom to neutral.
@@ -471,40 +398,17 @@ public class Kingdom {
                     s2.setInt(2, relatingKingdom.getID());
                     s2.executeUpdate();
                 }
-			case 3:
-				//War
-                try {
-                    java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                    ResultSet res = s.executeQuery();
-                    if(isEnemy(kingdom, relatingKingdom)) {
-                        return 0;
-                    } else if(res.next()) {
-                        if(res.getString("status") == "11") {
-                            java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=3 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                            if(s1.executeUpdate() == 1) {
-                                return 2;
-                            } else {
-                                return 0;
-                            }
-                        } else {
-                            java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=33 WHERE kingdom_id=" + getID(kingdom) + " AND sec_kingdom_id=" + getID(relatingKingdom) + ";");
-                            if(s1.executeUpdate() == 1) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        }
-                    } else {
-                        java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (" + getID(kingdom) + ", " + getID(relatingKingdom) + ", 33);");
-                        if(s1.executeUpdate() == 1) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-                }  catch (SQLException e) {
-                    e.printStackTrace();
-                    return 0;
+            } else {
+                java.sql.PreparedStatement s3 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 33);");
+                s3.setInt(1, this.id);
+                s3.setInt(2, relatingKingdom.getID());
+                s3.executeUpdate();
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Sets the relationships between this kingdom and the specified kingdom to ally.
      *
@@ -530,12 +434,16 @@ public class Kingdom {
                     s2.setInt(2, relatingKingdom.getID());
                     s2.executeUpdate();
                 }
-			default:
-				//Do nothing
-				return 0;
-		}
-		
-	}
+            } else {
+                java.sql.PreparedStatement s3 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 22);");
+                s3.setInt(1, this.id);
+                s3.setInt(2, relatingKingdom.getID());
+                s3.executeUpdate();
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public boolean isNeutral(Kingdom relatingKingdom) {
         if(!isEnemy(relatingKingdom) && !isAlly(relatingKingdom)) {
