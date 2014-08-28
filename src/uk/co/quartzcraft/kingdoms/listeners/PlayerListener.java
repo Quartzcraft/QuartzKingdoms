@@ -42,7 +42,7 @@ public class PlayerListener implements Listener {
             QKPlayer.createKingdomsPlayer(player);
         }
 
-        QKPlayer qkPlayer = new QKPlayer(QuartzKingdoms.plugin, player);
+        QKPlayer qkPlayer = new QKPlayer(player);
 
         //TODO add kingdom rank
         player.setDisplayName("[" + qkPlayer.getKingdom().getName() + "]" + player.getDisplayName());
