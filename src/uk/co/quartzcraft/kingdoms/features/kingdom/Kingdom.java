@@ -378,34 +378,38 @@ public class Kingdom {
      *
      * @param relatingKingdom
      */
-    public void setAtWar(Kingdom relatingKingdom) {
+    public int setAtWar(Kingdom relatingKingdom) {
         try {
             java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
             if(isEnemy(relatingKingdom)) {
-                return;
+                return 3;
             } else if(res.next()) {
-                if(res.getString("status") == "33") {
+                if(res.getString("status") == "22") {
                     java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=3 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s1.setInt(1, this.id);
                     s1.setInt(2, relatingKingdom.getID());
                     s1.executeUpdate();
+                    return 3;
                 } else {
                     java.sql.PreparedStatement s2 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=33 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s2.setInt(1, this.id);
                     s2.setInt(2, relatingKingdom.getID());
                     s2.executeUpdate();
+                    return 33;
                 }
             } else {
                 java.sql.PreparedStatement s3 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 33);");
                 s3.setInt(1, this.id);
                 s3.setInt(2, relatingKingdom.getID());
                 s3.executeUpdate();
+                return 33;
             }
         }  catch (SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not modify relationships", e);
+            return 0;
         }
     }
 
@@ -414,34 +418,38 @@ public class Kingdom {
      *
      * @param relatingKingdom
      */
-    public void setAtAlly(Kingdom relatingKingdom) {
+    public int setAtAlly(Kingdom relatingKingdom) {
         try {
             java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
-            if(isEnemy(relatingKingdom)) {
-                return;
+            if(isAlly(relatingKingdom)) {
+                return 2;
             } else if(res.next()) {
-                if(res.getString("status") == "33") {
+                if(res.getString("status") == "22") {
                     java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s1.setInt(1, this.id);
                     s1.setInt(2, relatingKingdom.getID());
                     s1.executeUpdate();
+                    return 2;
                 } else {
                     java.sql.PreparedStatement s2 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=22 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s2.setInt(1, this.id);
                     s2.setInt(2, relatingKingdom.getID());
                     s2.executeUpdate();
+                    return 22;
                 }
             } else {
                 java.sql.PreparedStatement s3 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 22);");
                 s3.setInt(1, this.id);
                 s3.setInt(2, relatingKingdom.getID());
                 s3.executeUpdate();
+                return 22;
             }
         }  catch (SQLException e) {
-            e.printStackTrace();
+            KUtil.printException("Could not modify relationships", e);
+            return 0;
         }
     }
 
