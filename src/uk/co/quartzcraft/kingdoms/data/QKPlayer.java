@@ -31,6 +31,11 @@ public class QKPlayer {
     private static Player player;
     private static int kingdomGroup;
 
+    /**
+     * Creates QKPlayer object using the specified id
+     *
+     * @param id
+     */
     public QKPlayer(int id) {
         this.id = id;
 
@@ -69,6 +74,11 @@ public class QKPlayer {
 
     }
 
+    /**
+     * Creates a QKPlayer object using the player id
+     *
+     * @param iplayer
+     */
     public QKPlayer(Player iplayer) {
         this.uuid = iplayer.getUniqueId();
         this.player = iplayer;
@@ -107,6 +117,11 @@ public class QKPlayer {
         this.qplayer = new QPlayer(iplayer);
     }
 
+    /**
+     * Creates a QKPlayer object using the specified QPlayer
+     *
+     * @param qPlayer
+     */
     public QKPlayer(QPlayer qPlayer) {
 
         try {
