@@ -18,14 +18,55 @@ public class Kingdom {
     private static int power;
     private static boolean open;
 
+    /**
+     * Creates a kingdom object using the specified id
+     *
+     * @param id
+     */
     public Kingdom(int id) {
+        this.id = id;
 
+        try {
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM Kingdoms WHERE id='" + id + "';");
+            if(res.next()) {
+                this.id = res.getInt("id");
+                this.power = res.getInt("Power");
+                this.open = res.getBoolean("invite_only");
+                this.king = new QKPlayer(res.getInt("KingID"));
+                this.name = res.getString("KingdomName");
+            } else {
+                return;
+            }
+
+        } catch(SQLException e) {
+            KUtil.printException("Could not retrieve Kingdoms data", e);
+            return;
+        }
     }
 
-    public Kingdom(QKPlayer player) {
-        if(player.kingdomMember()) {
+    /**
+     * Creates a kingdom object using the spcified name
+     *
+     * @param name
+     */
+    public Kingdom(String name) {
+        this.name = name;
 
-        } else {
+        try {
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName='" + name + "';");
+            if(res.next()) {
+                this.id = res.getInt("id");
+                this.power = res.getInt("Power");
+                this.open = res.getBoolean("invite_only");
+                this.king = new QKPlayer(res.getInt("KingID"));
+            } else {
+                return;
+            }
+
+        } catch(SQLException e) {
+            KUtil.printException("Could not retrieve Kingdoms data", e);
             return;
         }
     }
