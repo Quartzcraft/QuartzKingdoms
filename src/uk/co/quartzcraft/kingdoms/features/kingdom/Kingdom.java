@@ -484,4 +484,36 @@ public class Kingdom {
             return false;
         }
     }
+
+    public boolean isPendingEnemy(Kingdom relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=33;");
+            s.setInt(1, this.id);
+            s.setInt(2, relatingKingdom.getID());
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean isPendingAlly(Kingdom relatingKingdom) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=22;");
+            s.setInt(1, this.id);
+            s.setInt(2, relatingKingdom.getID());
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 }
