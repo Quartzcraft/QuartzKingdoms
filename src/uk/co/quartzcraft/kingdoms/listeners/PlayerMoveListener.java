@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
-import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
+import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 
 public class PlayerMoveListener implements Listener {
 

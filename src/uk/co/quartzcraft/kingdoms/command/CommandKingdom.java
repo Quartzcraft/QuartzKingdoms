@@ -9,14 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.command.framework.QCommandFramework;
-import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.command.framework.QCommand;
 import uk.co.quartzcraft.core.command.framework.CommandArgs;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
-import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
+import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 
 public class CommandKingdom {
 

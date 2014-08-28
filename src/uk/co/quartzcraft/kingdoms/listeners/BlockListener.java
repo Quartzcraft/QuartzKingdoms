@@ -11,7 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
-import uk.co.quartzcraft.kingdoms.managers.ChunkManager;
+import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 
 public class BlockListener implements Listener {
 	
