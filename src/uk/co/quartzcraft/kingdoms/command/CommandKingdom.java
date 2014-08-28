@@ -300,7 +300,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.join", aliases = { "k.join" }, permission = "QCK.kingdom.join", description = "Joins the specified kingdom, as long as you are allowed to. Gives the kingdom 2 power.", usage = "Use /kingdom join [kingdom name]")
+    @QCommand(name = "kingdom.join", aliases = { "k.join", "join" }, permission = "QCK.kingdom.join", description = "Joins the specified kingdom, as long as you are allowed to. Gives the kingdom 2 power.", usage = "Use /kingdom join [kingdom name]")
     public void kingdomJoin(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -320,7 +320,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.leave", aliases = { "k.leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 1 power from the kingdom.", usage = "Use /kingdom leave")
+    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 1 power from the kingdom.", usage = "Use /kingdom leave")
     public void kingdomLeave(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
