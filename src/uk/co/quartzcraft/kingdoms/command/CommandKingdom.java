@@ -257,25 +257,31 @@ public class CommandKingdom {
     public void kingdomAlly(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
-        Player player = (Player) sender;
-        Player player1 = Bukkit.getServer().getPlayer(Kingdom.getKing(args[0]));
-        String kingdom = QKPlayer.getKingdom(player);
+        Player sendplayer = (Player) sender;
+        QKPlayer player = new QKPlayer(sendplayer);
+        Kingdom kingdom1 = player.getKingdom();
+        Kingdom kingdom2 = new Kingdom(args[0]);
+        QKPlayer player1 = kingdom2.getKing();
 
-        if(Kingdom.exists(QKPlayer.getKingdom(player1))) {
-            if(QKPlayer.isKing(kingdom, player)) {
-                if(Kingdom.setRelationshipStatus(kingdom, args[0], 2) == 1) {
-                    Bukkit.broadcastMessage(QCChat.getPhrase(kingdom + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
-                    player1.sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom + ChatColor.GREEN + " is offering to become an ally with your kingdom. Type " + ChatColor.WHITE + "/kingdom ally " + kingdom + ChatColor.GREEN + " to accept the offer.");
-                } else if(Kingdom.setRelationshipStatus(kingdom, args[0], 2) == 2) {
-                    Bukkit.broadcastMessage(QCChat.getPhrase(kingdom + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + QKPlayer.getKingdom(player1));
-                } else {
-                    sender.sendMessage(QCChat.getPhrase("failed_to_ally_with_kingdom"));
-                }
-            } else {
-                sender.sendMessage(QCChat.getPhrase("no_permission"));
+        if(!player.isKing(kingdom1)) {
+            sender.sendMessage(QCChat.getPhrase("no_permission"));
+            return;
+        }
+        if(!Kingdom.exists(args[0])) {
+            sender.sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            return;
+        }
+
+        int suc = kingdom1.setAtAlly(kingdom2);
+        if(suc == 22) {
+            Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            if(player1.getQPlayer().getPlayer().isOnline()) {
+                player1.getQPlayer().sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom1.getName() + ChatColor.GREEN + " is offering to become an ally with your kingdom. Type " + ChatColor.WHITE + "/kingdom ally " + kingdom1.getName() + ChatColor.GREEN + " to accept the offer.");
             }
+        } else if(suc == 2) {
+            Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
         } else {
-            sender.sendMessage(QCChat.getPhrase("specifed_kingdom_does_not_exist"));
+            sender.sendMessage(QCChat.getPhrase("failed_to_ally_with_kingdom"));
         }
     }
 
