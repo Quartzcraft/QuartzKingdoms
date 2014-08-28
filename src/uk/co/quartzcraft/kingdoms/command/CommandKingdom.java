@@ -79,7 +79,7 @@ public class CommandKingdom {
         //TODO confirmation chest UI
         CommandSender sender = args0.getSender();
         QKPlayer player = new QKPlayer(args0.getPlayer());
-        Kingdom kingdom = new Kingdom(player);
+        Kingdom kingdom = player.getKingdom();
         String[] args = args0.getArgs();
         if(kingdom.getKing().equals(player.getKingdom()) && player.isKing(kingdom)) {
             if(kingdom.delete(player)) {
@@ -283,18 +283,17 @@ public class CommandKingdom {
     @QCommand(name = "kingdom.join", aliases = { "k.join" }, permission = "QCK.kingdom.join", description = "Joins the specified kingdom, as long as you are allowed to. Gives the kingdom 2 power.", usage = "Use /kingdom join [kingdom name]")
     public void kingdomJoin(CommandArgs args0) {
         CommandSender sender = args0.getSender();
-        Player player = (Player) sender;
         String[] args = args0.getArgs();
-        if(QKPlayer.kingdom(player)) {
+        Player player = (Player) sender;
+        QKPlayer qkPlayer = new QKPlayer(player);
+        Kingdom kingdom = new Kingdom(args[0]);
+        if(qkPlayer.kingdomMember()) {
             sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
-        } else if(Kingdom.isOpen(args[0])) {
-            if(QKPlayer.joinKingdom(player, args[0])) {
-                sender.sendMessage(QCChat.getPhrase("successfully_joined_kingdom_X") + args[0]);
-                Kingdom.setPower(QKPlayer.getKingdom(player), true, 2);
-            } else {
-                sender.sendMessage(QCChat.getPhrase("failed_join_kingdom"));
-            }
-        } else if(!Kingdom.isOpen(args[0])) {
+        } else if(kingdom.isOpen()) {
+            qkPlayer.setKingdom(kingdom);
+            kingdom.addPower(2);
+            sender.sendMessage(QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
+        } else if(kingdom.isOpen()) {
             sender.sendMessage(QCChat.getPhrase("kingdom_not_open"));
         } else {
             sender.sendMessage(QCChat.getPhrase("kingdom_not_found"));
@@ -304,19 +303,14 @@ public class CommandKingdom {
     @QCommand(name = "kingdom.leave", aliases = { "k.leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 1 power from the kingdom.", usage = "Use /kingdom leave")
     public void kingdomLeave(CommandArgs args0) {
         CommandSender sender = args0.getSender();
-        Player player = (Player) sender;
         String[] args = args0.getArgs();
-        if(QKPlayer.kingdom(player)) {
-            if(QKPlayer.isKing(QKPlayer.getKingdom(player), player)) {
-                sender.sendMessage(QCChat.getPhrase("you_are_king_someone_else_must_be_to_leave"));
-            } else {
-                if(QKPlayer.leaveKingdom(player, QKPlayer.getKingdom(player))) {
-                    sender.sendMessage(QCChat.getPhrase("successfully_left_kingdom_X") + QKPlayer.getKingdom(player));
-                    Kingdom.setPower(QKPlayer.getKingdom(player), false, 1);
-                } else {
-                    sender.sendMessage(QCChat.getPhrase("failed_leave_kingdom"));
-                }
-            }
+        Player player = (Player) sender;
+        QKPlayer qkPlayer = new QKPlayer(player);
+        Kingdom kingdom = new Kingdom(args[0]);
+        if(qkPlayer.kingdomMember()) {
+            qkPlayer.setKingdom(null);
+            kingdom.takePower(1);
+            sender.sendMessage(QCChat.getPhrase("successfully_left_kingdom_X") + kingdom.getName());
         } else {
             sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
         }
