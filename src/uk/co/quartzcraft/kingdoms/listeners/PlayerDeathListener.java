@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import uk.co.quartzcraft.core.chat.ChatPhrase;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
@@ -29,7 +28,8 @@ public class PlayerDeathListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         Player player = e.getPlayer();
-        QKPlayer.setPower(player, false, 5);
+        QKPlayer qkPlayer = new QKPlayer(player);
+        qkPlayer.takePower(5);
     }
 
 }

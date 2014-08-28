@@ -3,7 +3,7 @@ package uk.co.quartzcraft.kingdoms.systems.landclaim;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
-import uk.co.quartzcraft.core.entity.QPlayer;
+import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
