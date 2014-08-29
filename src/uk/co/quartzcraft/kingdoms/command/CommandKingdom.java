@@ -178,7 +178,7 @@ public class CommandKingdom {
         String WorldName = world.getName();
         String AWorldName = this.plugin.getConfig().getString("settings.world");
 
-        if(WorldName.equals(AWorldName)) {
+        if(WorldName.equalsIgnoreCase(AWorldName)) {
             if(ChunkManager.isClaimed(chunk)) {
                 sender.sendMessage(QCChat.getPhrase("this_chunk_is_already_claimed"));
             } else {
@@ -194,7 +194,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on. Returns 2 power.", usage = "Use /kingdom unclaim")
+    @QCommand(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on.", usage = "Use /kingdom unclaim")
     public void kingdomUnClaim(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -204,7 +204,6 @@ public class CommandKingdom {
         if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).equals(kingdomName)) {
             if(ChunkManager.unClaimChunkKingdom(player)) {
                 sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                Kingdom.setPower(QKPlayer.getKingdom(player), true, 2);
             } else {
                 sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
             }
