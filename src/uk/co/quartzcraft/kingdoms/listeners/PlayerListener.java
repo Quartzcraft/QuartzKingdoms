@@ -17,6 +17,7 @@ import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
+import uk.co.quartzcraft.kingdoms.systems.perms.Permissions;
 
 public class PlayerListener implements Listener {
 
@@ -43,15 +44,12 @@ public class PlayerListener implements Listener {
     public void onQPlayerJoin(QPlayerJoinEvent event) {
         Player player = event.getPlayer();
         if(QKPlayer.exists(player)) {
-            //something else
+            Permissions.registerPlayerPerms(event.getQPlayer());
         } else {
             QKPlayer.createKingdomsPlayer(player);
         }
 
         QKPlayer qkPlayer = new QKPlayer(player);
-
-        //TODO add kingdom rank
-        player.setDisplayName("[" + qkPlayer.getKingdom().getName() + "]" + player.getDisplayName());
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
