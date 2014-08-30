@@ -168,30 +168,36 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.claim", aliases = { "k.claim" }, permission = "QCK.kingdom.claim", description = "Claims the chunk of land you are standing on for your kingdom. Uses 4 power.", usage = "Use /kingdom claim")
+    @QCommand(name = "kingdom.claim", aliases = { "k.claim" }, permission = "QCK.kingdom.claim", description = "Claims the chunk of land you are standing on for your kingdom. Uses 5 power.", usage = "Use /kingdom claim")
     public void kingdomClaim(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
+        QKPlayer qkPlayer = new QKPlayer(player);
         Chunk chunk = player.getLocation().getChunk();
-        String kingdomName = QKPlayer.getKingdom(player);
         World world = player.getWorld();
         String WorldName = world.getName();
         String AWorldName = this.plugin.getConfig().getString("settings.world");
 
+        if(qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
+
+        } else {
+            QCChat.getPhrase("you_must_be_king");
+            return;
+        }
+
         if(WorldName.equalsIgnoreCase(AWorldName)) {
             if(ChunkManager.isClaimed(chunk)) {
                 sender.sendMessage(QCChat.getPhrase("this_chunk_is_already_claimed"));
+
             } else {
-                if(ChunkManager.claimChunkKingdom(player)) {
-                    sender.sendMessage(QCChat.getPhrase("chunk_claimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-                    Kingdom.setPower(QKPlayer.getKingdom(player), false, 4);
-                } else {
-                    sender.sendMessage(QCChat.getPhrase("chunk_claimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
-                }
+                ChunkManager.claimChunk(qkPlayer.getKingdom(), player);
+                sender.sendMessage(QCChat.getPhrase("chunk_claimed_for_kingdom_yes"));
+                qkPlayer.getKingdom().takePower(5);
             }
         } else {
             sender.sendMessage(QCChat.getPhrase("you_can_not_claim_land_in_this_world"));
         }
+
     }
 
     @QCommand(name = "kingdom.unclaim", aliases = { "k.unclaim" }, permission = "QCK.kingdom.claim", description = "Unclaims the chunk of land you are standing on.", usage = "Use /kingdom unclaim")
