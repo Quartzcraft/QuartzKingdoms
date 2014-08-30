@@ -198,15 +198,19 @@ public class CommandKingdom {
     public void kingdomUnClaim(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
+        QKPlayer qkPlayer = new QKPlayer(player);
         Chunk chunk = player.getLocation().getChunk();
-        String kingdomName = QKPlayer.getKingdom(player);
 
-        if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).equals(kingdomName)) {
-            if(ChunkManager.unClaimChunkKingdom(player)) {
-                sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_yes") + ChatColor.WHITE + kingdomName);
-            } else {
-                sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_no") + ChatColor.WHITE + kingdomName);
-            }
+        if(qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
+
+        } else {
+            QCChat.getPhrase("you_must_be_king");
+            return;
+        }
+
+        if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).equals(qkPlayer.getKingdom())) {
+            ChunkManager.unClaimChunk(qkPlayer.getKingdom(), player);
+            sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_yes"));
         } else {
             sender.sendMessage(QCChat.getPhrase("this_chunk_is_not_claimed"));
         }
