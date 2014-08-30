@@ -7,21 +7,17 @@ import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class ChunkManager {
 	
-	public static boolean claimChunkKingdom(Player player) {
-		Player chunkClaimer = player;
-        String kingdomName = QKPlayer.getKingdom(player);
-		Chunk chunk = chunkClaimer.getLocation().getChunk();
-        int chunkX = chunk.getX();
-        int chunkZ = chunk.getZ();
+	public static Chunk claimChunk(Kingdom kingdom, Player player) {
+		Chunk chunk = player.getLocation().getChunk();
 		
-		if(isClaimed(chunk) == false) {
+		if(isClaimed(chunk)) {
 			//claim chunk
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Chunks (kingdom_id, X, Z) VALUES (?, ?, ?);");
@@ -32,10 +28,10 @@ public class ChunkManager {
                 return chunk;
             } catch (SQLException e) {
                 e.printStackTrace();
-                return false;
+                return null;
             }
 		} else {
-            return false;
+            return null;
 		}
 	}
 
