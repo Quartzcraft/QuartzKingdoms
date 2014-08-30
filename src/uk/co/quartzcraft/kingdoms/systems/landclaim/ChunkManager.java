@@ -83,18 +83,18 @@ public class ChunkManager {
         }
 	}
 
-	public static String getKingdomOwner(Chunk chunk) {
+	public static Kingdom getKingdomOwner(Chunk chunk) {
         int chunkX = chunk.getX();
         int chunkZ = chunk.getZ();
 
         try {
-                Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                ResultSet res = s.executeQuery("SELECT * FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "';");
-                if(res.next()) {
-                    int kingdomID = res.getInt("kingdom_id");
-                    return Kingdom.getName(kingdomID);
-                } else {
-                    return null;
+            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
+            ResultSet res = s.executeQuery("SELECT * FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "';");
+            if(res.next()) {
+                int kingdomID = res.getInt("kingdom_id");
+                return new Kingdom(kingdomID);
+            } else {
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
