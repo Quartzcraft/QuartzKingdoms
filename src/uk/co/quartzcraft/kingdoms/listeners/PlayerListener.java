@@ -6,12 +6,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.core.event.QPlayerLoginEvent;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
+import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 
 public class PlayerListener implements Listener {
 
@@ -46,5 +51,43 @@ public class PlayerListener implements Listener {
 
         //TODO add kingdom rank
         player.setDisplayName("[" + qkPlayer.getKingdom().getName() + "]" + player.getDisplayName());
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        Player player = e.getEntity();
+        QKPlayer qkPlayer = new QKPlayer(player);
+        qkPlayer.takePower(5);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerRespawn(PlayerRespawnEvent e) {
+        Player player = e.getPlayer();
+        //QKPlayer qkPlayer = new QKPlayer(player);
+        //qkPlayer.takePower(5);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        if (event.getFrom().getChunk().equals(event.getTo().getChunk())) {
+            //Nothing
+        } else {
+            if(ChunkManager.isClaimed(event.getTo().getChunk()) && ChunkManager.isClaimed(event.getFrom().getChunk())) {
+                if(!ChunkManager.getKingdomOwner(event.getFrom().getChunk()).equals(ChunkManager.getKingdomOwner(event.getTo().getChunk()))) {
+                    player.sendMessage(QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(event.getFrom().getChunk()));
+                    player.sendMessage(QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdomOwner(event.getTo().getChunk()));
+                } else {
+                    //player.sendMessage(QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdom(event.getTo().getChunk()));
+                    return;
+                }
+            } else if(ChunkManager.isClaimed(event.getFrom().getChunk())) {
+                player.sendMessage(QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(event.getFrom().getChunk()));
+            } else if(ChunkManager.isClaimed(event.getTo().getChunk())) {
+                player.sendMessage(QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdomOwner(event.getTo().getChunk()));
+            } else {
+                return;
+            }
+        }
     }
 }
