@@ -239,6 +239,15 @@ public class QKPlayer {
     }
 
     /**
+     * Returns the Player object associated with this player.
+     *
+     * @return
+     */
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    /**
      * Returns the QPlayer object associated with this player.
      *
      * @return
