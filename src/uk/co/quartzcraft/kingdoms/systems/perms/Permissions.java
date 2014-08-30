@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import uk.co.quartzcraft.core.QuartzCore;
+import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 
 import java.sql.ResultSet;
@@ -20,39 +21,48 @@ public class Permissions {
     public static void registerPlayerPerms(QKPlayer kplayer) {
         Player player = kplayer.getQPlayer().getPlayer();
 
-        Integer kingdomGroup = kplayer.getKingdomGroup();
+        Integer group = kplayer.getKingdomGroup();
 
         if (permissions.containsKey(player.getName())) {
             unregisterPlayerPerms(kplayer);
         }
-        PermissionAttachment attachmentPrimary = player.addAttachment(QuartzCore.plugin);
+
+        PermissionAttachment attachmentPrimary = player.addAttachment(QuartzKingdoms.plugin);
 
         attachmentPrimary.setPermission("QCK.everyone", true);
 
-        //
-        if (kingdomGroup > 0) {
+        // everyone (not including guests)
+        if (group == 1) {
             attachmentPrimary.setPermission("QCK.normal", true);
         }
 
-        //citizens
-        if (kingdomGroup > 1) {
-            attachmentPrimary.setPermission("empire.supporter.iron", true);
+        //Members of a kingdom
+        if (group == 2) {
+            attachmentPrimary.setPermission("QCK.citizen", true);
         }
 
-        //upper class
-        if (kingdomGroup > 2) {
-            attachmentPrimary.setPermission("empire.supporter.gold", true);
+        //Upper class
+        if (group == 3) {
+            attachmentPrimary.setPermission("QCK.upper", true);
         }
 
-        //noble
-        if (kingdomGroup > 3) {
-            attachmentPrimary.setPermission("empire.supporter.diamond", true);
+        //Knights
+        if (group == 4) {
+            attachmentPrimary.setPermission("QCK.knight", true);
         }
 
-        //king
-        if (kingdomGroup > 5) {
-            attachmentPrimary.setPermission("empire.staff", true);
+        //Nobles
+        if (group == 5) {
+            attachmentPrimary.setPermission("QCK.noble", true);
         }
+
+        //Kings
+        if (group == 6) {
+            attachmentPrimary.setPermission("QCK.king", true);
+        }
+
+        registerNamePrefixPerm(kplayer);
+
 
         permissions.put(player.getName(), attachmentPrimary);
     }
@@ -65,5 +75,18 @@ public class Permissions {
             }
             permissions.remove(kplayer.getQPlayer().getPlayer().getName());
         }
+    }
+
+    public static void registerNamePrefixPerm(QKPlayer qplayer) {
+        Player player = qplayer.getPlayer();
+
+        PermissionAttachment attachmentColour = player.addAttachment(QuartzKingdoms.plugin);
+
+        switch(qplayer.getKingdomGroup()) {
+            default:
+                attachmentColour.setPermission("QCC.nameprefix.null", true);
+        }
+
+        permissions.put(player.getName(), attachmentColour);
     }
 }
