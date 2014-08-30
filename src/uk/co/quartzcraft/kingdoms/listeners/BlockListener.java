@@ -23,7 +23,7 @@ public class BlockListener implements Listener {
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         if(permission(event.getBlock().getChunk(), player)) {
-
+            return;
         } else {
             event.setCancelled(true);
         }
@@ -33,7 +33,7 @@ public class BlockListener implements Listener {
 	public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         if(permission(event.getBlock().getChunk(), player)) {
-
+            return;
         } else {
             event.setCancelled(true);
         }
@@ -43,7 +43,7 @@ public class BlockListener implements Listener {
     public void onIgnite(BlockIgniteEvent event) {
         Player player = event.getPlayer();
         if(permission(event.getBlock().getChunk(), player)) {
-
+            return;
         } else {
             event.setCancelled(true);
         }
