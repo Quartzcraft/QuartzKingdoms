@@ -1,10 +1,12 @@
 package uk.co.quartzcraft.kingdoms.data;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
+import net.minecraft.util.io.netty.handler.codec.http.HttpContentEncoder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -40,8 +42,9 @@ public class QKPlayer {
         this.id = id;
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id=" + id + ";");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE id=?;");
+            s.setInt(1, id);
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.qplayer = new QPlayer(res.getInt("PlayerID"));
                 this.power = res.getInt("Power");
@@ -85,8 +88,9 @@ public class QKPlayer {
 
         String SUUID = uuid.toString();
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE UUID='" + SUUID + "';");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE UUID=?;");
+            s.setString(1, SUUID);
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
@@ -125,8 +129,9 @@ public class QKPlayer {
     public QKPlayer(QPlayer qPlayer) {
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE id=" + qplayer.getID() + ";");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE id=?;");
+            s.setInt(1, qplayer.getID());
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
@@ -166,12 +171,11 @@ public class QKPlayer {
      * @return
      */
     public static boolean createKingdomsPlayer(Player player) {
-
         QPlayer lqplayer = new QPlayer(player);
 
         try {
-            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO KingdomsPlayerData (PlayerID) VALUES (" + lqplayer.getID() +");");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO KingdomsPlayerData (PlayerID) VALUES (?);");
+            s.setInt(1, lqplayer.getID());
             if(s.executeUpdate() == 1) {
                 return true;
             } else {
@@ -192,8 +196,8 @@ public class QKPlayer {
     public static boolean createKingdomsPlayer(QPlayer player) {
 
         try {
-            java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
-            java.sql.PreparedStatement s = connection.prepareStatement("INSERT INTO KingdomsPlayerData (PlayerID) VALUES (" + player.getID() +");");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO KingdomsPlayerData (PlayerID) VALUES (?);");
+            s.setInt(1, player.getID());
             if(s.executeUpdate() == 1) {
                 return true;
             } else {
@@ -215,8 +219,33 @@ public class QKPlayer {
         QPlayer qplayer = new QPlayer(player);
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM KingdomsPlayerData WHERE PlayerID='" + qplayer.getID() + "';");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE PlayerID=?;");
+            s.setInt(1, qplayer.getID());
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch(SQLException e) {
+            KUtil.printException("Could not retrieve player data", e);
+            return false;
+        }
+    }
+
+    /**
+     * Find out whether a QKPlayer object exists for the specified QPlayer
+     *
+     * @param player
+     * @return
+     */
+    public static boolean exists(QPlayer player) {
+
+        try {
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE PlayerID=?;");
+            s.setInt(1, player.getID());
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 return true;
             } else {
@@ -303,10 +332,11 @@ public class QKPlayer {
 	public boolean isKing(Kingdom kingdom) {
         if(kingdom != null) {
             try {
-                Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                ResultSet res2 = s.executeQuery("SELECT * FROM Kingdoms WHERE id=" + kingdom.getID() + ";");
-                if(res2.next()) {
-                    int kingID = res2.getInt("KingID");
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE id=?;");
+                s.setInt(1, kingdom.getID());
+                ResultSet res = s.executeQuery();
+                if(res.next()) {
+                    int kingID = res.getInt("KingID");
                     if(this.id == kingID) {
                         return true;
                     }

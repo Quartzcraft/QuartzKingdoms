@@ -1,5 +1,6 @@
 package uk.co.quartzcraft.kingdoms.features.kingdom;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,8 +31,9 @@ public class Kingdom {
         this.id = id;
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM Kingdoms WHERE id='" + id + "';");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE id=?;");
+            s.setInt(1, id);
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
@@ -58,8 +60,9 @@ public class Kingdom {
         this.name = name;
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM Kingdoms WHERE KingdomName='" + name + "';");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName=?;");
+            s.setString(1, name);
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
@@ -116,7 +119,6 @@ public class Kingdom {
      * @return
      */
     public static boolean exists(String kingdomName) {
-        java.sql.Connection connection = QuartzKingdoms.MySQLking.openConnection();
         try {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName='?';");
             s.setString(1, kingdomName);
@@ -368,12 +370,12 @@ public class Kingdom {
      */
     public void setAtNeutral(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
-                java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("DELETE FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
                 s.setInt(1, this.id);
                 s.setInt(2, relatingKingdom.getID());
                 s1.executeUpdate();
@@ -392,7 +394,7 @@ public class Kingdom {
      */
     public int setAtWar(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -400,20 +402,20 @@ public class Kingdom {
                 return 3;
             } else if(res.next()) {
                 if(res.getString("status") == "22") {
-                    java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=3 WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET status=3 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s1.setInt(1, this.id);
                     s1.setInt(2, relatingKingdom.getID());
                     s1.executeUpdate();
                     return 3;
                 } else {
-                    java.sql.PreparedStatement s2 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=33 WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    java.sql.PreparedStatement s2 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET status=33 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s2.setInt(1, this.id);
                     s2.setInt(2, relatingKingdom.getID());
                     s2.executeUpdate();
                     return 33;
                 }
             } else {
-                java.sql.PreparedStatement s3 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 33);");
+                java.sql.PreparedStatement s3 = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 33);");
                 s3.setInt(1, this.id);
                 s3.setInt(2, relatingKingdom.getID());
                 s3.executeUpdate();
@@ -432,7 +434,7 @@ public class Kingdom {
      */
     public int setAtAlly(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -440,20 +442,20 @@ public class Kingdom {
                 return 2;
             } else if(res.next()) {
                 if(res.getString("status") == "22") {
-                    java.sql.PreparedStatement s1 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s1.setInt(1, this.id);
                     s1.setInt(2, relatingKingdom.getID());
                     s1.executeUpdate();
                     return 2;
                 } else {
-                    java.sql.PreparedStatement s2 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("UPDATE relationships SET status=22 WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    java.sql.PreparedStatement s2 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET status=22 WHERE kingdom_id=? AND sec_kingdom_id=?;");
                     s2.setInt(1, this.id);
                     s2.setInt(2, relatingKingdom.getID());
                     s2.executeUpdate();
                     return 22;
                 }
             } else {
-                java.sql.PreparedStatement s3 = QuartzKingdoms.MySQLking.openConnection().prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 22);");
+                java.sql.PreparedStatement s3 = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 22);");
                 s3.setInt(1, this.id);
                 s3.setInt(2, relatingKingdom.getID());
                 s3.executeUpdate();
@@ -475,7 +477,7 @@ public class Kingdom {
 
     public boolean isEnemy(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=3;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=3;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -491,7 +493,7 @@ public class Kingdom {
 
     public boolean isAlly(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=2;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=2;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -507,7 +509,7 @@ public class Kingdom {
 
     public boolean isPendingEnemy(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=33;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=33;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -523,7 +525,7 @@ public class Kingdom {
 
     public boolean isPendingAlly(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.MySQLking.openConnection().prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=22;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=22;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
