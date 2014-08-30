@@ -39,15 +39,10 @@ public class ChunkManager {
 		}
 	}
 
-	public static boolean unClaimChunkKingdom(Player player) {
-        Player chunkClaimer = player;
-        String kingdomName = QKPlayer.getKingdom(player);
-        int kingdomID = Kingdom.getID(kingdomName);
-        Chunk chunk = chunkClaimer.getLocation().getChunk();
-        int chunkX = chunk.getX();
-        int chunkZ = chunk.getZ();
+	public static void unClaimChunk(Kingdom kingdom, Player player) {
+        Chunk chunk = player.getLocation().getChunk();
 
-        if(isClaimed(chunk) == true) {
+        if(isClaimed(chunk)) {
             //unclaim chunk
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE * FROM Chunks WHERE X=? AND Z=? AND kingdom_id=?;");
@@ -56,11 +51,11 @@ public class ChunkManager {
                 s.setInt(3, kingdom.getID());
                 s.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
+                KUtil.printException("Failed to delete chunks from database", e);
+                return;
             }
         } else {
-            return false;
+            return;
         }
 	}
 
