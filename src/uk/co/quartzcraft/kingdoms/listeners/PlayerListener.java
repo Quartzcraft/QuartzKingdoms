@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
         this.plugin = plugin;
     }
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCreation(QPlayerCreationEvent event) {
         QPlayer player = event.getQPlayer();
         Player bplayer = event.getPlayer();
@@ -39,8 +39,8 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onQPlayerLogin(QPlayerLoginEvent event) {
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onQPlayerJoin(QPlayerJoinEvent event) {
         Player player = event.getPlayer();
         if(QKPlayer.exists(player)) {
             //something else
