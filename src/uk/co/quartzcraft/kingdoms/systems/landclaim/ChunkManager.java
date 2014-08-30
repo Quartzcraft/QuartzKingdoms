@@ -24,12 +24,12 @@ public class ChunkManager {
 		if(isClaimed(chunk) == false) {
 			//claim chunk
             try {
-                Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                if(s.executeUpdate("INSERT INTO Chunks (kingdom, kingdom_id, X, Z) VALUES (1, " + Kingdom.getID(kingdomName) + ", '" + chunkX + "', '" + chunkZ + "');") == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Chunks (kingdom_id, X, Z) VALUES (?, ?, ?);");
+                s.setInt(1, kingdom.getID());
+                s.setInt(2, chunk.getX());
+                s.setInt(3, chunk.getZ());
+                s.executeUpdate();
+                return chunk;
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
@@ -50,12 +50,11 @@ public class ChunkManager {
         if(isClaimed(chunk) == true) {
             //unclaim chunk
             try {
-                Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-                if(s.executeUpdate("DELETE * FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "' AND kingdom_id=" + kingdomID + ";") == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE * FROM Chunks WHERE X=? AND Z=? AND kingdom_id=?;");
+                s.setInt(1, chunk.getX());
+                s.setInt(2, chunk.getZ());
+                s.setInt(3, kingdom.getID());
+                s.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
@@ -70,8 +69,10 @@ public class ChunkManager {
         int chunkZ = chunk.getZ();
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "';");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Chunks WHERE X=? AND Z=?;");
+            s.setInt(1, chunk.getX());
+            s.setInt(2, chunk.getZ());
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 return true;
             } else {
@@ -88,8 +89,10 @@ public class ChunkManager {
         int chunkZ = chunk.getZ();
 
         try {
-            Statement s = QuartzKingdoms.MySQLking.openConnection().createStatement();
-            ResultSet res = s.executeQuery("SELECT * FROM Chunks WHERE X='" + chunkX + "' AND Z='" + chunkZ + "';");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Chunks WHERE X=? AND Z=?;");
+            s.setInt(1, chunk.getX());
+            s.setInt(2, chunk.getZ());
+            ResultSet res = s.executeQuery();
             if(res.next()) {
                 int kingdomID = res.getInt("kingdom_id");
                 return new Kingdom(kingdomID);
