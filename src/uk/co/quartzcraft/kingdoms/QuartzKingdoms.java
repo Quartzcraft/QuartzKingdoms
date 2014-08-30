@@ -75,9 +75,9 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("your_kingdoms_power_is_X", "&aYour kingdoms power is &b");
 
         QCChat.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
-        QCChat.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for Kingdom: ");
+        QCChat.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for your kingdom!");
         QCChat.addPhrase("chunk_claimed_for_kingdom_no", "&cChunk was not successfully claimed for Kingdom: ");
-        QCChat.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for Kingdom: ");
+        QCChat.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for your kingdom!");
         QCChat.addPhrase("chunk_unclaimed_for_kingdom_no", "&cChunk was not successfully unclaimed for Kingdom: ");
         QCChat.addPhrase("this_chunk_is_already_claimed", "&cthis chunk has already been claimed!");
         QCChat.addPhrase("this_chunk_is_not_claimed", "&cThis chunk chunk is not claimed by your kingdom!");
@@ -91,6 +91,7 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("you_are_now_a_noble", "&aYou have been made a noble by your king!");
         QCChat.addPhrase("you_are_now_a_king", "&aYou have been made the king of your kingdom!");
 
+        QCChat.addPhrase("you_must_be_king", "&cYou must be the king to perform this action!");
         QCChat.addPhrase("you_must_be_member_kingdom", "&cYou must be a member of a kingdom!");
         QCChat.addPhrase("you_must_be_member_kingdom_leave", "&cYou must be a member of a kingdom to leave one!");
         QCChat.addPhrase("you_are_already_in_a_Kingdom", "&cYou are already a member of a kingdom!");
