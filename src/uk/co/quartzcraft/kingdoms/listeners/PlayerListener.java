@@ -42,7 +42,7 @@ public class PlayerListener implements Listener {
     public void onQPlayerJoin(QPlayerJoinEvent event) {
         Player player = event.getPlayer();
         if(QKPlayer.exists(player)) {
-            Permissions.registerPlayerPerms(event.getQPlayer());
+            Permissions.registerPlayerPerms(new QKPlayer(event.getQPlayer()));
         } else {
             QKPlayer.createKingdomsPlayer(player);
         }
