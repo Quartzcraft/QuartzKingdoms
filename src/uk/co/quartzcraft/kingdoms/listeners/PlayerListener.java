@@ -1,18 +1,16 @@
 package uk.co.quartzcraft.kingdoms.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
-import uk.co.quartzcraft.core.event.QPlayerLoginEvent;
+import uk.co.quartzcraft.core.event.QPlayerJoinEvent;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
