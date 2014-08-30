@@ -222,7 +222,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 4 power.", usage = "Use /kingdom war [enemy kingdom name]")
+    @QCommand(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 8 power.", usage = "Use /kingdom war [enemy kingdom name]")
     public void kingdomWar(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -249,6 +249,8 @@ public class CommandKingdom {
             }
         } else if(suc == 3) {
             Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            kingdom1.takePower(8);
+            kingdom2.takePower(8);
         } else {
             sender.sendMessage(QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom"));
         }
