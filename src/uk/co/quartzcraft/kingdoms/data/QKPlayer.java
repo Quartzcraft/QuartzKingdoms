@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.data.QPlayer;
+import uk.co.quartzcraft.kingdoms.systems.log.PowerLogger;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
@@ -379,6 +380,7 @@ public class QKPlayer {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
+                PowerLogger.logAdd(this, newa);
                 return this;
             } else {
                 return this;
@@ -404,6 +406,7 @@ public class QKPlayer {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
+                PowerLogger.logTake(this, newa);
                 return this;
             } else {
                 return this;
