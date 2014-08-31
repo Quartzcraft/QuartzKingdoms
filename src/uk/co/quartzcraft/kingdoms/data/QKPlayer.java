@@ -352,6 +352,19 @@ public class QKPlayer {
 	}
 
     /**
+     * Finds out whether a player is the king of their kingdom
+     *
+     * @return boolean true if king, false if not.
+     */
+    public boolean isKing() {
+        if(this.kingdom.getKing().equals(this)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Increases a players power by the specified amount.
      *
      * @param am
