@@ -50,6 +50,12 @@ public class PlayerListener implements Listener {
         }
 
         QKPlayer qkPlayer = new QKPlayer(player);
+
+        if(qkPlayer.kingdomMember()) {
+            if(qkPlayer.isKing()) {
+                //TODO Add pending war checks
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
