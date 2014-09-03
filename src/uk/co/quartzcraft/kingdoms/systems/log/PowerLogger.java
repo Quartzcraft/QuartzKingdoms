@@ -27,7 +27,7 @@ public class PowerLogger {
             s.setInt(4, power);
             s.executeUpdate();
         } catch(SQLException e) {
-            Util.printException("Failed to log chat using QPlayer", e);
+            Util.printException("Failed to log addition of power", e);
         }
     }
 
@@ -47,7 +47,7 @@ public class PowerLogger {
             s.setInt(4, power);
             s.executeUpdate();
         } catch(SQLException e) {
-            Util.printException("Failed to log chat using Player", e);
+            Util.printException("Failed to log taking of power", e);
         }
     }
 }
