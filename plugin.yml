@@ -1,7 +1,7 @@
 name: QuartzKingdoms
 version: 1.0.0
 author: The QuartzCraft Team! SoulPunisher, mba2012 and nfell2009!
-website: http://www.quartzcraft.co.uk/
+website: http://quartzcraft.co.uk/
 main: uk.co.quartzcraft.kingdoms.QuartzKingdoms
 softdepend: [QuartzCore]
 
