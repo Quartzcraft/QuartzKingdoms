@@ -20,19 +20,19 @@ import uk.co.quartzcraft.kingdoms.features.clan.Clan;
 
 public class QKPlayer {
 
-    private static Plugin plugin = QuartzKingdoms.plugin;
+    private Plugin plugin = QuartzKingdoms.plugin;
 
-    private static QPlayer qplayer;
+    private QPlayer qplayer;
 
-    private static int id;
-    private static UUID uuid;
-    private static int power;
-    private static int clanid;
-    private static Clan clan;
-    private static int kingdomid;
-    private static Kingdom kingdom;
-    private static Player player;
-    private static int kingdomGroup;
+    private int id;
+    private UUID uuid;
+    private int power;
+    private int clanid;
+    private Clan clan;
+    private int kingdomid;
+    private Kingdom kingdom;
+    private Player player;
+    private int kingdomGroup;
 
     /**
      * Creates QKPlayer object using the specified id

@@ -13,14 +13,14 @@ import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 public class Kingdom {
 	
-	private static Plugin plugin = QuartzKingdoms.plugin;
+	private Plugin plugin = QuartzKingdoms.plugin;
 
-    private static int id;
-    private static String name;
-    private static QKPlayer king;
-    private static int power;
-    private static int level;
-    private static boolean open;
+    private int id;
+    private String name;
+    private QKPlayer king;
+    private int power;
+    private int level;
+    private boolean open;
 
     /**
      * Creates a kingdom object using the specified id
