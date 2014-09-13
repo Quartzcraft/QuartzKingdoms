@@ -61,12 +61,12 @@ public class QKPlayer {
             return;
         }
 
-        if(this.kingdomid >= 1) {
+        if(this.kingdomid != 0) {
             this.kingdom = new Kingdom(this.kingdomid);
         } else {
             this.kingdom = null;
         }
-        if(this.clanid >= 1) {
+        if(this.clanid != 0) {
             //this.clan = new Clan(this.clanid);
             this.clan = null;
         } else {
@@ -84,13 +84,11 @@ public class QKPlayer {
      * @param iplayer
      */
     public QKPlayer(Player iplayer) {
-        this.uuid = iplayer.getUniqueId();
-        this.player = iplayer;
-
-        String SUUID = uuid.toString();
+        QPlayer qPlayer = new QPlayer(iplayer);
+        this.qplayer = qPlayer;
         try {
-            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE UUID=?;");
-            s.setString(1, SUUID);
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE PlayerID=?;");
+            s.setInt(1, qPlayer.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.id = res.getInt("id");
@@ -118,8 +116,6 @@ public class QKPlayer {
         } else {
             this.clan = null;
         }
-
-        this.qplayer = new QPlayer(iplayer);
     }
 
     /**
@@ -131,7 +127,7 @@ public class QKPlayer {
 
         try {
             PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE id=?;");
-            s.setInt(1, qplayer.getID());
+            s.setInt(1, qPlayer.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
                 this.id = res.getInt("id");
@@ -283,7 +279,7 @@ public class QKPlayer {
      * @return
      */
     public QPlayer getQPlayer() {
-        return this.qplayer;
+        return new QPlayer(this.player);
     }
 
     /**
