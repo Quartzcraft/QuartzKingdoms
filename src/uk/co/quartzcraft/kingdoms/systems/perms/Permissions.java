@@ -19,7 +19,7 @@ public class Permissions {
     public static HashMap<String, PermissionAttachment> permissions = new HashMap<>();
 
     public static void registerPlayerPerms(QKPlayer kplayer) {
-        Player player = kplayer.getQPlayer().getPlayer();
+        Player player = kplayer.getPlayer();
 
         Integer group = kplayer.getKingdomGroup();
 
