@@ -47,6 +47,7 @@ public class PlayerListener implements Listener {
             Permissions.registerPlayerPerms(new QKPlayer(event.getQPlayer()));
         } else {
             QKPlayer.createKingdomsPlayer(player);
+            Permissions.registerPlayerPerms(new QKPlayer(event.getQPlayer()));
         }
 
         QKPlayer qkPlayer = new QKPlayer(player);
