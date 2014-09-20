@@ -126,7 +126,7 @@ public class QKPlayer {
     public QKPlayer(QPlayer qPlayer) {
 
         try {
-            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE id=?;");
+            PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE PlayerID=?;");
             s.setInt(1, qPlayer.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
