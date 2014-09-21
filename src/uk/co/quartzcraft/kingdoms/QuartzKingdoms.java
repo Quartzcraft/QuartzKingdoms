@@ -40,7 +40,7 @@ public class QuartzKingdoms extends JavaPlugin {
 	public void onDisable() {
 				
     	//Shutdown notice
-		log.info("[QK]The QuartzKingdoms Plugin has been disabled!");
+		log.info("[QK] The QuartzKingdoms Plugin has been disabled!");
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class QuartzKingdoms extends JavaPlugin {
         this.core = QuartzCore.plugin;
         this.config = new QCConfig(this.plugin);
 		
-		log.info("[QC]Running plugin configuration");
+		log.info("[QC] Running plugin configuration");
 		this.saveDefaultConfig();
 		
 		String SQLKingHost = this.getConfig().getString("database.kingdoms.host");
@@ -123,22 +123,22 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("could_not_create_kingdoms_player", "&cYour player data could not be added to the QuartzKingdoms database!");
 		
 		//Database
-		log.info("[QK][STARTUP]Connecting to Database");
+		log.info("[QK][STARTUP] Connecting to Database");
 		DBKing = MySQLking.openConnection();
 		
 		//Listeners
-		log.info("[QK][STARTUP]Registering Listeners");
+		log.info("[QK][STARTUP] Registering Listeners");
 		new BlockListener(this);
 		new PlayerListener(this);
 		
 		//Commands
-		log.info("[QK][STARTUP]Registering Commands");
+		log.info("[QK][STARTUP] Registering Commands");
         commandFramework = new QCommandFramework(this);
         commandFramework.registerCommands(new CommandKingdom(this, core));
 	   	
         //Startup notice
-		log.info("[QK]The QuartzKingdoms Plugin has been enabled!");
-		log.info("[QK]Compiled using QuartzCore version " + releaseVersion);
+		log.info("[QK] The QuartzKingdoms Plugin has been enabled!");
+		log.info("[QK] Compiled using QuartzCore version " + releaseVersion);
 	}
 
     @Override
