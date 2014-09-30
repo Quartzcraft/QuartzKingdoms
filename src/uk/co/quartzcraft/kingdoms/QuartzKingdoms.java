@@ -27,7 +27,8 @@ public class QuartzKingdoms extends JavaPlugin {
 
     public static QCConfig config;
 	
-	public static final Logger log = Logger.getLogger("Minecraft");
+	public final Logger logg = Logger.getLogger("Minecraft");
+    public static final Logger log = Logger.getLogger("Minecraft");
 	
 	public static String releaseVersion = QuartzCore.version;
     public static String version;

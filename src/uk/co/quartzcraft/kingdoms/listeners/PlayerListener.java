@@ -57,6 +57,7 @@ public class PlayerListener implements Listener {
                 //TODO Add pending war checks
             }
         }
+        plugin.logg.info("[QK] " + qkPlayer.getQPlayer().getName() + " has successfully joined!");
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

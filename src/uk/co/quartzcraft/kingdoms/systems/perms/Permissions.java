@@ -61,9 +61,6 @@ public class Permissions {
             attachmentPrimary.setPermission("QCK.king", true);
         }
 
-        registerNamePrefixPerm(kplayer);
-
-
         permissions.put(player.getName(), attachmentPrimary);
     }
 
@@ -75,18 +72,5 @@ public class Permissions {
             }
             permissions.remove(kplayer.getQPlayer().getPlayer().getName());
         }
-    }
-
-    public static void registerNamePrefixPerm(QKPlayer qplayer) {
-        Player player = qplayer.getPlayer();
-
-        PermissionAttachment attachmentColour = player.addAttachment(QuartzKingdoms.plugin);
-
-        switch(qplayer.getKingdomGroup()) {
-            default:
-                attachmentColour.setPermission("QCC.nameprefix.null", true);
-        }
-
-        permissions.put(player.getName(), attachmentColour);
     }
 }
