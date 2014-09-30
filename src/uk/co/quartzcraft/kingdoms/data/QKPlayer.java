@@ -119,7 +119,7 @@ public class QKPlayer {
     }
 
     /**
-     * Creates a QKPlayer object using the specified QPlayer
+     * Creates a QKPlayer object using the specified QPlayer <b>This must be used for handling offline players</b>
      *
      * @param qPlayer
      */
@@ -279,7 +279,7 @@ public class QKPlayer {
      * @return
      */
     public QPlayer getQPlayer() {
-        return new QPlayer(this.player);
+        return this.qplayer;
     }
 
     /**
