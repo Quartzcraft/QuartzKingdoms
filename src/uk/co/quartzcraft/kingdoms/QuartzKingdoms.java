@@ -29,7 +29,8 @@ public class QuartzKingdoms extends JavaPlugin {
 	
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
-	public static String releaseVersion = QuartzCore.displayReleaseVersion();
+	public static String releaseVersion = QuartzCore.version;
+    public static String version;
 
 	public static Connection DBKing = null;
 	public static MySQL MySQLking = null;
@@ -46,9 +47,10 @@ public class QuartzKingdoms extends JavaPlugin {
 	@Override
 	public void onEnable() {
 
-        this.plugin = this;
-        this.core = QuartzCore.plugin;
-        this.config = new QCConfig(this.plugin);
+        version = this.getDescription().getVersion();
+        plugin = this;
+        core = QuartzCore.plugin;
+        config = new QCConfig(plugin);
 		
 		log.info("[QC] Running plugin configuration");
 		this.saveDefaultConfig();
@@ -138,7 +140,7 @@ public class QuartzKingdoms extends JavaPlugin {
 	   	
         //Startup notice
 		log.info("[QK] The QuartzKingdoms Plugin has been enabled!");
-		log.info("[QK] Compiled using QuartzCore version " + releaseVersion);
+		log.info("[QK] QuartzCore version " + version + " compiled with QuartzCore version " + releaseVersion);
 	}
 
     @Override
