@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.systems.log.PowerLogger;
+import uk.co.quartzcraft.kingdoms.systems.perms.Group;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
@@ -32,7 +33,7 @@ public class QKPlayer {
     private int kingdomid;
     private Kingdom kingdom;
     private Player player;
-    private int kingdomGroup;
+    private Group kingdomGroup;
 
     /**
      * Creates QKPlayer object using the specified id
@@ -51,7 +52,7 @@ public class QKPlayer {
                 this.power = res.getInt("Power");
                 this.kingdomid = res.getInt("KingdomID");
                 this.clanid = res.getInt("ClanID");
-                this.kingdomGroup = res.getInt("GroupID");
+                this.kingdomGroup = new Group(res.getInt("GroupID"));
             } else {
                 return;
             }
@@ -95,7 +96,7 @@ public class QKPlayer {
                 this.power = res.getInt("Power");
                 this.kingdomid = res.getInt("KingdomID");
                 this.clanid = res.getInt("ClanID");
-                this.kingdomGroup = res.getInt("GroupID");
+                this.kingdomGroup = new Group(res.getInt("GroupID"));
             } else {
                 return;
             }
@@ -134,7 +135,7 @@ public class QKPlayer {
                 this.power = res.getInt("Power");
                 this.kingdomid = res.getInt("KingdomID");
                 this.clanid = res.getInt("ClanID");
-                this.kingdomGroup = res.getInt("GroupID");
+                this.kingdomGroup = new Group(res.getInt("GroupID"));
             } else {
                 return;
             }
@@ -304,7 +305,7 @@ public class QKPlayer {
      *
      * @return
      */
-    public int getKingdomGroup() {
+    public Group getKingdomGroup() {
         return this.kingdomGroup;
     }
 
@@ -468,7 +469,7 @@ public class QKPlayer {
             s.setInt(1, this.id);
             s.setInt(2, rank);
             if(s.executeUpdate() == 1) {
-                this.kingdomGroup = rank;
+                this.kingdomGroup = new Group(rank);
                 return this;
             } else {
                 return this;

@@ -8,6 +8,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class Permissions {
     public static void registerPlayerPerms(QKPlayer kplayer) {
         Player player = kplayer.getPlayer();
 
-        Integer group = kplayer.getKingdomGroup();
+        Integer group = kplayer.getKingdomGroup().getId();
 
         if (permissions.containsKey(player.getName())) {
             unregisterPlayerPerms(kplayer);
@@ -69,6 +70,7 @@ public class Permissions {
             try {
                 kplayer.getQPlayer().getPlayer().removeAttachment(permissions.get(kplayer.getQPlayer().getPlayer().getName()));
             } catch (IllegalArgumentException ex) {
+                KUtil.printException("Failed to remove permission attachments", ex);
             }
             permissions.remove(kplayer.getQPlayer().getPlayer().getName());
         }

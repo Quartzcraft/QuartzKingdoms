@@ -43,14 +43,14 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQPlayerJoin(QPlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if(QKPlayer.exists(player)) {
-            Permissions.registerPlayerPerms(new QKPlayer(event.getQPlayer()));
-        } else {
+        if(!QKPlayer.exists(player)) {
             QKPlayer.createKingdomsPlayer(player);
-            Permissions.registerPlayerPerms(new QKPlayer(event.getQPlayer()));
         }
 
-        QKPlayer qkPlayer = new QKPlayer(player);
+        QKPlayer qkPlayer = new QKPlayer(event.getQPlayer());
+
+        Permissions.registerPlayerPerms(qkPlayer);
+
 
         if(qkPlayer.kingdomMember()) {
             if(qkPlayer.isKing()) {
