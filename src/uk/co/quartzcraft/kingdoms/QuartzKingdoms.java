@@ -51,7 +51,6 @@ public class QuartzKingdoms extends JavaPlugin {
         version = this.getDescription().getVersion();
         plugin = this;
         core = QuartzCore.plugin;
-        config = new QCConfig(plugin);
 		
 		log.info("[QC] Running plugin configuration");
 		this.saveDefaultConfig();
