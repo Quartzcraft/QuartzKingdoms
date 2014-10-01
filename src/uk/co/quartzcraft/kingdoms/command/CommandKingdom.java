@@ -39,7 +39,7 @@ public class CommandKingdom {
     public void kingdomTest(CommandArgs args) {
         String[] args0 = args.getArgs();
         args.getSender().sendMessage("This is the test kingdoms command!" + "Args0[1] was equal to " + args0[1]);
-        args.getSender().sendMessage("config preference settings.world equals:" + this.plugin.getConfig().getString("settings.world"));
+        args.getSender().sendMessage("config preference settings.world equals:" + plugin.getConfig().getString("settings.world"));
     }
 
     @QCommand(name = "kingdom.info", aliases = { "k.info" }, permission = "QCK.kingdom.info", description = "Get information about a specified kingdom", usage = "Use /kingdom info [kingdom name]")

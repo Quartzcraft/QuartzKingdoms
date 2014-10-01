@@ -17,7 +17,7 @@ public class ChunkManager {
 	public static Chunk claimChunk(Kingdom kingdom, Player player) {
 		Chunk chunk = player.getLocation().getChunk();
 		
-		if(isClaimed(chunk)) {
+		if(!isClaimed(chunk)) {
 			//claim chunk
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Chunks (kingdom_id, X, Z) VALUES (?, ?, ?);");
