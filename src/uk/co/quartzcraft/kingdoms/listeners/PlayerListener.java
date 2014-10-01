@@ -1,5 +1,6 @@
 package uk.co.quartzcraft.kingdoms.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -51,6 +52,8 @@ public class PlayerListener implements Listener {
 
         Permissions.registerPlayerPerms(qkPlayer);
 
+        player.setDisplayName(qkPlayer.getKingdomGroup().getStyleForName() + player.getDisplayName() + ChatColor.RESET);
+        player.setPlayerListName(player.getDisplayName());
 
         if(qkPlayer.kingdomMember()) {
             if(qkPlayer.isKing()) {
