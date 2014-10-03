@@ -47,7 +47,7 @@ public class CommandKingdom {
         args.getSender().sendMessage("Info command testing");
     }
 
-    @QCommand(name = "kingdom.create", aliases = { "k.create" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
+    @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(CommandArgs args) {
         CommandSender sender = args.getSender();
         QKPlayer player = new QKPlayer(args.getPlayer());
