@@ -32,9 +32,7 @@ public class Group {
                     this.name = res.getString("group_name");
                     this.fullName = res.getString("full_group_name");
                     this.prefix = res.getString("group_prefix");
-                    if(res.getString("group_colour") != null) {
-                        this.colour = ChatColor.getByChar(res.getString("group_colour"));
-                    }
+                    this.colour = ChatColor.getByChar(res.getString("group_colour"));
                 } else {
                     KUtil.log(Level.SEVERE, "Group id not equal");
                 }
@@ -57,9 +55,7 @@ public class Group {
                     this.id = res.getInt("id");
                     this.fullName = res.getString("full_group_name");
                     this.prefix = res.getString("group_prefix");
-                    if(res.getString("group_colour") != null) {
-                        this.colour = ChatColor.getByChar(res.getString("group_colour"));
-                    }
+                    this.colour = ChatColor.getByChar(res.getString("group_colour"));
                 } else {
                     KUtil.log(Level.SEVERE, "Group names not equal");
                 }
