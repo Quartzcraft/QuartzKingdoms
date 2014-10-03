@@ -96,8 +96,9 @@ public class Kingdom {
 		} 
 		
 		try {
-			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName) VALUES ('?');");
+			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES (?, ?);");
             s.setString(1, kingdomName);
+            s.setInt(2, player.getID());
             if(s.executeUpdate() == 1) {
                 Kingdom kkingdom = new Kingdom(player.getKingdom().getID());
                 player.setKingdom(kkingdom);
@@ -120,7 +121,7 @@ public class Kingdom {
      */
     public static boolean exists(String kingdomName) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName='?';");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName=?;");
             s.setString(1, kingdomName);
             ResultSet res2 = s.executeQuery();
             if(res2.next()) {
