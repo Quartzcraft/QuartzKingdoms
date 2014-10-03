@@ -14,6 +14,7 @@ import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.kingdoms.systems.log.PowerLogger;
 import uk.co.quartzcraft.kingdoms.systems.perms.Group;
+import uk.co.quartzcraft.kingdoms.systems.perms.Permissions;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
@@ -460,16 +461,17 @@ public class QKPlayer {
         //4 - knight
         //5 - noble
         //6 - king
-        if(rank >= 6 | rank == 0) {
+        if(rank > 6 | rank == 0) {
             return this;
         }
 
         try {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET GroupID=? WHERE id=?;");
-            s.setInt(1, this.id);
-            s.setInt(2, rank);
+            s.setInt(1, rank);
+            s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.kingdomGroup = new Group(rank);
+                Permissions.registerPlayerPerms(this);
                 return this;
             } else {
                 return this;
