@@ -15,6 +15,7 @@ import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.core.event.QPlayerJoinEvent;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.util.TaskChain;
+import uk.co.quartzcraft.core.util.Util;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
@@ -53,7 +54,7 @@ public class PlayerListener implements Listener {
         Permissions.registerPlayerPerms(qkPlayer);
 
         player.setDisplayName(qkPlayer.getKingdomGroup().getStyleForName() + player.getDisplayName() + ChatColor.RESET);
-        player.setPlayerListName(player.getDisplayName());
+        player.setPlayerListName(Util.removeExtraChars(player.getDisplayName(), 16));
 
         if(qkPlayer.kingdomMember()) {
             if(qkPlayer.isKing()) {
