@@ -113,7 +113,7 @@ public class Kingdom {
 	}
 
     /**
-     * Determines whether a kingdom with the specifed name exisits.
+     * Determines whether a kingdom with the specified name exists.
      *
      * @param kingdomName
      * @return
