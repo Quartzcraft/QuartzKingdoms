@@ -100,9 +100,9 @@ public class Kingdom {
             s.setString(1, kingdomName);
             s.setInt(2, player.getID());
             if(s.executeUpdate() == 1) {
-                Kingdom kkingdom = new Kingdom(player.getKingdom().getID());
+                Kingdom kkingdom = new Kingdom(kingdomName);
                 player.setKingdom(kkingdom);
-                kkingdom.setKing(player);
+                player.setKingdomGroup(6);
                 return kkingdom;
             } else {
                 return null;
