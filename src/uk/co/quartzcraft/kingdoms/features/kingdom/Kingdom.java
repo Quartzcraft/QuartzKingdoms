@@ -233,6 +233,7 @@ public class Kingdom {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
+                this.setLevel(newa);
                 return this;
             } else {
                 return this;
@@ -257,6 +258,7 @@ public class Kingdom {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.power = newa;
+                this.setLevel(newa);
                 return this;
             } else {
                 return this;
