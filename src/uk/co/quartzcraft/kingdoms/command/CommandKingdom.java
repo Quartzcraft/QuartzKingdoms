@@ -110,7 +110,14 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         QKPlayer psender = new QKPlayer((Player) sender);
-        QKPlayer target = new QKPlayer(Bukkit.getPlayer(args[0]));
+        QKPlayer target;
+        if(Bukkit.getPlayer(args[0]) != null) {
+            target = new QKPlayer(Bukkit.getPlayer(args[0]));
+        } else {
+            sender.sendMessage(QCChat.getPhrase("specify_online_username"));
+            return;
+        }
+
 
         if(args.length >= 2) {
             Kingdom kingdom = psender.getKingdom();
@@ -131,7 +138,13 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         QKPlayer psender = new QKPlayer((Player) sender);
-        QKPlayer target = new QKPlayer(Bukkit.getPlayer(args[0]));
+        QKPlayer target;
+        if(Bukkit.getPlayer(args[0]) != null) {
+            target = new QKPlayer(Bukkit.getPlayer(args[0]));
+        } else {
+            sender.sendMessage(QCChat.getPhrase("specify_online_username"));
+            return;
+        }
 
         if(args.length >= 2) {
             Kingdom kingdom = psender.getKingdom();
@@ -152,7 +165,13 @@ public class CommandKingdom {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
         QKPlayer psender = new QKPlayer((Player) sender);
-        QKPlayer target = new QKPlayer(Bukkit.getPlayer(args[0]));
+        QKPlayer target;
+        if(Bukkit.getPlayer(args[0]) != null) {
+            target = new QKPlayer(Bukkit.getPlayer(args[0]));
+        } else {
+            sender.sendMessage(QCChat.getPhrase("specify_online_username"));
+            return;
+        }
 
         if(args.length >= 2) {
             Kingdom kingdom = psender.getKingdom();
