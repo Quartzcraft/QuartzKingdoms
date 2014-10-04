@@ -266,6 +266,24 @@ public class Kingdom {
         }
     }
 
+    public int setLevel(int power) {
+        double rlevel = (double)power/10;
+        int level = (int) rlevel;
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET level=? WHERE id=?;");
+            s.setInt(1, level);
+            s.setInt(1, this.id);
+            if(s.executeUpdate() == 1) {
+                this.level = level;
+                return level;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     /**
      * Set the kingdom open or closed to new members.
      *
