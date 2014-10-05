@@ -461,7 +461,7 @@ public class QKPlayer {
         //4 - knight
         //5 - noble
         //6 - king
-        if(rank > 6 | rank == 0) {
+        if(rank > 6 | rank == 0 | rank == this.kingdomGroup.getId()) {
             return this;
         }
 
