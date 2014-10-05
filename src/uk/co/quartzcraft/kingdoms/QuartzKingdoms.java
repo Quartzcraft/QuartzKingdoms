@@ -137,6 +137,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		log.info("[QK][STARTUP] Registering Commands");
         commandFramework = new QCommandFramework(this);
         commandFramework.registerCommands(new CommandKingdom(this, core));
+        commandFramework.registerCommands(new CommandKAdmin(this, core));
 	   	
         //Startup notice
 		log.info("[QK] The QuartzKingdoms Plugin has been enabled!");
