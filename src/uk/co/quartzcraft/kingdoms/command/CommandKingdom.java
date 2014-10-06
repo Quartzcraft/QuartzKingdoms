@@ -14,6 +14,7 @@ import uk.co.quartzcraft.core.command.framework.QCommand;
 import uk.co.quartzcraft.core.command.framework.CommandArgs;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
+import uk.co.quartzcraft.kingdoms.features.FancyMessages;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 
@@ -264,7 +265,7 @@ public class CommandKingdom {
         if(suc == 33) {
             Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().getPlayer().isOnline()) {
-                player1.getQPlayer().sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom1.getName() + ChatColor.GREEN + " has declared war against your kingdom. Type " + ChatColor.WHITE + "/kingdom war " + kingdom1.getName() + ChatColor.GREEN + " to also declare war.");
+                player1.getQPlayer().sendMessage(FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 3) {
             Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
@@ -321,7 +322,7 @@ public class CommandKingdom {
         if(suc == 22) {
             Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().getPlayer().isOnline()) {
-                player1.getQPlayer().sendMessage(ChatColor.GREEN + "The kingdom " + ChatColor.WHITE + kingdom1.getName() + ChatColor.GREEN + " is offering to become an ally with your kingdom. Type " + ChatColor.WHITE + "/kingdom ally " + kingdom1.getName() + ChatColor.GREEN + " to accept the offer.");
+                player1.getQPlayer().sendMessage(FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 2) {
             Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
