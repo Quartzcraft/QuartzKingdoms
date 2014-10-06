@@ -10,16 +10,24 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+
 import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.event.QPlayerCreationEvent;
 import uk.co.quartzcraft.core.event.QPlayerJoinEvent;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.util.TaskChain;
 import uk.co.quartzcraft.core.util.Util;
+
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
+import uk.co.quartzcraft.kingdoms.features.FancyMessages;
+import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 import uk.co.quartzcraft.kingdoms.systems.perms.Permissions;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PlayerListener implements Listener {
 
@@ -58,7 +66,32 @@ public class PlayerListener implements Listener {
 
         if(qkPlayer.kingdomMember()) {
             if(qkPlayer.isKing()) {
-                //TODO Add pending war checks
+                final QKPlayer qqkPlayer = qkPlayer;
+                final Player pplayer = player;
+                TaskChain.newChain().add(new TaskChain.AsyncGenericTask() {
+                    @Override
+                    protected void run() {
+                        try {
+                            ResultSet pendingWar = qqkPlayer.getKingdom().getProposedEnemy();
+                            ResultSet pendingAlly = qqkPlayer.getKingdom().getProposedAlly();
+                            if(pendingWar != null) {
+                                while(pendingWar.next()) {
+                                    Kingdom kingdom1 = new Kingdom(pendingWar.getInt("kingdom_id"));
+                                    qqkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
+                                }
+                            }
+                            if(pendingAlly != null) {
+                                while(pendingAlly.next()) {
+                                    Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("kingdom_id"));
+                                    qqkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
+                                }
+                            }
+                        } catch(SQLException e) {
+                            KUtil.printException("Failed to retrieve and loop through pending war and ally relationships", e);
+                        }
+                    }
+                });
+
             }
         }
         plugin.logg.info("[QK] " + qkPlayer.getQPlayer().getName() + " has successfully joined!");
