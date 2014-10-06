@@ -518,7 +518,7 @@ public class Kingdom {
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
-            if(res.next()) {
+            if (res.next()) {
                 return true;
             } else {
                 return false;
