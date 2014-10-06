@@ -528,35 +528,33 @@ public class Kingdom {
         }
     }
 
-    public boolean isPendingEnemy(Kingdom relatingKingdom) {
+    public ResultSet getProposedEnemy() {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=33;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND status=33;");
             s.setInt(1, this.id);
-            s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
-                return true;
+                return res;
             } else {
-                return false;
+                return null;
             }
         } catch (SQLException e) {
-            return false;
+            return null;
         }
     }
 
-    public boolean isPendingAlly(Kingdom relatingKingdom) {
+    public ResultSet getProposedAlly() {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=22;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND status=22;");
             s.setInt(1, this.id);
-            s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
             if(res.next()) {
-                return true;
+                return res;
             } else {
-                return false;
+                return null;
             }
         } catch (SQLException e) {
-            return false;
+            return null;
         }
     }
 }
