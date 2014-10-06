@@ -89,8 +89,8 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("successfully_knighted_player", "&aThe player has successfully been knighted!");
         QCChat.addPhrase("successfully_noble_player", "&aThe player has successfully been made a noble!");
         QCChat.addPhrase("successfully_king_player", "&aThe player has successfully been made the king!");
-        QCChat.addPhrase("you_are_now_a_knight", "&aYou have been knighted by your kingdom!");
-        QCChat.addPhrase("you_are_now_a_noble", "&aYou have been made a noble by your king!");
+        QCChat.addPhrase("you_are_now_a_knight", "&aYou have been knighted by your king!");
+        QCChat.addPhrase("you_are_now_a_noble", "&aYou have been made a noble of your kingdom by your king!");
         QCChat.addPhrase("you_are_now_a_king", "&aYou have been made the king of your kingdom!");
 
         QCChat.addPhrase("you_must_be_king", "&cYou must be the king to perform this action!");
