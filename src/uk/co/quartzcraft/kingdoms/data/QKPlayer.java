@@ -118,10 +118,11 @@ public class QKPlayer {
         } else {
             this.clan = null;
         }
+        this.player = iplayer;
     }
 
     /**
-     * Creates a QKPlayer object using the specified QPlayer <b>This must be used for handling offline players</b>
+     * Creates a QKPlayer object using the specified QPlayer
      *
      * @param qPlayer
      */
@@ -164,8 +165,8 @@ public class QKPlayer {
     }
 
     /**
-     * Creates a new QKPlayer (not object
-     * )
+     * Creates a new QKPlayer (not object)
+     * 
      * @param player
      * @return
      */
