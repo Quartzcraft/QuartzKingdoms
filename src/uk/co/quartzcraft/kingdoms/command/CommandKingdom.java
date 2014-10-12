@@ -340,14 +340,14 @@ public class CommandKingdom {
         Kingdom kingdom = new Kingdom(args[0]);
         if(qkPlayer.kingdomMember()) {
             sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
-        } else if(kingdom.isOpen()) {
-            qkPlayer.setKingdom(kingdom);
-            kingdom.addPower(2);
-            sender.sendMessage(QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
+        } else if(kingdom.equals(null)) {
+            sender.sendMessage(QCChat.getPhrase("kingdom_not_found"));
         } else if(!kingdom.isOpen()) {
             sender.sendMessage(QCChat.getPhrase("kingdom_not_open"));
         } else {
-            sender.sendMessage(QCChat.getPhrase("kingdom_not_found"));
+            qkPlayer.setKingdom(kingdom);
+            kingdom.addPower(2);
+            sender.sendMessage(QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
         }
     }
 
