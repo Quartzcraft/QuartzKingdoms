@@ -52,7 +52,7 @@ public class Kingdom {
     }
 
     /**
-     * Creates a kingdom object using the spcified name
+     * Creates a kingdom object using the specified name
      *
      * @param name
      */
