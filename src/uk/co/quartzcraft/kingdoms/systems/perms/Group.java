@@ -106,6 +106,9 @@ public class Group {
         if(this.prefix == null) {
             return "";
         }
+        if(this.prefix == null && this.colour == null) {
+            return "";
+        }
         return this.colour + "[" + this.prefix + "]" + ChatColor.RESET;
     }
 }
