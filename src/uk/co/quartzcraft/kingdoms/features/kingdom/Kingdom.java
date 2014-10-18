@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import org.bukkit.plugin.Plugin;
 
+import uk.co.quartzcraft.core.util.TaskChain;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
@@ -142,7 +143,6 @@ public class Kingdom {
      * @return
      */
 	public boolean delete(QKPlayer player) {
-        //TODO All players must leave kingdom
 		if(!player.isKing(this)) {
 			return false;
 		}
@@ -153,6 +153,38 @@ public class Kingdom {
             s.setInt(2, player.getID());
             player.setKingdom(null);
 			if(s.executeUpdate() == 1) {
+                final int id = this.id;
+                TaskChain.newChain().add(new TaskChain.AsyncFirstTask() {
+                    @Override
+                    protected Object run() {
+                        try {
+                            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM KingdomsPlayerData WHERE KingdomID=?;");
+                            s.setInt(1, id);
+                            ResultSet res2 = s.executeQuery();
+                            return res2;
+                        } catch (SQLException e ) {
+                            KUtil.printException("Failed to select all players from kingdom", e);
+                            return null;
+                        }
+                    }
+                }).add(new TaskChain.AsyncLastTask() {
+                    @Override
+                    protected void run(Object o) {
+                        if(o == null) {
+                            return;
+                        }
+
+                        ResultSet res = (ResultSet) o;
+
+                        try {
+                            while(res.next()) {
+                                new QKPlayer(res.getInt("id")).setKingdom(null);
+                            }
+                        } catch (SQLException e) {
+                            KUtil.printException("Failed to remove all players from kingdom", e);
+                        }
+                    }
+                }).execute();
 				return true;
 			} else {
 				return false;
@@ -293,7 +325,6 @@ public class Kingdom {
      * @return
      */
     public Kingdom setOpen(boolean status) {
-        //TODO
         if(status && !this.open) {
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=0 WHERE id=?;");
