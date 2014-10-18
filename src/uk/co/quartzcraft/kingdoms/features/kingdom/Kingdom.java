@@ -17,7 +17,7 @@ public class Kingdom {
 
     private int id;
     private String name;
-    private QKPlayer king;
+    private int king;
     private int power;
     private int level;
     private boolean open;
@@ -38,7 +38,7 @@ public class Kingdom {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
                 this.open = res.getBoolean("invite_only");
-                this.king = new QKPlayer(res.getInt("KingID"));
+                this.king = res.getInt("KingID");
                 this.name = res.getString("KingdomName");
                 this.level = res.getInt("Level");
             } else {
@@ -67,7 +67,7 @@ public class Kingdom {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
                 this.open = res.getBoolean("invite_only");
-                this.king = new QKPlayer(res.getInt("KingID"));
+                this.king = res.getInt("KingID");
                 this.level = res.getInt("Level");
             } else {
                 return;
@@ -188,7 +188,7 @@ public class Kingdom {
      * @return
      */
     public QKPlayer getKing() {
-        return this.king;
+        return new QKPlayer(this.king);
     }
 
     /**
@@ -337,7 +337,7 @@ public class Kingdom {
             s.setInt(1, player.getID());
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
-                this.king = player;
+                this.king = player.getID();
                 return this;
             } else {
                 return this;
