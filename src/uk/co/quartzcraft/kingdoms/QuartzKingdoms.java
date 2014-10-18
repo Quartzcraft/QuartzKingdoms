@@ -67,14 +67,15 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("kingdom_name_single_word", "&cA kingdoms name may only be a single word!");
         QCChat.addPhrase("created_kingdom_yes", "&aSuccessfully created kingdom: ");
         QCChat.addPhrase("created_kingdom_no", "&cFailed to create kingdom: ");
-        QCChat.addPhrase("deleted_kingdom_yes", "&aSuccessfully deleted kingdom: ");
-        QCChat.addPhrase("deleted_kingdom_no", "&cFailed to delete kingdom: ");
+        QCChat.addPhrase("deleted_kingdom_yes", "&aSuccessfully disbanded kingdom: ");
+        QCChat.addPhrase("deleted_kingdom_no", "&cFailed to disbanded kingdom: ");
         QCChat.addPhrase("specify_kingdom_name", "&cPlease specify a name!");
         QCChat.addPhrase("kingdomname_already_used", "&cAnother kingdom is using that name! &aPlease pick another name");
         QCChat.addPhrase("kingdom_does_not_exist", "&cThe specified kingdom does not exist!");
         QCChat.addPhrase("info_kingdom", "&bInfo on Kingdom: ");
         QCChat.addPhrase("your_kingdoms_level_is_X", "&ayour kingdoms level is &b");
         QCChat.addPhrase("your_kingdoms_power_is_X", "&aYour kingdoms power is &b");
+        QCChat.addPhrase("your_kingdom_has_been_disbanded", "&cYour kingdom has been disbanded! You are no longer a member of a kingdom.");
 
         QCChat.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
         QCChat.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for your kingdom!");
