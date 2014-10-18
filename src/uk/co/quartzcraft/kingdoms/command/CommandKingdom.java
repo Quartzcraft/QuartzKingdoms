@@ -97,9 +97,9 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         if(kingdom.getKing().equals(player.getKingdom()) && player.isKing(kingdom)) {
             if(kingdom.delete(player)) {
-                player.getQPlayer().sendMessage(QCChat.getPhrase("disbanded_kingdom_yes") + ChatColor.WHITE + player.getKingdom().getName());
+                player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + player.getKingdom().getName());
             } else {
-                player.getQPlayer().sendMessage(QCChat.getPhrase("disbanded_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
+                player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
             }
         } else {
             player.getQPlayer().sendMessage(QCChat.getPhrase("you_must_be_king_to_delete_kingdom"));
