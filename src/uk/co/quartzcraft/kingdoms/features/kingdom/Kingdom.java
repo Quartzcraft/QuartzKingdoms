@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import org.bukkit.plugin.Plugin;
 
+import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.util.TaskChain;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
@@ -178,7 +179,8 @@ public class Kingdom {
 
                         try {
                             while(res.next()) {
-                                new QKPlayer(res.getInt("id")).setKingdom(null);
+                                QKPlayer player1 = new QKPlayer(res.getInt("id")).setKingdom(null);
+                                player1.sendMessage(QCChat.getPhrase("your_kingdom_has_been_disbanded"));
                             }
                         } catch (SQLException e) {
                             KUtil.printException("Failed to remove all players from kingdom", e);
