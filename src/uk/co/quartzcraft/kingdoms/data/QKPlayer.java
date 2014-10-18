@@ -483,4 +483,10 @@ public class QKPlayer {
         }
     }
 
+    public void sendMessage(String msg) {
+        if(this.qplayer.getPlayer() != null) {
+            this.qplayer.sendMessage(msg);
+        }
+    }
+
 }
