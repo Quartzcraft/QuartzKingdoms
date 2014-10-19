@@ -163,7 +163,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.king", aliases = { "k.king", "king" }, permission = "QCK.kingdom.promote.king", description = "Promotes the specified player to the king of the kingdom", usage = "Use /kingdom king [playername")
+    @QCommand(name = "kingdom.king", aliases = { "k.king", "king" }, permission = "QCK.kingdom.promote.king", description = "Promotes the specified player to the king of the kingdom. Makes the current king a noble", usage = "Use /kingdom king [playername")
     public void kingdomKing(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -175,6 +175,7 @@ public class CommandKingdom {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
                 target.setKingdomGroup(6);
+                psender.setKingdomGroup(5);
                 sender.sendMessage(QCChat.getPhrase("successfully_king_player"));
                 target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_king"));
             } else {
