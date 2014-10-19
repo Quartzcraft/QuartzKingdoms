@@ -183,9 +183,7 @@ public class CommandKingdom {
         String WorldName = world.getName();
         String AWorldName = QuartzKingdoms.plugin.getConfig().getString("settings.world");
 
-        if(qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
-
-        } else {
+        if(!qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
             QCChat.getPhrase("you_must_be_king");
             return;
         }
@@ -212,9 +210,7 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         Chunk chunk = player.getLocation().getChunk();
 
-        if(qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
-
-        } else {
+        if(!qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
             QCChat.getPhrase("you_must_be_king");
             return;
         }
