@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.command.framework.QCommandFramework;
+import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.command.framework.QCommand;
 import uk.co.quartzcraft.core.command.framework.CommandArgs;
@@ -112,13 +113,7 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         QKPlayer psender = new QKPlayer((Player) sender);
         QKPlayer target;
-        if(Bukkit.getPlayer(args[0]) != null) {
-            target = new QKPlayer(Bukkit.getPlayer(args[0]));
-        } else {
-            sender.sendMessage(QCChat.getPhrase("specify_online_username"));
-            return;
-        }
-
+        target = new QKPlayer(new QPlayer(args[0]));
 
         if(args.length >= 2) {
             Kingdom kingdom = psender.getKingdom();
@@ -140,12 +135,7 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         QKPlayer psender = new QKPlayer((Player) sender);
         QKPlayer target;
-        if(Bukkit.getPlayer(args[0]) != null) {
-            target = new QKPlayer(Bukkit.getPlayer(args[0]));
-        } else {
-            sender.sendMessage(QCChat.getPhrase("specify_online_username"));
-            return;
-        }
+        target = new QKPlayer(new QPlayer(args[0]));
 
         if(args.length >= 2) {
             Kingdom kingdom = psender.getKingdom();
@@ -167,12 +157,7 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         QKPlayer psender = new QKPlayer((Player) sender);
         QKPlayer target;
-        if(Bukkit.getPlayer(args[0]) != null) {
-            target = new QKPlayer(Bukkit.getPlayer(args[0]));
-        } else {
-            sender.sendMessage(QCChat.getPhrase("specify_online_username"));
-            return;
-        }
+        target = new QKPlayer(new QPlayer(args[0]));
 
         if(args.length >= 2) {
             Kingdom kingdom = psender.getKingdom();
