@@ -414,7 +414,7 @@ public class Kingdom {
      * @param player
      */
     public void invitePlayer(QKPlayer player) {
-        
+        //TODO Finish this
     }
 
     /**
