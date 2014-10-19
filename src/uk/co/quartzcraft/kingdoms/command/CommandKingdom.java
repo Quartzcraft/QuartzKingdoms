@@ -321,7 +321,7 @@ public class CommandKingdom {
         Kingdom kingdom = new Kingdom(args[0]);
         if(qkPlayer.kingdomMember()) {
             sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
-        } else if(kingdom.equals(null)) {
+        } else if(kingdom.getID() == 0) {
             sender.sendMessage(QCChat.getPhrase("kingdom_not_found"));
         } else if(!kingdom.isOpen()) {
             sender.sendMessage(QCChat.getPhrase("kingdom_not_open"));
