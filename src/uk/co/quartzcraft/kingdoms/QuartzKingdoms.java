@@ -75,7 +75,7 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("your_kingdom_has_been_disbanded", "&cYour kingdom has been disbanded! You are no longer a member of a kingdom.");
 
         QCChat.addPhrase("info_kingdom", "&bInformation on kingdom &r");
-        QCChat.addPhrase("your_kingdoms_level_is_X", "&ayour kingdoms level is &b");
+        QCChat.addPhrase("your_kingdoms_level_is_X", "&aYour kingdoms level is &b");
         QCChat.addPhrase("your_kingdoms_power_is_X", "&aYour kingdoms power is &b");
         QCChat.addPhrase("kingdom_level_is_X", "&aLevel: &r");
         QCChat.addPhrase("kingdom_power_is_X", "&aPower: &r");
