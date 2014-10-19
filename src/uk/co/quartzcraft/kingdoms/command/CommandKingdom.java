@@ -127,7 +127,7 @@ public class CommandKingdom {
         QKPlayer target;
         target = new QKPlayer(new QPlayer(args[0]));
 
-        if(args.length >= 2) {
+        if(args.length == 1 && target.getID() != 0) {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
                 target.setKingdomGroup(4);
@@ -149,7 +149,7 @@ public class CommandKingdom {
         QKPlayer target;
         target = new QKPlayer(new QPlayer(args[0]));
 
-        if(args.length >= 2) {
+        if(args.length == 1 && target.getID() != 0) {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
                 target.setKingdomGroup(5);
@@ -171,7 +171,7 @@ public class CommandKingdom {
         QKPlayer target;
         target = new QKPlayer(new QPlayer(args[0]));
 
-        if(args.length >= 2) {
+        if(args.length == 1 && target.getID() != 0) {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
                 target.setKingdomGroup(6);
