@@ -51,6 +51,10 @@ public class CommandKingdom {
         }
 
         Kingdom kingdom = new Kingdom(args.getArgs()[0]);
+        if(kingdom.getID() == 0) {
+            args.getSender().sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            return;
+        }
         args.getSender().sendMessage(QCChat.getPhrase("info_kingdom") + kingdom.getName());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getName());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
