@@ -81,6 +81,9 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("kingdom_power_is_X", "&aPower: &r");
         QCChat.addPhrase("kingdom_king_is_X", "&aKing: &r");
 
+        QCChat.addPhrase("player_level_is_X", "&Level: &r");
+        QCChat.addPhrase("player_kingdom_is_X", "&Kingdom: &r");
+
         QCChat.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
         QCChat.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for your kingdom!");
         QCChat.addPhrase("chunk_claimed_for_kingdom_no", "&cChunk was not successfully claimed for Kingdom: ");
