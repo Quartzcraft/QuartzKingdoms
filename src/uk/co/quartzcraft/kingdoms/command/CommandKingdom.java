@@ -110,7 +110,7 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         if(player.isKing(kingdom)) {
             if(kingdom.delete(player)) {
-                player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + player.getKingdom().getName());
+                player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
             } else {
                 player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
             }
