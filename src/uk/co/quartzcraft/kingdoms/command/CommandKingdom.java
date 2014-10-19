@@ -46,7 +46,15 @@ public class CommandKingdom {
 
     @QCommand(name = "kingdom.info", aliases = { "k.info" }, permission = "QCK.kingdom.info", description = "Get information about a specified kingdom", usage = "Use /kingdom info [kingdom name]")
     public void kingdomInfo(CommandArgs args) {
-        args.getSender().sendMessage("Info command testing");
+        if(args.getArgs()[0] == null) {
+            return;
+        }
+
+        Kingdom kingdom = new Kingdom(args.getArgs()[0]);
+        args.getSender().sendMessage(QCChat.getPhrase("info_kingdom") + kingdom.getName());
+        args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getName());
+        args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
+        args.getSender().sendMessage(QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
     }
 
     @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
