@@ -141,6 +141,7 @@ public class QuartzKingdoms extends JavaPlugin {
 		log.info("[QK][STARTUP] Registering Listeners");
 		new BlockListener(this);
 		new PlayerListener(this);
+        new PInfoListener(this);
 		
 		//Commands
 		log.info("[QK][STARTUP] Registering Commands");
