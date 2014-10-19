@@ -11,20 +11,17 @@ import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Permissions {
-    public static HashMap<String, PermissionAttachment> permissions = new HashMap<>();
+    public static HashMap<UUID, PermissionAttachment> permissions = new HashMap<>();
 
     public static void registerPlayerPerms(QKPlayer kplayer) {
         Player player = kplayer.getPlayer();
 
         Integer group = kplayer.getKingdomGroup().getId();
 
-        if (permissions.containsKey(player.getName())) {
+        if (permissions.containsKey(player.getUniqueId())) {
             unregisterPlayerPerms(kplayer);
         }
 
@@ -62,17 +59,17 @@ public class Permissions {
             attachmentPrimary.setPermission("QCK.king", true);
         }
 
-        permissions.put(player.getName(), attachmentPrimary);
+        permissions.put(player.getUniqueId(), attachmentPrimary);
     }
 
     public static void unregisterPlayerPerms(QKPlayer kplayer) {
-        if (permissions.containsKey(kplayer.getQPlayer().getPlayer().getName())) {
+        if (permissions.containsKey(kplayer.getQPlayer().getPlayer().getUniqueId())) {
             try {
-                kplayer.getQPlayer().getPlayer().removeAttachment(permissions.get(kplayer.getQPlayer().getPlayer().getName()));
+                kplayer.getQPlayer().getPlayer().removeAttachment(permissions.get(kplayer.getQPlayer().getPlayer().getUniqueId()));
             } catch (IllegalArgumentException ex) {
                 KUtil.printException("Failed to remove permission attachments", ex);
             }
-            permissions.remove(kplayer.getQPlayer().getPlayer().getName());
+            permissions.remove(kplayer.getQPlayer().getPlayer().getUniqueId());
         }
     }
 }
