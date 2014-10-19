@@ -14,5 +14,13 @@ public class PInfoListener implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPInfoExtraFieldsEvent(PInfoExtraFieldsEvent event) {
+        QKPlayer target = new QKPlayer(event.getTarget());
+
+        if(target.getKingdom() != null) {
+            event.addField(QCChat.getPhrase("player_kingdom_is_X") + target.getKingdom().getName());
+        }
+        event.addField(QCChat.getPhrase("player_level_is_X") + target.getPower());
     }
 }
