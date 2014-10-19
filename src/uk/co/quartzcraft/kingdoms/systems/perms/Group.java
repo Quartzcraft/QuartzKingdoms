@@ -100,16 +100,14 @@ public class Group {
     }
 
     public String getStyleForName() {
-        if(this.colour == null) {
-            return "[" + this.prefix + "]";
-        }
+        String p = "[" + this.prefix + "]";
         if(this.prefix == null) {
             return "";
+        } else if(this.colour != null) {
+            return this.colour + p + ChatColor.RESET;
+        } else {
+            return p + ChatColor.RESET;
         }
-        if(this.prefix == null && this.colour == null) {
-            return "";
-        }
-        return this.colour + "[" + this.prefix + "]" + ChatColor.RESET;
     }
 }
 
