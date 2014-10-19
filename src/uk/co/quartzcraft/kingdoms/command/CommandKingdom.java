@@ -181,7 +181,7 @@ public class CommandKingdom {
         Chunk chunk = player.getLocation().getChunk();
         World world = player.getWorld();
         String WorldName = world.getName();
-        String AWorldName = this.plugin.getConfig().getString("settings.world");
+        String AWorldName = QuartzKingdoms.plugin.getConfig().getString("settings.world");
 
         if(qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
 
