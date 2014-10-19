@@ -345,7 +345,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 1 power from the kingdom.", usage = "Use /kingdom leave")
+    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 3 power from the kingdom.", usage = "Use /kingdom leave")
     public void kingdomLeave(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -354,7 +354,7 @@ public class CommandKingdom {
         Kingdom kingdom = new Kingdom(args[0]);
         if(qkPlayer.kingdomMember()) {
             qkPlayer.setKingdom(null);
-            kingdom.takePower(1);
+            kingdom.takePower(3);
             sender.sendMessage(QCChat.getPhrase("successfully_left_kingdom_X") + kingdom.getName());
         } else {
             sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
@@ -376,7 +376,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this removes 3 power.", usage = "Use /kingdom close")
+    @QCommand(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this takes 5 power.", usage = "Use /kingdom close")
     public void kingdomClose(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -385,7 +385,7 @@ public class CommandKingdom {
         if(kingdom.isOpen()) {
             kingdom.setOpen(true);
             sender.sendMessage(QCChat.getPhrase("kingdom_now_closed"));
-            kingdom.takePower(3);
+            kingdom.takePower(5);
         } else {
             sender.sendMessage(QCChat.getPhrase("kingdom_already_closed"));
         }
