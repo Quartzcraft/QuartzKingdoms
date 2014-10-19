@@ -385,7 +385,7 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
         if(qkPlayer.kingdomMember()) {
-            qkPlayer.getKingdom().invitePlayer(new QKPlayer(Bukkit.getPlayer(args[0])));
+            qkPlayer.getKingdom().invitePlayer(new QKPlayer(new QPlayer(args[0])));
             sender.sendMessage(QCChat.getPhrase("invited_player_to_kingdom"));
         } else {
             sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
