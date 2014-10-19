@@ -134,7 +134,7 @@ public class CommandKingdom {
                 sender.sendMessage(QCChat.getPhrase("successfully_knighted_player"));
                 target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_knight"));
             } else {
-                sender.sendMessage(QCChat.getPhrase("no_permission"));
+                sender.sendMessage(QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
             }
         } else {
             sender.sendMessage(QCChat.getPhrase("specify_username"));
@@ -156,7 +156,7 @@ public class CommandKingdom {
                 sender.sendMessage(QCChat.getPhrase("successfully_noble_player"));
                 target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_noble"));
             } else {
-                sender.sendMessage(QCChat.getPhrase("no_permission"));
+                sender.sendMessage(QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
             }
         } else {
             sender.sendMessage(QCChat.getPhrase("specify_username"));
@@ -178,7 +178,7 @@ public class CommandKingdom {
                 sender.sendMessage(QCChat.getPhrase("successfully_king_player"));
                 target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_king"));
             } else {
-                sender.sendMessage(QCChat.getPhrase("no_permission"));
+                sender.sendMessage(QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
             }
         } else {
             sender.sendMessage(QCChat.getPhrase("specify_username"));
