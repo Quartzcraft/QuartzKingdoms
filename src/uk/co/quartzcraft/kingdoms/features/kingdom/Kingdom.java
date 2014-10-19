@@ -180,6 +180,7 @@ public class Kingdom {
                         try {
                             while(res.next()) {
                                 QKPlayer player1 = new QKPlayer(res.getInt("id")).setKingdom(null);
+                                player1.setKingdomGroup(1);
                                 player1.sendMessage(QCChat.getPhrase("your_kingdom_has_been_disbanded"));
                             }
                         } catch (SQLException e) {
