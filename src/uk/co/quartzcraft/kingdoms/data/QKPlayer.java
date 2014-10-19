@@ -472,7 +472,9 @@ public class QKPlayer {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.kingdomGroup = new Group(rank);
-                Permissions.registerPlayerPerms(this);
+                if(this.player != null) {
+                    Permissions.registerPlayerPerms(this);
+                }
                 return this;
             } else {
                 return this;
