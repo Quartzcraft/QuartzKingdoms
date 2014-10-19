@@ -401,7 +401,7 @@ public class CommandKingdom {
         if(qkPlayer.kingdomMember()) {
             sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
         } else {
-            qkPlayer.setKingdom(null); //TODO Fix this
+            qkPlayer.setKingdom(null); //TODO Finish this
             sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
         }
     }
