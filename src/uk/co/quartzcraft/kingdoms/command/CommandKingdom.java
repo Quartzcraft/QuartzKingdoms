@@ -108,10 +108,10 @@ public class CommandKingdom {
         QKPlayer player = new QKPlayer(args0.getPlayer());
         Kingdom kingdom = player.getKingdom();
         String[] args = args0.getArgs();
-        if(player.isKing(kingdom)) {
         if(args.length < 1) {
             player.getQPlayer().sendMessage(QCChat.getPhrase("specify_kingdom_name"));
         }
+        if(player.isKing(kingdom) && player.getPlayer().hasPermission("QCK.kingdom.disband")) {
             if(kingdom.delete(player)) {
                 player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
             } else {
