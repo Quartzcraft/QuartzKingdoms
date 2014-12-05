@@ -177,7 +177,7 @@ public class CommandKingdom {
         if(args.length == 1 && target.getID() != 0) {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
-                target.setKingdomGroup(6);
+                kingdom.setKing(target);
                 psender.setKingdomGroup(5);
                 sender.sendMessage(QCChat.getPhrase("successfully_king_player"));
                 target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_king"));
