@@ -374,6 +374,7 @@ public class Kingdom {
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.king = player.getID();
+                player.setKingdomGroup(6);
                 return this;
             } else {
                 return this;
