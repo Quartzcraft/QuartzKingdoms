@@ -153,6 +153,7 @@ public class Kingdom {
             s.setInt(1, this.id);
             s.setInt(2, player.getID());
             player.setKingdom(null);
+            player.setKingdomGroup(1);
 			if(s.executeUpdate() == 1) {
                 final int id = this.id;
                 TaskChain.newChain().add(new TaskChain.AsyncFirstTask() {
