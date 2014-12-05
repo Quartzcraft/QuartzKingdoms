@@ -109,6 +109,9 @@ public class CommandKingdom {
         Kingdom kingdom = player.getKingdom();
         String[] args = args0.getArgs();
         if(player.isKing(kingdom)) {
+        if(args.length < 1) {
+            player.getQPlayer().sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+        }
             if(kingdom.delete(player)) {
                 player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
             } else {
