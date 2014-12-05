@@ -115,7 +115,7 @@ public class CommandKingdom {
                 player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
             }
         } else {
-            player.getQPlayer().sendMessage(QCChat.getPhrase("you_must_be_king_to_delete_kingdom"));
+            player.getQPlayer().sendMessage(QCChat.getPhrase("you_must_be_king"));
         }
     }
 
