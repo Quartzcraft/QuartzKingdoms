@@ -89,7 +89,7 @@ public class Group {
     public String getFancyName() {
         if(this.prefix == null) {
             if(this.colour == null) {
-                return "[" + this.prefix + "]" + this.fullName + ChatColor.RESET;
+                return this.fullName + ChatColor.RESET;
             }
             return this.colour + this.fullName + ChatColor.RESET;
         }
