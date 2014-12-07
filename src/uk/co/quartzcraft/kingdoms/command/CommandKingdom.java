@@ -56,7 +56,7 @@ public class CommandKingdom {
             return;
         }
         args.getSender().sendMessage(QCChat.getPhrase("info_kingdom") + kingdom.getName());
-        args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getName());
+        args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getFancyName());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
     }
@@ -207,7 +207,6 @@ public class CommandKingdom {
         if(WorldName.equalsIgnoreCase(AWorldName)) {
             if(ChunkManager.isClaimed(chunk)) {
                 sender.sendMessage(QCChat.getPhrase("this_chunk_is_already_claimed"));
-
             } else {
                 ChunkManager.claimChunk(qkPlayer.getKingdom(), player);
                 sender.sendMessage(QCChat.getPhrase("chunk_claimed_for_kingdom_yes"));
