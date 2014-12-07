@@ -4,6 +4,7 @@ import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
 import uk.co.quartzcraft.core.data.QPlayer;
+import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 
 public class ChunkManager {
 	
-	public static Chunk claimChunk(Kingdom kingdom, Player player) {
+	public static boolean claimChunk(Kingdom kingdom, Player player) {
 		Chunk chunk = player.getLocation().getChunk();
 		
 		if(!isClaimed(chunk)) {
@@ -25,33 +26,33 @@ public class ChunkManager {
                 s.setInt(2, chunk.getX());
                 s.setInt(3, chunk.getZ());
                 s.executeUpdate();
-                return chunk;
+                return true;
             } catch (SQLException e) {
                 e.printStackTrace();
-                return null;
+                return false;
             }
 		} else {
-            return null;
+            return false;
 		}
 	}
 
-	public static void unClaimChunk(Kingdom kingdom, Player player) {
+	public static boolean unClaimChunk(Kingdom kingdom, Player player) {
         Chunk chunk = player.getLocation().getChunk();
 
         if(isClaimed(chunk)) {
-            //unclaim chunk
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE * FROM Chunks WHERE X=? AND Z=? AND kingdom_id=?;");
                 s.setInt(1, chunk.getX());
                 s.setInt(2, chunk.getZ());
                 s.setInt(3, kingdom.getID());
                 s.executeUpdate();
+                return true;
             } catch (SQLException e) {
                 KUtil.printException("Failed to delete chunks from database", e);
-                return;
+                return false;
             }
         } else {
-            return;
+            return false;
         }
 	}
 
