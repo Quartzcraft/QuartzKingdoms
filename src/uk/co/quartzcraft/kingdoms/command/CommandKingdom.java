@@ -59,6 +59,11 @@ public class CommandKingdom {
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getFancyName());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
+        if(kingdom.isOpen()) {
+            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_open"));
+        } else {
+            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_closed"));
+        }
     }
 
     @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
