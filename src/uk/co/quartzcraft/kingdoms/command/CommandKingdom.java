@@ -393,7 +393,7 @@ public class CommandKingdom {
         QKPlayer player = new QKPlayer(Bukkit.getPlayer(sender.getName()));
         Kingdom kingdom = player.getKingdom();
         if(kingdom.isOpen()) {
-            kingdom.setOpen(true);
+            kingdom.setOpen(false);
             sender.sendMessage(QCChat.getPhrase("kingdom_now_closed"));
             kingdom.takePower(5);
         } else {
