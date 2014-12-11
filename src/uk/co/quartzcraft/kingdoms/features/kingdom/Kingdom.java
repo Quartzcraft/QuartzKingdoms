@@ -334,12 +334,13 @@ public class Kingdom {
      * @return
      */
     public Kingdom setOpen(boolean status) {
-        if(status && !this.open) {
+        if(status && this.open) {
+            //Set open
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=0 WHERE id=?;");
                 s.setInt(1, this.id);
                 if(s.executeUpdate() == 1) {
-                    this.open = true;
+                    this.open = false;
                     return this;
                 } else {
                     return this;
@@ -347,12 +348,13 @@ public class Kingdom {
             } catch (SQLException e) {
                 return this;
             }
-        } else if(!status && this.open) {
+        } else if(!status && !this.open) {
+            //Set closed
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=1 WHERE id=?;");
                 s.setInt(1, this.id);
                 if(s.executeUpdate() == 1) {
-                    this.open = false;
+                    this.open = true;
                     return this;
                 } else {
                     return this;
