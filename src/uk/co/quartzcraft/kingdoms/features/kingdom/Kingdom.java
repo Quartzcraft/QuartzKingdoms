@@ -234,7 +234,11 @@ public class Kingdom {
      * @return True if open for new players, false if closed to new players.
      */
     public boolean isOpen() {
-        return this.open;
+        if(this.open) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
