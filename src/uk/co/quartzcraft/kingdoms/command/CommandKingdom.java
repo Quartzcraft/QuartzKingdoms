@@ -46,11 +46,14 @@ public class CommandKingdom {
 
     @QCommand(name = "kingdom.info", aliases = { "k.info" }, permission = "QCK.kingdom.info", description = "Get information about a specified kingdom", usage = "Use /kingdom info [kingdom name]")
     public void kingdomInfo(CommandArgs args) {
+        Kingdom kingdom;
+        Player player = args.getPlayer();
         if(args.getArgs()[0] == null) {
-            return;
+            kingdom = new QKPlayer(player).getKingdom();
+        } else {
+            kingdom = new Kingdom(args.getArgs()[0]);
         }
 
-        Kingdom kingdom = new Kingdom(args.getArgs()[0]);
         if(kingdom.getID() == 0) {
             args.getSender().sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
             return;
