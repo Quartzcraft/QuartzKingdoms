@@ -643,15 +643,21 @@ public class Kingdom {
 
     public boolean isAlly(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=2;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=2 AND pending=0;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
-            if (res.next()) {
+
+            java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=? AND status=2 AND pending=0;");
+            s1.setInt(1, relatingKingdom.getID());
+            s1.setInt(2, this.id);
+            ResultSet res1 = s1.executeQuery();
+
+            if(res.next() || res1.next()) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         } catch (SQLException e) {
             return false;
         }
