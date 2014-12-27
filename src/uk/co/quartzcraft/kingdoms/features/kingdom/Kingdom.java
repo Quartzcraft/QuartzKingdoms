@@ -438,16 +438,24 @@ public class Kingdom {
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
+
+            java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            s1.setInt(1, relatingKingdom.getID());
+            s1.setInt(2, this.id);
+            ResultSet res1 = s1.executeQuery();
+
             if(res.next()) {
-                java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
-                s.setInt(1, this.id);
-                s.setInt(2, relatingKingdom.getID());
-                s1.executeUpdate();
+                java.sql.PreparedStatement s2 = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                s2.setInt(1, relatingKingdom.getID());
+                s2.setInt(2, this.id);
+                s2.executeUpdate();
+            } else if (res1.next()) {
+
             } else {
                 return;
             }
         }  catch (SQLException e) {
-            KUtil.printException("Could not retrieve relationships", e);
+            KUtil.printException("Could not set kingdoms at neutral", e);
         }
     }
 
