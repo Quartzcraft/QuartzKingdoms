@@ -63,9 +63,9 @@ public class CommandKingdom {
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
         if(kingdom.isOpen()) {
-            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_open"));
+            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_open") + QCChat.getPhrase("to_new_members"));
         } else {
-            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_closed"));
+            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_closed") + QCChat.getPhrase("to_new_members"));
         }
     }
 
