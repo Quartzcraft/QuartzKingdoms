@@ -555,28 +555,58 @@ public class Kingdom {
             if(isAlly(relatingKingdom)) {
                 return 2;
             } else if(res.next()) {
-                if(res.getString("status") == "22") {
-                    java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET status=2 WHERE kingdom_id=? AND sec_kingdom_id=?;");
-                    s1.setInt(1, this.id);
-                    s1.setInt(2, relatingKingdom.getID());
-                    s1.executeUpdate();
+                if(res.getInt("status") == 2 && res.getInt("pending") == 1) {
+                    if(res.getInt("last_update_id") == relatingKingdom.getID()) {
+                        java.sql.PreparedStatement s11 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=0 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                        s11.setInt(1, this.id);
+                        s11.setInt(2, this.id);
+                        s11.setInt(3, relatingKingdom.getID());
+                        s11.executeUpdate();
+                        return 2;
+                    }
+                    return 22;
+                } else if(res.getInt("status") == 3 && res.getInt("pending") == 0) {
                     return 2;
                 } else {
-                    java.sql.PreparedStatement s2 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET status=22 WHERE kingdom_id=? AND sec_kingdom_id=?;");
-                    s2.setInt(1, this.id);
-                    s2.setInt(2, relatingKingdom.getID());
-                    s2.executeUpdate();
+                    java.sql.PreparedStatement s22 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=1 AND status=2 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    s22.setInt(1, this.id);
+                    s22.setInt(2, this.id);
+                    s22.setInt(3, relatingKingdom.getID());
+                    s22.executeUpdate();
+                    return 22;
+                }
+            } else if(res1.next()) {
+                if(res1.getInt("status") == 2 && res1.getInt("pending") == 1) {
+                    if(res1.getInt("last_update_id") == this.id) {
+                        return 22;
+                    } else {
+                        java.sql.PreparedStatement s33 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=0 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                        s33.setInt(1, this.id);
+                        s33.setInt(2, relatingKingdom.getID());
+                        s33.setInt(3, this.id);
+                        s33.executeUpdate();
+                        return 2;
+                    }
+                } else if(res1.getInt("status") == 2 && res1.getInt("pending") == 0) {
+                    return 2;
+                } else {
+                    java.sql.PreparedStatement s44 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=1 AND status=2 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
+                    s44.setInt(1, this.id);
+                    s44.setInt(2, relatingKingdom.getID());
+                    s44.setInt(3, this.id);
+                    s44.executeUpdate();
                     return 22;
                 }
             } else {
-                java.sql.PreparedStatement s3 = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status) VALUES (?, ?, 22);");
-                s3.setInt(1, this.id);
-                s3.setInt(2, relatingKingdom.getID());
-                s3.executeUpdate();
+                java.sql.PreparedStatement s55 = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO relationships (kingdom_id, sec_kingdom_id, status, last_update_id) VALUES (?, ?, 2, ?);");
+                s55.setInt(1, this.id);
+                s55.setInt(2, relatingKingdom.getID());
+                s55.setInt(3, this.id);
+                s55.executeUpdate();
                 return 22;
             }
         }  catch (SQLException e) {
-            KUtil.printException("Could not modify relationships", e);
+            KUtil.printException("Could not set kingdoms allay", e);
             return 0;
         }
     }
