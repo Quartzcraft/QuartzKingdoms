@@ -41,7 +41,7 @@ public class ChunkManager {
 
         if(isClaimed(chunk)) {
             try {
-                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE * FROM Chunks WHERE X=? AND Z=? AND kingdom_id=?;");
+                java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Chunks WHERE X=? AND Z=? AND kingdom_id=?;");
                 s.setInt(1, chunk.getX());
                 s.setInt(2, chunk.getZ());
                 s.setInt(3, kingdom.getID());
