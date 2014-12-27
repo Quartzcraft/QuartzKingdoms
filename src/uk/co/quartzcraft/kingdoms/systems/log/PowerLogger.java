@@ -21,7 +21,7 @@ public class PowerLogger {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         try{
             java.sql.PreparedStatement s = QuartzCore.DBLog.prepareStatement("INSERT INTO PowerLog (server_id, timestamp, player_id, taken, power) VALUES (?, ?, ?, 0, ?);");
-            s.setInt(1, QuartzCore.server);
+            s.setString(1, QuartzCore.getServerName());
             s.setTimestamp(2, timestamp);
             s.setInt(3, player.getQPlayer().getID());
             s.setInt(4, power);
@@ -41,7 +41,7 @@ public class PowerLogger {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         try{
             java.sql.PreparedStatement s = QuartzCore.DBLog.prepareStatement("INSERT INTO PowerLog (server_id, timestamp, player_id, taken, power) VALUES (?, ?, ?, 1, ?);");
-            s.setInt(1, QuartzCore.server);
+            s.setString(1, QuartzCore.getServerName());
             s.setTimestamp(2, timestamp);
             s.setInt(3, player.getQPlayer().getID());
             s.setInt(4, power);
