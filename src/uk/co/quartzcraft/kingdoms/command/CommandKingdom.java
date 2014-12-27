@@ -358,7 +358,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.join", description = "Leaves the kingdom you are in. Takes away 3 power from the kingdom.", usage = "Use /kingdom leave")
+    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.leave", description = "Leaves the kingdom you are in. Takes away 3 power from the kingdom.", usage = "Use /kingdom leave")
     public void kingdomLeave(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
