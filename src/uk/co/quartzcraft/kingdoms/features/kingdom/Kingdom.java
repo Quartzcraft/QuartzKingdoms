@@ -269,7 +269,7 @@ public class Kingdom {
         int newa = this.power + am;
 
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET Power=? WHERE id=?);");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET Power=? WHERE id=?;");
             s.setInt(1, newa);
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
@@ -294,7 +294,7 @@ public class Kingdom {
         int newa = this.power - am;
 
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE KingdomsPlayerData SET Power=? WHERE id=?);");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET Power=? WHERE id=?;");
             s.setInt(1, newa);
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
