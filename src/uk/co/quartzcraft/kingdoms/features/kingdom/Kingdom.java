@@ -665,7 +665,7 @@ public class Kingdom {
 
     public ResultSet getProposedEnemy() {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND status=33;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND kingdom_id=? AND status=3 AND pending=1;");
             s.setInt(1, this.id);
             ResultSet res = s.executeQuery();
             if(res.next()) {
