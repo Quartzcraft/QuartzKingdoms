@@ -28,6 +28,7 @@ import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 public class PlayerListener implements Listener {
 
@@ -68,31 +69,31 @@ public class PlayerListener implements Listener {
             if(qkPlayer.isKing()) {
                 final QKPlayer qqkPlayer = qkPlayer;
                 final Player pplayer = player;
-                TaskChain.newChain().add(new TaskChain.AsyncGenericTask() {
-                    @Override
-                    protected void run() {
-                        try {
-                            ResultSet pendingWar = qqkPlayer.getKingdom().getProposedEnemy();
-                            ResultSet pendingAlly = qqkPlayer.getKingdom().getProposedAlly();
-                            if(pendingWar != null) {
-                                while(pendingWar.next()) {
-                                    Kingdom kingdom1 = new Kingdom(pendingWar.getInt("kingdom_id"));
-                                    qqkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
-                                }
-                            }
-                            if(pendingAlly != null) {
-                                while(pendingAlly.next()) {
-                                    Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("kingdom_id"));
-                                    qqkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
-                                }
-                            }
-                        } catch(SQLException e) {
-                            KUtil.printException("Failed to retrieve and loop through pending war and ally relationships", e);
+                try {
+                    ResultSet pendingWar = qqkPlayer.getKingdom().getProposedEnemy();
+                    ResultSet pendingAlly = qqkPlayer.getKingdom().getProposedAlly();
+                    if(pendingWar != null) {
+                        while(pendingWar.next()) {
+                            Kingdom kingdom1 = new Kingdom(pendingWar.getInt("kingdom_id"));
+                            qqkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
                         }
                     }
-                });
+                    if(pendingAlly != null) {
+                        while(pendingAlly.next()) {
+                            Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("kingdom_id"));
+                            qqkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
+                        }
+                    }
+                } catch(SQLException e) {
+                    KUtil.printException("Failed to retrieve and loop through pending war and ally relationships", e);
+                }
 
             }
+            else {
+                KUtil.log(Level.INFO, "The player was not a king of a kingdom");
+            }
+        } else {
+            KUtil.log(Level.INFO, "The player was not a member of a kingdom");
         }
         plugin.logg.info("[QK] " + qkPlayer.getQPlayer().getName() + " has successfully joined!");
     }
