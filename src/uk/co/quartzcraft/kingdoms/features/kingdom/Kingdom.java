@@ -434,7 +434,7 @@ public class Kingdom {
      */
     public void setAtNeutral(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -458,7 +458,7 @@ public class Kingdom {
      */
     public int setAtWar(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
@@ -498,7 +498,7 @@ public class Kingdom {
      */
     public int setAtAlly(Kingdom relatingKingdom) {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
