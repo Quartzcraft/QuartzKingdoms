@@ -313,9 +313,9 @@ public class Kingdom {
         Double rlevel = new Double(power/10);
         int level = rlevel.intValue();
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET level=? WHERE id=?;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET Level=? WHERE id=?;");
             s.setInt(1, level);
-            s.setInt(1, this.id);
+            s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 this.level = level;
                 return level;
