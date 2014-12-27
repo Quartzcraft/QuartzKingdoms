@@ -352,6 +352,7 @@ public class CommandKingdom {
             sender.sendMessage(QCChat.getPhrase("kingdom_not_open"));
         } else {
             qkPlayer.setKingdom(kingdom);
+            qkPlayer.setKingdomGroup(2);
             kingdom.addPower(2);
             sender.sendMessage(QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
         }
@@ -366,6 +367,7 @@ public class CommandKingdom {
         Kingdom kingdom = new Kingdom(args[0]);
         if(qkPlayer.kingdomMember()) {
             qkPlayer.setKingdom(null);
+            qkPlayer.setKingdomGroup(1);
             kingdom.takePower(3);
             sender.sendMessage(QCChat.getPhrase("successfully_left_kingdom_X") + kingdom.getName());
         } else {
