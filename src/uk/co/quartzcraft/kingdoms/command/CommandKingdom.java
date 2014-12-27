@@ -274,7 +274,7 @@ public class CommandKingdom {
                 player1.getQPlayer().sendMessage(FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 3) {
-            Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             kingdom1.takePower(8);
             kingdom2.takePower(8);
         } else {
@@ -331,7 +331,7 @@ public class CommandKingdom {
                 player1.getQPlayer().sendMessage(FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 2) {
-            Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
         } else {
             sender.sendMessage(QCChat.getPhrase("failed_to_ally_with_kingdom"));
         }
