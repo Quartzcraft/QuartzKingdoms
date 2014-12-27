@@ -364,7 +364,14 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
+
+        if(args.length != 1) {
+            player.sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            return;
+        }
+
         Kingdom kingdom = new Kingdom(args[0]);
+
         if(qkPlayer.kingdomMember()) {
             qkPlayer.setKingdom(null);
             qkPlayer.setKingdomGroup(1);
