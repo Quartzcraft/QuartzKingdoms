@@ -118,7 +118,9 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         if(args.length < 1) {
             player.getQPlayer().sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            return;
         }
+
         if(player.isKing(kingdom) && player.getPlayer().hasPermission("QCK.kingdom.disband")) {
             if(kingdom.delete(player)) {
                 player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
@@ -207,8 +209,8 @@ public class CommandKingdom {
         String WorldName = world.getName();
         String AWorldName = QuartzKingdoms.plugin.getConfig().getString("settings.world");
 
-        if(!qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
-            QCChat.getPhrase("you_must_be_king");
+        if(!qkPlayer.isKing()) {
+            sender.sendMessage(QCChat.getPhrase("you_must_be_king"));
             return;
         }
 
@@ -233,8 +235,8 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         Chunk chunk = player.getLocation().getChunk();
 
-        if(!qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
-            QCChat.getPhrase("you_must_be_king");
+        if(ChunkManager.isClaimed(chunk) && !qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
+            sender.sendMessage(QCChat.getPhrase("you_must_be_king"));
             return;
         }
 
