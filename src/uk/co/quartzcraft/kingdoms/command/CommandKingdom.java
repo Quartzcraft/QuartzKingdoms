@@ -267,7 +267,7 @@ public class CommandKingdom {
             return;
         }
 
-        int suc = kingdom1.setAtAlly(kingdom2);
+        int suc = kingdom1.setAtWar(kingdom2);
         if(suc == 33) {
             Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().isOnline()) {
