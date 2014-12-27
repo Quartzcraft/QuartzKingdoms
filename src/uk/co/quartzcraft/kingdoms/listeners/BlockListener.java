@@ -54,9 +54,8 @@ public class BlockListener implements Listener {
         if(ChunkManager.isClaimed(chunk)) {
             if(qkPlayer.getKingdom().getID() == ChunkManager.getKingdomOwner(chunk).getID() || ChunkManager.getKingdomOwner(chunk).isAlly(qkPlayer.getKingdom())) {
                return true;
-            } else {
-                return false;
             }
+            return false;
         } else {
             return true;
         }
