@@ -269,8 +269,8 @@ public class CommandKingdom {
 
         int suc = kingdom1.setAtAlly(kingdom2);
         if(suc == 33) {
-            Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
-            if(player1.getQPlayer().getPlayer().isOnline()) {
+            Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            if(player1.getQPlayer().isOnline()) {
                 player1.getQPlayer().sendMessage(FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 3) {
@@ -326,8 +326,8 @@ public class CommandKingdom {
 
         int suc = kingdom1.setAtAlly(kingdom2);
         if(suc == 22) {
-            Bukkit.broadcastMessage(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
-            if(player1.getQPlayer().getPlayer().isOnline()) {
+            Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            if(player1.getQPlayer().isOnline()) {
                 player1.getQPlayer().sendMessage(FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 2) {
