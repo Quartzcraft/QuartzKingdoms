@@ -680,7 +680,7 @@ public class Kingdom {
 
     public ResultSet getProposedAlly() {
         try {
-            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND status=22;");
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND kingdom_id=? AND status=2 AND pending=1;");
             s.setInt(1, this.id);
             ResultSet res = s.executeQuery();
             if(res.next()) {
