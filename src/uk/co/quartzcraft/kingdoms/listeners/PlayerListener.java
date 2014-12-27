@@ -102,7 +102,7 @@ public class PlayerListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
         QKPlayer qkPlayer = new QKPlayer(player);
-        qkPlayer.takePower(5);
+        qkPlayer.takePower(3);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
