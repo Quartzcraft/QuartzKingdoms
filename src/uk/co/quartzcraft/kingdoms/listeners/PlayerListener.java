@@ -74,13 +74,13 @@ public class PlayerListener implements Listener {
                     ResultSet pendingAlly = qqkPlayer.getKingdom().getProposedAlly();
                     if(pendingWar != null) {
                         while(pendingWar.next()) {
-                            Kingdom kingdom1 = new Kingdom(pendingWar.getInt("kingdom_id"));
+                            Kingdom kingdom1 = new Kingdom(pendingWar.getInt("last_update_id"));
                             qqkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
                         }
                     }
                     if(pendingAlly != null) {
                         while(pendingAlly.next()) {
-                            Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("kingdom_id"));
+                            Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("last_update_id"));
                             qqkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
                         }
                     }
