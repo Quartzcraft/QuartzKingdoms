@@ -546,6 +546,12 @@ public class Kingdom {
             s.setInt(1, this.id);
             s.setInt(2, relatingKingdom.getID());
             ResultSet res = s.executeQuery();
+
+            java.sql.PreparedStatement s1 = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
+            s1.setInt(1, relatingKingdom.getID());
+            s1.setInt(2, this.id);
+            ResultSet res1 = s1.executeQuery();
+
             if(isAlly(relatingKingdom)) {
                 return 2;
             } else if(res.next()) {
