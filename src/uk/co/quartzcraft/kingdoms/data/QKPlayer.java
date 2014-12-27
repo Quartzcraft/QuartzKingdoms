@@ -357,7 +357,7 @@ public class QKPlayer {
      * @return boolean true if king, false if not.
      */
     public boolean isKing() {
-        if(this.kingdom.getKing().equals(this)) {
+        if(this.kingdom.getKing().getID() == this.id) {
             return true;
         } else {
             return false;

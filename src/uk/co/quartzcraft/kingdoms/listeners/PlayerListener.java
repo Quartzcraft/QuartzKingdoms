@@ -124,7 +124,7 @@ public class PlayerListener implements Listener {
                     return;
                 } else {
                     if(ChunkManager.isClaimed(chunkTo) && ChunkManager.isClaimed(chunkFrom)) {
-                        if(ChunkManager.getKingdomOwner(chunkFrom).equals(ChunkManager.getKingdomOwner(chunkTo))) {
+                        if(ChunkManager.getKingdomOwner(chunkFrom).getID() == ChunkManager.getKingdomOwner(chunkTo).getID()) {
                             return;
                         } else {
                             player.sendMessage(QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(chunkFrom).getName());

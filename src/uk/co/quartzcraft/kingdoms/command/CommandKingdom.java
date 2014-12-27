@@ -238,7 +238,7 @@ public class CommandKingdom {
             return;
         }
 
-        if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).equals(qkPlayer.getKingdom())) {
+        if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).getID() == qkPlayer.getKingdom().getID()) {
             ChunkManager.unClaimChunk(qkPlayer.getKingdom(), player);
             sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_yes"));
         } else {

@@ -52,7 +52,7 @@ public class BlockListener implements Listener {
     public boolean permission(Chunk chunk, Player player) {
         QKPlayer qkPlayer = new QKPlayer(player);
         if(ChunkManager.isClaimed(chunk)) {
-            if(qkPlayer.getKingdom().equals(ChunkManager.getKingdomOwner(chunk)) | ChunkManager.getKingdomOwner(chunk).isEnemy(qkPlayer.getKingdom()) | ChunkManager.getKingdomOwner(chunk).isAlly(qkPlayer.getKingdom())) {
+            if(qkPlayer.getKingdom().getID() == ChunkManager.getKingdomOwner(chunk).getID() || ChunkManager.getKingdomOwner(chunk).isAlly(qkPlayer.getKingdom())) {
                return true;
             } else {
                 return false;
