@@ -48,8 +48,10 @@ public class CommandKingdom {
     public void kingdomInfo(CommandArgs args) {
         Kingdom kingdom;
         Player player = args.getPlayer();
-        if(args.getArgs()[0] == null) {
-            kingdom = new QKPlayer(player).getKingdom();
+        QKPlayer qkPlayer = new QKPlayer(player);
+
+        if(args.getArgs().length != 1) {
+            kingdom = qkPlayer.getKingdom();
         } else {
             kingdom = new Kingdom(args.getArgs()[0]);
         }
