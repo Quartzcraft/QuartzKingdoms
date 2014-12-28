@@ -75,13 +75,13 @@ public class PlayerListener implements Listener {
                     if(pendingWar != null) {
                         while(pendingWar.next()) {
                             Kingdom kingdom1 = new Kingdom(pendingWar.getInt("last_update_id"));
-                            qqkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
+                            qkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
                         }
                     }
                     if(pendingAlly != null) {
                         while(pendingAlly.next()) {
                             Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("last_update_id"));
-                            qqkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
+                            qkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
                         }
                     }
                 } catch(SQLException e) {
