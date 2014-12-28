@@ -134,6 +134,11 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("failed_to_neutral_with_kingdom", "&cFailed to become neutral with ");
         QCChat.addPhrase("failed_to_war_with_kingdom", "&cFailed to go to war with ");
 
+        QCChat.addPhrase("kingdom_is_pending_ally_with_your_kingdom", " &aThis kingdom is pending an allied relationship with your kingdom");
+        QCChat.addPhrase("kingdom_is_pending_war_with_your_kingdom", "&cThis kingdom is pending war with your kingdom!");
+        QCChat.addPhrase("kingdom_is_at_war_with_your_kingdom", "&cThis kingdom is at war with your kingdom!");
+        QCChat.addPhrase("kingdom_is_allied_with_your_kingdom", "&aThis kingdom is allied with your kingdom!");
+
         QCChat.addPhrase("could_not_create_kingdoms_player", "&cYour player data could not be added to the QuartzKingdoms database!");
 		
 		//Database
