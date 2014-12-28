@@ -250,7 +250,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 8 power.", usage = "Use /kingdom war [enemy kingdom name]")
+    @QCommand(name = "kingdom.war", aliases = { "k.war" }, permission = "QCK.kingdom.war", description = "Declares war against the specified kingdom. Uses 5 power.", usage = "Use /kingdom war [enemy kingdom name]")
     public void kingdomWar(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -277,8 +277,8 @@ public class CommandKingdom {
             }
         } else if(suc == 3) {
             Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
-            kingdom1.takePower(8);
-            kingdom2.takePower(8);
+            kingdom1.takePower(5);
+            kingdom2.takePower(5);
         } else {
             sender.sendMessage(QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom"));
         }
@@ -360,7 +360,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.leave", description = "Leaves the kingdom you are in. Takes away 3 power from the kingdom.", usage = "Use /kingdom leave")
+    @QCommand(name = "kingdom.leave", aliases = { "k.leave", "leave" }, permission = "QCK.kingdom.leave", description = "Leaves the kingdom you are in. Takes away 2 power from the kingdom.", usage = "Use /kingdom leave")
     public void kingdomLeave(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -377,14 +377,14 @@ public class CommandKingdom {
         if(qkPlayer.kingdomMember()) {
             qkPlayer.setKingdom(null);
             qkPlayer.setKingdomGroup(1);
-            kingdom.takePower(3);
+            kingdom.takePower(2);
             sender.sendMessage(QCChat.getPhrase("successfully_left_kingdom_X") + kingdom.getName());
         } else {
             sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
         }
     }
 
-    @QCommand(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom 4 power.", usage = "Use /kingdom open")
+    @QCommand(name = "kingdom.open", aliases = { "k.open" }, permission = "QCK.kingdom.open", description = "Opens the kingdom so that players can join. Doing this gives your kingdom 3 power.", usage = "Use /kingdom open")
     public void kingdomOpen(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -395,11 +395,11 @@ public class CommandKingdom {
         } else {
             kingdom.setOpen(true);
             sender.sendMessage(QCChat.getPhrase("kingdom_now_open"));
-            kingdom.addPower(4);
+            kingdom.addPower(3);
         }
     }
 
-    @QCommand(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this takes 5 power.", usage = "Use /kingdom close")
+    @QCommand(name = "kingdom.close", aliases = { "k.close" }, permission = "QCK.kingdom.open", description = "Prevents other players from joining your kingdom unless invited. Doing this takes 4 power.", usage = "Use /kingdom close")
     public void kingdomClose(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
@@ -408,7 +408,7 @@ public class CommandKingdom {
         if(kingdom.isOpen()) {
             kingdom.setOpen(false);
             sender.sendMessage(QCChat.getPhrase("kingdom_now_closed"));
-            kingdom.takePower(5);
+            kingdom.takePower(4);
         } else {
             sender.sendMessage(QCChat.getPhrase("kingdom_already_closed"));
         }
