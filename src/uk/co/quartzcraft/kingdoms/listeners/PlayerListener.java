@@ -95,7 +95,7 @@ public class PlayerListener implements Listener {
         } else {
             KUtil.log(Level.INFO, "The player was not a member of a kingdom");
         }
-        plugin.logg.info("[QK] " + qkPlayer.getQPlayer().getName() + " has successfully joined!");
+        KUtil.log(Level.INFO, qkPlayer.getQPlayer().getName() + " has successfully joined!");
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
