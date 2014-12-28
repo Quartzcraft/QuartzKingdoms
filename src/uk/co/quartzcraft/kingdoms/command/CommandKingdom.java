@@ -60,15 +60,31 @@ public class CommandKingdom {
             args.getSender().sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
             return;
         }
+
         args.getSender().sendMessage(QCChat.getPhrase("info_kingdom") + kingdom.getName());
+
+        if(kingdom.getID() != qkPlayer.getKingdom().getID()) {
+            if(kingdom.isPendingAlly(qkPlayer.getKingdom())) {
+                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_pending_ally_with_your_kingdom"));
+            } else if(kingdom.isPendingEnemy(qkPlayer.getKingdom())) {
+                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_pending_war_with_your_kingdom"));
+            } else if(kingdom.isEnemy(qkPlayer.getKingdom())) {
+                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_at_war_with_your_kingdom"));
+            } else if(kingdom.isAlly(qkPlayer.getKingdom())) {
+                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_allied_with_your_kingdom"));
+            }
+        }
+
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getFancyName());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
         args.getSender().sendMessage(QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
+
         if(kingdom.isOpen()) {
             args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_open") + QCChat.getPhrase("to_new_members"));
         } else {
             args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_closed") + QCChat.getPhrase("to_new_members"));
         }
+
     }
 
     @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
