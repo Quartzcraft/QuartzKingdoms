@@ -64,6 +64,8 @@ public class QuartzKingdoms extends JavaPlugin {
 		//Phrases
 		log.info("[QK][STARTUP]Creating Phrases");
 
+        QCChat.addPhrase("kingdoms_prefix", "&8[&aKingdoms&8]");
+
         QCChat.addPhrase("kingdom_name_single_word", "&cA kingdoms name may only be a single word!");
         QCChat.addPhrase("created_kingdom_yes", "&aSuccessfully created kingdom: ");
         QCChat.addPhrase("created_kingdom_no", "&cFailed to create kingdom: ");
