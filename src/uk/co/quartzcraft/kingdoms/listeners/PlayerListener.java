@@ -45,7 +45,7 @@ public class PlayerListener implements Listener {
         Player bplayer = event.getPlayer();
 
         if(QKPlayer.createKingdomsPlayer(player)) {
-            plugin.log.info("[QC] Kingdoms Player, " + bplayer.getDisplayName() + " was created with UUID of " + bplayer.getUniqueId().toString());
+            plugin.log.info("[QK] Kingdoms Player, " + bplayer.getDisplayName() + " was created with UUID of " + bplayer.getUniqueId().toString());
         } else {
             bplayer.kickPlayer(QCChat.getPhrase("database_error_contact") + "\n" + QCChat.getPhrase("could_not_create_kingdoms_player"));
         }
