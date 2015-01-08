@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import org.bukkit.plugin.Plugin;
 import uk.co.quartzcraft.core.data.QPlayer;
+import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.kingdoms.systems.log.PowerLogger;
 import uk.co.quartzcraft.kingdoms.systems.perms.Group;
 import uk.co.quartzcraft.kingdoms.systems.perms.Permissions;
@@ -380,6 +381,7 @@ public class QKPlayer {
             if(s.executeUpdate() == 1) {
                 this.power = newa;
                 PowerLogger.logAdd(this, newa);
+                KUtil.sendMsg(this.getPlayer(), QCChat.getPhrase("power_updated_your_power_is_now") + this.power);//TODO move elsewhere
                 return this;
             } else {
                 return this;
@@ -406,6 +408,7 @@ public class QKPlayer {
             if(s.executeUpdate() == 1) {
                 this.power = newa;
                 PowerLogger.logTake(this, newa);
+                KUtil.sendMsg(this.getPlayer(), QCChat.getPhrase("power_updated_your_power_is_now") + this.power);//TODO move elsewhere
                 return this;
             } else {
                 return this;
