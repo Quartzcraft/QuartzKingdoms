@@ -67,6 +67,7 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("kingdoms_prefix", "&8[&aKingdoms&8]");
 
         QCChat.addPhrase("you_do_not_have_permission_to_build_here", "&cYou do not have permission to build here!");
+        QCChat.addPhrase("power_updated_your_power_is_now", "&aYour power has been updated! You now have &r");
 
         QCChat.addPhrase("kingdom_name_single_word", "&cA kingdoms name may only be a single word!");
         QCChat.addPhrase("created_kingdom_yes", "&aSuccessfully created kingdom: ");

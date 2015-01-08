@@ -381,7 +381,7 @@ public class QKPlayer {
             if(s.executeUpdate() == 1) {
                 this.power = newa;
                 PowerLogger.logAdd(this, newa);
-                KUtil.sendMsg(this.getPlayer(), QCChat.getPhrase("power_updated_your_power_is_now") + this.power);//TODO move elsewhere
+                KUtil.sendMsg(this.getPlayer(), QCChat.getPhrase("power_updated_your_power_is_now") + this.power + " &apower");//TODO move elsewhere
                 return this;
             } else {
                 return this;
@@ -408,7 +408,7 @@ public class QKPlayer {
             if(s.executeUpdate() == 1) {
                 this.power = newa;
                 PowerLogger.logTake(this, newa);
-                KUtil.sendMsg(this.getPlayer(), QCChat.getPhrase("power_updated_your_power_is_now") + this.power);//TODO move elsewhere
+                KUtil.sendMsg(this.getPlayer(), QCChat.getPhrase("power_updated_your_power_is_now") + this.power + " &apower");//TODO move elsewhere
                 return this;
             } else {
                 return this;
