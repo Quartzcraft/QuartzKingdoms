@@ -9,9 +9,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 public class BlockListener implements Listener {
 	
@@ -26,6 +28,7 @@ public class BlockListener implements Listener {
             return;
         } else {
             event.setCancelled(true);
+            KUtil.sendMsg(player, QCChat.getPhrase("you_do_not_have_permission_to_build_here"));
         }
     }
 	
@@ -36,6 +39,7 @@ public class BlockListener implements Listener {
             return;
         } else {
             event.setCancelled(true);
+            KUtil.sendMsg(player, QCChat.getPhrase("you_do_not_have_permission_to_build_here"));
         }
 	}
 
@@ -46,6 +50,7 @@ public class BlockListener implements Listener {
             return;
         } else {
             event.setCancelled(true);
+            KUtil.sendMsg(player, QCChat.getPhrase("you_do_not_have_permission_to_build_here"));
         }
     }
 
