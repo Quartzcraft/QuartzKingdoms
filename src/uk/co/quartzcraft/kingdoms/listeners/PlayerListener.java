@@ -128,16 +128,16 @@ public class PlayerListener implements Listener {
                         if(ChunkManager.getKingdomOwner(chunkFrom).getID() == ChunkManager.getKingdomOwner(chunkTo).getID()) {
                             return;
                         } else {
-                            player.sendMessage(QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(chunkFrom).getName());
-                            player.sendMessage(QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdomOwner(chunkTo).getName());
+                            KUtil.sendMsg(player, QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(chunkFrom).getName());
+                            KUtil.sendMsg(player, QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdomOwner(chunkTo).getName());
                             return;
                         }
                     } else {
                         if(ChunkManager.isClaimed(chunkFrom)) {
-                            player.sendMessage(QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(chunkFrom).getName());
+                            KUtil.sendMsg(player, QCChat.getPhrase("now_leaving_the_land_of") + ChunkManager.getKingdomOwner(chunkFrom).getName());
                             return;
                         } else if(ChunkManager.isClaimed(chunkTo)) {
-                            player.sendMessage(QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdomOwner(chunkTo).getName());
+                            KUtil.sendMsg(player, QCChat.getPhrase("now_entering_the_land_of") + ChunkManager.getKingdomOwner(chunkTo).getName());
                             return;
                         } else {
                             return;

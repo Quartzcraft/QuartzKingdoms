@@ -18,6 +18,7 @@ import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.features.FancyMessages;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
+import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 public class CommandKingdom {
 
@@ -57,32 +58,32 @@ public class CommandKingdom {
         }
 
         if(kingdom.getID() == 0) {
-            args.getSender().sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_does_not_exist"));
             return;
         }
 
-        args.getSender().sendMessage(QCChat.getPhrase("info_kingdom") + kingdom.getName());
+        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("info_kingdom") + kingdom.getName());
 
         if(kingdom.getID() != qkPlayer.getKingdom().getID()) {
             if(kingdom.isPendingAlly(qkPlayer.getKingdom())) {
-                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_pending_ally_with_your_kingdom"));
+                KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_pending_ally_with_your_kingdom"));
             } else if(kingdom.isPendingEnemy(qkPlayer.getKingdom())) {
-                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_pending_war_with_your_kingdom"));
+                KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_pending_war_with_your_kingdom"));
             } else if(kingdom.isEnemy(qkPlayer.getKingdom())) {
-                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_at_war_with_your_kingdom"));
+                KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_at_war_with_your_kingdom"));
             } else if(kingdom.isAlly(qkPlayer.getKingdom())) {
-                args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_allied_with_your_kingdom"));
+                KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_allied_with_your_kingdom"));
             }
         }
 
-        args.getSender().sendMessage(QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getFancyName());
-        args.getSender().sendMessage(QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
-        args.getSender().sendMessage(QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
+        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_king_is_X") + kingdom.getKing().getQPlayer().getFancyName());
+        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_level_is_X") + kingdom.getLevel());
+        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
 
         if(kingdom.isOpen()) {
-            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_open") + QCChat.getPhrase("to_new_members"));
+            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_open") + QCChat.getPhrase("to_new_members"));
         } else {
-            args.getSender().sendMessage(QCChat.getPhrase("kingdom_is_closed") + QCChat.getPhrase("to_new_members"));
+            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_closed") + QCChat.getPhrase("to_new_members"));
         }
 
     }
@@ -94,22 +95,22 @@ public class CommandKingdom {
         String[] args0 = args.getArgs();
         if(args0.length >= 1) {
             if(args0.length >= 2) {
-                player.getQPlayer().sendMessage(QCChat.getPhrase("kingdom_name_single_word"));
+                KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_name_single_word"));
             } else {
                 if(player.kingdomMember()) {
-                    player.getQPlayer().sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
+                    KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
                 } else {
                     String kingdomName = args0[0];
                     Kingdom kingdom = Kingdom.createKingdom(args0[0], player);
                     if(kingdom != null) {
-                        player.getQPlayer().sendMessage(QCChat.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
                     } else {
-                        player.getQPlayer().sendMessage(QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+                        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
                     }
                 }
             }
         } else {
-            player.getQPlayer().sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("specify_kingdom_name"));
         }
     }
 
@@ -117,14 +118,14 @@ public class CommandKingdom {
     public void kingdomLevel(CommandArgs args) {
         Player player = (Player) args.getSender();
         QKPlayer qkPlayer = new QKPlayer(player);
-        args.getSender().sendMessage(QCChat.getPhrase("your_kingdoms_level_is_X") + qkPlayer.getKingdom().getLevel());
+        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("your_kingdoms_level_is_X") + qkPlayer.getKingdom().getLevel());
     }
 
     @QCommand(name = "kingdom.power", aliases = { "k.power" }, permission = "QCK.kingdom.info.power", description = "Find out the power the kingdom has", usage = "Use /kingdom power")
     public void kingdomPower(CommandArgs args) {
         Player player = (Player) args.getSender();
         QKPlayer qkPlayer = new QKPlayer(player);
-        args.getSender().sendMessage(QCChat.getPhrase("your_kingdoms_power_is_X") + qkPlayer.getKingdom().getPower());
+        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("your_kingdoms_power_is_X") + qkPlayer.getKingdom().getPower());
     }
 
     @QCommand(name = "kingdom.disband", aliases = { "k.disband", "kingdom.delete", "k.delete" }, permission = "QCK.kingdom.disband", description = "Disbands the kingdom you specify. You must be the king.", usage = "Use /kingdom disband [kingdom name]")
@@ -135,18 +136,18 @@ public class CommandKingdom {
         Kingdom kingdom = player.getKingdom();
         String[] args = args0.getArgs();
         if(args.length < 1) {
-            player.getQPlayer().sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("specify_kingdom_name"));
             return;
         }
 
         if(player.isKing(kingdom) && player.getPlayer().hasPermission("QCK.kingdom.disband")) {
             if(kingdom.delete(player)) {
-                player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("deleted_kingdom_yes") + ChatColor.WHITE + args[0]);
             } else {
-                player.getQPlayer().sendMessage(QCChat.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("deleted_kingdom_no") + ChatColor.WHITE + player.getKingdom().getName());
             }
         } else {
-            player.getQPlayer().sendMessage(QCChat.getPhrase("you_must_be_king"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_king"));
         }
     }
 
@@ -162,13 +163,13 @@ public class CommandKingdom {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
                 target.setKingdomGroup(4);
-                sender.sendMessage(QCChat.getPhrase("successfully_knighted_player"));
-                target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_knight"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_knighted_player"));
+                KUtil.sendMsg(target.getPlayer(), QCChat.getPhrase("you_are_now_a_knight"));
             } else {
-                sender.sendMessage(QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
             }
         } else {
-            sender.sendMessage(QCChat.getPhrase("specify_username"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("specify_username"));
         }
     }
 
@@ -184,13 +185,13 @@ public class CommandKingdom {
             Kingdom kingdom = psender.getKingdom();
             if(kingdom.equals(target.getKingdom())) {
                 target.setKingdomGroup(5);
-                sender.sendMessage(QCChat.getPhrase("successfully_noble_player"));
-                target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_noble"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_noble_player"));
+                KUtil.sendMsg(target.getPlayer(), QCChat.getPhrase("you_are_now_a_noble"));
             } else {
-                sender.sendMessage(QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
             }
         } else {
-            sender.sendMessage(QCChat.getPhrase("specify_username"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("specify_username"));
         }
     }
 
@@ -207,13 +208,13 @@ public class CommandKingdom {
             if(kingdom.equals(target.getKingdom())) {
                 kingdom.setKing(target);
                 psender.setKingdomGroup(5);
-                sender.sendMessage(QCChat.getPhrase("successfully_king_player"));
-                target.getQPlayer().sendMessage(QCChat.getPhrase("you_are_now_a_king"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_king_player"));
+                KUtil.sendMsg(target.getPlayer(), QCChat.getPhrase("you_are_now_a_king"));
             } else {
-                sender.sendMessage(QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("player_must_be_member_of_your_kingdom"));
             }
         } else {
-            sender.sendMessage(QCChat.getPhrase("specify_username"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("specify_username"));
         }
     }
 
@@ -228,20 +229,20 @@ public class CommandKingdom {
         String AWorldName = QuartzKingdoms.plugin.getConfig().getString("settings.world");
 
         if(!qkPlayer.isKing()) {
-            sender.sendMessage(QCChat.getPhrase("you_must_be_king"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_king"));
             return;
         }
 
         if(WorldName.equalsIgnoreCase(AWorldName)) {
             if(ChunkManager.isClaimed(chunk)) {
-                sender.sendMessage(QCChat.getPhrase("this_chunk_is_already_claimed"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("this_chunk_is_already_claimed"));
             } else {
                 ChunkManager.claimChunk(qkPlayer.getKingdom(), player);
-                sender.sendMessage(QCChat.getPhrase("chunk_claimed_for_kingdom_yes"));
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("chunk_claimed_for_kingdom_yes"));
                 qkPlayer.getKingdom().takePower(5);
             }
         } else {
-            sender.sendMessage(QCChat.getPhrase("you_can_not_claim_land_in_this_world"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_can_not_claim_land_in_this_world"));
         }
 
     }
@@ -254,15 +255,15 @@ public class CommandKingdom {
         Chunk chunk = player.getLocation().getChunk();
 
         if(ChunkManager.isClaimed(chunk) && !qkPlayer.isKing(ChunkManager.getKingdomOwner(chunk))) {
-            sender.sendMessage(QCChat.getPhrase("you_must_be_king"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_king"));
             return;
         }
 
         if(ChunkManager.isClaimed(chunk) && ChunkManager.getKingdomOwner(chunk).getID() == qkPlayer.getKingdom().getID()) {
             ChunkManager.unClaimChunk(qkPlayer.getKingdom(), player);
-            sender.sendMessage(QCChat.getPhrase("chunk_unclaimed_for_kingdom_yes"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("chunk_unclaimed_for_kingdom_yes"));
         } else {
-            sender.sendMessage(QCChat.getPhrase("this_chunk_is_not_claimed"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("this_chunk_is_not_claimed"));
         }
     }
 
@@ -277,11 +278,11 @@ public class CommandKingdom {
         QKPlayer player1 = kingdom2.getKing();
 
         if(!player.isKing(kingdom1)) {
-            sender.sendMessage(QCChat.getPhrase("no_permission"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("no_permission"));
             return;
         }
         if(!Kingdom.exists(args[0])) {
-            sender.sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_does_not_exist"));
             return;
         }
 
@@ -289,14 +290,14 @@ public class CommandKingdom {
         if(suc == 33) {
             Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().isOnline()) {
-                player1.getQPlayer().sendMessage(FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
+                KUtil.sendMsg(player1.getPlayer(), FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 3) {
             Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             kingdom1.takePower(5);
             kingdom2.takePower(5);
         } else {
-            sender.sendMessage(QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom"));
         }
     }
 
@@ -311,11 +312,11 @@ public class CommandKingdom {
         QKPlayer player1 = kingdom2.getKing();
 
         if(!player.isKing(kingdom1)) {
-            sender.sendMessage(QCChat.getPhrase("no_permission"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("no_permission"));
             return;
         }
         if(!Kingdom.exists(args[0])) {
-            sender.sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_does_not_exist"));
             return;
         }
 
@@ -334,11 +335,11 @@ public class CommandKingdom {
         QKPlayer player1 = kingdom2.getKing();
 
         if(!player.isKing(kingdom1)) {
-            sender.sendMessage(QCChat.getPhrase("no_permission"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("no_permission"));
             return;
         }
         if(!Kingdom.exists(args[0])) {
-            sender.sendMessage(QCChat.getPhrase("kingdom_does_not_exist"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_does_not_exist"));
             return;
         }
 
@@ -346,12 +347,12 @@ public class CommandKingdom {
         if(suc == 22) {
             Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().isOnline()) {
-                player1.getQPlayer().sendMessage(FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
+                KUtil.sendMsg(player1.getPlayer(), FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
             }
         } else if(suc == 2) {
             Bukkit.broadcastMessage(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
         } else {
-            sender.sendMessage(QCChat.getPhrase("failed_to_ally_with_kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("failed_to_ally_with_kingdom"));
         }
     }
 
@@ -363,16 +364,16 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         Kingdom kingdom = new Kingdom(args[0]);
         if(qkPlayer.kingdomMember()) {
-            sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
         } else if(kingdom.getID() == 0) {
-            sender.sendMessage(QCChat.getPhrase("kingdom_not_found"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_not_found"));
         } else if(!kingdom.isOpen()) {
-            sender.sendMessage(QCChat.getPhrase("kingdom_not_open"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_not_open"));
         } else {
             qkPlayer.setKingdom(kingdom);
             qkPlayer.setKingdomGroup(2);
             kingdom.addPower(2);
-            sender.sendMessage(QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
         }
     }
 
@@ -384,7 +385,7 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
 
         if(args.length != 1) {
-            player.sendMessage(QCChat.getPhrase("specify_kingdom_name"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("specify_kingdom_name"));
             return;
         }
 
@@ -394,9 +395,9 @@ public class CommandKingdom {
             qkPlayer.setKingdom(null);
             qkPlayer.setKingdomGroup(1);
             kingdom.takePower(2);
-            sender.sendMessage(QCChat.getPhrase("successfully_left_kingdom_X") + kingdom.getName());
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_left_kingdom_X") + kingdom.getName());
         } else {
-            sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
         }
     }
 
@@ -407,10 +408,10 @@ public class CommandKingdom {
         QKPlayer player = new QKPlayer(Bukkit.getPlayer(sender.getName()));
         Kingdom kingdom = player.getKingdom();
         if(kingdom.isOpen()) {
-            sender.sendMessage(QCChat.getPhrase("kingdom_already_open"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_already_open"));
         } else {
             kingdom.setOpen(true);
-            sender.sendMessage(QCChat.getPhrase("kingdom_now_open"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_now_open"));
             kingdom.addPower(3);
         }
     }
@@ -423,10 +424,10 @@ public class CommandKingdom {
         Kingdom kingdom = player.getKingdom();
         if(kingdom.isOpen()) {
             kingdom.setOpen(false);
-            sender.sendMessage(QCChat.getPhrase("kingdom_now_closed"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_now_closed"));
             kingdom.takePower(4);
         } else {
-            sender.sendMessage(QCChat.getPhrase("kingdom_already_closed"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_already_closed"));
         }
     }
 
@@ -438,9 +439,9 @@ public class CommandKingdom {
         String[] args = args0.getArgs();
         if(qkPlayer.kingdomMember()) {
             qkPlayer.getKingdom().invitePlayer(new QKPlayer(new QPlayer(args[0])));
-            sender.sendMessage(QCChat.getPhrase("invited_player_to_kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("invited_player_to_kingdom"));
         } else {
-            sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
         }
     }
 
@@ -451,10 +452,10 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
         if(qkPlayer.kingdomMember()) {
-            sender.sendMessage(QCChat.getPhrase("you_are_already_in_a_Kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
         } else {
             qkPlayer.setKingdom(null); //TODO Finish this
-            sender.sendMessage(QCChat.getPhrase("you_must_be_member_kingdom"));
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
         }
     }
 }
