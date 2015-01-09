@@ -431,7 +431,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.invite", aliases = { "k.invite", "invite" }, permission = "QCK.kingdom.invite", description = "Invites a player to your kingdom.", usage = "Use /kingdom invite [playername]")
+    @QCommand(name = "kingdom.invite", aliases = { "k.invite"}, permission = "QCK.kingdom.invite", description = "Invites a player to your kingdom.", usage = "Use /kingdom invite [playername]")
     public void kingdomInvite(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
@@ -445,8 +445,8 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.accept", aliases = { "k.accept", "accept" }, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept")
-    public void kingdomAccept(CommandArgs args0) {
+    @QCommand(name = "kingdom.accept", aliases = { "k.accept"}, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept")
+     public void kingdomAccept(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
