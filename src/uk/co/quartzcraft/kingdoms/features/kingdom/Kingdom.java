@@ -749,4 +749,20 @@ public class Kingdom {
             return null;
         }
     }
+
+    public boolean setHome(Location loc) {
+        String value = loc.getWorld().getName() + "," + String.valueOf(loc.getX()) + "," + String.valueOf(loc.getY()) + "," + String.valueOf(loc.getZ());
+        try {
+            java.sql.PreparedStatement s44 = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET home=? WHERE id=?;");
+            s44.setString(1, value);
+            s44.setInt(2, this.id);
+            if (s44.executeUpdate() == 1) {
+                this.home = KUtil.generateHomeLoc(value);
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 }
