@@ -471,4 +471,22 @@ public class CommandKingdom {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_king"));
         }
     }
+
+    @QCommand(name = "kingdom.home", aliases = { "k.home"}, permission = "QCK.kingdom.home", description = "Teleports to the kingdoms home", usage = "Use /kingdom home")
+    public void kingdomHome(CommandArgs args0) {
+        QKPlayer qkPlayer = new QKPlayer(args0.getPlayer());
+
+        //TODO check if the player should be able to teleport from their current location
+        if(qkPlayer.kingdomMember()) {
+            Kingdom kingdom = qkPlayer.getKingdom();
+            if(kingdom.getHome() != null) {
+                qkPlayer.getPlayer().teleport(kingdom.getHome());
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("teleported_to_kingdom_home"));
+            } else {
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("there_is_no_kingdom_home"));
+            }
+        } else {
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
+        }
+    }
 }
