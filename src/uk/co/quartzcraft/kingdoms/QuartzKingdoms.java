@@ -102,6 +102,10 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("now_entering_the_land_of", "&aNow entering the land of ");
         QCChat.addPhrase("now_leaving_the_land_of", "&aNow entering the land of ");
 
+        QCChat.addPhrase("successfully_set_kingdom_home", "&aSuccessfully set the home of the kingdom!");
+        QCChat.addPhrase("there_is_no_kingdom_home", "&cyour kingdom does not have a home set!");
+        QCChat.addPhrase("teleported_to_kingdom_home", "&aTeleported to kingdom home!");
+
         QCChat.addPhrase("successfully_knighted_player", "&aThe player has successfully been knighted!");
         QCChat.addPhrase("successfully_noble_player", "&aThe player has successfully been made a noble!");
         QCChat.addPhrase("successfully_king_player", "&aThe player has successfully been made the king!");
