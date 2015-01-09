@@ -3,7 +3,6 @@ package uk.co.quartzcraft.kingdoms.features.kingdom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
@@ -15,8 +14,8 @@ import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 
 public class Kingdom {
-	
-	private Plugin plugin = QuartzKingdoms.plugin;
+
+    private Plugin plugin = QuartzKingdoms.plugin;
 
     private int id;
     private String name;
@@ -38,7 +37,7 @@ public class Kingdom {
             PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE id=?;");
             s.setInt(1, id);
             ResultSet res = s.executeQuery();
-            if(res.next()) {
+            if (res.next()) {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
                 this.open = res.getBoolean("invite_only");
@@ -50,7 +49,7 @@ public class Kingdom {
                 return;
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             KUtil.printException("Could not retrieve Kingdoms data", e);
             return;
         }
@@ -68,7 +67,7 @@ public class Kingdom {
             PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName=?;");
             s.setString(1, name);
             ResultSet res = s.executeQuery();
-            if(res.next()) {
+            if (res.next()) {
                 this.id = res.getInt("id");
                 this.power = res.getInt("Power");
                 this.open = res.getBoolean("invite_only");
@@ -79,7 +78,7 @@ public class Kingdom {
                 return;
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             KUtil.printException("Could not retrieve Kingdoms data", e);
             return;
         }
@@ -92,20 +91,20 @@ public class Kingdom {
      * @param player
      * @return
      */
-	public static Kingdom createKingdom(String kingdomName, QKPlayer player) {
-		if(exists(kingdomName)) {
-			return null;
-		}
-		
-		if(player.getID() == 0 | player.getQPlayer().getID() == 0) {
-			return null;
-		} 
-		
-		try {
-			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES (?, ?);");
+    public static Kingdom createKingdom(String kingdomName, QKPlayer player) {
+        if (exists(kingdomName)) {
+            return null;
+        }
+
+        if (player.getID() == 0 | player.getQPlayer().getID() == 0) {
+            return null;
+        }
+
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO Kingdoms (KingdomName, KingID) VALUES (?, ?);");
             s.setString(1, kingdomName);
             s.setInt(2, player.getID());
-            if(s.executeUpdate() == 1) {
+            if (s.executeUpdate() == 1) {
                 Kingdom kkingdom = new Kingdom(kingdomName);
                 player.setKingdom(kkingdom);
                 player.setKingdomGroup(6);
@@ -113,11 +112,11 @@ public class Kingdom {
             } else {
                 return null;
             }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      * Determines whether a kingdom with the specified name exists.
@@ -130,7 +129,7 @@ public class Kingdom {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM Kingdoms WHERE KingdomName=?;");
             s.setString(1, kingdomName);
             ResultSet res2 = s.executeQuery();
-            if(res2.next()) {
+            if (res2.next()) {
                 return true;
             } else {
                 return false;
@@ -147,18 +146,18 @@ public class Kingdom {
      * @param player
      * @return
      */
-	public boolean delete(QKPlayer player) {
-		if(!player.isKing(this)) {
-			return false;
-		}
-		
-		try {
-			java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Kingdoms WHERE id=? AND KingID=?;");
+    public boolean delete(QKPlayer player) {
+        if (!player.isKing(this)) {
+            return false;
+        }
+
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM Kingdoms WHERE id=? AND KingID=?;");
             s.setInt(1, this.id);
             s.setInt(2, player.getID());
             player.setKingdom(null);
             player.setKingdomGroup(1);
-			if(s.executeUpdate() == 1) {
+            if (s.executeUpdate() == 1) {
                 final int id = this.id;
                 TaskChain.newChain().add(new TaskChain.AsyncFirstTask() {
                     @Override
@@ -168,7 +167,7 @@ public class Kingdom {
                             s.setInt(1, id);
                             ResultSet res2 = s.executeQuery();
                             return res2;
-                        } catch (SQLException e ) {
+                        } catch (SQLException e) {
                             KUtil.printException("Failed to select all players from kingdom", e);
                             return null;
                         }
@@ -176,14 +175,14 @@ public class Kingdom {
                 }).add(new TaskChain.AsyncLastTask() {
                     @Override
                     protected void run(Object o) {
-                        if(o == null) {
+                        if (o == null) {
                             return;
                         }
 
                         ResultSet res = (ResultSet) o;
 
                         try {
-                            while(res.next()) {
+                            while (res.next()) {
                                 QKPlayer player1 = new QKPlayer(res.getInt("id"));
                                 player1.setKingdom(null);
                                 player1.setKingdomGroup(1);
@@ -194,16 +193,16 @@ public class Kingdom {
                         }
                     }
                 }).execute();
-				return true;
-			} else {
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		
-	}
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 
     /**
      * Returns a kingdoms id.
@@ -238,7 +237,7 @@ public class Kingdom {
      * @return True if open for new players, false if closed to new players.
      */
     public boolean isOpen() {
-        if(this.open) {
+        if (this.open) {
             return false;
         } else {
             return true;
@@ -285,7 +284,7 @@ public class Kingdom {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET Power=? WHERE id=?;");
             s.setInt(1, newa);
             s.setInt(2, this.id);
-            if(s.executeUpdate() == 1) {
+            if (s.executeUpdate() == 1) {
                 this.power = newa;
                 this.setLevel(newa);
                 return this;
@@ -310,7 +309,7 @@ public class Kingdom {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET Power=? WHERE id=?;");
             s.setInt(1, newa);
             s.setInt(2, this.id);
-            if(s.executeUpdate() == 1) {
+            if (s.executeUpdate() == 1) {
                 this.power = newa;
                 this.setLevel(newa);
                 return this;
@@ -323,13 +322,13 @@ public class Kingdom {
     }
 
     public int setLevel(int power) {
-        Double rlevel = new Double(power/10);
+        Double rlevel = new Double(power / 10);
         int level = rlevel.intValue();
         try {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET Level=? WHERE id=?;");
             s.setInt(1, level);
             s.setInt(2, this.id);
-            if(s.executeUpdate() == 1) {
+            if (s.executeUpdate() == 1) {
                 this.level = level;
                 return level;
             } else {
@@ -347,12 +346,12 @@ public class Kingdom {
      * @return
      */
     public Kingdom setOpen(boolean status) {
-        if(status && this.open) {
+        if (status && this.open) {
             //Set open
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=0 WHERE id=?;");
                 s.setInt(1, this.id);
-                if(s.executeUpdate() == 1) {
+                if (s.executeUpdate() == 1) {
                     this.open = false;
                     return this;
                 } else {
@@ -361,12 +360,12 @@ public class Kingdom {
             } catch (SQLException e) {
                 return this;
             }
-        } else if(!status && !this.open) {
+        } else if (!status && !this.open) {
             //Set closed
             try {
                 java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET invite_only=1 WHERE id=?;");
                 s.setInt(1, this.id);
-                if(s.executeUpdate() == 1) {
+                if (s.executeUpdate() == 1) {
                     this.open = true;
                     return this;
                 } else {
@@ -391,7 +390,7 @@ public class Kingdom {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("UPDATE Kingdoms SET kingID=? WHERE id=?;");
             s.setInt(1, player.getID());
             s.setInt(2, this.id);
-            if(s.executeUpdate() == 1) {
+            if (s.executeUpdate() == 1) {
                 this.king = player.getID();
                 player.setKingdomGroup(6);
                 return this;
@@ -410,7 +409,7 @@ public class Kingdom {
      * @return
      */
     public boolean makeNoble(QKPlayer player) {
-        if(player.getKingdom() != this) {
+        if (player.getKingdom() != this) {
             return false;
         }
 
@@ -424,7 +423,7 @@ public class Kingdom {
      * @return
      */
     public boolean makeKnight(QKPlayer player) {
-        if(player.getKingdom() != this) {
+        if (player.getKingdom() != this) {
             return false;
         }
 
@@ -457,7 +456,7 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(res.next()) {
+            if (res.next()) {
                 java.sql.PreparedStatement s2 = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM relationships WHERE kingdom_id=? AND sec_kingdom_id=?;");
                 s2.setInt(1, relatingKingdom.getID());
                 s2.setInt(2, this.id);
@@ -467,7 +466,7 @@ public class Kingdom {
             } else {
                 return;
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             KUtil.printException("Could not set kingdoms at neutral", e);
         }
     }
@@ -489,11 +488,11 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(isEnemy(relatingKingdom)) {
+            if (isEnemy(relatingKingdom)) {
                 return 3;
-            } else if(res.next()) {
-                if(res.getInt("status") == 3 && res.getInt("pending") == 1) {
-                    if(res.getInt("last_update_id") == relatingKingdom.getID()) {
+            } else if (res.next()) {
+                if (res.getInt("status") == 3 && res.getInt("pending") == 1) {
+                    if (res.getInt("last_update_id") == relatingKingdom.getID()) {
                         java.sql.PreparedStatement s11 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=0 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
                         s11.setInt(1, this.id);
                         s11.setInt(2, this.id);
@@ -502,7 +501,7 @@ public class Kingdom {
                         return 3;
                     }
                     return 33;
-                } else if(res.getInt("status") == 3 && res.getInt("pending") == 0) {
+                } else if (res.getInt("status") == 3 && res.getInt("pending") == 0) {
                     return 3;
                 } else {
                     java.sql.PreparedStatement s22 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=1 AND status=3 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
@@ -512,9 +511,9 @@ public class Kingdom {
                     s22.executeUpdate();
                     return 33;
                 }
-            } else if(res1.next()) {
-                if(res1.getInt("status") == 3 && res1.getInt("pending") == 1) {
-                    if(res1.getInt("last_update_id") == this.id) {
+            } else if (res1.next()) {
+                if (res1.getInt("status") == 3 && res1.getInt("pending") == 1) {
+                    if (res1.getInt("last_update_id") == this.id) {
                         return 33;
                     } else {
                         java.sql.PreparedStatement s33 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=0 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
@@ -524,7 +523,7 @@ public class Kingdom {
                         s33.executeUpdate();
                         return 3;
                     }
-                } else if(res1.getInt("status") == 3 && res1.getInt("pending") == 0) {
+                } else if (res1.getInt("status") == 3 && res1.getInt("pending") == 0) {
                     return 3;
                 } else {
                     java.sql.PreparedStatement s44 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=1 AND status=3 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
@@ -542,7 +541,7 @@ public class Kingdom {
                 s55.executeUpdate();
                 return 33;
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             KUtil.printException("Could not set kingdoms at war", e);
             return 0;
         }
@@ -565,11 +564,11 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(isAlly(relatingKingdom)) {
+            if (isAlly(relatingKingdom)) {
                 return 2;
-            } else if(res.next()) {
-                if(res.getInt("status") == 2 && res.getInt("pending") == 1) {
-                    if(res.getInt("last_update_id") == relatingKingdom.getID()) {
+            } else if (res.next()) {
+                if (res.getInt("status") == 2 && res.getInt("pending") == 1) {
+                    if (res.getInt("last_update_id") == relatingKingdom.getID()) {
                         java.sql.PreparedStatement s11 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=0 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
                         s11.setInt(1, this.id);
                         s11.setInt(2, this.id);
@@ -578,7 +577,7 @@ public class Kingdom {
                         return 2;
                     }
                     return 22;
-                } else if(res.getInt("status") == 3 && res.getInt("pending") == 0) {
+                } else if (res.getInt("status") == 3 && res.getInt("pending") == 0) {
                     return 2;
                 } else {
                     java.sql.PreparedStatement s22 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=1 AND status=2 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
@@ -588,9 +587,9 @@ public class Kingdom {
                     s22.executeUpdate();
                     return 22;
                 }
-            } else if(res1.next()) {
-                if(res1.getInt("status") == 2 && res1.getInt("pending") == 1) {
-                    if(res1.getInt("last_update_id") == this.id) {
+            } else if (res1.next()) {
+                if (res1.getInt("status") == 2 && res1.getInt("pending") == 1) {
+                    if (res1.getInt("last_update_id") == this.id) {
                         return 22;
                     } else {
                         java.sql.PreparedStatement s33 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=0 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
@@ -600,7 +599,7 @@ public class Kingdom {
                         s33.executeUpdate();
                         return 2;
                     }
-                } else if(res1.getInt("status") == 2 && res1.getInt("pending") == 0) {
+                } else if (res1.getInt("status") == 2 && res1.getInt("pending") == 0) {
                     return 2;
                 } else {
                     java.sql.PreparedStatement s44 = QuartzKingdoms.DBKing.prepareStatement("UPDATE relationships SET pending=1 AND status=2 AND last_update_id=? WHERE kingdom_id=? AND sec_kingdom_id=?;");
@@ -618,14 +617,14 @@ public class Kingdom {
                 s55.executeUpdate();
                 return 22;
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             KUtil.printException("Could not set kingdoms allay", e);
             return 0;
         }
     }
 
     public boolean isNeutral(Kingdom relatingKingdom) {
-        if(!isEnemy(relatingKingdom) && !isAlly(relatingKingdom)) {
+        if (!isEnemy(relatingKingdom) && !isAlly(relatingKingdom)) {
             return true;
         } else {
             return false;
@@ -644,7 +643,7 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(res.next() || res1.next()) {
+            if (res.next() || res1.next()) {
                 return true;
             }
 
@@ -666,7 +665,7 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(res.next() || res1.next()) {
+            if (res.next() || res1.next()) {
                 return true;
             }
 
@@ -688,7 +687,7 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(res.next() || res1.next()) {
+            if (res.next() || res1.next()) {
                 return true;
             }
 
@@ -710,7 +709,7 @@ public class Kingdom {
             s1.setInt(2, this.id);
             ResultSet res1 = s1.executeQuery();
 
-            if(res.next() || res1.next()) {
+            if (res.next() || res1.next()) {
                 return true;
             }
 
@@ -725,7 +724,7 @@ public class Kingdom {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND kingdom_id=? AND status=3 AND pending=1;");
             s.setInt(1, this.id);
             ResultSet res = s.executeQuery();
-            if(res.next()) {
+            if (res.next()) {
                 return res;
             } else {
                 return null;
@@ -740,7 +739,7 @@ public class Kingdom {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM relationships WHERE sec_kingdom_id=? AND kingdom_id=? AND status=2 AND pending=1;");
             s.setInt(1, this.id);
             ResultSet res = s.executeQuery();
-            if(res.next()) {
+            if (res.next()) {
                 return res;
             } else {
                 return null;
