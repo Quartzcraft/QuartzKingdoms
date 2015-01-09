@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.quartzcraft.core.systems.chat.QCChat;
@@ -23,6 +24,7 @@ public class Kingdom {
     private int power;
     private int level;
     private boolean open;
+    private Location home;
 
     /**
      * Creates a kingdom object using the specified id
@@ -43,6 +45,7 @@ public class Kingdom {
                 this.king = res.getInt("KingID");
                 this.name = res.getString("KingdomName");
                 this.level = res.getInt("Level");
+                this.home = KUtil.generateHomeLoc(res.getString("home"));
             } else {
                 return;
             }
@@ -71,6 +74,7 @@ public class Kingdom {
                 this.open = res.getBoolean("invite_only");
                 this.king = res.getInt("KingID");
                 this.level = res.getInt("Level");
+                this.home = KUtil.generateHomeLoc(res.getString("home"));
             } else {
                 return;
             }
@@ -257,6 +261,15 @@ public class Kingdom {
      */
     public int getPower() {
         return this.power;
+    }
+
+    /**
+     * Returns the home point of the kingdom
+     *
+     * @return Location home
+     */
+    public Location getHome() {
+        return home;
     }
 
     /**
