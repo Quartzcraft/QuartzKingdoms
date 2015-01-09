@@ -458,4 +458,17 @@ public class CommandKingdom {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
         }
     }
+
+    @QCommand(name = "kingdom.sethome", aliases = { "k.sethome"}, permission = "QCK.kingdom.sethome", description = "Sets the kingdom home point", usage = "Use /kingdom sethome")
+    public void kingdomSetHome(CommandArgs args0) {
+        QKPlayer qkPlayer = new QKPlayer(args0.getPlayer());
+
+        if(qkPlayer.kingdomMember() && qkPlayer.isKing()) {
+            Kingdom kingdom = qkPlayer.getKingdom();
+            if(kingdom.setHome(args0.getPlayer().getLocation()))
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_set_kingdom_home"));
+        } else {
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_king"));
+        }
+    }
 }
