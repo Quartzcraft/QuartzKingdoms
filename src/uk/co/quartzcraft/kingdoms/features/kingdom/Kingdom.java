@@ -44,7 +44,9 @@ public class Kingdom {
                 this.king = res.getInt("KingID");
                 this.name = res.getString("KingdomName");
                 this.level = res.getInt("Level");
-                this.home = KUtil.generateHomeLoc(res.getString("home"));
+                if(res.getString("home") != null) {
+                    this.home = KUtil.generateHomeLoc(res.getString("home"));
+                }
             } else {
                 return;
             }
@@ -73,7 +75,9 @@ public class Kingdom {
                 this.open = res.getBoolean("invite_only");
                 this.king = res.getInt("KingID");
                 this.level = res.getInt("Level");
-                this.home = KUtil.generateHomeLoc(res.getString("home"));
+                if(res.getString("home") != null) {
+                    this.home = KUtil.generateHomeLoc(res.getString("home"));
+                }
             } else {
                 return;
             }
