@@ -347,10 +347,10 @@ public class CommandKingdom {
 
         int suc = kingdom1.setAtAlly(kingdom2);
         if(suc == 22) {
-            if(player1.getQPlayer().isOnline()) {
-                KUtil.sendMsg(player1.getPlayer(), FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
-            }
             KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_pending_allied_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
+            player1.getQPlayer().alert(new AlertBuilder().setType("kingdom_ally")
+                    .setMessage("The kingdom " + kingdom1.getName() + " has proposed becoming an ally. Type the command /kingdom ally " + kingdom1.getName() + " to confirm that you are allies.")
+                    .setArgs(new AlertArgs().setInt("kingdom_id", kingdom1.getID())));
         } else if(suc == 2) {
             KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_allied_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
         } else {
