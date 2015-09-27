@@ -119,7 +119,8 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("you_must_be_member_kingdom_leave", "&cYou must be a member of a kingdom to leave one!");
         QCChat.addPhrase("you_are_already_in_a_Kingdom", "&cYou are already a member of a kingdom!");
         QCChat.addPhrase("successfully_joined_kingdom_X", "&aSuccessfully joined the kingdom ");
-        QCChat.addPhrase("failed_join_kingdom", "&cFailed to join the specified kingdom. Please check that it is not invite only.");
+        QCChat.addPhrase("failed_join_kingdom_check_invite", "&cFailed to join the specified kingdom. Please check that it is not invite only.");
+        QCChat.addPhrase("failed_join_kingdom", "&cFailed to join the specified kingdom.");
         QCChat.addPhrase("successfully_left_kingdom_X", "&aSuccessfully left the kingdom ");
         QCChat.addPhrase("failed_leave_kingdom", "&cFailed to leave the specified kingdom.");
         QCChat.addPhrase("kingdom_not_open", "&cThis kingdom is not open for new members!");
