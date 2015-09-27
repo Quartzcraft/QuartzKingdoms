@@ -8,6 +8,8 @@ import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.quartzcraft.core.systems.chat.QCChat;
+import uk.co.quartzcraft.core.systems.notifications.AlertArgs;
+import uk.co.quartzcraft.core.systems.notifications.AlertBuilder;
 import uk.co.quartzcraft.core.util.TaskChain;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
@@ -440,7 +442,7 @@ public class Kingdom {
      * @param player
      */
     public void invitePlayer(QKPlayer player) {
-        //TODO Finish this
+        player.getQPlayer().alert(new AlertBuilder().setType("kingdom_invite").setMessage("You have been invited to the kingdom " + this.name).setArgs(new AlertArgs().setInt("kingdom_id", this.id)));
     }
 
     /**
