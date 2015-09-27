@@ -37,4 +37,18 @@ public class KingdomsAlertTypes {
                 .then("declare war.").color(DARK_RED).style(UNDERLINE).suggest("/kingdom war " + kingdom.getName()).tooltip("Click to declare war against the specified kingdom.")
                 .toJSONString();
     }
+
+    @AlertType(name = "kingdom_ally", prefix = "[Kingdoms]", permission = "QCK.king")
+    public String kingdomAlly(AlertArgs args) {
+        int kid = (int) args.getArg("kingdom_id");
+        Kingdom kingdom = new Kingdom(kid);
+        return new FancyMessage("The kingdom ").color(GREEN)
+                .then(kingdom.getName()).color(GOLD).style(ITALIC)
+                .then(" has offered to ").color(GREEN)
+                .then("become an ally").color(DARK_GREEN)
+                .then(" with your kingdom. ").color(GREEN)
+                .then("You can ignore this with no consequences or you can ").color(GREEN)
+                .then("accept the offer.").color(DARK_GREEN).style(UNDERLINE).suggest("/kingdom ally " + kingdom.getName()).tooltip("Allies with the specified kingdom.")
+                .toJSONString();
+    }
 }
