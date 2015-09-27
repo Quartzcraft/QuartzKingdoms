@@ -453,11 +453,16 @@ public class CommandKingdom {
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
+        Kingdom kingdom = new Kingdom(args[0]);
         if(qkPlayer.kingdomMember()) {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
         } else {
-            qkPlayer.setKingdom(null); //TODO Finish this
-            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
+            QKPlayer q = qkPlayer.setKingdom(kingdom);
+            if(q.getKingdom().getID() == kingdom.getID()) {
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_joined_kingdom_X" + kingdom.getName()));
+            } else {
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("failed_join_kingdom"));
+            }
         }
     }
 
