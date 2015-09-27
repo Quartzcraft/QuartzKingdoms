@@ -65,36 +65,6 @@ public class PlayerListener implements Listener {
         player.setDisplayName(qkPlayer.getKingdomGroup().getStyleForName() + player.getDisplayName() + ChatColor.RESET);
         player.setPlayerListName(Util.removeExtraChars(player.getDisplayName(), 16));
 
-        if(qkPlayer.kingdomMember()) {
-            if(qkPlayer.isKing()) {
-                final QKPlayer qqkPlayer = qkPlayer;
-                final Player pplayer = player;
-                try {
-                    ResultSet pendingWar = qqkPlayer.getKingdom().getProposedEnemy();
-                    ResultSet pendingAlly = qqkPlayer.getKingdom().getProposedAlly();
-                    if(pendingWar != null) {
-                        while(pendingWar.next()) {
-                            Kingdom kingdom1 = new Kingdom(pendingWar.getInt("last_update_id"));
-                            qkPlayer.getQPlayer().sendMessage(FancyMessages.declaredWar(pplayer, kingdom1.getName()));
-                        }
-                    }
-                    if(pendingAlly != null) {
-                        while(pendingAlly.next()) {
-                            Kingdom kingdom2 = new Kingdom(pendingAlly.getInt("last_update_id"));
-                            qkPlayer.getQPlayer().sendMessage(FancyMessages.proposedAlly(pplayer, kingdom2.getName()));
-                        }
-                    }
-                } catch(SQLException e) {
-                    KUtil.printException("Failed to retrieve and loop through pending war and ally relationships", e);
-                }
-
-            }
-            else {
-                KUtil.log(Level.INFO, "The player was not a king of a kingdom");
-            }
-        } else {
-            KUtil.log(Level.INFO, "The player was not a member of a kingdom");
-        }
         KUtil.log(Level.INFO, qkPlayer.getQPlayer().getName() + " has successfully joined!");
     }
 
