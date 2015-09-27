@@ -13,6 +13,8 @@ import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.command.framework.QCommand;
 import uk.co.quartzcraft.core.command.framework.CommandArgs;
+import uk.co.quartzcraft.core.systems.notifications.AlertArgs;
+import uk.co.quartzcraft.core.systems.notifications.AlertBuilder;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
 import uk.co.quartzcraft.kingdoms.features.FancyMessages;
@@ -288,10 +290,10 @@ public class CommandKingdom {
 
         int suc = kingdom1.setAtWar(kingdom2);
         if(suc == 33) {
-            if(player1.getQPlayer().isOnline()) {
-                KUtil.sendMsg(player1.getPlayer(), FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
-            }
             KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_pending_war_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
+            player1.getQPlayer().alert(new AlertBuilder().setType("kingdom_war")
+                    .setMessage("The kingdom " + kingdom1.getName() + " has declared war against you. Type the command /kingdom war " + kingdom1.getName() + " to confirm that you are at war.")
+                    .setArgs(new AlertArgs().setInt("kingdom_id", kingdom1.getID())));
         } else if(suc == 3) {
             KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
             kingdom1.takePower(5);
