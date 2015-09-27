@@ -288,12 +288,12 @@ public class CommandKingdom {
 
         int suc = kingdom1.setAtWar(kingdom2);
         if(suc == 33) {
-            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_pending_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().isOnline()) {
                 KUtil.sendMsg(player1.getPlayer(), FancyMessages.declaredWar(sendplayer, kingdom1.getName()));
             }
+            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_pending_war_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
         } else if(suc == 3) {
-            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_at_war_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
             kingdom1.takePower(5);
             kingdom2.takePower(5);
         } else {
@@ -321,7 +321,7 @@ public class CommandKingdom {
         }
 
         kingdom1.setAtNeutral(kingdom2);
-        KUtil.broadcastMsg(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+        KUtil.broadcastMsg(QCChat.getPhrase(kingdom1.getName() + "kingdom_is_now_neutral_relationship_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
     }
 
     @QCommand(name = "kingdom.ally", aliases = { "k.ally" }, permission = "QCK.kingdom.ally", description = "Allies with a kingdom, members of allied kingdoms can not hurt each other.", usage = "Use /kingdom ally [ally kingdom name]")
@@ -345,12 +345,12 @@ public class CommandKingdom {
 
         int suc = kingdom1.setAtAlly(kingdom2);
         if(suc == 22) {
-            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_pending_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
             if(player1.getQPlayer().isOnline()) {
                 KUtil.sendMsg(player1.getPlayer(), FancyMessages.proposedAlly(sendplayer, kingdom1.getName()));
             }
+            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_pending_allied_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
         } else if(suc == 2) {
-            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_allied_with_kingdom") + ChatColor.WHITE + kingdom2.getName());
+            KUtil.broadcastMsg(kingdom1.getName() + QCChat.getPhrase("kingdom_is_now_allied_with_kingdom") + ChatColor.GOLD + kingdom2.getName());
         } else {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("failed_to_ally_with_kingdom"));
         }
