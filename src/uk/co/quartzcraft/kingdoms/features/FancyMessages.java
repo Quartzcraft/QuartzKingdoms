@@ -9,16 +9,6 @@ import static org.bukkit.ChatColor.UNDERLINE;
 
 public class FancyMessages {
 
-    public static String declaredWar(Player player, String kingdomName) {
-        return new FancyMessage("The kingdom ").color(GREEN)
-                .then(kingdomName).color(WHITE).style(ITALIC)
-                .then(" has declared ").color(GREEN)
-                .then("war").color(DARK_RED)
-                .then(" against your kingdom. ").color(GREEN)
-                .then("You can ignore this with no consequences or you can ").color(GREEN)
-                .then("declare war.").color(DARK_RED).style(UNDERLINE).suggest("/kingdom war " + kingdomName).tooltip("Declares war against the specified kingdom.")
-                .toJSONString();
-    }
 
     public static String proposedAlly(Player player, String kingdomName) {
         return new FancyMessage("The kingdom ").color(GREEN)
