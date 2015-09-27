@@ -87,6 +87,7 @@ public class PlayerListener implements Listener {
         final Player player = event.getPlayer();
         final Chunk chunkFrom = event.getFrom().getChunk();
         final Chunk chunkTo = event.getTo().getChunk();
+        //TODO issue may be because player has to stop moving
 
         TaskChain.newChain().add(new TaskChain.AsyncGenericTask() {
             @Override
