@@ -25,4 +25,16 @@ public class KingdomsAlertTypes {
                 .toJSONString();
     }
 
+    @AlertType(name = "kingdom_war", prefix = "[Kingdoms]", permission = "QCK.king")
+    public String kingdomWar(AlertArgs args) {
+        int kid = (int) args.getArg("kingdom_id");
+        Kingdom kingdom = new Kingdom(kid);
+        return new FancyMessage("The kingdom ").color(RED)
+                .then(kingdom.getName()).color(GOLD).style(ITALIC)
+                .then(" has declared war").color(DARK_RED)
+                .then(" against your kingdom. ").color(GREEN)
+                .then("You can ignore this with no consequences or you can ").color(GREEN)
+                .then("declare war.").color(DARK_RED).style(UNDERLINE).suggest("/kingdom war " + kingdom.getName()).tooltip("Click to declare war against the specified kingdom.")
+                .toJSONString();
+    }
 }
