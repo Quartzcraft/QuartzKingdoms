@@ -72,7 +72,7 @@ public class PlayerListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
         QKPlayer qkPlayer = new QKPlayer(player);
-        qkPlayer.takePower(3);
+        qkPlayer.takePower(1);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -87,8 +87,8 @@ public class PlayerListener implements Listener {
         final Player player = event.getPlayer();
         final Chunk chunkFrom = event.getFrom().getChunk();
         final Chunk chunkTo = event.getTo().getChunk();
+        
         //TODO issue may be because player has to stop moving
-
         TaskChain.newChain().add(new TaskChain.AsyncGenericTask() {
             @Override
             protected void run() {
