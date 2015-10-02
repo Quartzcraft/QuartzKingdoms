@@ -21,6 +21,6 @@ public class PInfoListener implements Listener {
         if(target.getKingdom() != null) {
             event.addField(QCChat.getPhrase("player_kingdom_is_X") + target.getKingdom().getName());
         }
-        event.addField(QCChat.getPhrase("player_level_is_X") + target.getPower());
+        event.addField(QCChat.getPhrase("player_power_is_X") + target.getPower());
     }
 }

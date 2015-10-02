@@ -90,6 +90,7 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("to_new_members", "&ato new members!");
 
         QCChat.addPhrase("player_level_is_X", "&aLevel: &r");
+        QCChat.addPhrase("player_power_is_X", "&aPower: &r");
         QCChat.addPhrase("player_kingdom_is_X", "&aKingdom: &r");
 
         QCChat.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
