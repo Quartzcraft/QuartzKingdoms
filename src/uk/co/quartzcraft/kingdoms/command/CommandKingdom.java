@@ -65,7 +65,7 @@ public class CommandKingdom {
 
         KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("info_kingdom") + kingdom.getName());
 
-        if(kingdom.getID() != qkPlayer.getKingdom().getID()) {
+        if(kingdom.getID() != qkPlayer.getKingdom().getID() && qkPlayer.isKingdomMember()) {
             if(kingdom.isPendingAlly(qkPlayer.getKingdom())) {
                 KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_pending_ally_with_your_kingdom"));
             } else if(kingdom.isPendingEnemy(qkPlayer.getKingdom())) {
