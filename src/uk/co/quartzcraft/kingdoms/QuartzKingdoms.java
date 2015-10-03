@@ -85,9 +85,8 @@ public class QuartzKingdoms extends JavaPlugin {
         QCChat.addPhrase("kingdom_level_is_X", "&aLevel: &r");
         QCChat.addPhrase("kingdom_power_is_X", "&aPower: &r");
         QCChat.addPhrase("kingdom_king_is_X", "&aKing: &r");
-        QCChat.addPhrase("kingdom_is_closed", "&aThe kingdom is &cclosed ");
-        QCChat.addPhrase("kingdom_is_open", "&aThe kingdom is &2open ");
-        QCChat.addPhrase("to_new_members", "&ato new members!");
+        QCChat.addPhrase("kingdom_is_closed", "&aThe kingdom is &cclosed &ato new members!");
+        QCChat.addPhrase("kingdom_is_open", "&aThe kingdom is &2open &ato new members!");
 
         QCChat.addPhrase("player_level_is_X", "&aLevel: &r");
         QCChat.addPhrase("player_power_is_X", "&aPower: &r");

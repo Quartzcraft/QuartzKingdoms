@@ -83,9 +83,9 @@ public class CommandKingdom {
         KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_power_is_X") + kingdom.getPower());
 
         if(kingdom.isOpen()) {
-            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_open") + QCChat.getPhrase("to_new_members"));
+            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_open"));
         } else {
-            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_closed") + QCChat.getPhrase("to_new_members"));
+            KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_is_closed"));
         }
 
     }
@@ -107,7 +107,7 @@ public class CommandKingdom {
                     if(kingdom != null) {
                         KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
                     } else {
-                        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName);
+                        KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName + ChatColor.RED + " A kingdom may already exist with the specified name.");
                     }
                 }
             }
