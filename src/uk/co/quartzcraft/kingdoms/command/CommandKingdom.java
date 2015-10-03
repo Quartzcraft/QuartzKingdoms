@@ -17,7 +17,6 @@ import uk.co.quartzcraft.core.systems.notifications.AlertArgs;
 import uk.co.quartzcraft.core.systems.notifications.AlertBuilder;
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
-import uk.co.quartzcraft.kingdoms.features.FancyMessages;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
@@ -99,7 +98,7 @@ public class CommandKingdom {
             if(args0.length >= 2) {
                 KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("kingdom_name_single_word"));
             } else {
-                if(player.kingdomMember()) {
+                if(player.isKingdomMember()) {
                     KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
                 } else {
                     String kingdomName = args0[0];
@@ -365,7 +364,7 @@ public class CommandKingdom {
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
         Kingdom kingdom = new Kingdom(args[0]);
-        if(qkPlayer.kingdomMember()) {
+        if(qkPlayer.isKingdomMember()) {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
         } else if(kingdom.getID() == 0) {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_not_found"));
@@ -393,7 +392,7 @@ public class CommandKingdom {
 
         Kingdom kingdom = new Kingdom(args[0]);
 
-        if(qkPlayer.kingdomMember()) {
+        if(qkPlayer.isKingdomMember()) {
             qkPlayer.setKingdom(null);
             qkPlayer.setKingdomGroup(1);
             kingdom.takePower(2);
@@ -439,7 +438,7 @@ public class CommandKingdom {
         Player player = (Player) sender;
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
-        if(qkPlayer.kingdomMember()) {
+        if(qkPlayer.isKingdomMember()) {
             qkPlayer.getKingdom().invitePlayer(new QKPlayer(new QPlayer(args[0])));
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("invited_player_to_kingdom"));
         } else {
@@ -454,7 +453,7 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
         Kingdom kingdom = new Kingdom(args[0]);
-        if(qkPlayer.kingdomMember()) {
+        if(qkPlayer.isKingdomMember()) {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
         } else {
             QKPlayer q = qkPlayer.setKingdom(kingdom);
@@ -470,7 +469,7 @@ public class CommandKingdom {
     public void kingdomSetHome(CommandArgs args0) {
         QKPlayer qkPlayer = new QKPlayer(args0.getPlayer());
 
-        if(qkPlayer.kingdomMember() && qkPlayer.isKing()) {
+        if(qkPlayer.isKingdomMember() && qkPlayer.isKing()) {
             Kingdom kingdom = qkPlayer.getKingdom();
             if(kingdom.setHome(args0.getPlayer().getLocation()))
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_set_kingdom_home"));
@@ -484,7 +483,7 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(args0.getPlayer());
 
         //TODO check if the player should be able to teleport from their current location
-        if(qkPlayer.kingdomMember()) {
+        if(qkPlayer.isKingdomMember()) {
             Kingdom kingdom = qkPlayer.getKingdom();
             if(kingdom.getHome() != null) {
                 qkPlayer.getPlayer().teleport(kingdom.getHome());

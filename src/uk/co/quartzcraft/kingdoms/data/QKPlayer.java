@@ -317,7 +317,7 @@ public class QKPlayer {
      *
      * @return true if member, false if not.
      */
-    public boolean kingdomMember() {
+    public boolean isKingdomMember() {
         if(this.kingdom == null) {
             return false;
         } else {
