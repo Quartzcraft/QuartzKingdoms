@@ -53,6 +53,10 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
 
         if(args.getArgs().length != 1) {
+            if(!qkPlayer.isKingdomMember()) {
+                KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("specify_kingdom_name"));
+                return;
+            }
             kingdom = qkPlayer.getKingdom();
         } else {
             kingdom = new Kingdom(args.getArgs()[0]);
