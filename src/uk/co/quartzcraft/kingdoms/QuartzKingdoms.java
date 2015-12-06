@@ -170,6 +170,7 @@ public class QuartzKingdoms extends JavaPlugin {
         //Startup notice
 		log.info("[QK] The QuartzKingdoms Plugin has been enabled!");
 		log.info("[QK] QuartzKingdoms version " + version + " compiled with QuartzCore version " + releaseVersion);
+        //log.info("[QK] QuartzKingdoms version " + version + " compiled with QuartzCore version " + QuartzCore.getVersion());
 	}
 
     @Override
