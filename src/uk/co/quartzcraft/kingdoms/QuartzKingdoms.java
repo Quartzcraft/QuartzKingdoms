@@ -71,6 +71,7 @@ public class QuartzKingdoms extends JavaPlugin {
 
         QCChat.addPhrase("kingdom_name_single_word", "&cA kingdoms name may only be a single word!");
         QCChat.addPhrase("created_kingdom_yes", "&aSuccessfully created kingdom: ");
+        QCChat.addPhrase("not_enough_power", "&cYou don't have enough power!");
         QCChat.addPhrase("created_kingdom_no", "&cFailed to create kingdom: ");
         QCChat.addPhrase("deleted_kingdom_yes", "&aSuccessfully disbanded kingdom: ");
         QCChat.addPhrase("deleted_kingdom_no", "&cFailed to disbanded kingdom: ");
