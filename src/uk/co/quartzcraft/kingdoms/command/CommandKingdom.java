@@ -93,7 +93,7 @@ public class CommandKingdom {
 
     }
 
-    @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name", usage = "Use /kingdom create [kingdom name]")
+    @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name. This requires 80 power.", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(CommandArgs args) {
         CommandSender sender = args.getSender();
         QKPlayer player = new QKPlayer(args.getPlayer());
@@ -104,14 +104,17 @@ public class CommandKingdom {
             } else {
                 if(player.isKingdomMember()) {
                     KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
-                } else {
+                } else if(player.getPower() >= 80) {
                     String kingdomName = args0[0];
                     Kingdom kingdom = Kingdom.createKingdom(args0[0], player);
                     if(kingdom != null) {
                         KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_yes") + ChatColor.WHITE + kingdomName);
+                        player.takePower(80);
                     } else {
                         KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("created_kingdom_no") + ChatColor.WHITE + kingdomName + ChatColor.RED + " A kingdom may already exist with the specified name.");
                     }
+                } else {
+                    KUtil.sendMsg(args.getPlayer(), QCChat.getPhrase("not_enough_power") + ChatColor.RED + " You require 80 power to create a kingdom!");
                 }
             }
         } else {
