@@ -413,7 +413,7 @@ public class CommandKingdom {
     public void kingdomOpen(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
-        QKPlayer player = new QKPlayer(Bukkit.getPlayer(sender.getName()));
+        QKPlayer player = new QKPlayer(args0.getPlayer());
         Kingdom kingdom = player.getKingdom();
         if(kingdom.isOpen()) {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_already_open"));
@@ -428,7 +428,7 @@ public class CommandKingdom {
     public void kingdomClose(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();
-        QKPlayer player = new QKPlayer(Bukkit.getPlayer(sender.getName()));
+        QKPlayer player = new QKPlayer(args0.getPlayer());
         Kingdom kingdom = player.getKingdom();
         if(kingdom.isOpen()) {
             kingdom.setOpen(false);
