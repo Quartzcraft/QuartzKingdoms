@@ -95,6 +95,7 @@ public class CommandKingdom {
 
     @QCommand(name = "kingdom.create", aliases = { "k.create", "create.kingdom" }, permission = "QCK.kingdom.create", description = "Creates a kingdoms with the specified name. This requires 80 power.", usage = "Use /kingdom create [kingdom name]")
     public void kingdomCreate(CommandArgs args) {
+        //TODO make it so that you can use other players power. Player who contributes most power becomes king
         CommandSender sender = args.getSender();
         QKPlayer player = new QKPlayer(args.getPlayer());
         String[] args0 = args.getArgs();
