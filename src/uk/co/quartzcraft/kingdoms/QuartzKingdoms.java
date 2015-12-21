@@ -30,7 +30,7 @@ public class QuartzKingdoms extends JavaPlugin {
 	public final Logger logg = Logger.getLogger("Minecraft");
     public static final Logger log = Logger.getLogger("Minecraft");
 	
-	public static String releaseVersion = QuartzCore.displayReleaseVersion();
+	public static String releaseVersion = QuartzCore.getVersion();
     public static String version;
 
 	public static Connection DBKing = null;
