@@ -52,7 +52,7 @@ public class QuartzKingdoms extends JavaPlugin {
         plugin = this;
         core = QuartzCore.plugin;
 		
-		log.info("[QC] Running plugin configuration");
+		log.info("[QK] Running plugin configuration");
 		this.saveDefaultConfig();
 		
 		String SQLKingHost = this.getConfig().getString("database.kingdoms.host");
