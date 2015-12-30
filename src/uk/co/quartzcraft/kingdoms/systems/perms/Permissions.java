@@ -45,17 +45,17 @@ public class Permissions {
         }
 
         //Knights
-        if (group == 4) {
+        if (group == 10) {
             attachmentPrimary.setPermission("QCK.knight", true);
         }
 
         //Nobles
-        if (group == 5) {
+        if (group == 15) {
             attachmentPrimary.setPermission("QCK.noble", true);
         }
 
         //Kings
-        if (group == 6) {
+        if (group == 20) {
             attachmentPrimary.setPermission("QCK.king", true);
         }
 
