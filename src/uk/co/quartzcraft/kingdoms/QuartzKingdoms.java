@@ -16,7 +16,6 @@ import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.command.framework.QCommandFramework;
 import uk.co.quartzcraft.core.database.MySQL;
 import uk.co.quartzcraft.core.command.framework.QCommand;
-import uk.co.quartzcraft.core.systems.config.QCConfig;
 import uk.co.quartzcraft.kingdoms.command.*;
 import uk.co.quartzcraft.kingdoms.listeners.*; 
 
@@ -24,8 +23,6 @@ public class QuartzKingdoms extends JavaPlugin {
 	
 	public static Plugin plugin;
     public static Plugin core;
-
-    public static QCConfig config;
 	
 	public final Logger logg = Logger.getLogger("Minecraft");
     public static final Logger log = Logger.getLogger("Minecraft");
