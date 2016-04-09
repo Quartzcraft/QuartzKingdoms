@@ -20,14 +20,10 @@ import uk.co.quartzcraft.core.util.Util;
 
 import uk.co.quartzcraft.kingdoms.QuartzKingdoms;
 import uk.co.quartzcraft.kingdoms.data.QKPlayer;
-import uk.co.quartzcraft.kingdoms.features.FancyMessages;
-import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
 import uk.co.quartzcraft.kingdoms.systems.landclaim.ChunkManager;
 import uk.co.quartzcraft.kingdoms.systems.perms.Permissions;
 import uk.co.quartzcraft.kingdoms.util.KUtil;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class PlayerListener implements Listener {
