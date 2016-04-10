@@ -454,7 +454,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.accept", aliases = { "k.accept"}, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept")
+    @QCommand(name = "kingdom.accept", aliases = { "k.accept"}, permission = "QCK.kingdom.accept", description = "Accepts an invitation for membership of a kingdom", usage = "Use /kingdom accept [kingdomname]")
      public void kingdomAccept(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         Player player = (Player) sender;
