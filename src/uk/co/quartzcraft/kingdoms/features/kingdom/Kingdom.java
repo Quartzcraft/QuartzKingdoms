@@ -459,7 +459,7 @@ public class Kingdom {
     }
 
     /**
-     * Invites the specified player to the kingdom.
+     * Removes a players invite to a kingdom
      *
      * @param id
      */
