@@ -69,6 +69,8 @@ public class ChatPhrases {
         QCChat.addPhrase("kingdom_not_found", "&cNo kingdom could be found using the specified name!");
         QCChat.addPhrase("you_are_king_someone_else_must_be_to_leave", "&cYou are the king! You must make another player king before leaving your kingdom!");
 
+        QCChat.addPhrase("invited_player_to_kingdom", "&aYou have successfully invited that player to join your kingdom!");
+        QCChat.addPhrase("failed_to_invited_player_to_kingdom", "&cPlayer could not be invited to your kingdom! Please try again.");
         QCChat.addPhrase("kingdom_already_open", " &cThe kingdom is already open!");
         QCChat.addPhrase("kingdom_now_open", " &aYour kingdom is now open!");
         QCChat.addPhrase("failed_open_kingdom", " &cFailed to open the kingdom!");
