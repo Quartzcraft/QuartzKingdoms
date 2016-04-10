@@ -463,10 +463,10 @@ public class Kingdom {
      *
      * @param id
      */
-    public boolean removeInvite(int id) {
+    public boolean removeInvite(int pid) {
         try {
             java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM invitations WHERE player_id=? AND kingdom_id=?;");
-            s.setInt(1, id);
+            s.setInt(1, pid);
             s.setInt(2, this.id);
             if(s.executeUpdate() == 1) {
                 return true;
