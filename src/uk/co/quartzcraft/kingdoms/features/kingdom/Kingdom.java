@@ -441,8 +441,22 @@ public class Kingdom {
      *
      * @param player
      */
-    public void invitePlayer(QKPlayer player) {
-        player.getQPlayer().alert(new AlertBuilder().setType("kingdom_invite").setMessage("You have been invited to the kingdom " + this.name).setArgs(new AlertArgs().setInt("kingdom_id", this.id)));
+    public boolean invitePlayer(QKPlayer player) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("INSERT INTO invitations (player_id, kingdom_id) VALUES (?, ?);");
+            s.setInt(1, player.getID());
+            s.setInt(2, this.id);
+            if (s.executeUpdate() == 1) {
+                player.getQPlayer().alert(new AlertBuilder().setType("kingdom_invite").setMessage("You have been invited to the kingdom " + this.name).setArgs(new AlertArgs().setInt("kingdom_id", this.id)));
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     }
 
     /**
