@@ -479,6 +479,8 @@ public class CommandKingdom {
                 KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
                 qkPlayer.getKingdom().removeInvite(qkPlayer.getID());
             }
+        } else {
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_have_not_been_invited_to_this_kingdom"));
         }
     }
 
