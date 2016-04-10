@@ -465,14 +465,19 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
         Kingdom kingdom = new Kingdom(args[0]);
-        if(qkPlayer.isKingdomMember()) {
-            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
-        } else {
-            QKPlayer q = qkPlayer.setKingdom(kingdom);
-            if(q.getKingdom().getID() == kingdom.getID()) {
-                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_joined_kingdom_X" + kingdom.getName()));
+        if(kingdom.getID() == 0) {
+            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("kingdom_not_found"));
+        }
+
+        if(qkPlayer.hasInvitation(kingdom.getID())) {
+            if(qkPlayer.isKingdomMember()) {
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_are_already_in_a_Kingdom"));
             } else {
-                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("failed_join_kingdom"));
+                qkPlayer.setKingdom(kingdom);
+                qkPlayer.setKingdomGroup(2);
+                kingdom.addPower(2);
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("successfully_joined_kingdom_X") + kingdom.getName());
+                qkPlayer.getKingdom().removeInvite(qkPlayer.getID());
             }
         }
     }
