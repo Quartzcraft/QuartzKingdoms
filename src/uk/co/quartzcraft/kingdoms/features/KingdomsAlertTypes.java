@@ -34,7 +34,7 @@ public class KingdomsAlertTypes {
                 .then(" has declared war").color(DARK_RED)
                 .then(" against your kingdom. ").color(GREEN)
                 .then("You can ignore this with no consequences or you can ").color(GREEN)
-                .then("declare war.").color(DARK_RED).style(UNDERLINE).suggest("/kingdom war " + kingdom.getName()).tooltip("Click to declare war against the specified kingdom.")
+                .then("click to declare war.").color(DARK_RED).style(UNDERLINE).suggest("/kingdom war " + kingdom.getName()).tooltip("Click to declare war against the specified kingdom.")
                 .toJSONString();
     }
 
@@ -48,7 +48,7 @@ public class KingdomsAlertTypes {
                 .then("become an ally").color(DARK_GREEN)
                 .then(" with your kingdom. ").color(GREEN)
                 .then("You can ignore this with no consequences or you can ").color(GREEN)
-                .then("accept the offer.").color(DARK_GREEN).style(UNDERLINE).suggest("/kingdom ally " + kingdom.getName()).tooltip("Allies with the specified kingdom.")
+                .then("click to accept the offer.").color(DARK_GREEN).style(UNDERLINE).suggest("/kingdom ally " + kingdom.getName()).tooltip("Allies with the specified kingdom.")
                 .toJSONString();
     }
 }
