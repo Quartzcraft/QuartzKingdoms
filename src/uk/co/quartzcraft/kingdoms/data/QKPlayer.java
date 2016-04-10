@@ -493,4 +493,23 @@ public class QKPlayer {
         }
     }
 
+    public boolean hasInvitation(int kid) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("SELECT * FROM invitations WHERE player_id=?;");
+            s.setInt(1, kid);
+            ResultSet res = s.executeQuery();
+            if(res.next()) {
+                if(res.getInt("kingdom_id") == kid) {
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            KUtil.printException("Could not retrieve invitation data", e);
+            return false;
+        }
+    }
+
 }
