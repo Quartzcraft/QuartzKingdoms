@@ -19,8 +19,8 @@ public class KingdomsAlertTypes {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
         return new FancyMessage("You have been invited to join the kingdom ").color(GREEN)
-                .then(kingdom.getName() + ".").color(GOLD)
-                .then(" ")
+                .then(kingdom.getName()).color(GOLD)
+                .then(". ").color(GREEN)
                 .then("Click here to accept the invitation!").color(BLUE).style(UNDERLINE).command("/k accept " + kingdom.getName()).tooltip("/k accept " + kingdom.getName())
                 .toJSONString();
     }
@@ -45,8 +45,8 @@ public class KingdomsAlertTypes {
         return new FancyMessage("The kingdom ").color(GREEN)
                 .then(kingdom.getName()).color(GOLD).style(ITALIC)
                 .then(" has offered to ").color(GREEN)
-                .then("become an ally").color(DARK_GREEN)
-                .then(" with your kingdom. ").color(GREEN)
+                .then("ally ").color(DARK_GREEN)
+                .then("with your kingdom. ").color(GREEN)
                 .then("You can ignore this with no consequences or you can ").color(GREEN)
                 .then("click to accept the offer.").color(DARK_GREEN).style(UNDERLINE).suggest("/kingdom ally " + kingdom.getName()).tooltip("Allies with the specified kingdom.")
                 .toJSONString();
