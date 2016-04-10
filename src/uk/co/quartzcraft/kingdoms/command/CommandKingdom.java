@@ -447,8 +447,12 @@ public class CommandKingdom {
         QKPlayer qkPlayer = new QKPlayer(player);
         String[] args = args0.getArgs();
         if(qkPlayer.isKingdomMember()) {
-            qkPlayer.getKingdom().invitePlayer(new QKPlayer(new QPlayer(args[0])));
-            KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("invited_player_to_kingdom"));
+            if(qkPlayer.getKingdom().invitePlayer(new QKPlayer(new QPlayer(args[0])))) {
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("invited_player_to_kingdom"));
+            } else {
+                KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("failed_to_invited_player_to_kingdom"));
+            }
+
         } else {
             KUtil.sendMsg(args0.getPlayer(), QCChat.getPhrase("you_must_be_member_kingdom"));
         }
