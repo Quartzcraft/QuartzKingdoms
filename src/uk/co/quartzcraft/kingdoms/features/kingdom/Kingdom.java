@@ -457,6 +457,26 @@ public class Kingdom {
             return false;
         }
     }
+
+    /**
+     * Invites the specified player to the kingdom.
+     *
+     * @param id
+     */
+    public boolean removeInvite(int id) {
+        try {
+            java.sql.PreparedStatement s = QuartzKingdoms.DBKing.prepareStatement("DELETE FROM invitations WHERE player_id=? AND kingdom_id=?;");
+            s.setInt(1, id);
+            s.setInt(2, this.id);
+            if(s.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
