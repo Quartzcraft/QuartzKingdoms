@@ -204,7 +204,7 @@ public class CommandKingdom {
         }
     }
 
-    @QCommand(name = "kingdom.king", aliases = { "k.king", "king" }, permission = "QCK.kingdom.promote.king", description = "Promotes the specified player to the king of the kingdom. Makes the current king a noble", usage = "Use /kingdom king [playername")
+    @QCommand(name = "kingdom.king", aliases = { "k.monarch", "monarch" }, permission = "QCK.kingdom.promote.king", description = "Promotes the specified player to the monarch of the kingdom. Makes the current king a noble", usage = "Use /kingdom king [playername")
     public void kingdomKing(CommandArgs args0) {
         CommandSender sender = args0.getSender();
         String[] args = args0.getArgs();

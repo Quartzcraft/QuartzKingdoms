@@ -26,7 +26,7 @@ public class ChatPhrases {
         QCChat.addPhrase("your_kingdoms_power_is_X", "&aYour kingdoms power is &b");
         QCChat.addPhrase("kingdom_level_is_X", "&aLevel: &r");
         QCChat.addPhrase("kingdom_power_is_X", "&aPower: &r");
-        QCChat.addPhrase("kingdom_king_is_X", "&aKing: &r");
+        QCChat.addPhrase("kingdom_king_is_X", "&aMonarch: &r");
         QCChat.addPhrase("kingdom_is_closed", "&aThe kingdom is &cclosed &ato new members!");
         QCChat.addPhrase("kingdom_is_open", "&aThe kingdom is &2open &ato new members!");
 
@@ -50,13 +50,13 @@ public class ChatPhrases {
 
         QCChat.addPhrase("successfully_knighted_player", "&aThe player has successfully been knighted!");
         QCChat.addPhrase("successfully_noble_player", "&aThe player has successfully been made a noble!");
-        QCChat.addPhrase("successfully_king_player", "&aThe player has successfully been made the king!");
-        QCChat.addPhrase("you_are_now_a_knight", "&aYou have been knighted by your king!");
-        QCChat.addPhrase("you_are_now_a_noble", "&aYou have been made a noble of your kingdom by your king!");
-        QCChat.addPhrase("you_are_now_a_king", "&aYou have been made the king of your kingdom!");
+        QCChat.addPhrase("successfully_king_player", "&aThe player has successfully been made the monarch!");
+        QCChat.addPhrase("you_are_now_a_knight", "&aYou have been knighted!");
+        QCChat.addPhrase("you_are_now_a_noble", "&aYou have been made a noble of your kingdom by your monarch!");
+        QCChat.addPhrase("you_are_now_a_king", "&aYou have been made the monarch of your kingdom!");
         QCChat.addPhrase("player_must_be_member_of_your_kingdom", "&cThe specified player is not a member of your kingdom!");
 
-        QCChat.addPhrase("you_must_be_king", "&cYou must be the king to perform this action!");
+        QCChat.addPhrase("you_must_be_king", "&cYou must be the monarch to perform this action!");
         QCChat.addPhrase("you_must_be_member_kingdom", "&cYou must be a member of a kingdom!");
         QCChat.addPhrase("you_must_be_member_kingdom_leave", "&cYou must be a member of a kingdom to leave one!");
         QCChat.addPhrase("you_are_already_in_a_Kingdom", "&cYou are already a member of a kingdom!");
@@ -67,7 +67,7 @@ public class ChatPhrases {
         QCChat.addPhrase("failed_leave_kingdom", "&cFailed to leave the specified kingdom.");
         QCChat.addPhrase("kingdom_not_open", "&cThis kingdom is not open for new members!");
         QCChat.addPhrase("kingdom_not_found", "&cNo kingdom could be found using the specified name!");
-        QCChat.addPhrase("you_are_king_someone_else_must_be_to_leave", "&cYou are the king! You must make another player king before leaving your kingdom!");
+        QCChat.addPhrase("you_are_king_someone_else_must_be_to_leave", "&cYou are the monarch! You must make another player the monarch before leaving your kingdom!");
 
         QCChat.addPhrase("invited_player_to_kingdom", "&aYou have successfully invited that player to join your kingdom!");
         QCChat.addPhrase("failed_to_invited_player_to_kingdom", "&cPlayer could not be invited to your kingdom! Please try again.");
