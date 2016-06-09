@@ -59,7 +59,8 @@ public class PlayerListener implements Listener {
         Permissions.registerPlayerPerms(qkPlayer);
 
         player.setDisplayName(qkPlayer.getKingdomGroup().getStyleForName() + player.getDisplayName() + ChatColor.RESET);
-        player.setPlayerListName(Util.removeExtraChars(player.getDisplayName(), 16));
+        //player.setPlayerListName(Util.removeExtraChars(player.getDisplayName(), 16));
+        player.setPlayerListName(player.getDisplayName());
 
         KUtil.log(Level.INFO, qkPlayer.getQPlayer().getName() + " has successfully joined!");
     }
