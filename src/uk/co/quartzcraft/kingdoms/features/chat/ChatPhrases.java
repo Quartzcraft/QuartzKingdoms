@@ -36,9 +36,9 @@ public class ChatPhrases {
 
         QCChat.addPhrase("you_can_not_claim_land_in_this_world", "&cYou can not claim land in this world!");
         QCChat.addPhrase("chunk_claimed_for_kingdom_yes", "&aChunk successfully claimed for your kingdom!");
-        QCChat.addPhrase("chunk_claimed_for_kingdom_no", "&cChunk was not successfully claimed for Kingdom: ");
+        QCChat.addPhrase("chunk_claimed_for_kingdom_no", "&cChunk was not claimed for Kingdom: ");
         QCChat.addPhrase("chunk_unclaimed_for_kingdom_yes", "&aChunk successfully unclaimed for your kingdom!");
-        QCChat.addPhrase("chunk_unclaimed_for_kingdom_no", "&cChunk was not successfully unclaimed for Kingdom: ");
+        QCChat.addPhrase("chunk_unclaimed_for_kingdom_no", "&cChunk was not unclaimed for Kingdom: ");
         QCChat.addPhrase("this_chunk_is_already_claimed", "&cthis chunk has already been claimed!");
         QCChat.addPhrase("this_chunk_is_not_claimed", "&cThis chunk chunk is not claimed by your kingdom!");
         QCChat.addPhrase("now_entering_the_land_of", "&aNow entering the land of ");
