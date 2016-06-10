@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
+import uk.co.quartzcraft.core.data.QPlayer;
 import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.systems.notifications.AlertArgs;
 import uk.co.quartzcraft.core.systems.notifications.AlertBuilder;
@@ -447,7 +448,11 @@ public class Kingdom {
             s.setInt(1, player.getID());
             s.setInt(2, this.id);
             if (s.executeUpdate() == 1) {
-                player.getQPlayer().alert(new AlertBuilder().setType("kingdom_invite").setMessage("You have been invited to the kingdom " + this.name).setArgs(new AlertArgs().setInt("kingdom_id", this.id)));
+                player.getQPlayer().alert(new AlertBuilder()
+                        .setType("kingdom_invite")
+                        .setMessage("You have been invited to the kingdom " + this.name)
+                        .setArgs(new AlertArgs().setInt("kingdom_id", this.id))
+                        .setReceiver(player.getQPlayer()));
                 return true;
             } else {
                 return false;
