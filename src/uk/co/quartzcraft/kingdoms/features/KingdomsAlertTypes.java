@@ -13,6 +13,7 @@ public class KingdomsAlertTypes {
 
     }
 
+    @AlertType(name = "kingdom_invite", prefix = "[Kingdoms]", requireArgs = true)
     public TextComponent kingdomInvite(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
@@ -31,6 +32,7 @@ public class KingdomsAlertTypes {
         return component;
     }
 
+    @AlertType(name = "kingdom_war", prefix = "[Kingdoms]", requireArgs = true)
     public TextComponent kingdomWar(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
@@ -51,6 +53,7 @@ public class KingdomsAlertTypes {
         return component;
     }
 
+    @AlertType(name = "kingdom_ally", prefix = "[Kingdoms]", requireArgs = true)
     public TextComponent kingdomAlly(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
