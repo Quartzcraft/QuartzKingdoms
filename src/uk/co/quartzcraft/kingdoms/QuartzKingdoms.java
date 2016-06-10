@@ -1,22 +1,16 @@
 package uk.co.quartzcraft.kingdoms;
 
 import java.sql.Connection;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
-import com.sun.tools.javac.util.List;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import uk.co.quartzcraft.core.QuartzCore;
-import uk.co.quartzcraft.core.systems.chat.QCChat;
 import uk.co.quartzcraft.core.command.framework.QCommandFramework;
 import uk.co.quartzcraft.core.database.MySQL;
-import uk.co.quartzcraft.core.command.framework.QCommand;
 import uk.co.quartzcraft.kingdoms.command.*;
 import uk.co.quartzcraft.kingdoms.features.chat.ChatPhrases;
 import uk.co.quartzcraft.kingdoms.listeners.*;
