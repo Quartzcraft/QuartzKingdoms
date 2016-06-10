@@ -13,7 +13,6 @@ public class KingdomsAlertTypes {
 
     }
 
-    @AlertType(name = "kingdom_invite", prefix = "[Kingdoms]", permission = "QCK.everyone")
     public TextComponent kingdomInvite(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
@@ -32,7 +31,6 @@ public class KingdomsAlertTypes {
         return component;
     }
 
-    @AlertType(name = "kingdom_war", prefix = "[Kingdoms]", permission = "QCK.king")
     public TextComponent kingdomWar(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
@@ -53,7 +51,6 @@ public class KingdomsAlertTypes {
         return component;
     }
 
-    @AlertType(name = "kingdom_ally", prefix = "[Kingdoms]", permission = "QCK.king")
     public TextComponent kingdomAlly(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
