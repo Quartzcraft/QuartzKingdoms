@@ -466,7 +466,7 @@ public class Kingdom {
     /**
      * Removes a players invite to a kingdom
      *
-     * @param id
+     * @param pid
      */
     public boolean removeInvite(int pid) {
         try {
