@@ -11,7 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import uk.co.quartzcraft.core.QuartzCore;
 import uk.co.quartzcraft.core.command.framework.QCommandFramework;
 import uk.co.quartzcraft.core.database.MySQL;
+import uk.co.quartzcraft.core.systems.notifications.AlertTypeHandler;
 import uk.co.quartzcraft.kingdoms.command.*;
+import uk.co.quartzcraft.kingdoms.features.KingdomsAlertTypes;
 import uk.co.quartzcraft.kingdoms.features.chat.ChatPhrases;
 import uk.co.quartzcraft.kingdoms.listeners.*;
 
@@ -65,6 +67,10 @@ public class QuartzKingdoms extends JavaPlugin {
 		//Database
 		log.info("[QK][STARTUP] Connecting to Database");
 		DBKing = MySQLking.openConnection();
+
+		//Alert Types
+		log.info("[QK] [STARTUP] Registering alert types");
+		AlertTypeHandler.registerAlertTypes(new KingdomsAlertTypes());
 		
 		//Listeners
 		log.info("[QK][STARTUP] Registering Listeners");
