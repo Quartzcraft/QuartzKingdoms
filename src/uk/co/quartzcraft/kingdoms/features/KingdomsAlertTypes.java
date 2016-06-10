@@ -1,12 +1,11 @@
 package uk.co.quartzcraft.kingdoms.features;
 
-import org.bukkit.ChatColor;
-import uk.co.quartzcraft.core.systems.fancymessage.FancyMessage;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.ChatColor;
 import uk.co.quartzcraft.core.systems.notifications.AlertArgs;
 import uk.co.quartzcraft.core.systems.notifications.AlertType;
 import uk.co.quartzcraft.kingdoms.features.kingdom.Kingdom;
-
-import static org.bukkit.ChatColor.*;
 
 public class KingdomsAlertTypes {
 
@@ -15,40 +14,67 @@ public class KingdomsAlertTypes {
     }
 
     @AlertType(name = "kingdom_invite", prefix = "[Kingdoms]", permission = "QCK.everyone")
-    public String kingdomInvite(AlertArgs args) {
+    public TextComponent kingdomInvite(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
-        return new FancyMessage("You have been invited to join the kingdom ").color(GREEN)
-                .then(kingdom.getName()).color(GOLD)
-                .then(". ").color(GREEN)
-                .then("Click here to accept the invitation!").color(BLUE).style(UNDERLINE).command("/k accept " + kingdom.getName()).tooltip("/k accept " + kingdom.getName())
-                .toJSONString();
+
+        TextComponent component = new TextComponent("You have ben invited to join the kingdom ");
+            component.setColor(ChatColor.GREEN);
+            component.addExtra(kingdom.getName());
+            component.setColor(ChatColor.GOLD);
+            component.addExtra(". ");
+            component.setColor(ChatColor.GREEN);
+            component.addExtra("Click here to accept the invitation!");
+            component.setColor(ChatColor.BLUE);
+            component.setUnderlined(true);
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/k accept " + kingdom.getName()));
+
+        return component;
     }
 
     @AlertType(name = "kingdom_war", prefix = "[Kingdoms]", permission = "QCK.king")
-    public String kingdomWar(AlertArgs args) {
+    public TextComponent kingdomWar(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
-        return new FancyMessage("The kingdom ").color(RED)
-                .then(kingdom.getName()).color(GOLD).style(ITALIC)
-                .then(" has declared war").color(DARK_RED)
-                .then(" against your kingdom. ").color(GREEN)
-                .then("You can ignore this with no consequences or you can ").color(GREEN)
-                .then("click to declare war.").color(DARK_RED).style(UNDERLINE).suggest("/kingdom war " + kingdom.getName()).tooltip("Click to declare war against the specified kingdom.")
-                .toJSONString();
+
+        TextComponent component = new TextComponent("The kingdom ");
+            component.setColor(ChatColor.RED);
+            component.addExtra(kingdom.getName());
+            component.setColor(ChatColor.GOLD);
+            component.addExtra(" has declared war against your kingdom! ");
+            component.setColor(ChatColor.RED);
+            component.addExtra("You can ignore this with no consequences or you can ");
+            component.setColor(ChatColor.RED);
+            component.addExtra(" click to declare war!");
+            component.setColor(ChatColor.DARK_RED);
+            component.setUnderlined(true);
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/kingdom war " + kingdom.getName()));
+
+        return component;
     }
 
     @AlertType(name = "kingdom_ally", prefix = "[Kingdoms]", permission = "QCK.king")
-    public String kingdomAlly(AlertArgs args) {
+    public TextComponent kingdomAlly(AlertArgs args) {
         int kid = (int) args.getArg("kingdom_id");
         Kingdom kingdom = new Kingdom(kid);
-        return new FancyMessage("The kingdom ").color(GREEN)
-                .then(kingdom.getName()).color(GOLD).style(ITALIC)
-                .then(" has offered to ").color(GREEN)
-                .then("ally ").color(DARK_GREEN)
-                .then("with your kingdom. ").color(GREEN)
-                .then("You can ignore this with no consequences or you can ").color(GREEN)
-                .then("click to accept the offer.").color(DARK_GREEN).style(UNDERLINE).suggest("/kingdom ally " + kingdom.getName()).tooltip("Allies with the specified kingdom.")
-                .toJSONString();
+
+        TextComponent component = new TextComponent("The kingdom ");
+            component.setColor(ChatColor.GREEN);
+            component.addExtra(kingdom.getName());
+            component.setColor(ChatColor.GOLD);
+            component.addExtra(" has offered to ");
+            component.setColor(ChatColor.GREEN);
+            component.addExtra("ally ");
+            component.setColor(ChatColor.DARK_GREEN);
+            component.addExtra("with your kingdom. ");
+            component.setColor(ChatColor.GREEN);
+            component.addExtra("You can ignore this with no consequences or you can ");
+            component.setColor(ChatColor.GREEN);
+            component.addExtra(" click to accept the offer");
+            component.setColor(ChatColor.DARK_GREEN);
+            component.setUnderlined(true);
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/kingdom ally " + kingdom.getName()));
+
+        return component;
     }
 }
